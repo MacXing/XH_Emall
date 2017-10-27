@@ -3,8 +3,15 @@
 
 <mapper namespace="com.xh.back.mapper.XhadminMapper">
 <!-- 通过用户名查找admin信息-->
-  <select id="selectAdminByName" parameterType="string" resultType="xhadmin">
-  	SELECT adminID,adminName,adminPassword FROM xhAdmin where adminName=#{adminname};
+  <select id="selectAdminByName" parameterType="xhadmin" resultType="xhadmin">
+  	SELECT adminID,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
   </select>
+  
+ <update id="updateAdminIpAndTime" parameterType="xhadmin">
+		update xhAdmin
+		set adminLastIp = #{adminlastip},adminLastTime = #{adminlasttime}
+		where adminName = #{adminname}
+</update>
+  
   
 </mapper>

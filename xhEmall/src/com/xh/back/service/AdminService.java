@@ -4,6 +4,9 @@ import com.xh.back.bean.Xhadmin;
 
 public interface AdminService {
 	//通过Name查找Admin信息
-	public Xhadmin selectAdminByName(String adminName);
+	public Xhadmin selectAdminByName(Xhadmin admin);
+	
+	//给admin添加time和ip
+	public void updateAdminIpAndTime(Xhadmin admin);
 	
 }

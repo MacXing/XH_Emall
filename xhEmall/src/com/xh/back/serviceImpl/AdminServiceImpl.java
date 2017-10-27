@@ -15,8 +15,13 @@ public class AdminServiceImpl implements AdminService{
 	@Qualifier("xhadminMapper")
 	private XhadminMapper adminMapper;
 
-	public Xhadmin selectAdminByName(String adminName) {
-		return adminMapper.selectAdminByName(adminName);
+	public Xhadmin selectAdminByName(Xhadmin admin) {
+		return adminMapper.selectAdminByName(admin);
+	}
+
+	@Override
+	public void updateAdminIpAndTime(Xhadmin admin) {
+		adminMapper.updateAdminIpAndTime(admin);
 	}
 
 }
