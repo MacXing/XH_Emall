@@ -1,27 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>H+ 后台主题UI框架 - 主页</title>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-    <!--[if lt IE 8]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
-
-    <link rel="shortcut icon" href="favicon.ico">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>后台首页</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="shortcut icon" href="favicon.ico">
     <link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet">
-</head>
-
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+  </head>
+  
+  <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
         <!--左侧导航开始-->
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -55,321 +59,435 @@
                         <div class="logo-element">H+
                         </div>
                     </li>
+          
                     <li>
                         <a href="#">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label">管理员维护</span>
+                            <i class="glyphicon glyphicon-cutlery"></i>
+                            <span class="glyphicon-class">高级管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="form_vallidate.html" data-index="0">添加管理员</a>
+                               <a href="#"><i class="glyphicon glyphicon-wrench"></i>
+                               <span class="glyphicon-class">管理员维护</span>
+                               <span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level">
+                            	<li>
+                                	<a class="J_menuItem" href="jsp/back/form_vallidate.jsp" data-index="0">添加管理员</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">修改管理员信息</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">查询所有管理员</a>
+                            	</li>                            
+                        	   </ul>
+                            </li>
+                            <li>                 
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-file"></i> 
+                        		<span class="glyphicon-class">日志维护 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            	<li>
+                                	<a class="J_menuItem" href="jsp/back/form_vallidate.jsp" data-index="0">添加日志</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">清除日志</a>
+                           		</li>
+                            	                   
+                        	   </ul>                       		
                             </li>
                             <li>
-                                <a class="J_menuItem" href="index_v2.html">删除管理员</a>
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-euro"></i> 
+                        		<span class="glyphicon-class">商家管理</span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            	<li>
+                                	<a class="J_menuItem" href="jsp/back/form_vallidate.jsp" data-index="0">添加商家</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">修改商家信息</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">查询所有商家</a>
+                            	</li>                            
+                        	   </ul>                        		
                             </li>
                             <li>
-                                <a class="J_menuItem" href="index_v3.html">修改管理员信息</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="index_v4.html">查询所有管理员</a>
-                            </li>
-                            <li>
-                                <a href="index_v5.html" target="_blank">-------</a>
-                            </li>
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-ok"></i> 
+                        		<span class="glyphicon-class">管理员权限管理</span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            	<li>
+                                	<a class="J_menuItem" href="jsp/back/form_vallidate.jsp" data-index="0">添加管理员权限</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">修改管理员权限</a>
+                           		</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">查询管理员权限</a>
+                            	</li>
+                            	<li>
+                                <a class="J_menuItem" href="#">删除管理员权限</a>
+                            	</li>                            
+                        	   </ul>                     		
+                            </li>              
                         </ul>
-
                     </li>
                     <li>
-                        <a class="J_menuItem" href="layouts.html"><i class="fa fa-columns"></i> <span class="nav-label">布局</span></a>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-gift"></i>
+                            <span class="glyphicon-class">商品管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="mailbox.html"> 
+                                <i class="glyphicon glyphicon-gift"></i>                               
+                        		<span class="glyphicon-class">商品维护 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">增加商品</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改商品信息</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询商品信息</a>
+                            		</li>
+                               </ul>
+                            </li>
+                            <li>                 
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-th-large"></i> 
+                        		<span class="glyphicon-class">商品分类 </span></a>                       		
+                            </li>
+                            <li>
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-comment"></i> 
+                        		<span class="glyphicon-class">用户评论</span></a>                        		
+                            </li>
+                            <li>
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-barcode"></i> 
+                        		<span class="glyphicon-class">商品品牌</span></a>                       		
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-tree-deciduous"></i> 
+                        		<span class="glyphicon-class">商品类型</span></a>                       		
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-trash"></i> 
+                        		<span class="glyphicon-class">商品回收站</span></a>                        		
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">
                             <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">统计图表</span>
+                            <span class="nav-label">报表统计管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="graph_echarts.html">百度ECharts</a>
+                                <a class="J_menuItem" href="graph_echarts.html">流量分析</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_flot.html">Flot</a>
+                                <a class="J_menuItem" href="graph_flot.html">客户统计</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_morris.html">Morris.js</a>
+                                <a class="J_menuItem" href="graph_morris.html">订单统计</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_rickshaw.html">Rickshaw</a>
+                                <a class="J_menuItem" href="graph_rickshaw.html">销售概括</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_peity.html">Peity</a>
+                                <a class="J_menuItem" href="graph_peity.html">会员排行</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_sparkline.html">Sparkline</a>
+                                <a class="J_menuItem" href="graph_sparkline.html">销售明细</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="graph_metrics.html">图表组合</a>
+                                <a class="J_menuItem" href="graph_metrics.html">搜索引擎</a>
+                            </li>
+                             <li>
+                                <a class="J_menuItem" href="graph_metrics.html">访问购买率</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_metrics.html">站外投放JS</a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">信箱 </span><span class="label label-warning pull-right">16</span></a>
+                        <a href="mailbox.html"><i class="glyphicon glyphicon-user"></i> 
+                        <span class="glyphicon-class">会员管理 </span>
+                        <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="mailbox.html">收件箱</a>
+                           <li>
+                            	<a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">会员维护 </span>
+                        		<span class="fa arrow"></span></a>
+                            	<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">增加会员</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改会员信息</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询会员信息</a>
+                            		</li>
+                               </ul>
                             </li>
-                            <li><a class="J_menuItem" href="mail_detail.html">查看邮件</a>
+                            <li>
+                            	<a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">会员等级维护 </span>
+                        		<span class="fa arrow"></span></a>
+                            	<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">增加等级</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改会员等级</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询会员等级</a>
+                            		</li>
+                                </ul>
                             </li>
-                            <li><a class="J_menuItem" href="mail_compose.html">写信</a>
+                            <li>
+                            	<a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">会员留言维护 </span>
+                        		<span class="fa arrow"></span></a>
+                            	<ul class="nav nav-second-level">
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询会员留言</a>
+                            		</li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-list-alt"></i>
+                            <span class="glyphicon-class">订单管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="form_basic.html">基本表单</a>
+                            <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">订单维护 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加订单</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改订单信息</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询订单信息</a>
+                            		</li>
+                               </ul>
                             </li>
-                            <li><a class="J_menuItem" href="form_validate.html">表单验证</a>
+                            <li>                                
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-duplicate"></i> 
+                        		<span class="glyphicon-class">合并订单 </span>
+                        		<span class="fa arrow"></span></a>
                             </li>
-                            <li><a class="J_menuItem" href="form_advanced.html">高级插件</a>
-                            </li>
-                            <li><a class="J_menuItem" href="form_wizard.html">表单向导</a>
+                            <li>                              
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-print"></i> 
+                        		<span class="glyphicon-class">打印订单 </span>
+                        		<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="#">文件上传 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="form_webuploader.html">百度WebUploader</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="form_file_upload.html">DropzoneJS</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="form_avatar.html">头像裁剪上传</a>
-                                    </li>
-                                </ul>
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-minus"></i> 
+                        		<span class="glyphicon-class">缺货登记 </span>
+                        		<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="#">编辑器 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="form_editors.html">富文本编辑器</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="form_simditor.html">simditor</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="form_markdown.html">MarkDown编辑器</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="code_editor.html">代码编辑器</a>
-                                    </li>
-                                </ul>
+                                <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">发货单管理 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加发货单</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改发货单信息</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询发货单信息</a>
+                            		</li>
+                               </ul>
                             </li>
-                            <li><a class="J_menuItem" href="suggest.html">搜索自动补全</a>
-                            </li>
-                            <li><a class="J_menuItem" href="layerdate.html">日期选择器layerDate</a>
-                            </li>
+                            <li>
+                                 <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">退货单管理 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加退货单</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改退货单信息</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询发货单信息</a>
+                            		</li>
+                               </ul>
+                            </li>          
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">页面</span><span class="fa arrow"></span></a>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                            <span class="glyphicon-class">购物车管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="contacts.html">联系人</a>
-                            </li>
-                            <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                            </li>
                             <li>
-                                <a href="#">项目管理 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="projects.html">项目</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="project_detail.html">项目详情</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="teams_board.html">团队管理</a>
-                            </li>
-                            <li><a class="J_menuItem" href="social_feed.html">信息流</a>
-                            </li>
-                            <li><a class="J_menuItem" href="clients.html">客户管理</a>
-                            </li>
-                            <li><a class="J_menuItem" href="file_manager.html">文件管理器</a>
-                            </li>
-                            <li><a class="J_menuItem" href="calendar.html">日历</a>
-                            </li>
-                            <li>
-                                <a href="#">博客 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="blog.html">文章列表</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="article.html">文章详情</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="faq.html">FAQ</a>
-                            </li>
-                            <li>
-                                <a href="#">时间轴 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="timeline.html">时间轴</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="timeline_v2.html">时间轴v2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="pin_board.html">标签墙</a>
-                            </li>
-                            <li>
-                                <a href="#">单据 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="invoice.html">单据</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="invoice_print.html">单据打印</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="search_results.html">搜索结果</a>
-                            </li>
-                            <li><a class="J_menuItem" href="forum_main.html">论坛</a>
-                            </li>
-                            <li>
-                                <a href="#">即时通讯 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="chat_view.html">聊天窗口</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="webim.html">layIM</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">登录注册相关 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="login.html" target="_blank">登录页面</a>
-                                    </li>
-                                    <li><a href="login_v2.html" target="_blank">登录页面v2</a>
-                                    </li>
-                                    <li><a href="register.html" target="_blank">注册页面</a>
-                                    </li>
-                                    <li><a href="lockscreen.html" target="_blank">登录超时</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="404.html">404页面</a>
-                            </li>
-                            <li><a class="J_menuItem" href="500.html">500页面</a>
-                            </li>
-                            <li><a class="J_menuItem" href="empty_page.html">空白页</a>
-                            </li>
+                               <a href="mailbox.html">
+                               <i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">购物车维护 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加购物车</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改购物车</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询购物车信息</a>
+                            		</li>
+                               </ul>
+                               </li>                            
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">UI元素</span><span class="fa arrow"></span></a>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <span class="glyphicon-class">文章管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="typography.html">排版</a>
-                            </li>
                             <li>
-                                <a href="#">字体图标 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a class="J_menuItem" href="fontawesome.html">Font Awesome</a>
-                                    </li>
-                                    <li>
-                                        <a class="J_menuItem" href="glyphicons.html">Glyphicon</a>
-                                    </li>
-                                    <li>
-                                        <a class="J_menuItem" href="iconfont.html">阿里巴巴矢量图标库</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">拖动排序 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="draggable_panels.html">拖动面板</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="agile_board.html">任务清单</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="buttons.html">按钮</a>
-                            </li>
-                            <li><a class="J_menuItem" href="tabs_panels.html">选项卡 &amp; 面板</a>
-                            </li>
-                            <li><a class="J_menuItem" href="notifications.html">通知 &amp; 提示</a>
-                            </li>
-                            <li><a class="J_menuItem" href="badges_labels.html">徽章，标签，进度条</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="grid_options.html">栅格</a>
-                            </li>
-                            <li><a class="J_menuItem" href="plyr.html">视频、音频</a>
-                            </li>
-                            <li>
-                                <a href="#">弹框插件 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="layer.html">Web弹层组件layer</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="modal_window.html">模态窗口</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="sweetalert.html">SweetAlert</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">树形视图 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="jstree.html">jsTree</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="tree_view.html">Bootstrap Tree View</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="nestable_list.html">nestable</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="toastr_notifications.html">Toastr通知</a>
-                            </li>
-                            <li><a class="J_menuItem" href="diff.html">文本对比</a>
-                            </li>
-                            <li><a class="J_menuItem" href="spinners.html">加载动画</a>
-                            </li>
-                            <li><a class="J_menuItem" href="widgets.html">小部件</a>
-                            </li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">文章维护 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加文章</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改文章</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询查询文章</a>
+                            		</li>
+                               </ul>
+                              </li>
+                              <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-th"></i> 
+                        		<span class="glyphicon-class">文章分类 </span>
+                        		<span class="fa arrow"></span></a>
+                              </li>                            
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
+                         <a href="#">
+                            <i class="glyphicon glyphicon-earphone"></i>
+                            <span class="glyphicon-class">推广管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="table_basic.html">基本表格</a>
-                            </li>
-                            <li><a class="J_menuItem" href="table_data_tables.html">DataTables</a>
-                            </li>
-                            <li><a class="J_menuItem" href="table_jqgrid.html">jqGrid</a>
-                            </li>
-                            <li><a class="J_menuItem" href="table_foo_table.html">Foo Tables</a>
-                            </li>
-                            <li><a class="J_menuItem" href="table_bootstrap.html">Bootstrap Table
-                                <span class="label label-danger pull-right">推荐</span></a>
-                            </li>
+                            <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">广告管理 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加广告</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改广告信息</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询广告信息</a>
+                            		</li>
+                               </ul>
+                              </li>
+                              <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-thumbs-up"></i> 
+                        		<span class="glyphicon-class">商品推荐 </span>
+                        		<span class="fa arrow"></span></a>
+                              </li>                            
+                        </ul>	
+                    </li>
+                    <li>
+                         <a href="#">
+                            <i class="glyphicon glyphicon-yen"></i>
+                            <span class="glyphicon-class">促销管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">积分商城商品管理 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加积分商品</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">修改积分商品</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询积分商品</a>
+                            		</li>
+                               </ul>
+                              </li>
+                              <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">积分管理 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加会员积分</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">扣除会员积分</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询会员积分</a>
+                            		</li>
+                               </ul>
+                              </li>                            
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">相册</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="basic_gallery.html">基本图库</a>
-                            </li>
-                            <li><a class="J_menuItem" href="carousel.html">图片切换</a>
-                            </li>
-                            <li><a class="J_menuItem" href="layerphotos.html">layer相册</a>
-                            </li>
-                            <li><a class="J_menuItem" href="blueimp.html">Blueimp相册</a>
-                            </li>
+                         <a href="#">
+                            <i class="glyphicon glyphicon-cog"></i>
+                            <span class="glyphicon-class">系统设置</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-wrench"></i> 
+                        		<span class="glyphicon-class">商店设置 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">商店信息</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_detail.html">商品显示</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">购物流程</a>
+                            		</li>
+                            		<li><a class="J_menuItem" href="mail_compose.html">基本设置</a>
+                            		</li>	
+                               </ul>
+                              </li>
+                              <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-bitcoin"></i> 
+                        		<span class="glyphicon-class">支付方式 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加支付方式</a>
+                            		</li>                            		
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询支付方式</a>
+                            		</li>
+                               </ul>
+                              </li>
+                              <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-road"></i> 
+                        		<span class="glyphicon-class">配送方式 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加配送方式</a>
+                            		</li>                            		
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询配送方式</a>
+                            		</li>                     			
+                               </ul>
+                              </li>
+                              <li>
+                               <a href="mailbox.html"><i class="glyphicon glyphicon-globe"></i> 
+                        		<span class="glyphicon-class">地区管理 </span>
+                        		<span class="fa arrow"></span></a>
+                        		<ul class="nav nav-second-level">
+                            		<li><a class="J_menuItem" href="mailbox.html">添加地区</a>
+                            		</li>
+                           			<li><a class="J_menuItem" href="mail_compose.html">查询地区</a>
+                            		</li>
+                               </ul>
+                              </li>                                      
                         </ul>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">CSS动画</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-cutlery"></i> <span class="nav-label">工具 </span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="form_builder.html">表单构建器</a>
-                            </li>
-                        </ul>
-                    </li>
-
+	                    </li>
                 </ul>
             </div>
         </nav>
@@ -824,97 +942,6 @@
         </div>
         <!--右侧边栏结束-->
         <!--mini聊天窗口开始-->
-        <div class="small-chat-box fadeInRight animated">
-
-            <div class="heading" draggable="true">
-                <small class="chat-date pull-right">
-                    2015.9.1
-                </small> 与 Beau-zihan 聊天中
-            </div>
-
-            <div class="content">
-
-                <div class="left">
-                    <div class="author-name">
-                        Beau-zihan <small class="chat-date">
-                        10:02
-                    </small>
-                    </div>
-                    <div class="chat-message active">
-                        你好
-                    </div>
-
-                </div>
-                <div class="right">
-                    <div class="author-name">
-                        游客
-                        <small class="chat-date">
-                            11:24
-                        </small>
-                    </div>
-                    <div class="chat-message">
-                        你好，请问H+有帮助文档吗？
-                    </div>
-                </div>
-                <div class="left">
-                    <div class="author-name">
-                        Beau-zihan
-                        <small class="chat-date">
-                            08:45
-                        </small>
-                    </div>
-                    <div class="chat-message active">
-                        有，购买的H+源码包中有帮助文档，位于docs文件夹下
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="author-name">
-                        游客
-                        <small class="chat-date">
-                            11:24
-                        </small>
-                    </div>
-                    <div class="chat-message">
-                        那除了帮助文档还提供什么样的服务？
-                    </div>
-                </div>
-                <div class="left">
-                    <div class="author-name">
-                        Beau-zihan
-                        <small class="chat-date">
-                            08:45
-                        </small>
-                    </div>
-                    <div class="chat-message active">
-                        1.所有源码(未压缩、带注释版本)；
-                        <br> 2.说明文档；
-                        <br> 3.终身免费升级服务；
-                        <br> 4.必要的技术支持；
-                        <br> 5.付费二次开发服务；
-                        <br> 6.授权许可；
-                        <br> ……
-                        <br>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="form-chat">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control"> <span class="input-group-btn"> <button
-                        class="btn btn-primary" type="button">发送
-                </button> </span>
-                </div>
-            </div>
-
-        </div>
-        <div id="small-chat">
-            <span class="badge badge-warning pull-right">5</span>
-            <a class="open-small-chat">
-                <i class="fa fa-comments"></i>
-
-            </a>
-        </div>
     </div>
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
@@ -925,6 +952,4 @@
     <script type="text/javascript" src="resource/js/contabs.min.js"></script>
     <script src="resource/js/plugins/pace/pace.min.js"></script>
 </body>
-
-</html>
 </html>
