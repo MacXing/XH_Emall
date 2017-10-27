@@ -19,7 +19,16 @@ public class Xhadmin {
 
     private String adminlastip;
 
-    private String attribute1;
+    @Override
+	public String toString() {
+		return "Xhadmin [adminid=" + adminid + ", adminname=" + adminname
+				+ ", adminpassword=" + adminpassword + ", adminphone="
+				+ adminphone + ", adminemail=" + adminemail
+				+ ", adminlogintime=" + adminlogintime + ", adminlasttime="
+				+ adminlasttime + ", adminlastip=" + adminlastip + "]";
+	}
+
+	private String attribute1;
 
     private String attribute2;
 

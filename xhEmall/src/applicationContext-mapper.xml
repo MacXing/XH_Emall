@@ -13,16 +13,20 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
-	<!-- 连接池dbcp -->	
-	<bean id ="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://120.78.172.22:3306/xhan"/>
-		<property name="username" value="root"/>
+	<!-- c3p0连接池的使用 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://120.78.172.22:3306/xhan"/>
+		<property name="user" value="root"/>
 		<property name="password" value="root"/>
 	</bean>
 	
-	
-	<!-- 由spring创建sqlsession -->
+	<!-- mybatis的运行过程
+		 sqlSessionFactory sqlSession  Mapper接口实现类
+		
+		现在由spring去创建mapper接口的具体实现类
+	 -->
+	<!--sqlSessionFactory 对象的创建  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:SqlMapConfig.xml"/>
@@ -30,12 +34,18 @@
 	
 	<!-- Mapper接口的实现类的创建
 		org.mybatis.spring.mapper.MapperScannerConfigurer 专门用来扫描制定的包路径下的
-		mapper接口，自动的生成对应接口的mapper实现类	
+		mapper接口，自动的生成对应接口的mapper实现类
+		
 		把每一个接口的实现类都实例化，然后每一个类的id值就是类名，首字母小写
 	 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.gzu.mapper"/>
+		<property name="basePackage" value="com.xh.back.mapper,
+											com.xh.front.mapper"/>
+		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
+
+
+	
 	
 </beans>
