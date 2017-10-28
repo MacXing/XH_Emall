@@ -31,7 +31,7 @@ public class Xhproduct {
 
     private Double pdiscount;
 
-    private String attribute1;
+    private int pIntegral;
 
     private String attribute2;
 
@@ -153,15 +153,17 @@ public class Xhproduct {
         this.pdiscount = pdiscount;
     }
 
-    public String getAttribute1() {
-        return attribute1;
-    }
 
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
 
-    public String getAttribute2() {
+    public int getpIntegral() {
+		return pIntegral;
+	}
+
+	public void setpIntegral(int pIntegral) {
+		this.pIntegral = pIntegral;
+	}
+
+	public String getAttribute2() {
         return attribute2;
     }
 

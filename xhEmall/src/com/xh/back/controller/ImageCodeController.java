@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.other.getCode.ImageCode;
 
-
-
 public class ImageCodeController {
 	@RequestMapping("imageCode.action")
 	public void ImageCodeController(HttpServletRequest request,HttpServletResponse response) throws IOException{
