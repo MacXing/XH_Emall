@@ -33,32 +33,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="row">
 			<div class="col-sm-5">
 				
-			<form method="post" action="admin/checkAdmin.action">
+			<form method="post" action="${pageContext.request.contextPath }/admin/checkAdmin.action">
 				<p class="m-t-md">后台登录</p>
-				<input type="text" class="form-control uname " placeholder="用户名" />
-	            <input type="password" class="form-control pword m-b" placeholder="密码" />
-	            <input type="text" class="form-control verify " placeholder="请输入验证码" />
-	            <a href="javascript:change()"><img id="img" alt="" src=""></a>	            
+				<input type="text" class="form-control uname " placeholder="用户名" name="adminname"/>
+	            <input type="password" class="form-control pword m-b" placeholder="密码" name="adminpassword"/>
+	            <input type="text" class="form-control verify " placeholder="请输入验证码" name="code"/>
+	            <a href="javascript:change()"><img id="img" alt="" src="${pageContext.request.contextPath }/image/imageCode.action"></a>	            
     			
 	            <br />
-	            <a href="">忘记密码</a>
+	            <a href="#">忘记密码</a>
 	           
 	            <button class="btn btn-success btn-block">登录</button>
-			</form>
-			
-			
-		</div>
-		
+			</form>	
+		</div>	
 		</div>
         <div class="signup-footer">
             <div class="pull-left">            	
                 &copy; 2017 CJ team copyright             
             </div>
         </div>
-
-	
-                    
-
-        </div>
+       </div>
+<script type="text/javascript">
+		function change(){//通过a标签的href属性调用此方法
+			var img =  document.getElementById("img");
+			img.src ="${pageContext.request.contextPath }/image/imageCode.action?a="+new Date().getTime();
+		}
+</script>
 	</body>
+	
 </html>

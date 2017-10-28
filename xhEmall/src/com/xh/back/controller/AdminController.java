@@ -25,6 +25,7 @@ public class AdminController {
 
 	@RequestMapping("checkAdmin.action")
 	public String checkAdmin(HttpSession session,Xhadmin admin,HttpServletRequest request,String code){
+	
 		GetIp ip = new GetIp();
 		String ip_String = ip.getIpAddr(request);
 		String session_code = (String)session.getAttribute("session_code");
