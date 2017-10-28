@@ -24,23 +24,21 @@ public class AdminController {
 	private AdminServiceImpl adminService;
 
 	@RequestMapping("checkAdmin.action")
-	public String checkAdmin(HttpSession session,Xhadmin admin,HttpServletRequest request){
+	public String checkAdmin(HttpSession session,Xhadmin admin,HttpServletRequest request,String code){
 		GetIp ip = new GetIp();
 		String ip_String = ip.getIpAddr(request);
-		Date date = new Date();
+		String session_code = (String)session.getAttribute("session_code");
 		
-		System.out.println(ip_String+""+date);
-		
-		if(admin.getAdminname()==null || admin.getAdminname()==""||admin.getAdminpassword()==null||admin.getAdminpassword()==""){
-			return "";
+		if(admin.getAdminname()==null || admin.getAdminname()==""||admin.getAdminpassword()==null||admin.getAdminpassword()==""||code.equals("")||code==null){
+			return "../jsp/back/loginbackstage.jsp";
 		}
 		Xhadmin admin1=adminService.selectAdminByName(admin);
-		if(admin1.getAdminname().equals(admin.getAdminname())&&admin1.getAdminpassword().equals(admin.getAdminpassword())){
+		if(admin1.getAdminname().equals(admin.getAdminname())&&admin1.getAdminpassword().equals(admin.getAdminpassword())&&session_code.equalsIgnoreCase(code)){
 			admin1.setAdminlastip(ip_String);
 			admin1.setAdminlasttime(new Date());
 			adminService.updateAdminIpAndTime(admin1);
 			return "../jsp/back/index.jsp";
 		}
-		return "";
+		return "../jsp/back/loginbackstage.jsp";
 	}
 }

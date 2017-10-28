@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="signinpanel" >	
 		<div class="row">
 			<div class="col-sm-5">
-			<form class=method="post" action="#">
+			<form class=method="post" action="${pageContext.request.contextPath }/admin/checkAdmin.action">
 				<p class="m-t-md">后台登录</p>
 				<input type="text" class="form-control uname" placeholder="用户名" />
 	            <input type="password" class="form-control pword m-b" placeholder="密码" />					
