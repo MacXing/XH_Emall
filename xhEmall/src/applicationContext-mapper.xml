@@ -16,7 +16,7 @@
 	<!-- c3p0连接池的使用 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
-		<property name="jdbcUrl" value="jdbc:mysql://120.78.172.22:3306/xhan"/>
+		<property name="jdbcUrl" value="jdbc:mysql://120.78.172.22:3306/xhan?characterEncoding=UTF-8"/>
 		<property name="user" value="root"/>
 		<property name="password" value="root"/>
 	</bean>
