@@ -45,7 +45,7 @@
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
 								<span class="block m-t-xs">
-									<strong class="font-bold">Beaut-zihan</strong>
+									<strong class="font-bold">CJ技术</strong>
 								</span>
 								<span class="text-muted text-xs block">
 									超级管理员<b class="caret"></b>
@@ -63,7 +63,7 @@
 								<a class="J_menuItem" href="contacts.html">联系我们</a>
 							</li>
 							<li>
-								<a class="J_menuItem" href="mailbox.html">信箱</a>
+								<a class="J_menuItem" href="#">信箱</a>
 							</li>
 							<li class="divider"></li>
 							<li>
@@ -71,7 +71,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="logo-element">H+</div>
+					<div class="logo-element"><h5>孝康安老</h5></div>
 				</li>
 
 				<li>
@@ -181,13 +181,13 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">增加商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllProducts.action">商品列表</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改商品信息</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">添加商品</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询商品信息</a>
+									<a class="J_menuItem" href="mail_compose.html">修改商品</a>
 								</li>
 							</ul>
 						</li>
@@ -268,22 +268,10 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">会员维护 </span>
-								<span class="fa arrow"></span>
+							<a class="J_menuItem" href="user/queryAllUsers.action">
+								<i class="glyphicon glyphicon-search"></i>
+								<span class="glyphicon-class">查询会员信息 </span>
 							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">增加会员</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改会员信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员信息</a>
-								</li>
-							</ul>
 						</li>
 						<li>
 							<a href="mailbox.html">
@@ -627,7 +615,7 @@
 					style="margin-bottom: 0">
 				<div class="navbar-header">
 					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="#">
+						href="jsp/back/index.jsp#">
 						<i class="fa fa-bars"></i>
 					</a>
 					<form role="search" class="navbar-form-custom" method="post"
@@ -1107,6 +1095,7 @@
 		<!--右侧边栏结束-->
 		<!--mini聊天窗口开始-->
 	</div>
+	
 	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
 	<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
 	<script src="resource/js/plugins/metisMenu/jquery.metisMenu.js"></script>

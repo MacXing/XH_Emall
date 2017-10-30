@@ -16,6 +16,9 @@
 
 	<!-- service的注册 -->
 	<bean id="adminService" class="com.xh.back.serviceImpl.AdminServiceImpl"/>
+	<bean id="userService" class="com.xh.back.serviceImpl.XhUserServiceImpl"/>	
 	<bean id="xhUserService" class="com.xh.front.serviceImpl.XhUserServiceImpl"/>
 	<!-- <context:component-scan base-package="com.xh.back.serviceImpl"/> -->
+	<bean id="productService" class="com.xh.back.serviceImpl.ProductServiceImpl"/>
+	<bean id="brandService" class="com.xh.back.serviceImpl.BrandServiceImpl"/> 
 </beans>
