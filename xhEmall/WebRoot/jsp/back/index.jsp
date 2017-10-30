@@ -95,6 +95,9 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/admin/queryAdminList.action">管理员列表</a>
+								</li>
+								<li>
 									<a class="J_menuItem" href="jsp/back/form_vallidate.jsp"
 										data-index="0">添加管理员</a>
 								</li>
@@ -102,7 +105,7 @@
 									<a class="J_menuItem" href="#">修改管理员信息</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="#">查询所有管理员</a>
+									<a class="J_menuItem" href="#">删除管理员信息</a>
 								</li>
 							</ul>
 						</li>

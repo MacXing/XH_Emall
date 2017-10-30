@@ -5,7 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -65,6 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
+                                	<th>选择</th>
                                     <th>编号</th>
                                     <th>管理员帐号</th>
                                     <th>联系电话</th>
@@ -76,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach items="${adminList }" varStatus="status">
+                            	<c:forEach items="${adminList }" varStatus="status" var="admin">
                             		<tr class="gradeX">
-                            			<td class="hidden"><input name="id" value="${admin.adminid }"></td>
+                            			<td class="hidden"><input name="id" value="${admin.adminid }" type="checkbox"></td>
 	                                    <td>${status.index + 1}</td>
 	                                    <td>${admin.adminname }</td>
 	                                    <td>${admin.adminphone }</td>
@@ -96,6 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </tbody>
                             <tfoot>
                                 <tr>
+                                	<th>选择</th>
                                     <th>编号</th>
                                     <th>管理员帐号</th>
                                     <th>联系电话</th>

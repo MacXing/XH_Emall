@@ -1,6 +1,7 @@
 package com.xh.back.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import com.xh.back.serviceImpl.AdminServiceImpl;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
+	// queryAdminList
 	
 	@Autowired
 	@Qualifier("adminService")
@@ -41,5 +43,12 @@ public class AdminController {
 			return "../jsp/back/index.jsp";
 		}
 		return "../jsp/back/loginbackstage.jsp";
+	}
+	
+	@RequestMapping("queryAdminList.action")
+	public String queryAdminList(Model model){	
+		List<Xhadmin> adminList = adminService.queryAdminList();
+		model.addAttribute("adminList", adminList);
+		return "forward:/jsp/back/admin/queryAdmin.jsp";
 	}
 }
