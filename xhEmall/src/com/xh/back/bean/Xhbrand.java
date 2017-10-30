@@ -1,7 +1,15 @@
 package com.xh.back.bean;
 
 public class Xhbrand {
-    private Integer brandid;
+    @Override
+	public String toString() {
+		return "Xhbrand [brandid=" + brandid + ", brandname=" + brandname
+				+ ", branddesc=" + branddesc + ", attribute1=" + attribute1
+				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
+				+ "]";
+	}
+
+	private Integer brandid;
 
     private String brandname;
 

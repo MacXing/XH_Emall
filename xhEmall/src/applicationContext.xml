@@ -19,5 +19,4 @@
 	<import resource="applicationContext-mapper.xml"/>
 	<import resource="applicationContext-service.xml"/>
 	<import resource="applicationContext-tx.xml"/>
-	
 </beans>
