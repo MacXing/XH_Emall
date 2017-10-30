@@ -11,14 +11,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xh.back.bean.Xhadmin;
 import com.xh.back.serviceImpl.AdminServiceImpl;
+import com.xh.back.serviceImpl.XhUserServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext.xml")
 public class UtilAdmin {
 	//查找admin信息测试
 	@Autowired
+	@Qualifier("userService")
+	private XhUserServiceImpl userService;
+	
+	@Autowired
 	@Qualifier("adminService")
 	private AdminServiceImpl adminService;
+	
 	@Test
 	public void test(){
 		Xhadmin admin = new Xhadmin();
@@ -27,7 +33,6 @@ public class UtilAdmin {
 		System.out.println("----------------------------------");
 		System.out.println(admin);
 	}
-	
 	@Test
 	public void test2(){
 		Xhadmin admin = new Xhadmin();
@@ -37,5 +42,4 @@ public class UtilAdmin {
 		admin.setAdminlasttime(new Date());
 		adminService.updateAdminIpAndTime(admin);
 	}
-	
 }
