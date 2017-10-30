@@ -2,6 +2,8 @@ package com.xh.front.bean;
 
 import java.util.Date;
 
+import org.apache.log4j.helpers.DateTimeDateFormat;
+
 public class Xhusers {
     private Integer userid;
 
@@ -222,4 +224,23 @@ public class Xhusers {
     public void setAttribute6(String attribute6) {
         this.attribute6 = attribute6 == null ? null : attribute6.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhusers [userid=" + userid + ", gradeid=" + gradeid
+				+ ", username=" + username + ", userpassword=" + userpassword
+				+ ", usersex=" + usersex + ", userbirthday=" + userbirthday
+				+ ", userphone=" + userphone + ", useremail=" + useremail
+				+ ", useraddress=" + useraddress + ", userlogintime="
+				+ userlogintime + ", userlasttime=" + userlasttime
+				+ ", userlastip=" + userlastip + ", uservisitcount="
+				+ uservisitcount + ", userhomephone=" + userhomephone
+				+ ", userphoto=" + userphoto + ", usermoney=" + usermoney
+				+ ", attribute1=" + attribute1 + ", attribute2=" + attribute2
+				+ ", attribute3=" + attribute3 + ", attribute4=" + attribute4
+				+ ", attribute5=" + attribute5 + ", attribute6=" + attribute6
+				+ "]";
+	}
+    
+    
 }

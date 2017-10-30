@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.UserMapper">
+    <!-- 根据用户ID查询用户 -->
+	<select id="queryUserByPrimaryKey" parameterType="int" resultType="xhusers">
+		select * from xhUsers where userID =#{userid}
+	</select>
+	
+	<!-- 增加用户 -->
+	<insert id="addUser" parameterType="xhusers">
+    insert into xhUsers (
+    	gradeid,
+    	username,
+    	userpassword,
+    	usersex,
+    	userbirthday,
+    	userphone,
+    	useremail,
+    	useraddress,
+    	userlogintime,
+    	userlasttime,
+    	userlastip,
+    	uservisitcount,
+    	userhomephone,
+    	usermoney,
+    	userphoto    	
+      )
+    values (#{gradeid}, #{username}, #{userpassword}, 
+      #{usersex}, #{userbirthday}, #{userphone},
+      #{useremail}, #{useraddress}, #{userlogintime}, 
+      #{userlasttime},#{userlastip}, #{uservisitcount}, 
+      #{userhomephone},#{usermoney},#{userphoto}
+      )
+  </insert>
+	
+	<!-- 根据用户ID修改用户信息 -->
+	<update id="updateByPrimaryKeySelective" parameterType="xhusers">
+    update xhUsers
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        userSex = #{usersex,jdbcType=INTEGER},
+      </if>
+      <if test="userbirthday != null">
+        userBirthday = #{userbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null">
+        userPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null">
+        userEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddress != null">
+        userAddress = #{useraddress,jdbcType=VARCHAR},
+      </if>     
+      <if test="userlogintime != null">
+        userLoginTime = #{userlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="userlasttime != null">
+        userLastTime = #{userlasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="userlastip != null">
+        userLastIp = #{userlastip,jdbcType=VARCHAR},
+      </if>
+      <if test="uservisitcount != null">
+        userVisitCount = #{uservisitcount,jdbcType=INTEGER},
+      </if>           
+      <if test="userhomephone != null">
+        userHomePhone = #{userhomephone,jdbcType=VARCHAR},
+      </if>
+      <if test="usermoney != null">
+        userMoney = #{usermoney,jdbcType=DOUBLE},
+      </if>
+      <if test="userphoto != null">
+        userPhoto = #{userphoto,jdbcType=VARCHAR},
+      </if>      
+    </set>
+    where userID = #{userid,jdbcType=INTEGER}
+   </update>
+	
+	<!-- 查询所有用户 -->
+	<select id="queryAllUsers" resultType="xhusers">
+		select * from xhUsers
+	</select>
+	
+	<!-- 根据用户ID删除用户信息 -->
+	<delete id="deleteByPrimaryKey" parameterType="xhusers">
+    delete from xhUsers
+    where userID = #{userid,jdbcType=INTEGER}
+  	</delete>
+	
+	<update id="updateUserIpAndTime" parameterType="xhusers">
+		update xhUsers
+		set userLastIp = #{userlastip},userLastTime = #{userlasttime}
+		where userPhone = #{userphone}
+	</update>
+  
+</mapper>

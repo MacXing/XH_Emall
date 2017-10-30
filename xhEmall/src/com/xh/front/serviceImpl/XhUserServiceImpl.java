@@ -1,10 +1,13 @@
 package com.xh.front.serviceImpl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.xh.front.bean.Xhusers;
+import com.xh.front.bean.XhusersBean;
 import com.xh.front.mapper.XhUserMapper;
 import com.xh.front.service.XhUserService;
 
@@ -27,5 +30,4 @@ public class XhUserServiceImpl implements XhUserService {
 		xhUserMapper.updateUserIpAndTime(user);
 		
 	}
-
 }
