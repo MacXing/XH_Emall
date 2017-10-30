@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML">
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -37,8 +37,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<p class="m-t-md">后台登录</p>
 				<input type="text" class="form-control uname " placeholder="用户名" name="adminname"/>
 	            <input type="password" class="form-control pword m-b" placeholder="密码" name="adminpassword"/>
+	            
+	            
 	            <input type="text" class="form-control verify " placeholder="请输入验证码" name="code"/>
-	            <a href="javascript:change()"><img id="img" alt="" src="${pageContext.request.contextPath }/image/imageCode.action"></a>	            
+	            <a href="javascript:change()"><img style="margin:-35px 0px 15px 0px; float:right;" id="img" alt="" src="${pageContext.request.contextPath }/image/imageCode.action"></a>	            
     			
 	            <br />
 	            <a href="#">忘记密码</a>

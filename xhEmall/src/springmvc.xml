@@ -21,6 +21,7 @@
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 	<!-- 适配器解析器 -->	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+
 		<property name="webBindingInitializer" ref="myBinder"/>
 		<property name="messageConverters">
 			<list>
@@ -28,12 +29,20 @@
 				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
 			</list>
 		</property>		
+
+		<property name="messageConverters">
+			<list>
+				<!-- 将消息转换为json所需要的配置。 -->
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+			</list>
+		</property>
 	</bean>
 	<!-- 视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- <property name="prefix" value="/jsp/back/user/"/>
 		<property name="suffix" value=".jsp"/> -->
 	</bean>	
+
 
 	<!-- 注册一下转换器 	-->
 	<bean id="myConverter" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
@@ -50,7 +59,6 @@
 		<property name="conversionService" ref="myConverter"/>
 	</bean>
 
-	
 	<!-- 配置springmvc的上传解析器
 		springmvc上传实现依赖了commons-fileupload组件
 		commons-fileupload-1.2.2.jar
