@@ -65,7 +65,7 @@ body.signin {
 }
 
 .signup-footer {
-	border-top: solid 1px rgba(255, 255, 255, .3);
+	/*border-top: solid 1px rgba(255, 255, 255, .3);*/
 	margin: 20px 0;
 	padding-top: 15px;	
 }
@@ -102,5 +102,8 @@ body.signin {
 	}
 }
 
-
+.imgverify{
+	margin:-34px 0px 16px;
+	float:right
+}
 
