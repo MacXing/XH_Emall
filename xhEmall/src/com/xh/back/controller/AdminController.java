@@ -49,7 +49,7 @@ public class AdminController {
 	public String queryAdminList(Model model){	
 		List<Xhadmin> adminList = adminService.queryAdminList();
 		model.addAttribute("adminList", adminList);
-		return "forward:/jsp/back/admin/queryadmin.jsp";
+		return "forward:/jsp/back/admin/queryAdmin.jsp";
 	}
 	
 	@RequestMapping("deleteAdminById.action")

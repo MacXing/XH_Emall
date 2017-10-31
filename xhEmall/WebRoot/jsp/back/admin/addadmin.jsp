@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>完整验证表单</h5>
+                        <h5>添加管理员</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">帐号：</label>
                                 <div class="col-sm-8">
-                                    <input id="firstname" name="firstname" class="form-control" type="text">
+                                    <input id="cname" name="name" minlength="2" type="text" class="form-control" required="" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -66,48 +66,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label">确认密码：</label>
+                                <div class="col-sm-8">
+                                    <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">联系电话：</label>
                                 <div class="col-sm-8">
-                                    <input id="lastname" name="lastname" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                                    <input id="adminPhone" name="adminPhone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">E-mail：</label>
                                 <div class="col-sm-8">
-                                    <input id="email" name="email" class="form-control" type="email">
+                                    <input id="cemail" type="email" class="form-control" name="email" required="" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">管理员头像：</label>
                                 <div class="col-sm-8">
-                                    <input id="firstname" name="firstname" class="form-control" type="text">
+                                    <input id="adminPhoto" name="adminPhoto" class="form-control" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">个人资料：</label>
+                                <label class="col-sm-3 control-label">说明：</label>
                                 <div class="col-sm-8">
-                                    <input id="firstname" name="firstname" class="form-control" type="text">
+                                    <textarea id="ccomment" name="comment" class="form-control" required="" aria-required="true"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
+<!--                             <div class="form-group">
                                 <label class="col-sm-3 control-label">注册时间：</label>
                                 <div class="col-sm-8">
                                     <input id="firstname" name="firstname" class="form-control" type="text">
                                 </div>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label">最后登录时间：</label>
                                 <div class="col-sm-8">
                                     <input id="firstname" name="firstname" class="form-control" type="text">
                                 </div>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label">最后登录IP：</label>
                                 <div class="col-sm-8">
                                     <input id="firstname" name="firstname" class="form-control" type="text">
                                 </div>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <div class="checkbox">
                                         <label>
@@ -115,10 +122,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
-                                    <button class="btn btn-primary" type="submit">提交</button>
+                                    <button class="btn btn-primary" type="submit">添加</button>
                                 </div>
                             </div>
                         </form>
@@ -127,13 +134,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="resource/js/demo/form-validate-demo.min.js"></script>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+    <script src="js/demo/form-validate-demo.min.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
+
+</html>
 
 </html>

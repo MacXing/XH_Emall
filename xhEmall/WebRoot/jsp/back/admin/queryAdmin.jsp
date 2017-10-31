@@ -107,11 +107,99 @@
 											<button class="btn btn-danger btn-sm demo4">
 												<span class="glyphicon glyphicon-trash"></span>
 											</button>
-											
+
 											&nbsp;
-											<button class="btn btn-warning btn-sm demo3">
+											<button type="button" class="btn btn-primary btn-sm"
+												data-toggle="modal" data-target="#myModal5${admin.adminid }">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
+											<div class="modal inmodal fade" id="myModal5${admin.adminid }" tabindex="-1"
+												role="dialog" aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">
+																<span aria-hidden="true">&times;</span>
+																<span class="sr-only">Close</span>
+															</button>
+															<h4 class="modal-title">ADMIN更新</h4>
+															<!-- <small class="font-bold">这里可以显示副标题。 -->
+														</div>
+														<div class="modal-body">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="signupForm">
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">帐号：</label>
+																		<div class="col-sm-8">
+																			<input id="cname" name="name" minlength="2"
+																				type="text" class="form-control" required=""
+																				aria-required="true" value="${admin.adminname }">
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">密码：</label>
+																		<div class="col-sm-8">
+																			<input id="password" name="password"
+																				class="form-control" type="password">
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">确认密码：</label>
+																		<div class="col-sm-8">
+																			<input id="confirm_password" name="confirm_password"
+																				class="form-control" type="password">
+																			<span class="help-block m-b-none">
+																				<i class="fa fa-info-circle"></i> 请再次输入您的密码
+																			</span>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">联系电话：</label>
+																		<div class="col-sm-8">
+																			<input id="adminPhone" name="adminPhone"
+																				class="form-control" type="text"
+																				aria-required="true" aria-invalid="false"
+																				class="valid" value="${admin.adminphone }">
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">E-mail：</label>
+																		<div class="col-sm-8">
+																			<input id="cemail" type="email" class="form-control"
+																				name="email" required="" aria-required="true" value="${admin.adminemail }">
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">管理员头像：</label>
+																		<div class="col-sm-8">
+																			<input id="adminPhoto" name="adminPhoto"
+																				class="form-control" type="text">
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-3 control-label">说明：</label>
+																		<div class="col-sm-8">
+																			<textarea id="ccomment" name="comment"
+																				class="form-control" required=""
+																				aria-required="true"></textarea>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<div class="col-sm-8 col-sm-offset-3">
+																			<button class="btn btn-primary" type="submit">添加</button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-white"
+																data-dismiss="modal">关闭</button>
+															<button type="button" class="btn btn-primary">保存</button>
+														</div>
+													</div>
+												</div>
+											</div>
 										</td>
 									</tr>
 								</c:forEach>
@@ -141,83 +229,7 @@
 	<script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="resource/js/content.min.js?v=1.0.0"></script>
 	<script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$(".demo1").click(function() {
-				swal({
-					title : "欢迎使用SweetAlert",
-					text : "Sweet Alert 是一个替代传统的 JavaScript Alert 的漂亮提示效果。"
-				})
-			});
-			$(".demo2").click(function() {
-				swal({
-					title : "太帅了",
-					text : "小手一抖就打开了一个框",
-					type : "success"
-				})
-			});
-			$(".demo3").click(function() {
-				swal({
-					title : "您确定要删除这条信息吗",
-					text : "删除后将无法恢复，请谨慎操作！",
-					type : "warning",
-					showCancelButton : true,
-					confirmButtonColor : "#DD6B55",
-					confirmButtonText : "删除",
-					closeOnConfirm : false
-				}, function() {
-					swal("删除成功！", "您已经永久删除了这条信息。", "success")
-				})
-			});
-			$(".demo4").click(function() {
-				var id = $(this).parent().parent().find("input[type='checkbox']").val();
-				$(this).parent().parent().attr("class","del");
-				swal({
-					title : "您确定要删除这条信息吗",
-					text : "删除后将无法恢复，请谨慎操作！",
-					type : "warning",
-					showCancelButton : true,
-					confirmButtonColor : "#DD6B55",
-					confirmButtonText : "是的，我要删除！",
-					cancelButtonText : "让我再考虑一下…",
-					closeOnConfirm : false,
-					closeOnCancel : false
-				}, function(isConfirm) {
-					if (isConfirm) {
-						$.ajax({
-							url : "admin/deleteAdminById.action?id=" + id,
-						});
-						swal("删除成功！", "您已经永久删除了这条信息。", "success");
-						$(".del").remove();
-					} else {
-						swal("已取消", "您取消了删除操作！", "error");
-					}
-				})
-			});
-			$(".dataTables-example").dataTable();
-			var oTable = $("#editable").dataTable();
-			oTable.$("td").editable("../example_ajax.php", {
-				"callback" : function(sValue, y) {
-					var aPos = oTable.fnGetPosition(this);
-					oTable.fnUpdate(sValue, aPos[0], aPos[1])
-				},
-				"submitdata" : function(value, settings) {
-					return {
-						"row_id" : this.parentNode.getAttribute("id"),
-						"column" : oTable.fnGetPosition(this)[2]
-					}
-				},
-				"width" : "90%",
-				"height" : "100%"
-			})
-		});
-		function fnClickAddRow() {
-			$("#editable").dataTable()
-					.fnAddData(
-							[ "Custom row", "New row", "New row", "New row",
-									"New row" ])
-		};
-	</script>
+	<script src="resource/js/admin/back-admin.js"></script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 

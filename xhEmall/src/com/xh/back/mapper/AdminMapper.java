@@ -6,7 +6,7 @@ import java.util.Map;
 import com.xh.back.bean.Xhadmin;
 
 
-public interface XhadminMapper {
+public interface AdminMapper {
 	
    public Xhadmin selectAdminByName(Xhadmin admin);
    

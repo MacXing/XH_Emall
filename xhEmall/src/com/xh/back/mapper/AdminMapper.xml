@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xh.back.mapper.XhadminMapper">
+<mapper namespace="com.xh.back.mapper.AdminMapper">
 <!-- 通过用户名查找admin信息-->
     <select id="selectAdminByName" parameterType="xhadmin" resultType="xhadmin">
   		SELECT adminID,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
