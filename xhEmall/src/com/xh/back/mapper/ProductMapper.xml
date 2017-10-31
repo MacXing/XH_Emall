@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.ProductMapper">
+<!-- 通过用户名查找admin信息-->
+	  <resultMap id="selectProductByIdMap" type="com.xh.back.bean.Xhproduct">
+	    <id column="pID" jdbcType="INTEGER" property="pid" />
+ 	    <result column="brandID" jdbcType="INTEGER" property="brandid" />
+	    <result column="pName" jdbcType="VARCHAR" property="pname" />
+	    <result column="pClick" jdbcType="INTEGER" property="pclick" />
+	    <result column="pDesc" jdbcType="VARCHAR" property="pdesc" />
+	    <result column="pPrice" jdbcType="DOUBLE" property="pprice" />
+	    <result column="pSale" jdbcType="DOUBLE" property="psale" />
+	    <result column="pImg" jdbcType="VARCHAR" property="pimg" />
+	    <result column="pImgDetail" jdbcType="VARCHAR" property="pimgdetail" />
+	    <result column="pAddtime" jdbcType="TIMESTAMP" property="paddtime" />
+	    <result column="pUpdatetime" jdbcType="TIMESTAMP" property="pupdatetime" />
+	    <result column="pSize" jdbcType="VARCHAR" property="psize" />
+	    <result column="pUnit" jdbcType="VARCHAR" property="punit" />
+	    <result column="pDiscount" jdbcType="DOUBLE" property="pdiscount" />
+	    <result column="pIntegral" jdbcType="INTEGER" property="pIntegral" />   
+	     <association property="brand" javaType="com.xh.back.bean.Xhbrand">
+	    	<id column="brandID" jdbcType="INTEGER" property="brandid" />
+			<result column="brandName" jdbcType="VARCHAR" property="brandname" />   
+	    </association>  
+	  </resultMap>
+ 
+	<select id="selectAllProducts" resultType="xhproduct">
+		SELECT pID,pName,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount,brandID,pClick ,pUpdatetime,pIntegral
+		FROM xhProduct
+	</select>
+	
+  <insert id="insertProduct" parameterType="xhproduct">
+  	INSERT INTO xhProduct(pName,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount)
+	VALUES(#{pname},#{pdesc},#{pprice},#{psale},#{pimg},#{pimgdetail},#{paddtime},#{psize},#{punit},#{pdiscount})
+  </insert>
+  
+  <select id="selectProductById" parameterType="int"  resultMap="selectProductByIdMap">
+  SELECT p.pID,p.brandID,p.pName,p.pClick,p.pDesc,p.pPrice,p.pSale,
+	p.pImg,p.pImgDetail,p.pAddtime,p.pUpdatetime,p.pUnit,
+	p.pSize,p.pDiscount,p.pIntegral, b.brandName
+	FROM xhProduct p JOIN xhBrand b ON p.brandID=b.brandID
+	WHERE p.pID=#{id}
+  </select> 
+  
+  <select id="selectProductByName" parameterType="string" resultType="xhproduct">
+  	SELECT pName,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount from xhProduct WHERE pName=#{name}
+  </select>
+  
+  <update id="updateProductById" parameterType="xhproduct">
+	UPDATE xhProduct
+	SET pName=#{pname},pDesc=#{pdesc},pPrice=#{pprice},pSale=#{psale},pImg=#{pimg},
+	pImgDetail=#{pimgdetail},pUpdatetime=#{pupdatetime},pSize=#{psize},pUnit=#{punit},pDiscount=#{pdiscount}
+	WHERE pID=#{pid}
+  </update>
+  
+  <delete id="deleteProductById" parameterType="int">
+  	DELETE FROM xhProduct WHERE pid=#{id}
+  </delete>
+  
+  <select id="selectProductByNameLike" parameterType="string" resultType="xhproduct">
+  	SELECT pName,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount 
+	FROM xhProduct
+	WHERE pName LIKE "%"#{name}"%"
+  </select>
+  
+</mapper>

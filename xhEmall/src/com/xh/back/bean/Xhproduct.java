@@ -39,9 +39,30 @@ public class Xhproduct {
 
     private String attribute4;
 
-    private String attribute5;
+    @Override
+	public String toString() {
+		return "Xhproduct [pid=" + pid + ", brandid=" + brandid + ", pname="
+				+ pname + ", pclick=" + pclick + ", pdesc=" + pdesc
+				+ ", pprice=" + pprice + ", psale=" + psale + ", pimg=" + pimg
+				+ ", pimgdetail=" + pimgdetail + ", paddtime=" + paddtime
+				+ ", pupdatetime=" + pupdatetime + ", psize=" + psize
+				+ ", punit=" + punit + ", pdiscount=" + pdiscount
+				+ ", pIntegral=" + pIntegral + ", brand=" + brand + "]";
+	}
 
-    public Integer getPid() {
+	private String attribute5;
+    
+    private Xhbrand brand;
+
+    public Xhbrand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Xhbrand brand) {
+		this.brand = brand;
+	}
+
+	public Integer getPid() {
         return pid;
     }
 

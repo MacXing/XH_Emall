@@ -63,7 +63,7 @@
 								<a class="J_menuItem" href="contacts.html">联系我们</a>
 							</li>
 							<li>
-								<a class="J_menuItem" href="mailbox.html">信箱</a>
+								<a class="J_menuItem" href="#">信箱</a>
 							</li>
 							<li class="divider"></li>
 							<li>
@@ -180,13 +180,13 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">增加商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllProducts.action">商品列表</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改商品信息</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">添加商品</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询商品信息</a>
+									<a class="J_menuItem" href="mail_compose.html">修改商品</a>
 								</li>
 							</ul>
 						</li>
@@ -1106,6 +1106,7 @@
 		<!--右侧边栏结束-->
 		<!--mini聊天窗口开始-->
 	</div>
+	
 	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
 	<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
 	<script src="resource/js/plugins/metisMenu/jquery.metisMenu.js"></script>
