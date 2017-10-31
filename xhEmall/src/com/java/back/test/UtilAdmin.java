@@ -38,4 +38,10 @@ public class UtilAdmin {
 		adminService.updateAdminIpAndTime(admin);
 	}
 	
+	@Test
+	public void test3(){
+		int result = adminService.deleteAdminById("3");
+		System.out.println(result);
+	}
+	
 }

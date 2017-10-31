@@ -14,6 +14,7 @@ import com.xh.back.service.AdminService;
  * */
 public class AdminServiceImpl implements AdminService{
 	
+	private static final Xhadmin admin = null;
 	@Autowired
 	@Qualifier("xhadminMapper")
 	private XhadminMapper adminMapper;
@@ -34,6 +35,39 @@ public class AdminServiceImpl implements AdminService{
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@Override
+	public int deleteAdminById(String id){
+		try {
+			return adminMapper.deleteAdminById(Integer.parseInt(id));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public int modifyAdmin(Xhadmin admin) {
+		try {
+			return adminMapper.modifyAdmin(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public int addAdmin(Xhadmin admin) {
+		try {
+			return adminMapper.addAdmin(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 

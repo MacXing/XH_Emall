@@ -6,9 +6,9 @@
     <select id="selectAdminByName" parameterType="xhadmin" resultType="xhadmin">
   		SELECT adminID,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
     </select>
-  
+	
 	<update id="updateAdminIpAndTime" parameterType="xhadmin">
-		update xhAdmin
+		UPDATE xhAdmin
 		set adminLastIp = #{adminlastip},adminLastTime = #{adminlasttime}
 		where adminName = #{adminname}
 	</update>
@@ -18,5 +18,51 @@
 			   ,ADMINLASTTIME,ADMINLASTIP,ATTRIBUTE1,ATTRIBUTE2,ATTRIBUTE3
 		FROM xhAdmin ORDER BY ADMINID
 	</select>
+	
+	<delete id="deleteAdminById" parameterType="int">
+		DELETE FROM xhAdmin WHERE ADMINID=#{_parameter};
+	</delete>
+	
+	<update id="modifyAdmin" parameterType="com.xh.back.bean.Xhadmin">
+		UPDATE Xhadmin 
+               SET   ADMINNAME         = #{adminname}
+                    ,ADMINPASSWORD     = #{adminpassword}
+                    ,ADMINPHONE        = #{adminphone}
+                    ,ADMINEMAIL        = #{adminemail}
+                    ,ADMINLOGINTIME    = #{adminlogintime}
+                    ,ADMINLASTTIME     = #{adminlasttime}
+                    ,ADMINLASTIP       = #{adminlastip}
+                    ,ATTRIBUTE1        = #{attribute1}
+                    ,ATTRIBUTE2        = #{attribute2}
+                    ,ATTRIBUTE3        = #{attribute3}
+             WHERE   ADMINID           = #{adminid}
+	</update>
+	
+	<insert id="addAdmin" parameterType="com.xh.back.bean.Xhadmin">
+		INSERT INTO Xhadmin (
+                     ADMINNAME
+                    ,ADMINPASSWORD
+                    ,ADMINPHONE
+                    ,ADMINEMAIL
+                    ,ADMINLOGINTIME
+                    ,ADMINLASTTIME
+                    ,ADMINLASTIP
+                    ,ATTRIBUTE1
+                    ,ATTRIBUTE2
+                    ,ATTRIBUTE3
+                    )
+            VALUES  (
+                     #{adminname}
+                    ,#{adminpassword}
+                    ,#{adminphone}
+                    ,#{adminemail}
+                    ,#{adminlogintime}
+                    ,#{adminlasttime}
+                    ,#{adminlastip}
+                    ,#{attribute1}
+                    ,#{attribute2}
+                    ,#{attribute3}
+                    )
+	</insert>
 	
 </mapper>

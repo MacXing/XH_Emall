@@ -25,7 +25,7 @@ public interface XhadminMapper {
     * @param Xhadmin     - 
     * @throws Exception  - 异常捕捉
     */
-   public void getInsert(Xhadmin Xhadmin) throws Exception;
+   public int addAdmin(Xhadmin Xhadmin) throws Exception;
 
 
    /**
@@ -35,7 +35,7 @@ public interface XhadminMapper {
     * @return int        - 执行结果
     * @throws Exception  - 异常捕捉
     */
-   public int getDelete(Integer adminid) throws Exception;
+   public int deleteAdminById(int id) throws Exception;
 
 
    /**
@@ -45,7 +45,7 @@ public interface XhadminMapper {
     * @return int        - 执行结果
     * @throws Exception  - 异常捕捉
     */
-   public int getUpdate(Xhadmin Xhadmin) throws Exception;
+   public int modifyAdmin(Xhadmin Xhadmin) throws Exception;
 
 
    /**

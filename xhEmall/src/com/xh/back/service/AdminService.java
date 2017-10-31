@@ -14,4 +14,13 @@ public interface AdminService {
 	//查找所有Admin信息
 	public List<Xhadmin> queryAdminList();
 	
+	//删除单个管理员信息
+	public int deleteAdminById(String id);
+	
+	//修改单个管理员信息
+	public int modifyAdmin(Xhadmin admin);
+	
+	//添加单个管理员信息
+	public int addAdmin(Xhadmin admin);
+	
 }
