@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="shortcut icon" href="favicon.ico"> 
     <link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <!-- Data Tables -->
+    <!-- Data Tables-->
     <link href="resource/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>增加商品</h5>
+                        <h5>修改商品</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -51,7 +51,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form id="myform" method="post"  class="form-horizontal" enctype="multipart/form-data">
+                       <form id="myform" method="post"  class="form-horizontal" enctype="multipart/form-data">
+                       		<div class="form-group">                  
+                                <div class="col-md-3">
+                                    <input id="pid" type=hidden class="form-control" name="pid">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">名称：</label>
 
@@ -88,8 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-md-3">
                                     <div id="file-pretty">
 			                            <div class="form-group">
-			                                <input type="file" id="file" class="form-control" name="file" onchange="showPic()"/>
-			                               		
+			                                <input type="file" id="file" class="form-control" name="file" onchange="showPic()"/>			                               		
 									 		<img class="img-rounded" id="img" width="150" height="150"> 	
 			                            </div>  
 		                            </div>
@@ -109,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-2 control-label">品牌：</label>		
                                 <div class="col-md-3">                                
                                     <div class="input-group">
-			                                <select id="addBrand" data-placeholder="选择品牌..." class="chosen-select" style="width:350px;" tabindex="2" name="brandid">
+			                                <select id="brand" data-placeholder="选择品牌..." class="chosen-select" style="width:350px;" tabindex="2" name="brandid">
 			                                	 
 			                                </select>
 			                        </div>   
@@ -144,7 +148,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-primary" type="button" id="btn_id">保存内容</button>
-                                    <!-- <button class="btn btn-white" id="return">返回</button> -->
                                     <input type="button" class="btn" value="返回" onclick="javascript:history.go(-1);"/>
                                 </div>
                             </div>
@@ -154,12 +157,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-    
-   
-    
+
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/plugins/jeditable/jquery.jeditable.js"></script>
+	<script src="resource/js/plugins/jeditable/jquery.jeditable.js"></script>
     <script src="resource/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="resource/js/content.min.js?v=1.0.0"></script>
@@ -168,8 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.zh.js"></script>
 
- 
-    <script>
+    <script type="text/javascript">
     
     $(function(){
     	$.ajax({
@@ -178,16 +178,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		success:function(result){
      			$.each(result.extend.brands,function(index,item){
      				 var option=$("<option value='"+item.brandid+"'></option>").append(item.brandname);
-     				 option.appendTo(addBrand);
+     				 option.appendTo(brand);
      			});
      		}
      	});
-    	
+    	 
+    	$.ajax({
+    		url:"${pageContext.request.contextPath}/product/queryProductById.action?id="+getID(),
+    		type:"GET",
+    		success:function(result){
+    			console.log(result);
+    			$("#pid").val(result.pid);
+    			$("#pname").val(result.pname);
+    			$("#pdesc").val(result.pdesc);
+    			$("#pprice").val(result.pprice);
+    			$("#psale").val(result.psale);
+    			$("#pimg").val(result.pimg);
+    			$("#pimgdetail").val(result.pimgdetail);
+    			$("#psize").val(result.psize);
+    			$("#punit").val(result.punit);
+    			$("#pdiscount").val(result.pdiscount);
+    			$("#brand").val(result.brand.brandid);
+    			$("#img").attr("src","${pageContext.request.contextPath}/upload/"+result.pimg);
+    			alert($("#brand").val(result.pid));
+    		}
+    	});
     });
     	
    
     </script>
-   
+   <script type="text/javascript">
+    function getID(){
+    	var Ohref=window.location.href;
+    	var arrhref=Ohref.split("?id=");
+    	var id = arrhref[1];
+    	return id;
+    }
+    
+    
+   </script>
+    
 <script type="text/javascript">
 $("#btn_id").on("click",function(){
 	 var action="";
@@ -195,12 +225,11 @@ $("#btn_id").on("click",function(){
 		return false;
 	}else{
 		var form = $("#file").val().length;
-		var formData= new FormData($("#myform")[0]);
-		
+		var formData= new FormData($("#myform")[0]);		
 		 if(form==0){
-			 action ="insertProduct.action";
+			 action ="updateProduct.action";
 		}else{
-			 action="insertProductAndFile.action";
+			 action="updateProductAndFile.action";
 		}		 
 		$.ajax({		
 			url:"${pageContext.request.contextPath }/product/"+action,
@@ -212,42 +241,28 @@ $("#btn_id").on("click",function(){
 		       processData: false, 
 			   success:function(result){ 
 				  if(result.code==100){	
-					  	clean();
-					    alert("增加成功！");
+					    alert("修改成功！");
+					    window.location.href="${pageContext.request.contextPath}/product/queryAllProducts.action";
 				   }else{
-					  alert("增加失败！");
-				   } 
+					  alert("修改失败！");
+				   } 				 
 			   }
 		});
 	}
 });
-function clean()
-{	
-$("pname").val("");
-$("#pdesc").val("");
-$("#pprice").val("");
-$("#psale").val("");
-$("#addBrand").val("");
-$("#pimgdetail").val("");
-$("#psize").val("");
-$("#punit").val("");
-$("#pdiscount").val("");
-var file = $("#file"); 
-file.after(file.clone().val("")); 
-file.remove();
-$("#img").attr("src",null);
-$("#addBrand").val(1);
-}
 
 </script>
+
+<!-- 上传图片 -->
+
 <script type="text/javascript">
 //展示图片
-	 function showPic(){
-	  var pic = $("#file").get(0).files[0];
-	  $("img").prop("src",window.URL.createObjectURL(pic));
-	 
-	 }
-</script>
-</body>
+function showPic(){
+ var pic = $("#file").get(0).files[0];
+ $("img").prop("src", window.URL.createObjectURL(pic));
 
+}
+</script>
+
+</body>
 </html>

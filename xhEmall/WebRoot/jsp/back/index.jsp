@@ -184,11 +184,9 @@
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllProducts.action">商品列表</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">添加商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/product/addProduct.jsp">添加商品</a>
 								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">修改商品</a>
-								</li>
+								
 							</ul>
 						</li>
 						<li>
