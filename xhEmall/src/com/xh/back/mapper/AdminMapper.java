@@ -55,7 +55,7 @@ public interface AdminMapper {
     * @return Xhadmin    - 执行结果
     * @throws Exception  - 异常捕捉
     */
-   public Xhadmin getBean(Integer adminid) throws Exception;
+   public Xhadmin getAdmin(Integer adminid) throws Exception;
 
 
    /**
@@ -80,17 +80,6 @@ public interface AdminMapper {
     * @throws Exception      - 异常捕捉
     */
    public List<Xhadmin> getPageList(Map<String ,Object> map) throws Exception;
-
-
-   /**
-    * 7.删除数据
-    * 注: 根据Bean实体的主键ID执行删除操作.
-    * @param Xhadmin     - 
-    * @return int        - 执行结果
-    * @throws Exception  - 异常捕捉
-    */
-   public int getDeleteBean(Xhadmin Xhadmin) throws Exception;
-
 
    /**
     * 8.删除多条数据

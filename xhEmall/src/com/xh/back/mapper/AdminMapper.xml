@@ -2,67 +2,144 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xh.back.mapper.AdminMapper">
+	<sql id="parametername">
+		ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
+		,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE,ATTRIBUTE3
+	</sql>
+	<sql id="key">
+		<trim suffixOverrides=",">
+		  <if test="adminname != null and !&quot;&quot;.equals(adminname.trim())">
+	      	ADMINNAME,
+	      </if>
+	      <if test="adminpassword != null and !&quot;&quot;.equals(adminpassword.trim())">
+	      	ADMINPASSWORD,
+	      </if>
+	      <if test="adminphone != null and !&quot;&quot;.equals(adminphone.trim())">
+	      	ADMINPHONE,
+	      </if>
+	      <if test="adminemail != null and !&quot;&quot;.equals(adminemail.trim())">
+	      	ADMINEMAIL,
+	      </if>
+	      <if test="adminlogintime != null">
+	      	ADMINLOGINTIME,
+	      </if>
+	      <if test="adminlasttime != null">
+	      	ADMINLASTTIME,
+	      </if>
+	      <if test="adminlastip != null and !&quot;&quot;.equals(adminlastip.trim())">
+	      	ADMINLASTIP,
+	      </if>
+	      <if test="adminphoto != null and !&quot;&quot;.equals(adminphoto.trim())">
+	      	ADMINPHOTO,
+	      </if>
+	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
+	      	ADMINDESCRIBE,
+	      </if>
+	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
+	      	ATTRIBUTE3
+	      </if>
+		</trim>
+	</sql>
+	
+	<sql id="values">
+		<trim suffixOverrides=",">
+		  <if test="adminname != null and !&quot;&quot;.equals(adminname.trim())">
+	      	#{adminname},
+	      </if>
+	      <if test="adminpassword != null and !&quot;&quot;.equals(adminpassword.trim())">
+	      	#{adminpassword},
+	      </if>
+	      <if test="adminphone != null and !&quot;&quot;.equals(adminphone.trim())">
+	      	#{adminphone},
+	      </if>
+	      <if test="adminemail != null and !&quot;&quot;.equals(adminemail.trim())">
+	      	#{adminemail},
+	      </if>
+	      <if test="adminlogintime != null">
+	      	#{adminlogintime},
+	      </if>
+	      <if test="adminlasttime != null">
+	      	#{adminlasttime},
+	      </if>
+	      <if test="adminlastip != null and !&quot;&quot;.equals(adminlastip.trim())">
+	      	#{adminlastip},
+	      </if>
+	      <if test="adminphoto != null and !&quot;&quot;.equals(adminphoto.trim())">
+	      	#{adminphoto},
+	      </if>
+	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
+	      	#{admindescribe},
+	      </if>
+	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
+	      	#{attribute3}
+	      </if>
+	    </trim>
+	</sql>
 <!-- 通过用户名查找admin信息-->
     <select id="selectAdminByName" parameterType="xhadmin" resultType="xhadmin">
   		SELECT adminID,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
     </select>
 	
 	<update id="updateAdminIpAndTime" parameterType="xhadmin">
-		UPDATE xhAdmin
+		UPDATE xhAdmin <include refid="parametername"></include>
 		set adminLastIp = #{adminlastip},adminLastTime = #{adminlasttime}
 		where adminName = #{adminname}
 	</update>
 	
 	<select id="queryAdminList" resultType="com.xh.back.bean.Xhadmin">
-		SELECT  ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
-			   ,ADMINLASTTIME,ADMINLASTIP,ATTRIBUTE1,ATTRIBUTE2,ATTRIBUTE3
+		SELECT ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
+				,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE,ATTRIBUTE3
 		FROM xhAdmin ORDER BY ADMINID
 	</select>
 	
+	<select id="getAdmin" parameterType="int" resultType="com.xh.back.bean.Xhadmin">
+		SELECT  <include refid="parametername"></include>
+		FROM xhAdmin WHERE ADMINID = #{id}
+	</select>
+	
 	<delete id="deleteAdminById" parameterType="int">
-		DELETE FROM xhAdmin WHERE ADMINID=#{_parameter};
+		DELETE FROM xhAdmin WHERE ADMINID=#{id};
 	</delete>
 	
 	<update id="modifyAdmin" parameterType="com.xh.back.bean.Xhadmin">
-		UPDATE Xhadmin 
-               SET   ADMINNAME         = #{adminname}
-                    ,ADMINPASSWORD     = #{adminpassword}
-                    ,ADMINPHONE        = #{adminphone}
-                    ,ADMINEMAIL        = #{adminemail}
-                    ,ADMINLOGINTIME    = #{adminlogintime}
-                    ,ADMINLASTTIME     = #{adminlasttime}
-                    ,ADMINLASTIP       = #{adminlastip}
-                    ,ATTRIBUTE1        = #{attribute1}
-                    ,ATTRIBUTE2        = #{attribute2}
-                    ,ATTRIBUTE3        = #{attribute3}
-             WHERE   ADMINID           = #{adminid}
+		UPDATE Xhadmin
+		<trim prefix="set" suffixOverrides=",">
+	      <if test="adminname != null and !&quot;&quot;.equals(adminname.trim())">
+	      	ADMINNAME = #{adminname},
+	      </if>
+	      <if test="adminpassword != null and !&quot;&quot;.equals(adminpassword.trim())">
+	      	ADMINPASSWORD = #{adminpassword},
+	      </if>
+	      <if test="adminphone != null and !&quot;&quot;.equals(adminphone.trim())">
+	      	ADMINPHONE = #{adminphone},
+	      </if>
+	      <if test="adminemail != null and !&quot;&quot;.equals(adminemail.trim())">
+	      	ADMINEMAIL = #{adminemail},
+	      </if>
+	      <if test="adminlogintime != null">
+	      	ADMINLOGINTIME = #{adminlogintime},
+	      </if>
+	      <if test="adminlasttime != null">
+	      	ADMINLASTTIME = #{adminlasttime},
+	      </if>
+	      <if test="adminlastip != null and !&quot;&quot;.equals(adminlastip.trim())">
+	      	ADMINLASTIP = #{adminlastip},
+	      </if>
+	      <if test="adminphoto != null and !&quot;&quot;.equals(adminphoto.trim())">
+	      	ADMINPHOTO = #{adminphoto},
+	      </if>
+	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
+	      	ADMINDESCRIBE = #{admindescribe},
+	      </if>
+	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
+	      	ATTRIBUTE3 = #{attribute3}
+	      </if>
+	    </trim>
+	    WHERE ADMINID = #{adminid}
 	</update>
 	
 	<insert id="addAdmin" parameterType="com.xh.back.bean.Xhadmin">
-		INSERT INTO Xhadmin (
-                     ADMINNAME
-                    ,ADMINPASSWORD
-                    ,ADMINPHONE
-                    ,ADMINEMAIL
-                    ,ADMINLOGINTIME
-                    ,ADMINLASTTIME
-                    ,ADMINLASTIP
-                    ,ATTRIBUTE1
-                    ,ATTRIBUTE2
-                    ,ATTRIBUTE3
-                    )
-            VALUES  (
-                     #{adminname}
-                    ,#{adminpassword}
-                    ,#{adminphone}
-                    ,#{adminemail}
-                    ,#{adminlogintime}
-                    ,#{adminlasttime}
-                    ,#{adminlastip}
-                    ,#{attribute1}
-                    ,#{attribute2}
-                    ,#{attribute3}
-                    )
+	  INSERT INTO xhadmin (<include refid="key" />) values(<include refid="values"/>)
 	</insert>
 	
 </mapper>
