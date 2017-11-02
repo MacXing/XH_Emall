@@ -1,6 +1,7 @@
 package com.java.back.test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,32 +11,46 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xh.back.bean.Xhadmin;
+import com.xh.back.bean.Xhmessage;
+import com.xh.back.mapper.UserGradeMapper;
 import com.xh.back.serviceImpl.AdminServiceImpl;
+import com.xh.back.serviceImpl.UserGradeServiceImpl;
+import com.xh.back.serviceImpl.UserMessageServiceImpl;
+import com.xh.back.serviceImpl.XhUserServiceImpl;
+import com.xh.front.bean.Xhusers;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext.xml")
 public class UtilUser {
-	//查找admin信息测试
 	@Autowired
-	@Qualifier("adminService")
-	private AdminServiceImpl adminService;
+	@Qualifier("userMessage")
+	private UserMessageServiceImpl userMessage;
+	
+	@Autowired
+	@Qualifier("userGrade")
+	private UserGradeServiceImpl userGrade;
+	
 	@Test
 	public void test(){
-		Xhadmin admin = new Xhadmin();
-		admin.setAdminname("admin");
-		admin = adminService.selectAdminByName(admin);
-		System.out.println("----------------------------------");
-		System.out.println(admin);
+		List<Xhusers> user=userGrade.queryUserGrade();
+		System.out.println(user);
+	}
+
+	@Test
+	public void test1(){
+		List<Xhmessage> message=userMessage.queryUserMessage();
+		System.out.println(message);
 	}
 	
 	@Test
 	public void test2(){
-		Xhadmin admin = new Xhadmin();
-		admin.setAdminname("admin");
-		admin.setAdminpassword("admin");
-		admin.setAdminlastip("123456798");
-		admin.setAdminlasttime(new Date());
-		adminService.updateAdminIpAndTime(admin);
+		Xhmessage message=userMessage.queryUsermessageById(102);
+		System.out.println(message);
 	}
 	
+	@Test
+	public void test3(){
+		List<Xhmessage> message=userMessage.queryAllMessagelist();
+		System.out.println(message);
+	}
 }

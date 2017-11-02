@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
@@ -29,6 +29,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 <div class="container">
+	 	<%
+        	String message=(String)request.getAttribute("message");
+        	if(message==null){
+        		message="";
+        	}
+     	%>
     <div class="row">
         <div class="col-md-18">
             <div class="container">
@@ -57,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="alert alert-info">
                           
                         </div>
-                        <form class="form-horizontal m-t" action="${pageContext.request.contextPath }/user/addUser.action" method="post" enctype="">
+                        <form class="form-horizontal m-t" id="add" enctype="multipart/form-data">
                             <div class="col-md-12">                           
                                 <div class="form-group">
                                 	<label class="col-sm-3 control-label">会员等级：</label>                            	    
@@ -78,15 +84,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">性别：</label>
+                                    <label class="col-sm-3 control-label">性别：</label>                          
                                     <div class="col-sm-9">
-                                        <input type="text" name="usersex" class="form-control" placeholder="请输入密码">
+                                    	<input type="radio"name="usersex"id="sex"value="1"<c:if test="${user.usersex>=1&&user.usersex<=200}">checked</c:if>/>男&nbsp;&nbsp;
+                                    	<input type="radio"name="usersex"id="sex"value="0"<c:if test="${user.usersex>200||user.usersex eq 0}">checked</c:if>/>女
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">生日：</label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="userbirthday" class="form-control" placeholder="请输入生日">
+                                        <input type="date" name="userbirthday" class="form-control" placeholder="请输入生日" id="erro">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -106,29 +113,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-sm-9">
                                         <input type="text" name="useraddress" class="form-control" placeholder="请输入地址">
                                     </div>
-                                </div>
-                               <!--  <div class="form-group">
-                                    <label class="col-sm-3 control-label">注册时间：</label>
-                                    <div class="col-sm-9">
-                                        <input type="date" name="userlogintime" class="form-control" placeholder="请输入地址">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">最后登录时间：</label>
-                                    <div class="col-sm-9">
-                                        <input type="date" name="userlasttime" class="form-control" placeholder="请输入家庭电话">
-                                    </div>
-                                </div> -->
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">最后登录IP：</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="userlastip" class="form-control" placeholder="请输入家庭电话">
-                                    </div>
-                                </div>
+                                </div>                        
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">访问数：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="uservisitcount" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="text" name="uservisitcount" class="form-control" placeholder="请输入访问数">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -140,15 +129,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">消费金额：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="usermoney" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="text" name="usermoney" class="form-control" placeholder="请输入消费金额">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">修改头像：</label>
+                                    <label class="col-sm-3 control-label">会员积分：</label>
                                     <div class="col-sm-9">
-                                        <input type="file" name="userphoto" class="form-control" placeholder="">                                        
+                                        <input type="text" name="userintegral" class="form-control" placeholder="会员积分">                                        
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">上传头像：</label>
+                                    <div class="col-sm-4">                                   
+                                    	选择图片：<img width="80px" height="100px" id="img" onclick="showPic()">
+                                        <input type="file" name="userphotoload" class="form-control" placeholder="修改头像" id="file">                                                                         	
+                                    </div>
+                                </div>                              
                                 <div class="form-group">
                                     <div class="col-sm-9">
                                         <input type="hidden" name="attribute1" class="form-control" placeholder="">                                        
@@ -182,9 +178,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group draggable">
+                            	 <font color="red"><%=message %></font>
                                 <div class="col-sm-12 col-sm-offset-3">
-                                    <button class="btn btn-primary" type="submit">添加会员</button>
-                                    <button class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/user/updateUser.action'">取消</button>
+                                	<input type="button" value="添加会员" class="btn btn-primary" onclick="addUser()">
+            	                    <input type="button" value="取消" class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/user/queryAllUsers.action'">
+                                    <!-- <button class="btn btn-primary" type="submit">添加会员</button>
+                                    <button class="btn btn-white" id="back">取消</button> -->
                                 </div>
                             </div>
                         </form>
@@ -192,11 +191,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
             </div>
-
         </div>
      
     </div>
 </div>
+
+	<script>
+
+	function addUser(){
+		var formData = new FormData($("#add")[0]);
+		$.ajax({
+		cache: true,
+		type: "POST",
+		data:formData,
+		url:"${pageContext.request.contextPath }/user/addUser.action",
+		async: false,
+		cache: false,  
+	    contentType: false,  
+	    processData: false,
+		success: function(result) {
+			  if(result.code!=100){	
+				    alert("增加成功！");
+				    window.location.href="user/queryAllUsers.action";
+			   }else{
+				  alert("增加失败！");
+				  window.location.href="user/queryAllUsers.action";
+			   } 		
+		}
+		});
+		}  
+	
+	/*显示图片*/
+	function showPic(){
+		 var pic = $("#file").get(0).files[0];
+		 $("img").prop("src" , window.URL.createObjectURL(pic));
+
+		}
+	
+	
+	/*设置提示*/
+	
+	</script>
 
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>

@@ -270,38 +270,20 @@
 						<li>
 							<a class="J_menuItem" href="user/queryAllUsers.action">
 								<i class="glyphicon glyphicon-search"></i>
-								<span class="glyphicon-class">查询会员信息 </span>
+								<span class="glyphicon-class">会员信息管理</span>
 							</a>
 						</li>
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
+							<a class="J_menuItem" href="grade/userGrade.action">
+								<i class="glyphicon glyphicon-certificate"></i>
 								<span class="glyphicon-class">会员等级维护 </span>
-								<span class="fa arrow"></span>
 							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">增加等级</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改会员等级</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员等级</a>
-								</li>
-							</ul>
 						</li>
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">会员留言维护 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员留言</a>
-								</li>
-							</ul>
+							<a href="message/queryUsermessageController.action" class="J_menuItem">
+								<i class="glyphicon glyphicon-text-width"></i>
+								<span class="glyphicon-class">会员留言维护 </span>								
+							</a>					
 						</li>
 					</ul>
 				</li>

@@ -23,6 +23,7 @@
     	userlastip,
     	uservisitcount,
     	userhomephone,
+    	userintegral,
     	usermoney,
     	userphoto    	
       )
@@ -30,7 +31,7 @@
       #{usersex}, #{userbirthday}, #{userphone},
       #{useremail}, #{useraddress}, #{userlogintime}, 
       #{userlasttime},#{userlastip}, #{uservisitcount}, 
-      #{userhomephone},#{usermoney},#{userphoto}
+      #{userhomephone},#{userintegral},#{usermoney},#{userphoto}
       )
   </insert>
 	
@@ -74,6 +75,9 @@
       <if test="userhomephone != null">
         userHomePhone = #{userhomephone,jdbcType=VARCHAR},
       </if>
+      <if test="userintegral != null">
+        userIntegral = #{userintegral,jdbcType=INTEGER},
+      </if>
       <if test="usermoney != null">
         userMoney = #{usermoney,jdbcType=DOUBLE},
       </if>
@@ -94,11 +98,5 @@
     delete from xhUsers
     where userID = #{userid,jdbcType=INTEGER}
   	</delete>
-	
-	<update id="updateUserIpAndTime" parameterType="xhusers">
-		update xhUsers
-		set userLastIp = #{userlastip},userLastTime = #{userlasttime}
-		where userPhone = #{userphone}
-	</update>
-  
+
 </mapper>

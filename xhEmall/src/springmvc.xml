@@ -21,15 +21,7 @@
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 	<!-- 适配器解析器 -->	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-
 		<property name="webBindingInitializer" ref="myBinder"/>
-		<property name="messageConverters">
-			<list>
-				<!-- 将消息转换为json所需要的配置。 -->
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
-			</list>
-		</property>		
-
 		<property name="messageConverters">
 			<list>
 				<!-- 将消息转换为json所需要的配置。 -->
@@ -66,7 +58,7 @@
 	 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize">
-			<value>5248800</value>
+			<value>52488000</value>
 		</property>
 	</bean>
 </beans>

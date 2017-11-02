@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.apache.log4j.helpers.DateTimeDateFormat;
 
+import com.xh.back.bean.Xhgrade;
+
 public class Xhusers {
     private Integer userid;
 
@@ -37,7 +39,37 @@ public class Xhusers {
 
     private Double usermoney;
 
-    private String attribute1;
+    private String userphotoPath;
+    
+    private Integer userintegral; 
+    
+    private Xhgrade xhgrade;
+
+	public Xhgrade getXhgrade() {
+		return xhgrade;
+	}
+
+	public void setXhgrade(Xhgrade xhgrade) {
+		this.xhgrade = xhgrade;
+	}
+
+	public String getUserphotoPath() {
+		return userphotoPath;
+	}
+
+	public void setUserphotoPath(String userphotoPath) {
+		this.userphotoPath = userphotoPath;
+	}
+
+	public Integer getUserintegral() {
+		return userintegral;
+	}
+
+	public void setUserintegral(Integer userintegral) {
+		this.userintegral = userintegral;
+	}
+
+	private String attribute1;
 
     private String attribute2;
 
@@ -236,10 +268,11 @@ public class Xhusers {
 				+ ", userlastip=" + userlastip + ", uservisitcount="
 				+ uservisitcount + ", userhomephone=" + userhomephone
 				+ ", userphoto=" + userphoto + ", usermoney=" + usermoney
-				+ ", attribute1=" + attribute1 + ", attribute2=" + attribute2
-				+ ", attribute3=" + attribute3 + ", attribute4=" + attribute4
-				+ ", attribute5=" + attribute5 + ", attribute6=" + attribute6
-				+ "]";
+				+ ", userphotoPath=" + userphotoPath + ", userintegral="
+				+ userintegral + ", xhgrade=" + xhgrade + ", attribute1="
+				+ attribute1 + ", attribute2=" + attribute2 + ", attribute3="
+				+ attribute3 + ", attribute4=" + attribute4 + ", attribute5="
+				+ attribute5 + ", attribute6=" + attribute6 + "]"+"\n";
 	}
     
     

@@ -30,6 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 <div class="container">
+		<%
+        	String message=(String)request.getAttribute("message");
+        	if(message==null){
+        		message="";
+        	}
+     	%>
     <div class="row">
         <div class="col-md-18">
             <div class="container">
@@ -58,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="alert alert-info">
                           
                         </div>
-                        <form role="form" class="form-horizontal m-t" action="${pageContext.request.contextPath }/user/updateUser.action" method="post" >
+                        <form role="form" class="form-horizontal m-t" id="update" method="post" enctype="multipart/form-data">
                             <div class="col-md-12">                           
                             	<div class="form-group">                            	    
                                     <div class="col-sm-9">
@@ -147,6 +153,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">会员积分：</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="userintegral" value="${user.userintegral }" class="form-control" placeholder="请输入会员积分">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3 control-label">消费金额：</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="usermoney" value="${user.usermoney }" class="form-control" placeholder="请输入家庭电话">
@@ -155,7 +167,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">修改头像：</label>
                                     <div class="col-sm-9">
-                                        <input type="file" name="userphoto" value="${user.userphoto }" class="form-control" placeholder="">                                        
+                                        <input type="file" name="userphotoupdate"class="form-control" placeholder="" id="file">                                                                    
+                                    	原头像信息：<input type="image" name="userphoto" value="${user.userphoto }"><br>
+                                    	 选择图片：<img width="80px" height="100px" id="img" onclick="showPic()">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -191,9 +205,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group draggable">
+                            	 <font color="red"><%=message %></font>
                                 <div class="col-sm-12 col-sm-offset-3">
-                                    <button class="btn btn-primary" type="submit">保存修改</button>
-                                    <button class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/user/updateUser.action'">取消</button>
+                                	<input type="button" value="保存修改" class="btn btn-primary" onclick="doupdate()">
+            	                    <input type="button" value="取消" class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/user/queryAllUsers.action'">
+                                    <%-- <button class="btn btn-primary" type="submit">保存修改</button>
+                                    <button class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/user/updateUser.action'">取消</button> --%>
                                 </div>
                             </div>
                         </form>
@@ -206,7 +223,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
     </div>
 </div>
+	
+	<script>
+	function doupdate(){
+		var formData = new FormData($("#update")[0]);
+		$.ajax({
+		cache: true,
+		type: "POST",
+		url:"${pageContext.request.contextPath }/user/updateUser.action",
+		data:formData,
+		//data:$('#update').serialize(),	//要发送的是ajaxFrm表单中的数据
+		async: false,
+		cache: false,  
+	    contentType: false,  
+	    processData: false,
+		success: function(result) {
+			if(result.code!=100){				  	
+			    alert("修改成功！");
+			    window.location.href="user/queryAllUsers.action";
+		   }else{
+			  alert("修改失败！");
+			  window.location.href="user/queryAllUsers.action";
+		   } 	
+		}
+		});
+		} 
+	
+	/*显示图片*/
+	function showPic(){
+		 var pic = $("#file").get(0).files[0];
+		 $("img").prop("src" , window.URL.createObjectURL(pic));
 
+		}
+
+	
+	</script>
+	
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
     <script src="resource/js/content.min.js?v=1.0.0"></script>
