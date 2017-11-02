@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.UserGradeMapper">
+
+	<resultMap id="queryUserByIdMap" type="com.xh.front.bean.Xhusers">
+	    <id column="userID" jdbcType="INTEGER" property="userid" />
+ 	    <result column="gradeID" jdbcType="INTEGER" property="gradeid" />
+	    <result column="userName" jdbcType="VARCHAR" property="username" />
+	  	<result column="userSex" jdbcType="VARCHAR" property="usersex" />
+	    <result column="userBirthday" jdbcType="DATE" property="userbirthday" />
+	    <result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+	    <result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
+	    <result column="userIntegral" jdbcType="INTEGER" property="userintegral" />   
+	     <association property="xhgrade" javaType="com.xh.back.bean.Xhgrade">
+	    	<id column="gradeID" jdbcType="INTEGER" property="gradeid" />
+			<result column="gradeName" jdbcType="VARCHAR" property="gradename" />
+			<result column="gradeCount" jdbcType="VARCHAR" property="gradecount" />   
+	    </association>  
+	  </resultMap>
+	
+    <!-- 查询所有等级用户 -->
+	<select id="queryUserGrade" resultMap="queryUserByIdMap">
+    SELECT u.userID,g.gradeID,u.userName,u.userSex,u.userBirthday,u.userPhone,u.userIntegral,
+       u.userMoney,g.gradeName,g.gradeCount
+	FROM xhUsers u JOIN xhGrade g ON u.gradeID=g.gradeID
+    </select>
+	
+	<!-- 根据用户ID查询等级用户 -->
+	<select id="queryUserByPrimaryKey" resultMap="queryUserByIdMap" parameterType="int">
+    SELECT u.userID,g.gradeID,u.userName,u.userSex,u.userBirthday,u.userPhone,u.userIntegral,
+       u.userMoney,g.gradeName,g.gradeCount
+	FROM xhUsers u JOIN xhGrade g ON u.gradeID=g.gradeID 
+	where u.userID=#{userid,jdbcType=INTEGER}
+    </select>
+    
+    <!-- 根据用户ID修改会员等级 -->
+    <update id="updateByPrimaryKeySelective" parameterType="xhusers">
+    update xhUsers
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+            
+    </set>
+    where userID = #{userid,jdbcType=INTEGER}
+   </update>
+    
+    <!-- 查询等级列表 -->
+    <select id="queryAllGrade" resultType="xhgrade">
+    	select * from xhGrade
+    </select>
+    
+    <!-- 根据用户ID -->
+    <select id="queryGradeByPrimarykey" resultType="xhgrade" parameterType="int">
+    	select * from xhGrade where gradeID=#{gradeid}
+    </select>
+    
+	<!-- 增加等级列表 -->
+	<insert id="addGrade" parameterType="xhusers">
+    insert into xhGrade (
+    	gradeid,
+    	gradename,
+    	gradecount
+      )
+    values (#{gradeid}, #{gradename}, #{gradecount})
+  </insert>
+	
+	<!-- 根据用户ID修改等级信息 -->
+	<update id="updateGradeByPrimaryKey" parameterType="xhgrade">
+    update xhGrade
+    <set>
+      <if test="gradename != null">
+        gradename = #{gradename,jdbcType=VARCHAR},
+      </if>
+      <if test="gradecount != null">
+        gradecount = #{gradecount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gradeID = #{gradeid,jdbcType=INTEGER}
+   </update>
+	
+	<!-- 根据等级ID删除等级信息 -->
+	<delete id="deleteGradeByPrimaryKey" parameterType="xhgrade">
+    delete from xhGrade
+    where gradeID = #{gradeid,jdbcType=INTEGER}
+  	</delete>
+
+</mapper>

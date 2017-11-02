@@ -53,4 +53,12 @@ public class Msg {
 		public void setExtend(Map<String, Object> extend) {
 			this.extend = extend;
 		}
+		
+//		public Msg(){
+//			super();
+//		}
+//		
+//		public Msg(String msg){
+//			this.msg = msg;
+//		}
 }

@@ -2,17 +2,22 @@ package com.xh.front.controller;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.helpers.DateTimeDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.other.getip.GetIp;
 import com.xh.front.bean.Xhusers;
+import com.xh.front.bean.XhusersBean;
 import com.xh.front.service.XhUserService;
 
 @Controller

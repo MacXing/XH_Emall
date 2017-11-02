@@ -2,14 +2,26 @@ package com.xh.back.bean;
 
 import java.util.Date;
 
+import com.xh.front.bean.Xhusers;
+
 public class Xhmessage {
     private Integer msgid;
 
     private Integer userid;
 
     private String msgtxt;
+    
+    private Xhusers users;
 
-    private Date msginittime;
+    public Xhusers getUsers() {
+		return users;
+	}
+
+	public void setUsers(Xhusers users) {
+		this.users = users;
+	}
+
+	private Date msginittime;
 
     private String attribute1;
 
@@ -82,4 +94,15 @@ public class Xhmessage {
     public void setAttribute4(String attribute4) {
         this.attribute4 = attribute4 == null ? null : attribute4.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhmessage [msgid=" + msgid + ", userid=" + userid + ", msgtxt="
+				+ msgtxt  + ", msginittime=" + msginittime+ ", users=" + users
+				+ ", attribute1=" + attribute1 + ", attribute2=" + attribute2
+				+ ", attribute3=" + attribute3 + ", attribute4=" + attribute4
+				+ "]"+"\n";
+	}
+    
+    
 }

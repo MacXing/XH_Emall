@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body class="signin">		
 		<div class="signinpanel"  >	
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-5 col-md-offset-3">
 				
 			<form method="post" action="${pageContext.request.contextPath }/admin/checkAdmin.action">
 				<p class="m-t-md">后台登录</p>
@@ -40,17 +40,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            
 	            
 	            <input type="text" class="form-control verify " placeholder="请输入验证码" name="code"/>
-	            <a href="javascript:change()"><img style="margin:-35px 0px 15px 0px; float:right;" id="img" alt="" src="${pageContext.request.contextPath }/image/imageCode.action"></a>	            
+	            <a href="javascript:change()"><img class="img-rounded  imgverify" id="img" alt="" src="${pageContext.request.contextPath }/image/imageCode.action"></a>	            
     			
 	            <br />
-	            <a href="#">忘记密码</a>
+	            <a href="#" style="color:#fff">忘记密码</a>
 	           
 	            <button class="btn btn-success btn-block">登录</button>
 			</form>	
 		</div>	
 		</div>
-        <div class="signup-footer">
-            <div class="pull-left">            	
+        <div class="col-md-3"></div>
+        <div class="signup-footer col-md-5  " >
+        	<div class="pull-left  ">
+        	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;           	
                 &copy; 2017 CJ team copyright             
             </div>
         </div>

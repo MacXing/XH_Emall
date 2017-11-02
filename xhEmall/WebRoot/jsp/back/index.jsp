@@ -45,7 +45,7 @@
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
 								<span class="block m-t-xs">
-									<strong class="font-bold">Beaut-zihan</strong>
+									<strong class="font-bold">CJ技术</strong>
 								</span>
 								<span class="text-muted text-xs block">
 									超级管理员<b class="caret"></b>
@@ -71,7 +71,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="logo-element">H+</div>
+					<div class="logo-element"><h5>孝康安老</h5></div>
 				</li>
 
 				<li>
@@ -271,52 +271,22 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">会员维护 </span>
-								<span class="fa arrow"></span>
+							<a class="J_menuItem" href="user/queryAllUsers.action">
+								<i class="glyphicon glyphicon-search"></i>
+								<span class="glyphicon-class">会员信息管理</span>
 							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">增加会员</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改会员信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员信息</a>
-								</li>
-							</ul>
 						</li>
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
+							<a class="J_menuItem" href="grade/userGrade.action">
+								<i class="glyphicon glyphicon-certificate"></i>
 								<span class="glyphicon-class">会员等级维护 </span>
-								<span class="fa arrow"></span>
 							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">增加等级</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改会员等级</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员等级</a>
-								</li>
-							</ul>
 						</li>
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">会员留言维护 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员留言</a>
-								</li>
-							</ul>
+							<a href="message/queryUsermessageController.action" class="J_menuItem">
+								<i class="glyphicon glyphicon-text-width"></i>
+								<span class="glyphicon-class">会员留言维护 </span>								
+							</a>					
 						</li>
 					</ul>
 				</li>
@@ -630,7 +600,7 @@
 					style="margin-bottom: 0">
 				<div class="navbar-header">
 					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="#">
+						href="jsp/back/index.jsp#">
 						<i class="fa fa-bars"></i>
 					</a>
 					<form role="search" class="navbar-form-custom" method="post"

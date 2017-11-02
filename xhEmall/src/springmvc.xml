@@ -21,6 +21,7 @@
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 	<!-- 适配器解析器 -->	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer" ref="myBinder"/>
 		<property name="messageConverters">
 			<list>
 				<!-- 将消息转换为json所需要的配置。 -->
@@ -30,10 +31,26 @@
 	</bean>
 	<!-- 视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- <property name="prefix" value="/jsp/"/>
+		<!-- <property name="prefix" value="/jsp/back/user/"/>
 		<property name="suffix" value=".jsp"/> -->
 	</bean>	
+
+
+	<!-- 注册一下转换器 	-->
+	<bean id="myConverter" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.xh.back.controller.DateConverter"/>
+				<bean class="com.xh.back.controller.StringConvertor"/>
+			</list>
+			
+		</property>
+	</bean>
 	
+	<bean id="myBinder" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+		<property name="conversionService" ref="myConverter"/>
+	</bean>
+
 	<!-- 配置springmvc的上传解析器
 		springmvc上传实现依赖了commons-fileupload组件
 		commons-fileupload-1.2.2.jar
@@ -41,7 +58,7 @@
 	 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize">
-			<value>5248800</value>
+			<value>52488000</value>
 		</property>
 	</bean>
 </beans>
