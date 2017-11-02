@@ -18,6 +18,16 @@ public class Xhadmin {
     private Date adminlasttime;
 
     private String adminlastip;
+    
+    public String getAdminphoto() {
+		return adminphoto;
+	}
+
+	public void setAdminphoto(String adminphoto) {
+		this.adminphoto = adminphoto;
+	}
+
+	private String adminphoto;
 
     @Override
 	public String toString() {
@@ -28,9 +38,7 @@ public class Xhadmin {
 				+ adminlasttime + ", adminlastip=" + adminlastip + "]";
 	}
 
-	private String attribute1;
-
-    private String attribute2;
+	private String admindescribe;
 
     private String attribute3;
 
@@ -71,7 +79,7 @@ public class Xhadmin {
     }
 
     public void setAdminemail(String adminemail) {
-        this.adminemail = adminemail == null ? null : adminemail.trim();
+        this.adminemail = adminemail;
     }
 
     public Date getAdminlogintime() {
@@ -95,23 +103,15 @@ public class Xhadmin {
     }
 
     public void setAdminlastip(String adminlastip) {
-        this.adminlastip = adminlastip == null ? null : adminlastip.trim();
+        this.adminlastip = adminlastip;
     }
 
-    public String getAttribute1() {
-        return attribute1;
+    public String getAdmindescribe() {
+        return admindescribe;
     }
 
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
-
-    public String getAttribute2() {
-        return attribute2;
-    }
-
-    public void setAttribute2(String attribute2) {
-        this.attribute2 = attribute2 == null ? null : attribute2.trim();
+    public void setAdmindescribe(String admindescribe) {
+        this.admindescribe = admindescribe;
     }
 
     public String getAttribute3() {
@@ -119,6 +119,6 @@ public class Xhadmin {
     }
 
     public void setAttribute3(String attribute3) {
-        this.attribute3 = attribute3 == null ? null : attribute3.trim();
+        this.attribute3 = attribute3;
     }
 }

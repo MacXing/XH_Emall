@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.UserMessageMapper">
+
+	<resultMap id="queryUserMessageByIdMap" type="com.xh.back.bean.Xhmessage">
+	    <id column="msgId" jdbcType="INTEGER" property="msgid" />
+ 	    <result column="msgTxt" jdbcType="VARCHAR" property="msgtxt" />
+	    <result column="msgInitTime" jdbcType="VARCHAR" property="msginittime" /> 
+	     <association property="users" javaType="com.xh.front.bean.Xhusers">
+	    	<id column="userID" jdbcType="INTEGER" property="userid" />
+			<result column="gradeID" jdbcType="VARCHAR" property="gradeid" />
+			<result column="userName" jdbcType="VARCHAR" property="username" />
+			<result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
+			<result column="userSex" jdbcType="INTEGER" property="usersex" />
+			<result column="userBirthday" jdbcType="DATE" property="userbirthday" />
+			<result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+			<result column="userEmail" jdbcType="VARCHAR" property="useremail" />
+			<result column="userAddress" jdbcType="VARCHAR" property="useraddress" />
+			<result column="userLoginTime" jdbcType="DATE" property="userlogintime" />
+			<result column="userlasttime" jdbcType="DATE" property="userlasttime" />			
+			<result column="userLastIp" jdbcType="VARCHAR" property="userlastip" />
+			<result column="userVisitCount" jdbcType="INTEGER" property="uservisitcount" />
+			<result column="userHomePhone" jdbcType="VARCHAR" property="userhomephone" />
+			<result column="userPhoto" jdbcType="VARCHAR" property="userphoto" />
+			<result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
+			<result column="userIntegral" jdbcType="DOUBLE" property="userintegral" />     
+	    </association>  
+	  </resultMap>
+	
+    <!-- 查询所有留言用户 -->
+	<select id="queryUserMessage" resultMap="queryUserMessageByIdMap">
+    SELECT u.userID,m.msgID,u.userName,m.msgInitTime,m.msgTxt
+	FROM xhMessage m JOIN xhUsers u ON m.userID=u.userID
+    </select>
+	
+	<!-- 根据用户ID查询用户留言  -->
+	<select id="querymsgByPrimaryKey" resultMap="queryUserMessageByIdMap" parameterType="int">
+    SELECT u.userID,m.msgID,u.userName,m.msgInitTime,m.msgTxt
+	FROM xhMessage m JOIN xhUsers u ON m.userID=u.userID
+	where m.msgID=#{msgid,jdbcType=INTEGER}
+    </select>
+    
+    <!-- 查询留言列表-->
+    <select id="queryAllMessage" resultType="xhmessage">
+    	select * from xhMessage
+    </select>
+    
+    <!--根据用户ID查询留言列表-->
+    <select id="queryMsgByPrimarykey" resultType="xhmessage" parameterType="int">
+    	select * from xhMessage where msgID=#{msgid}
+    </select>
+    
+	<!--增加留言列表-->
+	<insert id="addMessage" parameterType="xhmessage">
+    insert into xhMessage (
+    	userId,
+    	msgInitTime,
+    	msgTxt
+      )
+    values (#{userid}, #{msginittime}, #{msgtxt})
+  </insert>
+	
+	<!--根据用户ID修改等级信息
+	<update id="updateGradeByPrimaryKey" parameterType="xhgrade">
+    update xhGrade
+    <set>
+      <if test="gradename != null">
+        gradename = #{gradename,jdbcType=VARCHAR},
+      </if>
+      <if test="gradecount != null">
+        gradecount = #{gradecount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gradeID = #{gradeid,jdbcType=INTEGER}
+   </update>
+	
+	根据等级ID删除等级信息
+	<delete id="deleteGradeByPrimaryKey" parameterType="xhgrade">
+    delete from xhGrade
+    where gradeID = #{gradeid,jdbcType=INTEGER}
+  	</delete> -->
+
+</mapper>

@@ -63,51 +63,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="ibox-content">
                         <table class="table table-striped table-bordered table-hover dataTables-example">
-                            <thead>
+                            <thead >
                                 <tr>
-                                	<th>ID</th>
-                                    <th>名称</th>
-                                   <!--  <th>点击数</th>
-                                    <th>描述</th> -->
-                                    <th>定价</th>
-                                    <th>售价</th>
-                                   <!--  <th>图片</th>
-                                    <th>详细图片</th> -->
-                                   <!--  <th>添加时间</th>
-                                    <th>修改时间</th>  -->
-                                    <th>品牌</th>                           
-                                    <th>大小</th>
-                                    <th>单位</th>
-                                    <th>折扣</th>
-                                	<th>是否积分商品</th>
-                                    <th>操作</th>
+                                	<th class="text-center">ID</th>
+                                    <th class="text-center">名称</th>
+                               		<th class="text-center">图片</th>
+                                    <th class="text-center">定价</th>
+                                    <th class="text-center">售价</th>                           
+                                    <th class="text-center">品牌</th>                           
+                                    <th class="text-center">大小</th>
+                                    <th class="text-center">单位</th>
+                                    <th class="text-center">折扣</th>
+                                    <th class="text-center">操作</th>
                                 </tr>
                             </thead>
-                            <tbody id="table_data">             
+                            <tbody id="table_data" class="text-center">             
                              <c:forEach items="${products }" var="product">
 							    	<tr>
 							    		<td>${product.pid }</td>
 							    		<td>${product.pname }</td>
-							    		<%-- <td>${product.pclick }</td>
-							    		<td>${product.pdesc }</td> --%>
+							    		<td>
+							    			<a class="fancybox" href="${pageContext.request.contextPath }/upload/${product.pimg}" title="">
+					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }/upload/${product.pimg}" />
+					                        </a>
+							    		</td>							    	
 							    		<td>${product.pprice }</td>
 							    		<td>${product.psale }</td>
-							    		<%-- <td>${product.pimg }</td>
-							    		<td>${product.pimgdetail }</td> --%>
-							    		<%-- <td><fmt:formatDate value="${product.paddtime }" type="date"/></td> 
-							    		<td><fmt:formatDate value="${product.pupdatetime }" type="date"/></td> --%>
-							    		<td>${product.brandid }</td>
+							    		<td>${product.brand.brandname }</td>
 							    		<td>${product.psize }</td>
 							    		<td>${product.punit }</td>
 							    		<td>${product.pdiscount }</td>
-							    		<td>${product.pIntegral }</td>	
+							    		
 							    		<td class="text-center">
 							    			
-							    			<a onclick="btn1(${product.pid })" data-toggle="modal" data-target="#myModel1" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
+							    			<a onclick="btn1(${product.pid })" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
 							    			&nbsp;&nbsp; 							    			
 							    			<a onclick="btn2(${product.pid })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
 							    			&nbsp;&nbsp;
-							    			<a onclick="btn3(${product.pid })" data-toggle="modal" data-target="#myModel2"><span class="glyphicon glyphicon-pencil"></span></a>
+							    			<a onclick="btn3(${product.pid })"><span class="glyphicon glyphicon-pencil"></span></a>
 							    		</td> 						    									    									    		
 							    	</tr>
     							</c:forEach> 
@@ -193,44 +186,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="resource/js/content.min.js?v=1.0.0"></script>
     
-    
-    							<%-- <tr>
-							    		<td>${product.pid }</td>
-							    		<td>${product.pname }</td>
-							    		<td>${product.pclick }</td>
-							    		<td>${product.pdesc }</td>
-							    		<td>${product.pprice }</td>
-							    		<td>${product.psale }</td>
-							    		<td>${product.pimg }</td>
-							    		<td>${product.pimgdetail }</td>
-							    		<td>${product.paddtime }</td>
-							    		<td>${product.pupdatetime }</td>
-							    		<td>${product.brandid }</td>
-							    		<td>${product.psize }</td>
-							    		<td>${product.punit }</td>
-							    		<td>${product.pdiscount }</td>
-							    		<td>${product.pIntegral }</td>	
-							    		<td class="text-center"> 							    			
-							    			<a myAttr="del_btn" style="color:#000"><span class="glyphicon glyphicon-trash del_btn"></span></a>
-							    			&nbsp;&nbsp;
-							    			<a data-toggle="modal" data-target="#myModel2"><span class="glyphicon glyphicon-pencil" ></span></a>
-							    		</td> 						    									    									    		
-							    	  </tr> 
-							    	  
-							    
-							    	    
-							    	  --%>
-							    	  
-	<!-- 						    	
-     <script type="text/javascript">
-	  function build_table(result){
-		  $.each(result,function(index,item){
-			  $("<tr></tr>").append($("<td></td>").append(item.pid)).appendTo($("#mytable"));
-		  });
-	  }
-    </script>  -->
-    
-    
     <script>
         $(document).ready(function(){       	
         	$(".dataTables-example").dataTable();
@@ -248,34 +203,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	单选删除按钮
      -->
     <script type="text/javascript">
-   /*  $("#").on("click",".del_btn",function(){
- 	   var id=$(this).parents("tr").find("td:eq(0)").text();
- 	   var name=$(this).parents("tr").find("td:eq(1)").text();
- 	   if(!confirm("您确定要删除【"+name+"】商品的报名记录吗？")){
- 		   return false;
- 	   }else{
- 		   $.ajax({
- 			   url:"${pageContext.request.contextPath }/product/delectProduct.action?id="+id,
- 			   type:"delete",
- 			   success:function(result){
- 					   /* alert("删除成功！");
- 					   window.location.href="product/queryAllProducts.action";
- 			   }
- 			   
- 		   });
- 	   }
-    }); */
     /* 查看单个商品信息 */
     
    function btn1(id){
-  		   $.ajax({
-  			   url:"${pageContext.request.contextPath }/product/queryProductById.action?id="+id,
-  			   type:"GET",
-  			   success:function(result){
-  					   console.log(result);
-  					   build_table(result);
-  			   }   
-  		   });
+    	
+	   window.location.href="${pageContext.request.contextPath }/jsp/back/product/productInfo.jsp?id="+id;
+  		  
     }
     function build_table(result){
     	$("#pid").html(result.pid);
@@ -333,19 +266,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/**
 	*点击修改
 	*/
-		
+	
+	function btn3(id){ 		  
+	 		window.location.href="${pageContext.request.contextPath }/jsp/back/product/updateProduct.jsp?id="+id;	   	 			 
+	}	
 	/**
 	*点击跳转到增加页面
 	*/
-     $("#addProduct").on("click", function(){
-    	$.ajax({
+   $("#addProduct").on("click", function(){
+    	/*  $.ajax({
     		url:"${pageContext.request.contextPath }/brand/queryAllBrands.action",
     		type:"GET",
     		success:function(){
     			window.location.href="${pageContext.request.contextPath }/brand/queryAllBrands.action";
     		}
-    	});
-    	
+    	});  */
+	   window.location.href="${pageContext.request.contextPath }/jsp/back/product/addProduct.jsp";
     }); 
     
     

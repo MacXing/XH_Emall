@@ -25,16 +25,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="shortcut icon" href="favicon.ico"> 
     <link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-
     <!-- Data Tables -->
     <link href="resource/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 	<link rel="stylesheet" type="text/css" href="resource/css/plugins/markdown/bootstrap-markdown.min.css" />
+
+	
   </head>
   
   <body class="gray-bg">
@@ -47,27 +44,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
-                            </a>
-                            
+                            </a>                 
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form method="post" class="form-horizontal" action="" enctype="application/x-www-form-urlencoded">
+                        <form id="myform" method="post"  class="form-horizontal" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">名称：</label>
 
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input id="pname" type="text" class="form-control" name="pname">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">商品描述：</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"> <span class="help-block m-b-none">商品说明，50字内说明商品信息。</span>
+                                    <input id="pdesc" type="text" class="form-control" name="pdesc"> <span class="help-block m-b-none">商品说明，50字内说明商品信息。</span>
                                 </div>
                             </div>
                              <div class="hr-line-dashed"></div>
@@ -75,46 +71,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-2 control-label">定价：</label>
 
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input id="pprice" type="text" class="form-control" name="pprice">
                                 </div>
                             </div>
                              <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">售价：</label>
-
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input id="psale" type="text" class="form-control" name="psale">
                                 </div>
                             </div>
                              <div class="hr-line-dashed"></div>
+                             
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">商品图片：</label>
-
                                 <div class="col-md-3">
                                     <div id="file-pretty">
 			                            <div class="form-group">
-			                                <input type="file" class="form-control">
+			                                <input type="file" id="file" class="form-control" name="file" onchange="showPic()"/>
+			                               		
+									 		<img class="img-rounded" id="img" width="150" height="150"> 	
 			                            </div>  
 		                            </div>
                                 </div>  
                             </div>
+                            
+                            <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">商品详细：</label>
-                                    <div class="col-sm-10" id="file-pretty">
-			                                <textarea name="content" data-provide="markdown" rows="10"></textarea>
-			                        </div>     
-                            </div>                          
-                            
+                                   <div class="col-sm-10" id="file-pretty">
+			                                <textarea data-provide="markdown" rows="10" name="pimgdetail" id="pimgdetail"></textarea>
+			                       </div>                                
+                            </div>
                 			<div class="hr-line-dashed"></div>
                 			
                 			<div class="form-group">
                                 <label class="col-sm-2 control-label">品牌：</label>		
                                 <div class="col-md-3">                                
                                     <div class="input-group">
-			                                <select data-placeholder="选择品牌..." class="chosen-select" style="width:350px;" tabindex="2">
-			                                	<c:forEach items="${brands }" var="brand">
-			                                		<option value="${brand.brandid }" hassubinfo="true">${brand.brandname }</option>
-			                                	</c:forEach> 
+			                                <select id="addBrand" data-placeholder="选择品牌..." class="chosen-select" style="width:350px;" tabindex="2" name="brandid">
+			                                	 
 			                                </select>
 			                        </div>   
                                 </div>
@@ -125,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-2 control-label">商品大小：</label>
 
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input id="psize" type="text" class="form-control" name="psize">
                                 </div>
                             </div>
                 			
@@ -134,22 +130,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-2 control-label">商品单位：</label>
 
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input id="punit" type="text" class="form-control" name="punit">
                                 </div>
                             </div>
                 			<div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">商品折扣：</label>
-
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input id="pdiscount" type="text" class="form-control" name="pdiscount">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit">保存内容</button>
-                                    <button class="btn btn-white" type="submit">取消</button>
+                                    <button class="btn btn-primary" type="button" id="btn_id">保存内容</button>
+                                    <!-- <button class="btn btn-white" id="return">返回</button> -->
+                                    <input type="button" class="btn" value="返回" onclick="javascript:history.go(-1);"/>
                                 </div>
                             </div>
                         </form> 
@@ -159,135 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     
-    <%--隐藏窗口 --%>
-		<div class="modal fade" id="myModel1" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="gridSystemModalLabel">添加商品信息</h4>
-		      </div>
-		      <div class="modal-body"> 
-		        
-		        <form class="form-horizontal">
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品名称">
-				    </div>
-				  </div>
-				 
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">定价</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品定价">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">售价</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品售价">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				  <label  class="col-sm-2 control-label">品牌</label>
-				    <div class="col-sm-10">
-				      
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">大小</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品大小">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">单位</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品单位">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">折扣</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品折扣">
-				    </div>
-				  </div>
-				</form> 
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Submit</button>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-		
-		<%--隐藏窗口2 --%>
-		<div class="modal fade" id="myModel2" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="gridSystemModalLabel">修改商品信息</h4>
-		      </div>
-		      <div class="modal-body"> 
-		        
-		        <form class="form-horizontal">
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品名称">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">描述</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品描述">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">定价</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品定价">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">售价</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品售价">
-				    </div>
-				  </div>
-				 
-				 
-				 
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">大小</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品大小">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">单位</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品单位">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="inputEmail3" class="col-sm-2 control-label">折扣</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="pname" placeholder="商品折扣">
-				    </div>
-				  </div>
-				</form> 
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Submit</button>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+   
     
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
@@ -295,88 +163,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="resource/js/content.min.js?v=1.0.0"></script>
-    
-    
-    <%-- <tr>
-							    		<td>${product.pid }</td>
-							    		<td>${product.pname }</td>
-							    		<td>${product.pclick }</td>
-							    		<td>${product.pdesc }</td>
-							    		<td>${product.pprice }</td>
-							    		<td>${product.psale }</td>
-							    		<td>${product.pimg }</td>
-							    		<td>${product.pimgdetail }</td>
-							    		<td>${product.paddtime }</td>
-							    		<td>${product.pupdatetime }</td>
-							    		<td>${product.brandid }</td>
-							    		<td>${product.psize }</td>
-							    		<td>${product.punit }</td>
-							    		<td>${product.pdiscount }</td>
-							    		<td>${product.pIntegral }</td>	
-							    		<td class="text-center"> 							    			
-							    			<a myAttr="del_btn" style="color:#000"><span class="glyphicon glyphicon-trash del_btn"></span></a>
-							    			&nbsp;&nbsp;
-							    			<a data-toggle="modal" data-target="#myModel2"><span class="glyphicon glyphicon-pencil" ></span></a>
-							    		</td> 						    									    									    		
-							    	</tr> --%>
-<!--     <script type="text/javascript">
-	  function build_table(result){
-		  $.each(result,function(index,item){
-			  $("<tr></tr>").append($("<td></td>").append(item.pid)).appendTo($("#table_data"));
-		  });
-	  }
-    </script> -->
-    
-     <script type="text/javascript" src="resource/js/plugins/markdown/markdown.js"></script>
+    <script type="text/javascript" src="resource/js/plugins/markdown/markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/to-markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.zh.js"></script>
-    <script>
-        $(document).ready(function(){
-        	
-        	 /* $.ajax({
-       		  url:"product/queryAllProducts.action",
-       		  type:"GET",
-       		  success:function(result){
-       			  console.log(result);
-       			  build_table(result);
-       		  }
-       	  }); */
-        	
-        	$(".dataTables-example").dataTable();
-        var oTable=$("#editable").dataTable();
-        oTable.$("td").editable("../example_ajax.php",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);
-        oTable.fnUpdate(sValue,aPos[0],aPos[1])},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("allUser.userid"),"column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"})});
-        function fnClickAddRow(){$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])};
-    </script>
-    <script type="text/javascript" 
-    src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8">
-    </script>
-    
-    <!-- 
-    	单选删除按钮
-     -->
-    
-    <script type="text/javascript">
-    $(document).on("click",".del_btn",function(){
- 	   var id=$(this).parents("tr").find("td:eq(0)").text();
- 	   var name=$(this).parents("tr").find("td:eq(1)").text();
- 	   if(!confirm("您确定要删除【"+name+"】商品的报名记录吗？")){
- 		   return false;
- 	   }else{
- 		   $.ajax({
- 			   url:"${pageContext.request.contextPath }/product/delectProduct.action?id="+id,
- 			   type:"delete",
- 			   success:function(result){
- 					   /* alert("删除成功！"); */
- 					   window.location.href="product/queryAllProducts.action";
- 			   }
- 			   
- 		   });
- 	   }
-    });
 
+ 
+    <script>
+    
+    $(function(){
+    	$.ajax({
+     		url:"${pageContext.request.contextPath}/brand/queryAllBrands.action",
+     		type:"GET",
+     		success:function(result){
+     			$.each(result.extend.brands,function(index,item){
+     				 var option=$("<option value='"+item.brandid+"'></option>").append(item.brandname);
+     				 option.appendTo(addBrand);
+     			});
+     		}
+     	});
+    	
+    });
+    	
+   
     </script>
+   
+<script type="text/javascript">
+$("#btn_id").on("click",function(){
+	 var action="";
+	if(!confirm("您确定要增加商品？")){
+		return false;
+	}else{
+		var form = $("#file").val().length;
+		var formData= new FormData($("#myform")[0]);
+		
+		 if(form==0){
+			 action ="insertProduct.action";
+		}else{
+			 action="insertProductAndFile.action";
+		}		 
+		$.ajax({		
+			url:"${pageContext.request.contextPath }/product/"+action,
+			   type:"POST",
+			   data:formData,
+			  /*  async: false,  
+		       cache: false,  */ 
+		       contentType: false,  
+		       processData: false, 
+			   success:function(result){ 
+				  if(result.code==100){	
+					  	clean();
+					    alert("增加成功！");
+				   }else{
+					  alert("增加失败！");
+				   } 
+			   }
+		});
+	}
+});
+function clean()
+{	
+$("pname").val("");
+$("#pdesc").val("");
+$("#pprice").val("");
+$("#psale").val("");
+$("#addBrand").val("");
+$("#pimgdetail").val("");
+$("#psize").val("");
+$("#punit").val("");
+$("#pdiscount").val("");
+var file = $("#file"); 
+file.after(file.clone().val("")); 
+file.remove();
+$("#img").attr("src",null);
+$("#addBrand").val(1);
+}
+
+</script>
+<script type="text/javascript">
+//展示图片
+	 function showPic(){
+	  var pic = $("#file").get(0).files[0];
+	  $("img").prop("src",window.URL.createObjectURL(pic));
+	 
+	 }
+</script>
 </body>
 
 </html>

@@ -42,4 +42,26 @@ public class UtilAdmin {
 		admin.setAdminlasttime(new Date());
 		adminService.updateAdminIpAndTime(admin);
 	}
+
+	
+	@Test
+	public void test3(){
+		Xhadmin admin = adminService.getAdmin("100");
+		System.out.println(admin.getAdminemail());
+	}
+	
+	@Test
+	public void test4(){
+		int result = adminService.deleteAdminById("3");
+		System.out.println(result);
+	}
+	
+	@Test
+	public void test5(){
+		Xhadmin admin = new Xhadmin();
+		admin.setAdminlastip("aaaaaaaaaa");
+		admin.setAdminid(205);
+		adminService.modifyAdmin(admin);
+	}
+	
 }
