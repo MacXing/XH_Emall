@@ -5,10 +5,24 @@
 <!--brand信息-->
 	
 	<select id="queryAllBrands" resultType="xhbrand">
-		SELECT brandID,brandName FROM xhBrand
+		SELECT brandID,brandName,brandDesc FROM xhBrand
 	</select>
 	
 	<select id="queryBrandById" parameterType="int" resultType="xhbrand">
-		SELECT brandID,brandName FRON xhBrand WHERE brandID=#{id}
-	</select>  
+		SELECT brandID,brandName,brandDesc FROM xhBrand WHERE brandID=#{id}
+	</select>
+	
+	<select id="insertBrand" parameterType="xhbrand">
+		INSERT INTO xhBrand( brandName,brandDesc) VALUES(#{brandname},#{branddesc});
+	</select>
+	
+	<update id="updateBrandById" parameterType="xhbrand">
+		UPDATE xhBrand 
+		SET brandName=#{brandname}, brandDesc=#{branddesc}
+		WHERE brandID=#{brandid}
+	</update> 
+	
+	<delete id="deleteBrandById" parameterType="int">
+		DELETE FROM xhBrand WHERE brandid = #{id}
+	</delete>
 </mapper>

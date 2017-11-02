@@ -29,4 +29,21 @@ public class BrandServiceImpl implements BrandService{
 		return brandMapper.queryBrandById(id);
 	}
 
+	@Override
+	public void insertBrand(Xhbrand brand) {
+		
+		brandMapper.insertBrand(brand);
+	}
+
+	@Override
+	public void updateBrandById(Xhbrand brand) {
+		brandMapper.updateBrandById(brand);
+	}
+
+	@Override
+	public void deleteBrandById(int id) {
+		brandMapper.deleteBrandById(id);
+		
+	}
+
 }

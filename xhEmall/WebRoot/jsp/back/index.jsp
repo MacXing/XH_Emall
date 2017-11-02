@@ -95,14 +95,13 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="jsp/back/form_vallidate.jsp"
-										data-index="0">添加管理员</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/admin/queryAdminList.action">管理员列表</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="#">修改管理员信息</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/admin/addadmin.jsp">添加管理员</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="#">查询所有管理员</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/admin/modifyadmin.jsp">修改管理员信息</a>
 								</li>
 							</ul>
 						</li>
@@ -199,13 +198,19 @@
 							<a href="mailbox.html">
 								<i class="glyphicon glyphicon-comment"></i>
 								<span class="glyphicon-class">用户评论</span>
-							</a>
+							</a>							
 						</li>
 						<li>
 							<a href="mailbox.html">
 								<i class="glyphicon glyphicon-barcode"></i>
 								<span class="glyphicon-class">商品品牌</span>
+								<span class="fa arrow"></span>
 							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">品牌列表</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="#">

@@ -27,4 +27,12 @@ public class UtilBrand {
 		System.out.println(brands);
 		
 	}
+	
+	@Test
+	public void test1(){
+		Xhbrand brand = new Xhbrand();
+		brand.setBrandname("华为");
+		brand.setBranddesc("中国公司");
+		brandService.insertBrand(brand);
+	}
 }

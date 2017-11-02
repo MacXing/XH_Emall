@@ -14,4 +14,10 @@ public interface BrandService {
 	
 	public Xhbrand queryBrand(int id);
 	
+	public void insertBrand(Xhbrand brand);
+
+	public void updateBrandById(Xhbrand brand);
+	
+	public void deleteBrandById(int id);
+	
 }
