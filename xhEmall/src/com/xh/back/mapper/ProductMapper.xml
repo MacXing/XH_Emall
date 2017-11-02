@@ -25,18 +25,20 @@
 	    </association>  
 	  </resultMap>
  
-	<select id="selectAllProducts" resultType="xhproduct">
-		SELECT pID,pName,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount,brandID,pClick ,pUpdatetime,pIntegral
-		FROM xhProduct
+	<select id="selectAllProducts" resultMap="selectProductByIdMap">
+			SELECT p.pID,p.brandID,p.pName,p.pClick,p.pDesc,p.pPrice,p.pSale,
+			p.pImg,p.pImgDetail,p.pAddtime,p.pUpdatetime,p.pUnit,
+			p.pSize,p.pDiscount,p.pIntegral, b.brandName
+			FROM xhProduct p JOIN xhBrand b ON p.brandID=b.brandID
 	</select>
 	
   <insert id="insertProduct" parameterType="xhproduct">
-  	INSERT INTO xhProduct(pName,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount)
-	VALUES(#{pname},#{pdesc},#{pprice},#{psale},#{pimg},#{pimgdetail},#{paddtime},#{psize},#{punit},#{pdiscount})
+  	INSERT INTO xhProduct(pName,brandId,pDesc,pPrice,pSale,pImg,pImgDetail,pAddtime,pSize,pUnit,pDiscount)
+	VALUES(#{pname},#{brandid},#{pdesc},#{pprice},#{psale},#{pimg},#{pimgdetail},#{paddtime},#{psize},#{punit},#{pdiscount})
   </insert>
   
   <select id="selectProductById" parameterType="int"  resultMap="selectProductByIdMap">
-  SELECT p.pID,p.brandID,p.pName,p.pClick,p.pDesc,p.pPrice,p.pSale,
+  	SELECT p.pID,p.brandID,p.pName,p.pClick,p.pDesc,p.pPrice,p.pSale,
 	p.pImg,p.pImgDetail,p.pAddtime,p.pUpdatetime,p.pUnit,
 	p.pSize,p.pDiscount,p.pIntegral, b.brandName
 	FROM xhProduct p JOIN xhBrand b ON p.brandID=b.brandID
@@ -49,7 +51,11 @@
   
   <update id="updateProductById" parameterType="xhproduct">
 	UPDATE xhProduct
-	SET pName=#{pname},pDesc=#{pdesc},pPrice=#{pprice},pSale=#{psale},pImg=#{pimg},
+	SET
+	<if test="pimg!=null and pimg!='' ">
+		pImg=#{pimg},
+	</if>
+	pName=#{pname},pDesc=#{pdesc},pPrice=#{pprice},pSale=#{psale},brandID=#{brandid},
 	pImgDetail=#{pimgdetail},pUpdatetime=#{pupdatetime},pSize=#{psize},pUnit=#{punit},pDiscount=#{pdiscount}
 	WHERE pID=#{pid}
   </update>
