@@ -100,9 +100,6 @@
 								<li>
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/admin/addadmin.jsp">添加管理员</a>
 								</li>
-								<li>
-									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/admin/modifyadmin.jsp">修改管理员信息</a>
-								</li>
 							</ul>
 						</li>
 						<li>
