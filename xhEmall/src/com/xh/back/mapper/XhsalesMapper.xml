@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.XhsalesMapper">
+	
+	<resultMap type="xhproduct" id="queryIntegralProductMap">
+		<id column="pID" jdbcType="INTEGER" property="pid" />
+		<result column="brandID" jdbcType="INTEGER" property="brandid" />
+		<result column="pName" jdbcType="VARCHAR" property="pname" />
+		<result column="pPrice" jdbcType="DOUBLE" property="pprice" />
+	    <result column="pSale" jdbcType="DOUBLE" property="psale" />
+	    <result column="pSize" jdbcType="VARCHAR" property="psize" />
+	    <result column="pUnit" jdbcType="VARCHAR" property="punit" />
+	    <association property="brand" javaType="com.xh.back.bean.Xhbrand">
+	    	<id column="brandID" jdbcType="INTEGER" property="brandid" />
+			<result column="brandName" jdbcType="VARCHAR" property="brandname" />   
+	    </association>
+	</resultMap>
+	
+	<!-- 查询（非）积分商品 -->
+	<select id="queryIntegralProduct" resultMap="queryIntegralProductMap" parameterType="int">
+		select p.pID,p.brandID,b.brandName,p.pName,p.pPrice,p.pSale,p.pSize,p.pUnit
+		from xhProduct p join xhBrand b 
+		on p.brandID = b.brandID
+		where pIntegral = #{flag}
+	</select>
+	
+	<!-- 查询用户积分 -->
+	<select id="queryUsersIntegral" resultType="xhusers">
+		select userID,userName,userPhone,userMoney,userIntegral
+		from xhUsers
+	</select>
+	
+	<!-- 根据id查询用户信息（积分） -->
+	<select id="queryUserById" parameterType="int" resultType="xhusers">
+		select userID,userName,userIntegral
+		from xhUsers
+		where userID = #{userid}
+	</select>
+	
+	<!-- 根据id查询商品信息（积分） -->
+	<select id="queryProductById" parameterType="int" resultType="xhproduct">
+		select pID,pName,pPrice
+		from xhProduct
+		where pID = #{pid}
+	</select>
+	
+	<!-- 添加积分商品 -->
+	<update id="updateNotIntegralProduct" parameterType="java.util.List">
+		update xhProduct
+		set pIntegral=1
+		where pID in (
+			<foreach collection="list" item="item" separator=",">
+				#{item}
+			</foreach>
+		)
+	</update>
+	
+	<!-- 移除积分商品 -->
+	<update id="updateIntegralProduct" parameterType="java.util.List">
+		update xhProduct
+		set pIntegral=0
+		where pID in (
+			<foreach collection="list" item="item" separator=",">
+				#{item}
+			</foreach>
+		)
+	</update>
+	
+	<!-- 修改用户积分 -->
+	<update id="updateIntegral" parameterType="xhusers">
+		update xhUsers
+		set userIntegral = #{userintegral}
+		where userID = #{userid}
+	</update>
+	
+	<!-- 增加用户积分 -->
+	<update id="addUserIntegral" parameterType="xhusers">
+		update xhUsers
+		set userIntegral = userIntegral + #{userintegral}
+		where userID = #{userid}
+	</update>
+	
+	<update id="cutUserIntegral" parameterType="xhusers">
+		update xhUsers
+		set userIntegral = userIntegral - #{userintegral}
+		where userID = #{userid}
+	</update>
+    
+</mapper>

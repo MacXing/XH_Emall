@@ -505,13 +505,10 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加积分商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/sales/queryAllNotIntegralProduct.action">添加积分商品</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改积分商品</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询积分商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/sales/queryAllIntegralProduct.action">移除积分商品</a>
 								</li>
 							</ul>
 						</li>
@@ -523,13 +520,7 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加会员积分</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">扣除会员积分</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员积分</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/sales/queryUsersIntegral.action">会员积分修改</a>
 								</li>
 							</ul>
 						</li>
