@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xh.back.mapper.ProductMapper">
-<!-- 通过用户名查找admin信息-->
+
 	  <resultMap id="selectProductByIdMap" type="com.xh.back.bean.Xhproduct">
 	    <id column="pID" jdbcType="INTEGER" property="pid" />
  	    <result column="brandID" jdbcType="INTEGER" property="brandid" />
@@ -25,11 +25,11 @@
 	    </association>  
 	  </resultMap>
  
-	<select id="selectAllProducts" resultMap="selectProductByIdMap">
+	<select id="selectAllProducts" resultMap="selectProductByIdMap" parameterType="int">
 			SELECT p.pID,p.brandID,p.pName,p.pClick,p.pDesc,p.pPrice,p.pSale,
 			p.pImg,p.pImgDetail,p.pAddtime,p.pUpdatetime,p.pUnit,
 			p.pSize,p.pDiscount,p.pIntegral, b.brandName
-			FROM xhProduct p JOIN xhBrand b ON p.brandID=b.brandID
+			FROM xhProduct p JOIN xhBrand b ON p.brandID=b.brandID WHERE p.pIsDelete=#{is}
 	</select>
 	
   <insert id="insertProduct" parameterType="xhproduct">
@@ -57,7 +57,7 @@
 	</if>
 	pName=#{pname},pDesc=#{pdesc},pPrice=#{pprice},pSale=#{psale},brandID=#{brandid},
 	pImgDetail=#{pimgdetail},pUpdatetime=#{pupdatetime},pSize=#{psize},pUnit=#{punit},pDiscount=#{pdiscount}
-	WHERE pID=#{pid}
+	WHERE pID=#{pid} AND pIsDelete=0
   </update>
   
   <delete id="deleteProductById" parameterType="int">
@@ -70,4 +70,12 @@
 	WHERE pName LIKE "%"#{name}"%"
   </select>
   
+  <update id="updatePrductIsDeleteById" parameterType="int">
+  		UPDATE xhProduct SET pIsDelete=1 WHERE pid=#{id}
+  </update>
+  
+  <update id="updatePrductDeleteById" parameterType="int">
+  		UPDATE xhProduct SET pIsDelete=0 WHERE pid=#{id}
+  </update>
+
 </mapper>

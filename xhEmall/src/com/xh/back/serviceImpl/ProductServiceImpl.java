@@ -54,9 +54,20 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Xhproduct> selectAllProducts() {
+	public List<Xhproduct> selectAllProducts(int is) {
 		
-		return productMapper.selectAllProducts();
+		return productMapper.selectAllProducts(is);
+	}
+
+	@Override
+	public void updatePrductIsDeleteById(int id) {
+		
+		productMapper.updatePrductIsDeleteById(id);	
+	}
+
+	@Override
+	public void updatePrductDeleteById(int id) {
+		productMapper.updatePrductDeleteById(id);
 	}
 
 }

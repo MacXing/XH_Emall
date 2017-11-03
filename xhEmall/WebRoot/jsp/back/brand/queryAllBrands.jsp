@@ -46,7 +46,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a data-toggle="modal" data-target="#myModel1" id="addBrand" class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
-                        
+                        	<a  id="flash">
+                                <i class="fa fa-refresh"></i>
+                            </a>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -258,6 +260,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	单选删除按钮
      -->
 <script type="text/javascript">
+/*
+刷新按钮
+*/
+$("#flash").on("click",function(){
+ window.location.href="${pageContext.request.contextPath }/brand/queryAllBrands.action";  	
+});
+
+
     /* 查看单个商品信息 */
     
    function btn1(id){

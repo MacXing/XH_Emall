@@ -33,21 +33,18 @@ public class Xhproduct {
 
     private int pIntegral;
 
-    private String attribute2;
+    private int pisdelete;
 
     private String attribute3;
 
     private String attribute4;
 
-    @Override
-	public String toString() {
-		return "Xhproduct [pid=" + pid + ", brandid=" + brandid + ", pname="
-				+ pname + ", pclick=" + pclick + ", pdesc=" + pdesc
-				+ ", pprice=" + pprice + ", psale=" + psale + ", pimg=" + pimg
-				+ ", pimgdetail=" + pimgdetail + ", paddtime=" + paddtime
-				+ ", pupdatetime=" + pupdatetime + ", psize=" + psize
-				+ ", punit=" + punit + ", pdiscount=" + pdiscount
-				+ ", pIntegral=" + pIntegral + ", brand=" + brand + "]";
+	public int getPisdelete() {
+		return pisdelete;
+	}
+
+	public void setPisdelete(int pisdelete) {
+		this.pisdelete = pisdelete;
 	}
 
 	private String attribute5;
@@ -184,14 +181,6 @@ public class Xhproduct {
 		this.pIntegral = pIntegral;
 	}
 
-	public String getAttribute2() {
-        return attribute2;
-    }
-
-    public void setAttribute2(String attribute2) {
-        this.attribute2 = attribute2 == null ? null : attribute2.trim();
-    }
-
     public String getAttribute3() {
         return attribute3;
     }
@@ -215,4 +204,17 @@ public class Xhproduct {
     public void setAttribute5(String attribute5) {
         this.attribute5 = attribute5 == null ? null : attribute5.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhproduct [pid=" + pid + ", brandid=" + brandid + ", pname="
+				+ pname + ", pclick=" + pclick + ", pdesc=" + pdesc
+				+ ", pprice=" + pprice + ", psale=" + psale + ", pimg=" + pimg
+				+ ", pimgdetail=" + pimgdetail + ", paddtime=" + paddtime
+				+ ", pupdatetime=" + pupdatetime + ", psize=" + psize
+				+ ", punit=" + punit + ", pdiscount=" + pdiscount
+				+ ", pIntegral=" + pIntegral + ", pisdelete=" + pisdelete
+				+ ", attribute3=" + attribute3 + ", attribute4=" + attribute4
+				+ ", attribute5=" + attribute5 + ", brand=" + brand + "]";
+	}
 }

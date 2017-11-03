@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>商品管理</title>
+    <title>商品回收站管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -48,17 +48,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a id="addProduct">添加商品</a>
-                               
-                                </li>
-                            </ul>
                             <a  id="flash">
                                 <i class="fa fa-refresh"></i>
                             </a>
+                           
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -97,13 +90,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    		<td>${product.punit }</td>
 							    		<td>${product.pdiscount }</td>
 							    		
-							    		<td class="text-center">
-							    			
-							    			<a onclick="btn1(${product.pid })" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
-							    			&nbsp;&nbsp; 							    			
-							    			<a onclick="btn2(${product.pid })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
-							    			&nbsp;&nbsp;
-							    			<a onclick="btn3(${product.pid })"><span class="glyphicon glyphicon-pencil"></span></a>
+							    		<td class="text-center">	
+							    			<div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+		                                    <button onclick="btn1(${product.pid })" type="button" class="btn btn-outline btn-default">
+		                                        <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+		                                    </button>
+		                                    <button onclick="btn2(${product.pid })" type="button" class="btn btn-outline btn-default">
+		                                        <i class="fa fa-undo" aria-hidden="true"></i>
+		                                    </button>
+		                                    <button onclick="btn3(${product.pid })" type="button" class="btn btn-outline btn-default">
+		                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+		                                    </button>
+		                                </div>
 							    		</td> 						    									    									    		
 							    	</tr>
     							</c:forEach> 
@@ -140,49 +138,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	单选删除按钮
      -->
     <script type="text/javascript">
-	 /*
-		刷新按钮
-	*/
-	$("#flash").on("click",function(){
-		 window.location.href="${pageContext.request.contextPath }/product/queryAllProducts.action";  	
-	});
-    
+    /*
+    	刷新按钮
+    */
+    $("#flash").on("click",function(){
+    	 window.location.href="${pageContext.request.contextPath }/product/queryAllProductsDelete.action";  	
+    });
     
     /* 查看单个商品信息 */
-    
-    
     
    function btn1(id){
     	
 	   window.location.href="${pageContext.request.contextPath }/jsp/back/product/productInfo.jsp?id="+id;
   		  
     }
-    function build_table(result){
-    	$("#pid").html(result.pid);
-    	$("#brandid").html(result.brandid);
-    	$("#pname").html(result.pname);
-    	$("#pclick").html(result.pclick);
-    	$("#pdesc").html(result.pdesc);
-    	$("#pprice").html(result.pprice);
-    	$("#pdesc").html(result.pdesc);
-    	$("#psale").html(result.psale);
-    	$("#pimg").html(result.pimg);
-    	$("#pimgdetail").html(result.pimgdetail);
-    	$("#paddtime").html(fmtDate(result.paddtime));
-    	$("#pupdatetime").html(fmtDate(result.pupdatetime));
-    	$("#psize").html(result.psize);
-    	$("#punit").html(result.punit);
-    	$("#pdiscount").html(result.pdiscount);
-    	
-    	if(result.pIntegral==1){
-    		$("#pintegral").html("是");
-    	}else{
-    		$("#pintegral").html("否");
-    	}
-    	
-    	$("#brandname").html(result.brand.brandname);
-    }
-    
+   
  
     /* 时间格式转换 */
     function fmtDate(obj){
@@ -194,20 +164,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	} 
     
 	/* 点击删除 */
-	function btn2(id){
-		if(!confirm("您确定要删除商品的报名记录吗？")){
+	function btn3(id){
+		if(!confirm("该商品商品删除就没有了，你确定删除吗？")){
 	 		   return false;
 	 	   }else{
 	 		   $.ajax({
-	 			   url:"${pageContext.request.contextPath }/product/updateIsDelete.action?id="+id,
+	 			   url:"${pageContext.request.contextPath }/product/delectProduct.action?id="+id,
 	 			   type:"GET",
 	 			   success:function(result){
 	 					   if(result.code==100){
 	 						   alert("删除成功！");
-	 						  window.location.href="product/queryAllProducts.action";
+	 						  window.location.href="${pageContext.request.contextPath }/product/queryAllProductsDelete.action";
 	 					   }else{
 	 						  alert("删除失败！");
-	 					   }	  
+	 					   }
+	  
 	 			   }
 	 			   
 	 		   });
@@ -215,27 +186,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	/**
-	*点击修改
+	*点击回退，还原商品
 	*/
 	
-	function btn3(id){ 		  
-	 		window.location.href="${pageContext.request.contextPath }/jsp/back/product/updateProduct.jsp?id="+id;	   	 			 
-	}	
-	/**
-	*点击跳转到增加页面
-	*/
-   $("#addProduct").on("click", function(){
-    	/*  $.ajax({
-    		url:"${pageContext.request.contextPath }/brand/queryAllBrands.action",
-    		type:"GET",
-    		success:function(){
-    			window.location.href="${pageContext.request.contextPath }/brand/queryAllBrands.action";
-    		}
-    	});  */
-	   window.location.href="${pageContext.request.contextPath }/jsp/back/product/addProduct.jsp";
-    }); 
-    
-    
+	function btn2(id){ 
+		if(!confirm("确定回滚改商品吗？")){
+			return false;
+		}else{
+			$.ajax({
+				url:"${pageContext.request.contextPath }/product/updateDelete.action?id="+id,
+				type:"GET",
+				success:function(result){
+					if(result.code==100){
+						alert("回滚成功！");
+						window.location.href="${pageContext.request.contextPath }/product/queryAllProductsDelete.action";
+					}else{
+						alert("回滚失败！");
+					}
+				}
+			});			
+		}
+		 			   	 			 
+	}	  
     </script>
 </body>
 

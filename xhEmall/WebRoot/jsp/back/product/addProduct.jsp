@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     $(function(){
     	$.ajax({
-     		url:"${pageContext.request.contextPath}/brand/queryAllBrands.action",
+     		url:"${pageContext.request.contextPath}/brand/queryAllBrandsForJson.action",
      		type:"GET",
      		success:function(result){
      			$.each(result.extend.brands,function(index,item){
@@ -211,9 +211,9 @@ $("#btn_id").on("click",function(){
 		       contentType: false,  
 		       processData: false, 
 			   success:function(result){ 
-				  if(result.code==100){	
-					  	clean();
+				  if(result.code==100){						  	
 					    alert("增加成功！");
+					    clean();
 				   }else{
 					  alert("增加失败！");
 				   } 

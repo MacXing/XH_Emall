@@ -64,7 +64,7 @@ public class UtilProduct {
 	@Test
 	public void test5(){
 		
-		List<Xhproduct> products = productService.selectAllProducts();
+		List<Xhproduct> products = productService.selectAllProducts(0);
 		System.out.println(products);
 	}
 	

@@ -9,7 +9,7 @@ import com.xh.back.bean.Xhproduct;
  * */
 public interface ProductMapper {
 	
-	public List<Xhproduct> selectAllProducts();
+	public List<Xhproduct> selectAllProducts(int is);
 
 	public void insertProduct(Xhproduct product);
 	
@@ -22,5 +22,9 @@ public interface ProductMapper {
 	public void deleteProductById(int id);
 	
 	public Xhproduct selectProductByNameLike(String name);
+	
+	public void updatePrductIsDeleteById(int id);
+	
+	public void updatePrductDeleteById(int id);
 	
 }

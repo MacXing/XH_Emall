@@ -2,8 +2,6 @@ package com.xh.front.bean;
 
 import java.util.Date;
 
-import org.apache.log4j.helpers.DateTimeDateFormat;
-
 import com.xh.back.bean.Xhgrade;
 
 public class Xhusers {

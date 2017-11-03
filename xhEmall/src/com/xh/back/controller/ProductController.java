@@ -35,15 +35,21 @@ public class ProductController {
 	@RequestMapping("queryAllProducts.action")	
 	public String queryAllProudcts(Model model){
 		List<Xhproduct> products = new ArrayList<Xhproduct>();
-		products=productService.selectAllProducts();
+		products=productService.selectAllProducts(0);
 		model.addAttribute("products", products);
 		return "/jsp/back/product/queryAllProducts.jsp";
 	}
 	
+	@ResponseBody
 	@RequestMapping("delectProduct.action")
-	public String deleteProduct(Model model,int id){
-		productService.deleteProductById(id);
-		return "/product/queryAllProducts.action";
+	public Msg deleteProduct(int id){
+		
+		if(id>0){
+			productService.deleteProductById(id);
+			return Msg.success();
+		}
+		
+		return Msg.fail();
 	}
 	
 	@ResponseBody
@@ -147,12 +153,48 @@ public class ProductController {
 		if(request.getContentType().contains("multipart/form-data")){
 			System.out.println(product.getPimg());
 			System.out.println(file);
-			/*return "forward:/product/insertProductAndFile.action";*/
+			
 			return Msg.fail();
 		}
 		
 		System.out.println(product.getPimg());
-		/*return "forward:/product/insertProduct.action";*/
+		
+		return Msg.fail();
+	}
+	/*
+	 * 将商品加入到商品回收站
+	 */
+	@RequestMapping("updateIsDelete.action")
+	@ResponseBody
+	public Msg updateIsDeleteById(int id){
+		System.out.println(id);
+		if(id>0){
+			productService.updatePrductIsDeleteById(id);
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+	/*
+	 * 查询商品回收站的所有商品
+	 */
+	@RequestMapping("queryAllProductsDelete.action")
+	public String queryAllProduct(Model model){
+		List<Xhproduct> products =  productService.selectAllProducts(1);
+		model.addAttribute("products", products);
+		return "/jsp/back/productDelete/queryAllProductsDelete.jsp";
+	}
+	
+	/*
+	 * 恢复商品回收站的商品
+	 */
+	@RequestMapping("updateDelete.action")
+	@ResponseBody
+	public Msg updateDeleteById(int id){
+		System.out.println(id);
+		if(id>0){
+			productService.updatePrductDeleteById(id);
+			return Msg.success();
+		}
 		return Msg.fail();
 	}
 }

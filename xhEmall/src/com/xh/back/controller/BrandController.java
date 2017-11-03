@@ -70,4 +70,14 @@ public class BrandController {
 		}
 		return Msg.fail();
 	}
+	
+	@RequestMapping("queryAllBrandsForJson.action")
+	@ResponseBody
+	public Msg queryAllBrandsForJson(){
+		List<Xhbrand> brands = brandService.queryAllBrands();
+		if(brands!=null){
+			return Msg.success().add("brands", brands);
+		}
+		return Msg.fail();
+	}	
 }

@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     $(function(){
     	$.ajax({
-     		url:"${pageContext.request.contextPath}/brand/queryAllBrands.action",
+     		url:"${pageContext.request.contextPath}/brand/queryAllBrandsForJson.action",
      		type:"GET",
      		success:function(result){
      			$.each(result.extend.brands,function(index,item){
@@ -200,7 +200,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			$("#pdiscount").val(result.pdiscount);
     			$("#brand").val(result.brand.brandid);
     			$("#img").attr("src","${pageContext.request.contextPath}/upload/"+result.pimg);
-    			alert($("#brand").val(result.pid));
     		}
     	});
     });

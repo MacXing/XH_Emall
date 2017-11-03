@@ -195,22 +195,28 @@
 							</a>
 						</li>
 						<li>
-							<a href="mailbox.html">
+							<a href="#">
 								<i class="glyphicon glyphicon-comment"></i>
-								<span class="glyphicon-class">用户评论</span>
-							</a>							
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-barcode"></i>
-								<span class="glyphicon-class">商品品牌</span>
+								<span class="glyphicon-class">仓库管理</span>
 								<span class="fa arrow"></span>
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">品牌列表</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库记录</a>
 								</li>
-							</ul>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库出货管理</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库进货管理</a>
+								</li>
+							</ul>							
+						</li>
+						<li>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">
+								<i class="glyphicon glyphicon-barcode"></i>
+								<span class="glyphicon-class">商品品牌</span>							
+							</a>							
 						</li>
 						<li>
 							<a href="#">
@@ -219,7 +225,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllProductsDelete.action">
 								<i class="glyphicon glyphicon-trash"></i>
 								<span class="glyphicon-class">商品回收站</span>
 							</a>
