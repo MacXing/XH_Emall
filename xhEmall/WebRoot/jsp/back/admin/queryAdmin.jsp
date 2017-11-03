@@ -271,7 +271,7 @@
 		$("#adminpwd").attr("value", result.adminpassword);
 		$("#adminPhone").attr("value", result.adminphone);
 		$("#email").attr("value", result.adminemail);
- 		$("#admindescribe").attr("text", result.admindescribe);
+ 		$("#admindescribe").html(result.admindescribe);
 		$("#demo1").attr("src", "${pageContext.request.contextPath }/upload/" + result.adminphoto);
 		
 /* 		$("#adminlogintime").attr(result.adminlogintime);
