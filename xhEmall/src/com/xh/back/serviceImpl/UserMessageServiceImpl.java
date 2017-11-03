@@ -45,42 +45,34 @@ public class UserMessageServiceImpl implements UserMessageService {
 		return userMessageMapper.querymsgByPrimaryKey(id);
 	}
 
-	/*@Override
-	public Xhusers queryUserGradeById(int id) {
+	@Override
+	public void addMessageList(Xhmessage message) {
 		// TODO Auto-generated method stub
-		return userGradeMapper.queryUserByPrimaryKey(id);
+		userMessageMapper.addMessage(message);
 	}
 
 	@Override
-	public List<Xhgrade> queryAllGradelist() {
+	public void deleteMessageListByPrimaryKey(int id) {
 		// TODO Auto-generated method stub
-		List<Xhgrade> allGrade=userGradeMapper.queryAllGrade();
-		return allGrade;
+		userMessageMapper.deleteMessageByPrimaryKey(id);
 	}
 
 	@Override
-	public void addGradeList(Xhgrade grade) {
+	public void cleanMessageContext(int id) {
 		// TODO Auto-generated method stub
-		userGradeMapper.addGrade(grade);
-	
+		userMessageMapper.cleanMessageContextByPrimaryKey(id);
 	}
 
 	@Override
-	public void deleteGradeListByPrimaryKey(int id) {
+	public void cleanMessage(int id) {
 		// TODO Auto-generated method stub
-		userGradeMapper.deleteGradeByPrimaryKey(id);
+		userMessageMapper.cleanMessageByPrimaryKey(id);
 	}
 
 	@Override
-	public void updateGradeListByPrimaryKey(Xhgrade grade) {
+	public void updateMessageByPrimaryKey(Xhmessage message) {
 		// TODO Auto-generated method stub
-		userGradeMapper.updateGradeByPrimaryKey(grade);
+		userMessageMapper.updateMessageByPrimaryKey(message);
 	}
 
-	@Override
-	public Xhgrade queryGradeListById(int id) {
-		// TODO Auto-generated method stub
-		Xhgrade grade=userGradeMapper.queryGradeByPrimarykey(id);
-		return grade;
-	}*/
 }

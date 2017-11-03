@@ -191,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    var d = "0"+date.getDate();
 			    var h = "0"+date.getHours();
 			    var f = "0"+date.getMinutes();
-			    var s ="0"+date.getSeconds();
+			    var s = "0"+date.getSeconds();
 			    return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length)
 			    +" "+h.substring(h.length-2,h.length)+":"+f.substring(f.length-2,f.length)+":"+s.substring(s.length-2,s.length);
 			} 

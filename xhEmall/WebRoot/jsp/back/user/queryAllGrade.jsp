@@ -77,11 +77,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    		<td>${grade.gradename }</td>							    									    		
 							    		<td>${grade.gradecount }</td>							    			 
 							    		<td class="text-center">
-							    		   <%--  <a onclick="btn1(${grade.gradeid})" data-toggle="modal" data-target="#myModel1" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
-							    			&nbsp;&nbsp; --%> 							    			
+							    		    <a onclick="btn1(${grade.gradeid})" data-toggle="modal" data-target="#myModal1" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
+							    			&nbsp;&nbsp;							    			
 							    			<a onclick="btn2(${grade.gradeid})" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
 							    			&nbsp;&nbsp;
-							    			<a onclick="btn3(${grade.gradeid })" style="color:#000"><span class="glyphicon glyphicon-pencil"></span></a>
+							    			<a onclick="btn3(${grade.gradeid })" style="color:#000" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-pencil"></span></a>
 							    		</td> 						    									    									    		
 							    	</tr>
     							</c:forEach>
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     
-    <!-- 模态框（Modal） -->
+    <!-- 模态框（Modal） 添加-->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
          <%
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <label class="col-sm-3 control-label">等级条件：</label>
                     <div style="height:150px">
                          <!-- <input type="textarea" name="gradecount"class="form-control" placeholder="请输入等级条件" style="height:100px"> -->
-                         <textarea rows="5" cols="74" name="gradecount" data-provide="markdown" class="md-input" style="resize: none; display: block;" placeholder="请输入等级条件"></textarea>
+                         <textarea rows="5" cols="74" name="gradecount" class="form-control" data-provide="markdown" class="md-input" style="resize: none; display: block;" placeholder="请输入等级条件"></textarea>
                     </div>
                     </div>               
             	</form>
@@ -139,7 +139,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
   </div>
-		
+
+<!-- 模态框（Modal） 修改-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">      
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改等级</h4>
+            </div>
+            <div class="modal-body">
+            	<form id="updategrade">
+            		<div>                                                                           
+                          <input name="gradeid" id="gradeid1" type="hidden" class="form-control" >
+                    </div>                                              	    
+                    <div>
+                        <label class="col-sm-3 control-label">等级名称：</label> 
+                        <input name="gradename" type="text" id="gradename1" class="form-control">
+                    </div>             	    
+                    <div>                         	    
+                    <div>
+                    	  <label class="col-sm-3 control-label">等级条件：</label>                                                                 
+                          <textarea rows="5" cols="80" name="gradecount" id="gradecount1" data-provide="markdown" class="form-control" class="md-input" style="resize: none; display: block;"></textarea>
+                    </div>
+                    </div>               
+            	</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updategrade()">提交修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>		
+    
+    <!-- 模态框（Modal） 查询-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="gridSystemModalLabel">查看详细信息</h4>
+		      </div>
+		      <div class="modal-body"> 		        
+		      		<div class="ibox-content">
+                        <table class="table table-bordered">	                           
+                            <tbody id="mytable">                    
+                                <tr>
+                                    <td>编号</td>
+                                    <td id="gradeid"></td>                                    
+                                </tr>                             
+                                <tr>
+                                	<td>等级名称</td>
+                                    <td id="gradename"></td>                               	           
+                                </tr> 
+                                <tr>
+                                	<td>等级条件</td>
+                                    <td id="gradecount"></td>
+                                </tr>                            
+                        </table>
+                    </div>
+		      </div>
+		      <div class="modal-footer">		       
+		        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		      </div>
+		   </div><!-- /.modal-content -->
+	    </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
     
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
@@ -160,35 +226,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 
 	<script>
-	/*查询商品详细信息  */
+	    /*查询商品详细信息  */
 		function btn1(id){
 			   $.ajax({
-				   url:"${pageContext.request.contextPath }/grade/queryUserGradeByIdForDetail.action?id="+id,
+				   url:"${pageContext.request.contextPath }/grade/queryGradeById.action?id="+id,
 				   type:"GET",
 				   success:function(result){
 						   console.log(result);
 						   build_table(result);
 				   }   
-			   });
-			 }
+			 });
+		}
 		
-		 function build_table(result){
-		 	$("#userid").html(result.userid);
-		 	$("#gradeid").html(result.gradeid);
-		 	$("#username").html(result.username);
-		 	$("#usersex").html(result.usersex);
-		 	$("#userbirthday").html(fmtDate(result.userbirthday));
-		 	$("#userphone").html(result.userphone);
-		 	$("#usermoney").html(result.usermoney);		 	
-		 	$("#userintegral").html(result.userintegral);
-		 	$("#gradename").html(result.xhgrade.gradename);
-		 	$("#gradecount").html(result.xhgrade.gradecount);
-		 	
-		 	if(result.usersex==1){
-		 		$("#usersex").html("男");
-		 	}else{
-		 		$("#usersex").html("女");
-		 	}
+		 function build_table(result){		 	
+		 	$("#gradeid").html(result.gradeid);		 	
+		 	$("#gradename").html(result.gradename);
+		 	$("#gradecount").html(result.gradecount);		 			 	
 		 }		 
 		  	
 		 /* 时间格式转换 */
@@ -198,31 +251,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    var m = "0"+(date.getMonth()+1);
 			    var d = "0"+date.getDate();
 			    return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
-			} 
+		} 
 		 
 		 /* 点击删除 */
-			function btn2(id){
-				if(!confirm("您确定要删除该等级信息记录吗？")){
-			 		   return false;
-			 	   }else{
-			 		   $.ajax({
-			 			   url:"${pageContext.request.contextPath }/grade/deleteGradeList.action?id="+id,
-			 			   type:"delete",
-			 			   success:function(result){
-			 					   /* alert("删除成功！"); */
-			 					   window.location.href="grade/queryallGrade.action";
-			 			   }
+	     function btn2(id){
+			if(!confirm("您确定要删除该等级信息记录吗？")){
+			 		 return false;
+			 }else{
+			 	$.ajax({
+			 		url:"${pageContext.request.contextPath }/grade/deleteGradeList.action?id="+id,
+			 		type:"delete",
+			 		success:function(result){
+			 			 /* alert("删除成功！"); */
+			 			window.location.href="grade/queryallGrade.action";
+			 		}
 			 			   
-			 		   });
-			 	   }
+			 	});
 			}
+		  }
 		 
 		 /*点击修改*/
-			function btn3(id){
-				window.location.href="${pageContext.request.contextPath }/grade/queryByIdForUpdate.action?id="+id; 
-			}
+		function btn3(id){
+			$.ajax({
+				   url:"${pageContext.request.contextPath }/grade/queryGradeById.action?id="+id,
+				   type:"GET",
+				   success:function(result){
+						   console.log(result);
+						   build_table1(result);
+				   }   
+			   });
+		}
 		 
-		 /*modal框添加*/
+		function build_table1(result){			
+		 	$("#gradeid1").attr("value",result.gradeid);			 	
+		 	$("#gradename1").attr("value",result.gradename);
+		 	$("#gradecount1").html(result.gradecount);		  	
+		 } 
+		 
+		
+		function updategrade(){
+			 var formData = new FormData($("#updategrade")[0]);
+				$.ajax({
+				cache: true,
+				type: "POST",
+				data:formData,
+				url:"${pageContext.request.contextPath }/grade/modifyGradeList.action",
+				async: false,
+				cache: false,  
+			    contentType: false,  
+			    processData: false,
+				success: function(result) {
+					  if(result.code!=100){	
+						    alert("修改成功！");
+						    window.location.href="${pageContext.request.contextPath }/grade/queryallGrade.action";
+					   }else{
+						  alert("修改失败！");
+						  window.location.href="${pageContext.request.contextPath }/grade/queryallGrade.action";
+					   } 		
+				}
+				});
+		 }
+		 
+		/*modal框添加*/
 		function addgradetolist(){
 		var formData = new FormData($("#addgrade")[0]);
 		$.ajax({

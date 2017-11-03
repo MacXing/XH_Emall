@@ -63,47 +63,58 @@ public class UserMessageController {
 	    return "/jsp/back/user/queryAllMessage.jsp";
 	}
 	
-	//通过等级ID查询等级列表
+	//通过留言ID查询留言列表
 	@ResponseBody
-	@RequestMapping("queryUserGradeByIdForDetail.action")
-	public Xhmessage queryUserGradeByIdForDetail(int id,Model model){
+	@RequestMapping("queryUserMessageByIdForDetail.action")
+	public Xhmessage queryUserMessageByIdForDetail(int id,Model model){
 		Xhmessage message =userMessage.queryMessageListById(id);
 		model.addAttribute("message",message);
 		return message;
 	}
 		
-	
-	/*//增加等级列表
-	@RequestMapping("addGradeList.action")
-	public String addGradeList(Xhgrade grade,HttpServletRequest request,Model model,HttpSession session){
-		String gradename=request.getParameter("gradename");
-		String gradecount=request.getParameter("gradecount");		
+	@ResponseBody
+	@RequestMapping("queryUsermessageByIdForModify.action")
+	public Xhmessage queryUsermessageByIdForModify(int id,Model model){
+		Xhmessage message =userMessage.queryMessageListById(id);
+		model.addAttribute("message",message);
+		return message;
 		
-		List<Xhgrade> allGrade=userGrade.queryAllGradelist();
-		if(gradename!=""){
-			for (Xhgrade xhgrade : allGrade) {
-				if (gradename.equals(xhgrade.getGradename())&& gradecount.equals(xhgrade.getGradecount())) {
-					return null;
-				}	
-			}
-		}else{
-			userGrade.addGradeList(grade);
-		}
-				
-		return "/grade/queryallGrade.action";
 	}
 	
-	//通过等级ID删除等级列表信息
-	@RequestMapping("deleteGradeList.action")
-	public String deleteGradeList(int id){
-		userGrade.deleteGradeListByPrimaryKey(id);
-		return "/grade/queryallGrade.action";
+	//增加留言列表
+	@RequestMapping("addMessageList.action")
+	public String addMessageList(Xhmessage message,HttpServletRequest request,Model model,HttpSession session){
+		message.setMsginittime(new Date());
+		userMessage.addMessageList(message);
+		return "/message/queryAllMessage.action";
 	}
 	
-	//更新等级列表信息
-	@RequestMapping("modifyGradeList.action")
-	public String modifyGradeList(Xhgrade grade){
-		userGrade.updateGradeListByPrimaryKey(grade);
-		return "/grade/queryallGrade.action";
-	}*/
+	//通过留言ID删除留言列表信息
+	@RequestMapping("deleteMessageList.action")
+	public String deleteMessageList(int id){
+		userMessage.deleteMessageListByPrimaryKey(id);;
+		return "/message/queryAllMessage.action";
+	}
+	
+	//通过留言ID清空留言内容
+	@RequestMapping("cleanMessageContext.action")
+	public String cleanMessageContext(int id){
+		userMessage.cleanMessageContext(id);
+		return "/message/queryAllMessage.action";
+	}
+	
+	//通过留言ID清空留言内容
+	@RequestMapping("cleanMessage.action")
+	public String cleanMessage(int id){
+		userMessage.cleanMessage(id);
+		return "/message/queryAllMessage.action";
+	}
+
+	//通过留言ID更新留言内容
+	@RequestMapping("updateMessage.action")
+	public String updateMessage(Xhmessage message){
+		message.setMsginittime(new Date());
+		userMessage.updateMessageByPrimaryKey(message);
+		return "/message/queryAllMessage.action";
+	}
 }

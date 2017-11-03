@@ -64,6 +64,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
+                                    <th><h6>清空留言</h6></th>
+                                    <th><h6>清空内容</h6></th>
                                 	<th>编号</th>
                                     <th>会员编号</th>                                  
                                     <th>留言内容</th>                                  
@@ -74,6 +76,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <tbody id="table_data">             
                                 <c:forEach items="${messageList }" varStatus="status" var="messageList">
 							    	<tr class="gradeX">
+							    		<td class="text-center">
+							    			<button type="button" class="btn btn-danger btn-circle btn-outline" onclick="btn4(${messageList.msgid })">	
+							    			<i class="fa fa-times"></i>	
+							    			</button>				    			
+							    		    <%-- <a onclick="btn4(${messageList.msgid })" style="color:red"><span class="glyphicon glyphicon-search"></span></a>
+							    			&nbsp;&nbsp; 							    			
+							    			<a onclick="btn5(${messageList.msgid })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a> --%>
+							    		</td>
+							    		<td class="text-center">
+							    		    <button type="button" class="btn btn-danger btn-circle btn-outline" onclick="btn5(${messageList.msgid })">	
+							    			<i class="fa fa-times"></i>	
+							    			</button>
+							    		</td>
 							    		<td>${messageList.msgid }</td>
 							    		<td>${messageList.userid }</td>							    		
 							    		<td>${messageList.msgtxt }</td>							    									    		
@@ -83,13 +98,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    			&nbsp;&nbsp; 							    			
 							    			<a onclick="btn2(${messageList.msgid })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
 							    			&nbsp;&nbsp;
-							    			<a onclick="btn3(${messageList.msgid })" style="color:#000"><span class="glyphicon glyphicon-pencil"></span></a>
+							    			<a onclick="btn3(${messageList.msgid })" style="color:#000" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-pencil"></span></a>
 							    		</td> 						    									    									    		
 							    	</tr>
     							</c:forEach>
                             </tbody>
                             <tfoot>
                                 <tr>
+                                	<th><h6>清空留言</h6></th>
+                                    <th><h6>清空内容</h6></th>
                                 	<th>编号</th>
                                     <th>会员编号</th>                                  
                                     <th>留言内容</th>                                  
@@ -123,18 +140,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<form id="addmessage" novalidate="novalidate">
             		<label class="col-sm-3 control-label">会员编号：</label>                            	    
                     <div class="form-group has-error">
-                        <input name="userid" type="text" class="form-control" placeholder="请输入会员编号"  aria-required="true" aria-describedby="firstname-error">
+                        <input name="userid" type="text" class="form-control" placeholder="请输入会员编号"  aria-required="true">
                         <span class="help-block m-b-none" style="display: none;"></span>
-                        <span id="firstname-error" class="help-block m-b-none">
-                        <i class="fa fa-times-circle"></i> 请输入用户编号
+                        <i class="fa fa-times-circle"></i> 请输入会员编号
                         </span>
                         
                     </div>                       	    
                     <div>
                     <label class="col-sm-3 control-label">留言内容：</label>
                     <div style="height:150px">
-                         
-                         <textarea rows="5" cols="74" name="msginittime" data-provide="markdown" class="md-input" style="resize: none; display: block;" placeholder="从这里开始"></textarea>
+                         <textarea rows="5" cols="74" name="msgtxt" data-provide="markdown" class="md-input" style="resize: none; display: block;" placeholder="从这里开始"></textarea>
                     </div>
                     </div>               
             	</form>
@@ -142,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <font color="red"><%=message %></font>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addgradetolist()">提交添加</button>
+                <button type="button" class="btn btn-primary" onclick="addmessagetolist()">提交添加</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -188,6 +203,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->	
 		
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">      
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改留言内容</h4>
+            </div>
+            <div class="modal-body">
+            	<form id="updatemessage">
+            		<div>
+                   		<input type="hidden" id="msgid1" name="msgid">
+                    </div>             	    
+                    <div>
+                    <label class="col-sm-3 control-label">留言内容：</label>
+                    <div style="height:150px">                    	                       
+                         <textarea rows="5" cols="74" name="msgtxt" id="msgtxt1" data-provide="markdown" class="md-input" style="resize: none; display: block;"></textarea>
+                    </div>
+                    </div>               
+            	</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="update()">提交修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+    
+    
     
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
@@ -200,9 +244,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $(document).ready(function(){$(".dataTables-example").dataTable();
         var oTable=$("#editable").dataTable();
         oTable.$("td").editable("../example_ajax.php",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);
-        oTable.fnUpdate(sValue,aPos[0],aPos[1])},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("allUser.userid"),"column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"})});
+        oTable.fnUpdate(sValue,aPos[0],aPos[1])},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("messageList.msgid"),"column":oTable.fnGetPosition(this)[2]}},"width":"90%","height":"100%"})});
         function fnClickAddRow(){$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])};
     </script>
+    
     <script type="text/javascript" 
     src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8">
     </script>
@@ -211,7 +256,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/*查询留言详细信息  */
 		function btn1(id){
 			   $.ajax({
-				   url:"${pageContext.request.contextPath }/message/queryUserGradeByIdForDetail.action?id="+id,
+				   url:"${pageContext.request.contextPath }/message/queryUserMessageByIdForDetail.action?id="+id,
 				   type:"GET",
 				   success:function(result){
 						   console.log(result);
@@ -226,7 +271,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	$("#msginittime").html(fmtDate(result.msginittime));
 		 	$("#msgtxt").html(result.msgtxt);		  	
 		 }
-		 
+		 		 		 
 		 /* 时间格式转换 */
 		 function fmtDate(obj){
 			    var date =  new Date(obj);
@@ -242,15 +287,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 
 		 /* 点击删除 */
 			function btn2(id){
-				if(!confirm("您确定要删除该等级信息记录吗？")){
+				if(!confirm("您确定要删除该留言信息记录吗？")){
 			 		   return false;
 			 	   }else{
 			 		   $.ajax({
-			 			   url:"${pageContext.request.contextPath }/grade/deleteGradeList.action?id="+id,
+			 			   url:"${pageContext.request.contextPath }/message/deleteMessageList.action?id="+id,
 			 			   type:"delete",
 			 			   success:function(result){
-			 					   /* alert("删除成功！"); */
-			 					   window.location.href="grade/queryallGrade.action";
+			 					   alert("删除成功！");
+			 					   window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
 			 			   }
 			 			   
 			 		   });
@@ -258,33 +303,81 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		 
 		 /*点击修改*/
-			function btn3(id){
-				window.location.href="${pageContext.request.contextPath }/grade/queryByIdForUpdate.action?id="+id; 
-			}
+		function btn3(id){
+			$.ajax({
+				   url:"${pageContext.request.contextPath }/message/queryUserMessageByIdForDetail.action?id="+id,
+				   type:"GET",
+				   success:function(result){
+						   console.log(result);
+						   build_table1(result);
+				   }   
+			   });
+		}
 		 
-		 /*modal框添加*/
-		function addgradetolist(){
-		var formData = new FormData($("#addgrade")[0]);
+		function build_table1(result){			
+		 	$("#msgid1").attr("value",result.msgid);			 	
+		 	
+		 	$("#msgtxt1").html(result.msgtxt);		  	
+		 } 
+		 
+		function update(){
+			var formData = new FormData($("#updatemessage")[0]);
+			$.ajax({
+			cache: true,
+			type: "POST",
+			data:formData,
+			url:"${pageContext.request.contextPath }/message/updateMessage.action",
+			async: false,
+			cache: false,  
+		    contentType: false,  
+		    processData: false,
+			success: function(result) {
+				  if(result.code!=100){	
+					    alert("修改成功！");
+					    window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
+				   }else{
+					  alert("修改失败！");
+					  window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
+				   } 		
+			}
+			});
+			
+		}
+		 
+		/*modal框添加*/
+		function addmessagetolist(){
+		var formData = new FormData($("#addmessage")[0]);
 		$.ajax({
 		cache: true,
 		type: "POST",
 		data:formData,
-		url:"${pageContext.request.contextPath }/grade/addGradeList.action",
+		url:"${pageContext.request.contextPath }/message/addMessageList.action",
 		async: false,
 		cache: false,  
 	    contentType: false,  
 	    processData: false,
 		success: function(result) {
-			  if(result.code==100){	
+			  if(result.code!=100){	
 				    alert("增加成功！");
-				    window.location.href="${pageContext.request.contextPath }/grade/queryallGrade.action";
+				    window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
 			   }else{
-				  alert("增加失败！等级为空或等级已存在！");
-				  window.location.href="${pageContext.request.contextPath }/grade/queryallGrade.action";
+				  alert("增加失败！");
+				  window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
 			   } 		
 		}
 		});
 		}
+		
+		function btn4(id){
+			alert("清空成功！");
+			window.location.href="${pageContext.request.contextPath }/message/cleanMessageContext.action?id="+id; 
+		}
+		
+		function btn5(id){
+			alert("清空成功！");
+			window.location.href="${pageContext.request.contextPath }/message/cleanMessage.action?id="+id; 
+		}
+						
 		</script>
 </body>
 

@@ -11,8 +11,9 @@ public interface UserMessageService {
 	public Xhmessage queryUsermessageById(int id);
 	public List<Xhmessage> queryAllMessagelist();
 	public Xhmessage queryMessageListById(int id);
-	/*public void addGradeList(Xhgrade grade);
-	public void deleteGradeListByPrimaryKey(int id);
-	public void updateGradeListByPrimaryKey(Xhgrade grade);
-	*/
+	public void addMessageList(Xhmessage message);
+	public void deleteMessageListByPrimaryKey(int id);
+	public void cleanMessageContext(int id);
+	public void cleanMessage(int id);
+	public void updateMessageByPrimaryKey(Xhmessage message);	
 }

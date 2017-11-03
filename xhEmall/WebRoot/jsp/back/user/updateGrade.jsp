@@ -57,26 +57,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                         <form role="form" class="form-horizontal m-t" id="update" method="post" enctype="multipart/form-data">
                             <div class="col-md-12">                           
-                            	<div class="form-group">                            	    
-                                    <div class="col-sm-9">
+                            	<div class="form-group">                             		                           	                               	    
+                                    <div class="col-sm-9">                                                                           
                                         <input name="gradeid" value="${grade.gradeid }" type="hidden" class="form-control" placeholder="请输入ID">
                                     </div>
                                 </div>
-                                <div class="form-group">                            	    
-                                    <div class="col-sm-9">
+                                <div class="form-group">
+                                	<label class="col-sm-3 control-label">等级名称：</label>                                	                  	                            	    
+                                    <div class="col-sm-9">                                                                        	
                                         <input name="gradename" value="${grade.gradename }" class="form-control">
                                     </div>
                                 </div>
-                                <div class="form-group">                            	    
-                                    <div class="col-sm-9">
-                                        <input name="gradecount" value="${grade.gradecount }" class="form-control">
+                                <div class="form-group">  
+                                	<label class="col-sm-3 control-label">等级条件：</label>                          	    
+                                    <div class="col-sm-9">                                        
+                                        <%-- <input name="gradecount" value="${grade.gradecount }" class="form-control"> --%>
+                                        <textarea rows="5" cols="80" name="gradecount" value="${grade.gradecount }" data-provide="markdown" class="form-control" class="md-input" style="resize: none; display: block;"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group draggable">
                             	 <font color="red"><%=message %></font>
-                                <div class="col-sm-12 col-sm-offset-3">
+                                <div class="col-sm-12 col-sm-offset-6">
                                 	<input type="button" value="保存修改" class="btn btn-primary" onclick="doupdate()">
             	                    <input type="button" value="取消" class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/grade/queryallGrade.action'">                                    
                                 </div>

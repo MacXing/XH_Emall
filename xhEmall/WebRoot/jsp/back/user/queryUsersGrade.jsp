@@ -84,9 +84,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    		<td>${user.xhgrade.gradename }</td>
 							    		<td>${user.xhgrade.gradecount }</td>							    			 
 							    		<td class="text-center">
-							    		    <a onclick="btn1(${user.userid})" data-toggle="modal" data-target="#myModel1" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
+							    		    <a onclick="btn1(${user.userid})" data-toggle="modal" data-target="#myModal1" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
 							    			&nbsp;&nbsp; 							    			
-							    			<a onclick="btn3(${user.userid })" style="color:#000"><span class="glyphicon glyphicon-pencil"></span></a>
+							    			<a onclick="btn3(${user.userid })" style="color:#000" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-pencil"></span></a>
 							    		</td> 						    									    									    		
 							    	</tr>
     							</c:forEach>
@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     
-    <div class="modal fade" id="myModel1" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -156,6 +156,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 		
+    <!-- 模态框（Modal） 修改-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">      
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改等级</h4>
+            </div>
+            <div class="modal-body">
+            	<form id="updateusergrade">
+            		<div>                                                                           
+                          <input name="gradeid" id="gradeid1" type="hidden" class="form-control" >
+                    </div>                                              	    
+                    <div>
+                        <label class="col-sm-3 control-label">等级名称：</label> 
+                        <input name="gradename" type="text" id="gradename1" class="form-control">
+                    </div>             	    
+                    <div>                         	    
+                    <div>
+                    	  <label class="col-sm-3 control-label">等级条件：</label>                                                                 
+                          <textarea rows="5" cols="80" name="gradecount" id="gradecount1" data-provide="markdown" class="form-control" class="md-input" style="resize: none; display: block;"></textarea>
+                    </div>
+                    </div>               
+            	</form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updateusergrade()">提交修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+ </div>
+    
     
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
@@ -216,27 +249,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
 			} 
 		 
-		 /* 点击删除 */
-			function btn2(id){
-				if(!confirm("您确定要删除该会员的信息记录吗？")){
-			 		   return false;
-			 	   }else{
-			 		   $.ajax({
-			 			   url:"${pageContext.request.contextPath }/?id="+id,
-			 			   type:"delete",
-			 			   success:function(result){
-			 					   /* alert("删除成功！"); */
-			 					   window.location.href="";
-			 			   }
-			 			   
-			 		   });
-			 	   }
+		/*点击修改*/
+		function btn3(id){
+				$.ajax({
+					   url:"${pageContext.request.contextPath }/grade/queryUserGradeByIdForDetail.action?id="+id,
+					   type:"GET",
+					   success:function(result){
+							   console.log(result);
+							   build_table1(result);
+					   }   
+				   });
 			}
+			 
+    	 function build_table1(result){			
+			 	$("#gradeid1").attr("value",result.gradeid);			 	
+			 	$("#gradename1").attr("value",result.xhgrade.gradename);
+			 	$("#gradecount1").html(result.xhgrade.gradecount);		  	
+			 }
 		 
-		 /*点击修改*/
-			function btn3(id){
-				window.location.href="${pageContext.request.contextPath }/?id="+id; 
-			}
+		 function updateusergrade(){
+			 var formData = new FormData($("#updateusergrade")[0]);
+				$.ajax({
+				cache: true,
+				type: "POST",
+				data:formData,
+				url:"${pageContext.request.contextPath }/grade/modifyGradeList.action",
+				async: false,
+				cache: false,  
+			    contentType: false,  
+			    processData: false,
+				success: function(result) {
+					  if(result.code!=100){	
+						    alert("修改成功！");
+						    window.location.href="${pageContext.request.contextPath }/grade/userGrade.action";
+					   }else{
+						  alert("修改失败！");
+						  window.location.href="${pageContext.request.contextPath }/grade/userGrade.action";
+					   } 		
+				}
+				});
+		 }
 		 
 		 /*点击添加*/
 		 $("#gradelist").on("click", function(){
