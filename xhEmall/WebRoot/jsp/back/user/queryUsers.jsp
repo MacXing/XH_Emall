@@ -206,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <td>用户访问数</td>
                                     <td id="uservisitcount"></td>
                                     <td>会员头像</td>
-                                    <td id="userphoto"></td>
+                                    <td><img width="80px" height="100px" id="userphoto1"></td>
                                 </tr>
                                 <tr>
                                     <td>销售金额</td>
@@ -272,7 +272,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	$("#userlastip").html(fmtDate(result.userlastip));
 		 	$("#uservisitcount").html(result.uservisitcount);
 		 	$("#userhomephone").html(result.userhomephone);
-		 	$("#userphoto").html(result.userphoto);
+		 	$("#userphoto1").attr("src","${pageContext.request.contextPath }/userphoto/"+result.userphoto);
 		 	$("#usermoney").html(result.usermoney);		 	
 		 	$("#userintegral").html(result.userintegral);
 		 	

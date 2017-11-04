@@ -45,6 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="ibox-title">
                         <h5>会员留言信息 <small>查找</small></h5>
                         <div class="ibox-tools">
+                        	<a class="collapse-link" onclick="usermessagehome()">
+                                <i class="glyphicon glyphicon-home"></i>
+                            </a>
                         	<a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
@@ -377,7 +380,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			alert("清空成功！");
 			window.location.href="${pageContext.request.contextPath }/message/cleanMessage.action?id="+id; 
 		}
-						
+		
+		function usermessagehome(){
+			window.location.href="${pageContext.request.contextPath }/message/queryUsermessageController.action";
+		}
 		</script>
 </body>
 

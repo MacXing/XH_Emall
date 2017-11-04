@@ -19,6 +19,12 @@ public class Xhadmin {
 
     private String adminlastip;
     
+    private String adminphoto;
+    
+    private String admindescribe;
+
+    private String attribute3;
+
     public String getAdminphoto() {
 		return adminphoto;
 	}
@@ -26,8 +32,6 @@ public class Xhadmin {
 	public void setAdminphoto(String adminphoto) {
 		this.adminphoto = adminphoto;
 	}
-
-	private String adminphoto;
 
     @Override
 	public String toString() {
@@ -37,10 +41,6 @@ public class Xhadmin {
 				+ ", adminlogintime=" + adminlogintime + ", adminlasttime="
 				+ adminlasttime + ", adminlastip=" + adminlastip + "]";
 	}
-
-	private String admindescribe;
-
-    private String attribute3;
 
     public Integer getAdminid() {
         return adminid;

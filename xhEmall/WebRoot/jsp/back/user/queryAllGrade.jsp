@@ -45,6 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="ibox-title">
                         <h5>会员等级信息 <small>查找</small></h5>
                         <div class="ibox-tools">
+                        	<a class="collapse-link" onclick="usergradehome()">
+                                <i class="glyphicon glyphicon-home"></i>
+                            </a>
                         	<a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
@@ -335,6 +338,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		});
 		}
+		
+	function usergradehome(){
+		window.location.href="${pageContext.request.contextPath }/grade/userGrade.action";
+	}
+	
+		
 	</script>
 </body>
 

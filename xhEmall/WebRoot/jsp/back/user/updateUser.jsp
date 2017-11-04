@@ -43,18 +43,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="ibox-title">
                         <h5>修改会员信息</h5>
                         <div class="ibox-tools">
+                        	<a class="collapse-link" onclick="userhome()">
+                                <i class="glyphicon glyphicon-home"></i>
+                            </a>
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="form_editors.html#">选项1</a>
-                                </li>
-                                <li><a href="form_editors.html#">选项2</a>
-                                </li>
-                            </ul>
+                            </a>                                                
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -167,7 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">修改头像：</label>
                                     <div class="col-sm-9">
-                                        <input type="file" name="userphotoupdate"class="form-control" placeholder="" id="file">                                                                    
+                                        <input type="file" name="file"class="form-control" placeholder="" id="file">                                                                    
                                     	原头像信息：<input type="image" name="userphoto" value="${user.userphoto }"><br>
                                     	 选择图片：<img width="80px" height="100px" id="img" onclick="showPic()">
                                     </div>
@@ -224,21 +218,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 	
-	<script>
+	<script type="text/javascript">
 	function doupdate(){
-		var formData = new FormData($("#update")[0]);
+		var action="";
+		var form = $("#file").val().length;
+		var formData = new FormData($("#update")[0]);		
+		action="updateUser.action";	
 		$.ajax({
 		cache: true,
 		type: "POST",
-		url:"${pageContext.request.contextPath }/user/updateUser.action",
+		
+		url:"${pageContext.request.contextPath }/user/"+action,
 		data:formData,
-		//data:$('#update').serialize(),	//要发送的是ajaxFrm表单中的数据
-		async: false,
-		cache: false,  
 	    contentType: false,  
 	    processData: false,
 		success: function(result) {
-			if(result.code!=100){				  	
+			if(result.code==100){				  	
 			    alert("修改成功！");
 			    window.location.href="user/queryAllUsers.action";
 		   }else{
@@ -252,10 +247,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/*显示图片*/
 	function showPic(){
 		 var pic = $("#file").get(0).files[0];
-		 $("img").prop("src" , window.URL.createObjectURL(pic));
+		 $("#img").prop("src" , window.URL.createObjectURL(pic));
 
 		}
 
+	function userhome(){
+		 window.location.href="${pageContext.request.contextPath }/user/queryAllUsers.action";		    	
+	} 
 	
 	</script>
 	
