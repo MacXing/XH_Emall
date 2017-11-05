@@ -58,6 +58,15 @@ public class UserGradeController {
 		return "/jsp/back/user/updateGrade.jsp";
 	}
 	
+	//通过等级ID查询等级列表，并返回json数据
+	@ResponseBody
+	@RequestMapping("queryGradeById.action")
+	public Xhgrade queryGradeById(int id,Model model){
+		Xhgrade grade =userGrade.queryGradeListById(id);
+		model.addAttribute("grade",grade);
+		return grade;
+	}
+	
 	//查询等级列表的所有信息
 	@RequestMapping("queryallGrade.action")
 	public String queryallGrade(Model model){
@@ -80,7 +89,8 @@ public class UserGradeController {
 				}	
 			}
 			userGrade.addGradeList(grade);
-		}else{			
+		}else{
+			userGrade.addGradeList(grade);
 		}
 				
 		return "/grade/queryallGrade.action";

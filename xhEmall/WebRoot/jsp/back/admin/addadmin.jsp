@@ -3,27 +3,34 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML>
 <html>
-  <head>
+
+<head>
     <base href="<%=basePath%>">
-    
-    <title>添加管理员信息</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
+	<title>添加管理员信息</title>
+    <meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="favicon.ico">
+    <!-- <link rel="shortcut icon" href="favicon.ico"> -->
     <link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="resource/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link rel="stylesheet" href="resource/layui/css/layui.css" media="all">
+    <style>
+    .layui-upload-img {
+        width: 92px;
+        height: 92px;
+        margin: 0 10px 10px 0;
+    }
+    </style>
     <base target="_blank">
-
 </head>
 
 <body class="gray-bg">
@@ -52,80 +59,71 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form class="form-horizontal m-t" id="signupForm">
+                        <form class="form-horizontal m-t" id="signupForm1">
+                            <div>
+                                <input type="hidden" name="adminid" id="adminid">
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">帐号：</label>
                                 <div class="col-sm-8">
-                                    <input id="cname" name="name" minlength="2" type="text" class="form-control" required="" aria-required="true">
+                                    <input id="adminname" name="adminname" minlength="2" type="text" class="form-control" required="" aria-required="true" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">密码：</label>
                                 <div class="col-sm-8">
-                                    <input id="password" name="password" class="form-control" type="password">
+                                    <input id="adminpassword" name="adminpassword"
+                                        class="form-control" type="password">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label">确认密码：</label>
                                 <div class="col-sm-8">
-                                    <input id="confirm_password" name="confirm_password" class="form-control" type="password">
-                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
+                                    <input id="confirm_password" name="confirm_password"
+                                        class="form-control" type="password">
+                                    <span class="help-block m-b-none">
+                                        <i class="fa fa-info-circle"></i> 请再次输入您的密码
+                                    </span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">联系电话：</label>
                                 <div class="col-sm-8">
-                                    <input id="adminPhone" name="adminPhone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                                    <input id="adminPhone" name="adminphone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">E-mail：</label>
                                 <div class="col-sm-8">
-                                    <input id="cemail" type="email" class="form-control" name="email" required="" aria-required="true">
+                                    <input id="adminemail" type="email" class="form-control" name="adminemail" required="" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">管理员头像：</label>
                                 <div class="col-sm-8">
-                                    <input id="adminPhoto" name="adminPhoto" class="form-control" type="text">
+                                    <div class="layui-upload">
+                                        <button type="button" class="layui-btn" id="test1">上传图片</button>
+                                        <div class="layui-upload-list">
+                                            <img class="layui-upload-img" id="demo1">
+                                            <p id="demoText"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                    <input id="adminphoto" name="adminphoto" type="hidden">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">说明：</label>
                                 <div class="col-sm-8">
-                                    <textarea id="ccomment" name="comment" class="form-control" required="" aria-required="true"></textarea>
+                                    <textarea id="admindescribe" name="admindescribe" class="form-control" required="" aria-required="true"></textarea>
                                 </div>
                             </div>
-<!--                             <div class="form-group">
-                                <label class="col-sm-3 control-label">注册时间：</label>
-                                <div class="col-sm-8">
-                                    <input id="firstname" name="firstname" class="form-control" type="text">
-                                </div>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label class="col-sm-3 control-label">最后登录时间：</label>
-                                <div class="col-sm-8">
-                                    <input id="firstname" name="firstname" class="form-control" type="text">
-                                </div>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label class="col-sm-3 control-label">最后登录IP：</label>
-                                <div class="col-sm-8">
-                                    <input id="firstname" name="firstname" class="form-control" type="text">
-                                </div>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意《H+使用协议》
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <div class="form-group">
-                                <div class="col-sm-8 col-sm-offset-3">
-                                    <button class="btn btn-primary" type="submit">添加</button>
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <button type="button" class="btn btn-primary" id="submitform">提交</button>
                                 </div>
                             </div>
                         </form>
@@ -134,15 +132,98 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="js/content.min.js?v=1.0.0"></script>
-    <script src="js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="js/plugins/validate/messages_zh.min.js"></script>
-    <script src="js/demo/form-validate-demo.min.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
+    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <!-- <script src="js/plugins/validate/jquery.validate.min.js"></script> -->
+    <!-- <script src="js/plugins/validate/messages_zh.min.js"></script> -->
+    <!-- <script src="js/demo/form-validate-demo.min.js"></script> -->
+    <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="resource/layer/layer.js"></script>
+    <script src="resource/layui/layui.js"></script>
+    <script>
+    layui.use('upload', function() {
+        var $ = layui.jquery,
+            upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1',
+            url: '${pageContext.request.contextPath }/admin/uploadfile.action',
+            before: function(obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            },
+            done: function(res) {
+                //如果上传失败
+                if (res.code == 200) {
+                	console.log(res);
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                console.log(res);
+                $("#adminphoto").attr("value", res.extend.savePath);
+            },
+            error: function() {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function() {
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+    $.fn.serializeObject = function () {  
+	    var o = {};  
+	    var a = this.serializeArray();  
+	    $.each(a, function () {  
+	        if (o[this.name]) {  
+	            if (!o[this.name].push) {  
+	                o[this.name] = [o[this.name]];  
+	            }  
+	            o[this.name].push(this.value || '');  
+	        } else {  
+	            o[this.name] = this.value || '';  
+	        }  
+	    });  
+	    return o;  
+	}; 
+	$("#submitform").click(function (){
+		//var id = $(this).parent().find("input[type='checkbox']").val();
+		//var formdata = new FormData($("#signupForm1"));
+		//console.log("test");
+		//console.log();
+
+		$.ajax({
+			url : "${pageContext.request.contextPath }/admin/addAdmin.action",
+			type : "POST",
+			data : JSON.stringify($("#signupForm1").serializeObject()),
+			contentType:"application/json", 
+			success : function(result){
+    			if(result == 1){
+    				swal({
+    					title : "提示",
+    					text : "添加成功！！"},
+    					function(){
+    						setTimeout(function () { $("#close").click(); self.location.reload();}, 300);
+    					}
+    				);
+    			} else {
+    				swal({
+    					title : "提示",
+    					text : "添加失败！！",
+    					confirmButtonColor : "#F00"
+    				});
+    			}
+    			
+    		}
+		});
+	});
+    </script>
 </body>
 
 </html>
 
-</html>

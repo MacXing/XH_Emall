@@ -22,18 +22,23 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="shortcut icon" href="favicon.ico">
-<link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-<link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-
-<!-- Data Tables -->
-<link href="resource/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-<link href="resource/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-
-<link href="resource/css/animate.min.css" rel="stylesheet">
-<link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet">
+   <link rel="shortcut icon" href="favicon.ico">
+   <link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+   <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+   <!-- Data Tables -->
+   <link href="resource/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+   <link href="resource/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+   <link href="resource/css/animate.min.css" rel="stylesheet">
+   <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet">
+   <link rel="stylesheet" href="resource/layui/css/layui.css" media="all">
+   <base target="_blank">
+<style>
+    .layui-upload-img {
+        width: 92px;
+        height: 92px;
+        margin: 0 10px 10px 0;
+    }
+    </style>
 <base target="_blank">
 
 </head>
@@ -71,6 +76,7 @@
 									<th>选择</th>
 									<th>编号</th>
 									<th>管理员照片</th>
+									<th>描述</th>
 									<th>管理员帐号</th>
 									<th>联系电话</th>
 									<th>邮箱</th>
@@ -92,6 +98,7 @@
 					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }/upload/${admin.adminphoto }" />
 					                        </a>
 							    		</td>
+							    		<td>${admin.admindescribe }</td>
 										<td>${admin.adminname }</td>
 										<td>${admin.adminphone }</td>
 										<td>${admin.adminemail }</td>
@@ -120,6 +127,7 @@
 									<th>选择</th>
 									<th>编号</th>
 									<th>管理员照片</th>
+									<th>描述</th>
 									<th>管理员帐号</th>
 									<th>联系电话</th>
 									<th>邮箱</th>
@@ -141,7 +149,7 @@
 									<span class="sr-only">Close</span>
 								</button>
 								<h4 class="modal-title">ADMIN更新</h4>
-								<!-- <small class="font-bold">这里可以显示副标题。 -->
+								<small class="font-bold">这里可以显示副标题。
 							</div>
 							<div class="modal-body">
 								<div class="ibox-content">
@@ -162,16 +170,6 @@
 												<input id="adminpwd" name="adminpassword" class="form-control" type="password">
 											</div>
 										</div>
-										<!-- <div class="form-group">
-											<label class="col-sm-3 control-label">确认密码：</label>
-											<div class="col-sm-8">
-												<input id="confirm_password" name="confirm_password"
-													class="form-control" type="password">
-												<span class="help-block m-b-none">
-													<i class="fa fa-info-circle"></i> 请再次输入您的密码
-												</span>
-											</div>
-										</div> -->
 										<div class="form-group">
 											<label class="col-sm-3 control-label">联系电话：</label>
 											<div class="col-sm-8">
@@ -186,21 +184,26 @@
 													aria-required="true">
 											</div>
 										</div>
-										<!-- <div class="form-group">
-											<label class="col-sm-3 control-label">管理员头像：</label>
-											<div class="col-sm-8">
-												<input id="adminPhoto" name="adminPhoto"
-													class="form-control" type="text">
-											</div>
-										</div>
+										<div>
+			                                <label class="col-sm-3 control-label">管理员头像：</label>
+			                                <div class="col-sm-8">
+			                                    <div class="layui-upload">
+			                                        <button type="button" class="layui-btn" id="test1">上传图片</button>
+			                                        <div class="layui-upload-list">
+			                                            <img class="layui-upload-img" id="demo1">
+			                                            <p id="demoText"></p>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
 										<div class="form-group">
 											<label class="col-sm-3 control-label">说明：</label>
 											<div class="col-sm-8">
-												<textarea id="describe" name="describe"
+												<textarea id="admindescribe" name="admindescribe"
 													class="form-control" required=""
 													aria-required="true"></textarea>
 											</div>
-										</div> -->
+										</div>
 									</form>
 								</div>
 							</div>
@@ -215,13 +218,14 @@
 		</div>
 	</div>
 	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
-	<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-	<script src="resource/js/plugins/dataTables/jquery.dataTables.js"></script>
-	<script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-	<script src="resource/js/content.min.js?v=1.0.0"></script>
-	<script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
-	<script src="resource/js/admin/back-admin.js"></script>
-	<script src="resource/layer/layer.js"></script>
+    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="resource/js/admin/back-admin.js"></script>
+    <script src="resource/layer/layer.js"></script>
+    <script src="resource/layui/layui.js"></script>
 	<script>
 	$.fn.serializeObject = function () {  
 	    var o = {};  
@@ -246,7 +250,7 @@
 	        
 	        //area: ['600px', '360px'],
 	        shadeClose: true, //点击遮罩关闭
-	        content: 'jsp/back/admin/MyJsp.jsp'
+	        content: 'jsp/back/admin/addadmin.jsp'
 	    });
 	});
 
@@ -267,9 +271,10 @@
 		$("#adminpwd").attr("value", result.adminpassword);
 		$("#adminPhone").attr("value", result.adminphone);
 		$("#email").attr("value", result.adminemail);
-	/* 			$("#describe").attr("value", result.describe);
-		$("#adminPhoto").attr("value", result.adminPhoto);
-			$("#adminlogintime").attr(result.adminlogintime);
+ 		$("#admindescribe").html(result.admindescribe);
+		$("#demo1").attr("src", "${pageContext.request.contextPath }/upload/" + result.adminphoto);
+		
+/* 		$("#adminlogintime").attr(result.adminlogintime);
 		$("#adminlasttime").attr(result.adminlasttime);
 		$("#adminlastip").attr(result.adminlastip); */
 		//var formdata = new FormData($("#signupForm"));
@@ -282,7 +287,7 @@
 		//console.log();
 
 		$.ajax({
-			url : "${pageContext.request.contextPath }/admin/modifyAdmin.action",
+			url : "admin/modifyAdmin.action",
 			type : "POST",
 			data : JSON.stringify($("#signupForm").serializeObject()),
 			contentType:"application/json", 
@@ -292,7 +297,8 @@
 						title : "提示",
 						text : "更新成功！！"},
 						function(){
-							setTimeout(function () { $("#close").click(); self.location.reload();}, 300);
+							$("#close").click(); 
+							self.location.reload();
 						}
 					);
 				} else {

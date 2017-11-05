@@ -1,7 +1,7 @@
 package com.xh.front.bean;
 
 /***
- * 日期格式的转换
+ *鏃ユ湡鏍煎紡杞崲
  * */
 public class XhusersBean extends Xhusers{
 	private String formatDateString; //yyyy-MM-dd

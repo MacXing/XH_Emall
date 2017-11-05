@@ -61,24 +61,29 @@
     values (#{userid}, #{msginittime}, #{msgtxt})
   </insert>
 	
-	<!--根据用户ID修改等级信息
-	<update id="updateGradeByPrimaryKey" parameterType="xhgrade">
-    update xhGrade
-    <set>
-      <if test="gradename != null">
-        gradename = #{gradename,jdbcType=VARCHAR},
-      </if>
-      <if test="gradecount != null">
-        gradecount = #{gradecount,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where gradeID = #{gradeid,jdbcType=INTEGER}
+	<!--根据用户ID清空留言内容-->
+	<update id="cleanMessageContextByPrimaryKey" parameterType="int">
+    update xhMessage set msgTxt =null 
+    where msgID = #{msgid,jdbcType=INTEGER}
    </update>
 	
-	根据等级ID删除等级信息
-	<delete id="deleteGradeByPrimaryKey" parameterType="xhgrade">
-    delete from xhGrade
-    where gradeID = #{gradeid,jdbcType=INTEGER}
-  	</delete> -->
-
+	<!--根据用户ID清空留言信息-->
+	<update id="cleanMessageByPrimaryKey" parameterType="int">
+    update xhMessage set msgTxt =null,msgInitTime=null 
+    where msgID = #{msgid,jdbcType=INTEGER}
+   </update>
+	
+	<!--根据留言ID更新留言信息 -->
+	<delete id="updateMessageByPrimaryKey" parameterType="xhmessage">
+     update xhMessage set msgTxt =#{msgtxt,jdbcType=VARCHAR},msgInitTime=#{msginittime}  
+     where msgID = #{msgid,jdbcType=INTEGER}
+  	</delete>
+	
+	<!--根据留言ID删除留言信息 -->
+	<delete id="deleteMessageByPrimaryKey" parameterType="int">
+    delete from xhMessage 
+    where msgID=#{msgid,jdbcType=INTEGER}
+  	</delete>
+	
+	
 </mapper>

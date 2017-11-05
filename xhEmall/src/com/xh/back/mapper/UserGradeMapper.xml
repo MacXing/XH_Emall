@@ -35,15 +35,18 @@
     </select>
     
     <!-- 根据用户ID修改会员等级 -->
-    <update id="updateByPrimaryKeySelective" parameterType="xhusers">
-    update xhUsers
+    
+    <update id="updateByPrimaryKeySelective" parameterType="xhgrade">
+    update xhGrade
     <set>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
+      <if test="gradename != null">
+        gradeName = #{gradename,jdbcType=VARCHAR},
       </if>
-            
+      <if test="gradecount != null">
+        gradeCount = #{gradecount,jdbcType=VARCHAR},
+      </if>     
     </set>
-    where userID = #{userid,jdbcType=INTEGER}
+    where gradeID = #{gradeid,jdbcType=INTEGER}
    </update>
     
     <!-- 查询等级列表 -->

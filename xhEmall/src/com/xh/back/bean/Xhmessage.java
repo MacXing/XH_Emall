@@ -2,6 +2,8 @@ package com.xh.back.bean;
 
 import java.util.Date;
 
+import org.apache.log4j.helpers.DateTimeDateFormat;
+
 import com.xh.front.bean.Xhusers;
 
 public class Xhmessage {
@@ -59,8 +61,8 @@ public class Xhmessage {
         return msginittime;
     }
 
-    public void setMsginittime(Date msginittime) {
-        this.msginittime = msginittime;
+    public void setMsginittime(Date dateTimeDateFormat) {
+        this.msginittime = dateTimeDateFormat;
     }
 
     public String getAttribute1() {

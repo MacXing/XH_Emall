@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
-                <div class="ibox float-e-margins">
+                <%-- <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>分类信息</h5>
                         <div class="ibox-tools">
@@ -90,7 +90,81 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </tbody>                     
                         </table>
                     </div>
-                </div>
+                </div> --%>
+                
+                 <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>自定义主题</h5>
+                    </div>
+                    <div class="ibox-content">
+	
+	                        <p class="m-b-lg">
+	                            每个列表可以自定义标准的CSS样式。每个单元响应所以你可以给它添加其他元素来改善功能列表。
+	                        </p>
+	
+	                        <div class="dd" id="nestable2">
+	                            <ol class="dd-list">
+	                                <li class="dd-item" data-id="1">
+	                                    <div class="dd-handle">
+	                                        <span class="label label-info"><i class="fa fa-users"></i></span> 群组
+	                                    </div>
+	                                    <ol class="dd-list">
+	                                        <li class="dd-item" data-id="2">
+	                                            <div class="dd-handle">
+	                                                <span class="pull-right"> 12:00 </span>
+	                                                <span class="label label-info"><i class="fa fa-cog"></i></span> 设置
+	                                            </div>
+	                                        </li>
+	                                        <li class="dd-item" data-id="3">
+	                                            <div class="dd-handle">
+	                                                <span class="pull-right"> 11:00 </span>
+	                                                <span class="label label-info"><i class="fa fa-bolt"></i></span> 筛选
+	                                            </div>
+	                                        </li>
+	                                        <li class="dd-item" data-id="4">
+	                                            <div class="dd-handle">
+	                                                <span class="pull-right"> 11:00 </span>
+	                                                <span class="label label-info"><i class="fa fa-laptop"></i></span> 电脑
+	                                            </div>
+	                                        </li>
+	                                    </ol>
+	                                </li>
+	
+	                                <li class="dd-item" data-id="5">
+	                                    <div class="dd-handle">
+	                                        <span class="label label-warning"><i class="fa fa-users"></i></span> 用户
+	                                    </div>
+	                                    <ol class="dd-list">
+	                                        <li class="dd-item" data-id="6">
+	                                            <div class="dd-handle">
+	                                                <span class="pull-right"> 15:00 </span>
+	                                                <span class="label label-warning"><i class="fa fa-users"></i></span> 列用户表
+	                                            </div>
+	                                        </li>
+	                                        <li class="dd-item" data-id="7">
+	                                            <div class="dd-handle">
+	                                                <span class="pull-right"> 16:00 </span>
+	                                                <span class="label label-warning"><i class="fa fa-bomb"></i></span> 炸弹
+	                                            </div>
+	                                        </li>
+	                                        <li class="dd-item" data-id="8">
+	                                            <div class="dd-handle">
+	                                                <span class="pull-right"> 21:00 </span>
+	                                                <span class="label label-warning"><i class="fa fa-child"></i></span> 子元素
+	                                            </div>
+	                                        </li>
+	                                    </ol>
+	                                </li>
+	                            </ol>
+	                        </div>
+	                        <div class="m-t-md">
+	                            <h5>数据：</h5>
+	                        </div>
+	                        <textarea id="nestable2-output" class="form-control"></textarea>
+	                    </div>
+	                </div>
+                
+                
             </div>
         </div>
     </div>
@@ -225,9 +299,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
     <script src="resource/js/plugins/iCheck/icheck.min.js"></script>
+     <script src="js/plugins/nestable/jquery.nestable.js"></script>
     <script>
         $(document).ready(function(){
-        		
+        	$(document).ready(function(){
+        		var updateOutput=function(e){
+        		var list=e.length?e:$(e.target),
+        		output=list.data("output");
+        		if(window.JSON){
+        			output.val(window.JSON.stringify(list.nestable("serialize")));}
+        		else{output.val("浏览器不支持");}};
+        		$("#nestable").nestable({group:1}).on("change",updateOutput);
+        		$("#nestable2").nestable({group:1}).on("change",updateOutput);
+        		updateOutput(
+        				$("#nestable").data("output",$("#nestable-output")));
+        		updateOutput($("#nestable2").data("output",$("#nestable2-output")));
+        		$("#nestable-menu").on("click",function(e){
+        			var target=$(e.target),action=target.data("action");
+        			if(action==="expand-all"){$(".dd").nestable("expandAll");};
+        			if(action==="collapse-all"){$(".dd").nestable("collapseAll");};});});
+        
         $(".dataTables-example").dataTable();
         var oTable=$("#editable").dataTable();
         oTable.$("td").editable("../example_ajax.php",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);

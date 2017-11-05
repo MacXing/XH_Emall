@@ -40,12 +40,8 @@
 	 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.xh.back.mapper,
-											com.xh.front.mapper"/>
-		
+											com.xh.front.mapper"/>		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
-
-
-	
 	
 </beans>

@@ -102,7 +102,7 @@
 	</delete>
 	
 	<update id="modifyAdmin" parameterType="com.xh.back.bean.Xhadmin">
-		UPDATE Xhadmin
+		UPDATE xhAdmin
 		<trim prefix="set" suffixOverrides=",">
 	      <if test="adminname != null and !&quot;&quot;.equals(adminname.trim())">
 	      	ADMINNAME = #{adminname},
@@ -139,7 +139,7 @@
 	</update>
 	
 	<insert id="addAdmin" parameterType="com.xh.back.bean.Xhadmin">
-	  INSERT INTO xhadmin (<include refid="key" />) values(<include refid="values"/>)
+	  INSERT INTO xhAdmin (<include refid="key" />) values(<include refid="values"/>)
 	</insert>
 	
 </mapper>

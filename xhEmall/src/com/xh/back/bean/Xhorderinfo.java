@@ -50,6 +50,12 @@ public class Xhorderinfo {
     private Double payfee;
 
     private Date paytime;
+    
+    // 
+    private Xhadmin admin;
+    
+    
+    private Xhshopping shopping;
 
     private String attribute1;
 

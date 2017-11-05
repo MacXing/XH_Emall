@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	  <!-- 字符编码过滤器 -->
+	<!--字符编码过滤器 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -31,8 +31,9 @@
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>	
+	</filter-mapping> -->	
   <!-- spring的配置 -->
+  
 	<listener>
 		<!-- 这里要指定spring中的哪一类去监听ServletContext的创建 -->
 		<!-- 在容器创建servletContext的时候，ContextLoaderListener就自动的创建 applicationContext对象， 
