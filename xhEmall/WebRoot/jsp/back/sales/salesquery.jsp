@@ -43,9 +43,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>促销管理-新增积分商品</h5>
-            <div class="ibox-tools">
+            <div class="ibox-tools">            	
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
+                </a>
+                <a id="refresh">
+                    <i class="fa fa-refresh"></i>
                 </a>
                 <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                     <i class="fa fa-wrench"></i>
@@ -88,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${product.pprice }</td>
 						<td>${product.psale }</td>
 						<td>${product.psize }</td>
-						<td>${product.punit }</td>
+						<td>${product.punit }</td>						
 						<td><input type="checkbox" value="${product.pid}" class="item" name="pids"></td>							    		
 					</tr>
 					</c:forEach>
@@ -133,6 +136,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 			return o;
 		}; */
+		
+		$("#refresh").on("click",function(){				
+			window.location.href="${pageContext.request.contextPath}/sales/queryAllNotIntegralProduct.action";
+		});
 		
 		//$("#psub").con("click",function(){ //JSON.stringify($("#pform").serializeObject())
 		function psub(){

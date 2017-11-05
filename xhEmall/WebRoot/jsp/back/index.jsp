@@ -526,6 +526,62 @@
 						</li>
 					</ul>
 				</li>
+				
+				<li>
+					<a href="#">
+						<i class="glyphicon glyphicon-tasks"></i>
+						<span class="glyphicon-class">库存管理</span>
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="mailbox.html">
+								<i class="glyphicon glyphicon-wrench"></i>
+								<span class="glyphicon-class">库存查询 </span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="#">总库存查询</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="#">分店库存查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="mailbox.html">
+								<i class="glyphicon glyphicon-wrench"></i>
+								<span class="glyphicon-class">仓库管理 </span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllRepertory.action">仓库查询</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/jsp/back/warehouse/addhouse.jsp">增加仓库</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="mailbox.html">
+								<i class="glyphicon glyphicon-wrench"></i>
+								<span class="glyphicon-class">进出货管理 </span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="#">出货管理</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="#">进货管理</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-cog"></i>
@@ -612,7 +668,7 @@
 					style="margin-bottom: 0">
 				<div class="navbar-header">
 					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="#">
+						href="${pageContext.request.contextPath}/jsp/back/index.jsp#">
 						<i class="fa fa-bars"></i>
 					</a>
 					<form role="search" class="navbar-form-custom" method="post"

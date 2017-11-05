@@ -47,6 +47,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
                 </a>
+                <a id="refresh">
+           			<i class="fa fa-refresh"></i>
+       			</a>
                 <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                     <i class="fa fa-wrench"></i>
                 </a>
@@ -82,10 +85,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   		<td>${user.usermoney }</td>
 					   		<td>${user.userintegral }</td>
 					   		<td>					   		
-	          				<button class="btn btn-success btn-rounded" onclick="btnalter(${user.userid })"
+	          				<button class="btn btn-success btn-rounded btn-outline" onclick="btnalter(${user.userid })"
 	          						type="button" data-toggle="modal" data-target="#alterintegral">
-	          					<i class="glyphicon glyphicon-plus"></i>
-	          					<i class="glyphicon glyphicon-pencil"></i>
+	          					<i class="glyphicon glyphicon-plus"></i>&nbsp
+	          					<i class="glyphicon glyphicon-pencil"></i>&nbsp
 	          					<i class="glyphicon glyphicon-minus"></i>	          				
 	          				</button>
 	              			</td>							    		
@@ -189,7 +192,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 	
 	<!-- 将模态框中输入的数据提交并返回（修改）------------------------------------------------------------ -->
-	<script type="text/javascript"> 		
+	<script type="text/javascript">
+	
+		$("#refresh").on("click",function(){
+			window.location.href="${pageContext.request.contextPath}/sales/queryUsersIntegral.action";
+		});
+	 		
 		$("#alter").on("click",function(){
 		//function alter(){
 			//console.log(654);

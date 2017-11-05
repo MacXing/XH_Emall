@@ -47,6 +47,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
+                            <a id="refresh">
+                    			<i class="fa fa-refresh"></i>
+                			</a>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                                 <i class="fa fa-wrench"></i>
                             </a>
@@ -116,7 +119,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 	
 	<!-- 通过ajax进行提交跳转------------------------------------------------------------ -->
-	<script type="text/javascript">		
+	<script type="text/javascript">	
+		
+		$("#refresh").on("click",function(){
+			window.location.href="${pageContext.request.contextPath}/sales/queryAllIntegralProduct.action";
+		});
+			
 		function psub(){
 			console.log(645);
 			$.ajax({

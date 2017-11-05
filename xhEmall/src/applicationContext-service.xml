@@ -20,5 +20,6 @@
 	<!-- <context:component-scan base-package="com.xh.back.serviceImpl"/> -->
 	<bean id="productService" class="com.xh.back.serviceImpl.ProductServiceImpl"/>
 	<bean id="brandService" class="com.xh.back.serviceImpl.BrandServiceImpl"/> 
-	<bean id="salesService" class="com.xh.back.serviceImpl.SalesServiceImpl"></bean>
+	<bean id="salesService" class="com.xh.back.serviceImpl.SalesServiceImpl"/>
+	<bean id="repertoryService" class="com.xh.back.serviceImpl.RepertoryServiceImpl"/>
 </beans>
