@@ -50,8 +50,18 @@ public class Xhproduct {
 	private String attribute5;
     
     private Xhbrand brand;
+    
+    private Xhcategory category;
 
-    public Xhbrand getBrand() {
+    public Xhcategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(Xhcategory category) {
+		this.category = category;
+	}
+
+	public Xhbrand getBrand() {
 		return brand;
 	}
 

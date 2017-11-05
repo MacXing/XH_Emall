@@ -1,5 +1,7 @@
 package com.xh.back.bean;
 
+import java.util.List;
+
 public class Xhcategory {
     private Integer catid;
 
@@ -20,8 +22,28 @@ public class Xhcategory {
     private String attribute2;
 
     private String attribute3;
+    
+    private List<Xhcategory> categorys;
+    
+	private Xhcategory category;
 
-    public Integer getCatid() {
+	public Xhcategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(Xhcategory category) {
+		this.category = category;
+	}
+
+	public List<Xhcategory> getCategorys() {
+		return categorys;
+	}
+
+	public void setCategorys(List<Xhcategory> categorys) {
+		this.categorys = categorys;
+	}
+
+	public Integer getCatid() {
         return catid;
     }
 
@@ -100,4 +122,15 @@ public class Xhcategory {
     public void setAttribute3(String attribute3) {
         this.attribute3 = attribute3 == null ? null : attribute3.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhcategory [catid=" + catid + ", parentid=" + parentid
+				+ ", catname=" + catname + ", catdesc=" + catdesc
+				+ ", sortorder=" + sortorder + ", isshow=" + isshow
+				+ ", catgrade=" + catgrade + ", attribute1=" + attribute1
+				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
+				+ ", categorys=" + categorys + ", category=" + category + "]";
+	}
+    
 }

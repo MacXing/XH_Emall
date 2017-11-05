@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.CategoryMapper">
+
+	  <resultMap id="queryAllCategoryMap" type="com.xh.back.bean.Xhcategory">
+	    <id column="catID1" jdbcType="INTEGER" property="catid" />
+	    <result column="catName1" jdbcType="VARCHAR" property="catname" />
+	    <result column="catDesc1" jdbcType="VARCHAR" property="catdesc" />
+	    <result column="sortOrder1" jdbcType="INTEGER" property="sortorder" />
+	    <result column="isShow1" jdbcType="INTEGER" property="isshow" />
+	    <result column="catGrade1" jdbcType="INTEGER" property="catgrade" />
+	    <result column="parentID1" jdbcType="INTEGER" property="parentid" />
+	    <collection property="category" ofType="com.xh.back.bean.Xhcategory">
+	    	<id column="parentID1" jdbcType="INTEGER" property="parentid" />
+	    	<result column="catID2" jdbcType="INTEGER" property="catid" />
+	    	<result column="parentID2" jdbcType="INTEGER" property="parentid" />
+			<result column="catName2" jdbcType="VARCHAR" property="catname"/>
+			<result column="catDesc2" jdbcType="VARCHAR" property="catdesc" />
+		    <result column="sortOrder2" jdbcType="INTEGER" property="sortorder" />
+		    <result column="isShow2" jdbcType="INTEGER" property="isshow" />
+		    
+	    </collection>
+	      
+	  </resultMap>
+
+	<select id="queryAllCategory" resultMap="queryAllCategoryMap">
+		SELECT c1.catName catName1,c1.catID catID1,c1.catDesc catDesc1,c1.sortOrder sortOrder1,
+		c1.isShow isShow1,c1.catGrade catGrade1,c1.parentID parentID1,  
+		c2.catID catID2,c2.parentID parentID2,c2.catName catName2 ,c2.catDesc catDesc2,
+		c2.isShow isShow2,c2.sortOrder sortOrder2 
+		FROM xhCategory c1 JOIN xhCategory c2
+		WHERE c1.parentID =c2.catID
+	</select>
+	
+	<select id="queryCategoryByGrade" resultType="xhcategory" parameterType="int">
+		SELECT catID,parentID,catGrade,catName,catDesc,sortOrder,isShow 
+		FROM xhCategory
+		WHERE catGrade=#{grade}
+	</select>
+	
+	<select id="queryCategoryById" resultType="xhcategory">
+		SELECT catID,parentID,catGrade,catName,catDesc,sortOrder,isShow 
+		FROM xhCategory
+		WHERE catID=#{id}
+	</select>
+	
+	<insert id="insertCategory" parameterType="xhcategory">
+		INSERT  INTO xhCategory(parentID,catGrade,catName,catDesc,sortOrder,isShow)
+		VALUES(#{parentid},#{catgrade},#{catname},#{catdesc},#{sortorder},#{isshow})
+	</insert>
+	
+	<delete id="deleteCategoryById" parameterType="int">
+		DELETE FROM xhCategory WHERE catID=#{id}
+	</delete>
+	
+	<update id="updateCategoryById" parameterType="xhcategory">
+		UPDATE xhCategory
+		SET parentID=#{parentid},catName=#{catname},catDesc=#{catdesc},
+		sortOrder=#{sortorder},isShow=#{ishow},catGrade=#{catgrade}
+		WHERE catID =#{catid}
+	</update>
+	
+</mapper>

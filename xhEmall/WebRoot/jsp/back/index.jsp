@@ -185,19 +185,18 @@
 								<li>
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/product/addProduct.jsp">添加商品</a>
 								</li>
-								
 							</ul>
 						</li>
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-th-large"></i>
-								<span class="glyphicon-class">商品分类 </span>
-							</a>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/category/queryAllCategory.action">
+								<i class="glyphicon glyphicon-barcode"></i>
+								<span class="glyphicon-class">商品分类</span>							
+							</a>					
 						</li>
 						<li>
 							<a href="#">
 								<i class="glyphicon glyphicon-comment"></i>
-								<span class="glyphicon-class">仓库管理</span>
+								<span class="glyphicon-class">会员评论</span>
 								<span class="fa arrow"></span>
 							</a>
 							<ul class="nav nav-second-level">
