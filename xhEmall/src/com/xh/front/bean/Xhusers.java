@@ -2,6 +2,8 @@ package com.xh.front.bean;
 
 import java.util.Date;
 
+import org.apache.log4j.helpers.DateTimeDateFormat;
+
 import com.xh.back.bean.Xhgrade;
 
 public class Xhusers {
@@ -207,7 +209,15 @@ public class Xhusers {
         this.usermoney = usermoney;
     }
 
-	public String getAttribute2() {
+    public String getAttribute1() {
+        return attribute1;
+    }
+
+    public void setAttribute1(String attribute1) {
+        this.attribute1 = attribute1 == null ? null : attribute1.trim();
+    }
+
+    public String getAttribute2() {
         return attribute2;
     }
 

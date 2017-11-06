@@ -391,13 +391,10 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加购物车</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/jsp/back/trolley/addtrolley.jsp">添加购物车</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改购物车</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询购物车信息</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/trolley/myTrolley.action">查询购物车信息</a>
 								</li>
 							</ul>
 						</li>

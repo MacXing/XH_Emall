@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -102,8 +103,8 @@
 										<td>${admin.adminname }</td>
 										<td>${admin.adminphone }</td>
 										<td>${admin.adminemail }</td>
-										<td>${admin.adminlogintime }</td>
-										<td>${admin.adminlasttime }</td>
+										<td><fmt:formatDate value="${admin.adminlogintime }" type="both"/></td>
+										<td><fmt:formatDate value="${admin.adminlasttime }" type="both"/></td>
 										<td>${admin.adminlastip }</td>
 										<td class="text-center">
 											<button class="btn btn-danger btn-sm demo4">

@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 
 public class ImageCode {
 
-
 		private int w = 120;
 		private int h = 34;
 	 	private Random r = new Random();

@@ -77,11 +77,11 @@
 	</sql>
 <!-- 通过用户名查找admin信息-->
     <select id="selectAdminByName" parameterType="xhadmin" resultType="xhadmin">
-  		SELECT adminID,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
+  		SELECT adminId,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
     </select>
 	
 	<update id="updateAdminIpAndTime" parameterType="xhadmin">
-		UPDATE xhAdmin <include refid="parametername"></include>
+		UPDATE xhAdmin 
 		set adminLastIp = #{adminlastip},adminLastTime = #{adminlasttime}
 		where adminName = #{adminname}
 	</update>

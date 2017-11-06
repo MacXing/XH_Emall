@@ -30,33 +30,35 @@ public class XhUserController {
 	@RequestMapping("selectUserByPhone.action")	
 	public String selectUserByPhone(Model model,Xhusers user,HttpServletRequest request,String code){
 		GetIp getIp = new GetIp();		
-		//ÓÃ»§µÇÂ¼Ê±ÊµÀı»¯Ê±¼ä×÷ÎªÓÃ»§µÇÂ¼Ê±¼ä
+		//ï¿½Ã»ï¿½ï¿½ï¿½Â¼Ê±Êµï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Îªï¿½Ã»ï¿½ï¿½ï¿½Â¼Ê±ï¿½ï¿½
 		Date date = new Date();		
-		//»ñÈ¡ÓÃ»§µÇÂ¼ÊäÈëµÄÑéÖ¤Âë
+		//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
 		String code1 = code;	
-		//»ñÈ¡ÓÃ»§µÇÂ¼µÄip
+		//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ip
 		String ip = getIp.getIpAddr(request);		
 		System.out.println(code1);
 		
 		if(user.getUserphone()!=null){
 			user.setUserlastip(ip);
 			user.setUserlasttime(date);
-			//²éÑ¯ÓÃ»§ÊäÈëµÄÊÖ»úºÅÂëºÍÃÜÂëÊÇ·ñÕıÈ·
+			//ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½È·
 			Xhusers users =xhUserService.selectUserByPhone(user);
 			if(users != null){
-				//»ñÈ¡ÑéÖ¤ÂëÉÏµÄĞÅÏ¢
+				//ï¿½ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ï¢
 				//String session_code = (String) request.getSession().getAttribute("session_code");
 				if(!code1.equalsIgnoreCase("4At9")){
 					return "/jsp/login.jsp";
 				}
-				//¸üĞÂÓÃ»§µÇÂ¼µÄipµÈĞÅÏ¢
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ipï¿½ï¿½ï¿½ï¿½Ï¢
 				xhUserService.updateUserIpAndTime(user);
-				//½«ËùĞèÊı¾İ·µ»Ø¸øÒ³Ãæ
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ·ï¿½ï¿½Ø¸ï¿½Ò³ï¿½ï¿½
 				model.addAttribute("users", users);
 				return "/jsp/users.jsp";
 			}			
 		}
 		return null;		
 	}
+	
+	
 	
 }

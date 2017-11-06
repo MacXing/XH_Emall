@@ -43,7 +43,6 @@
 				<bean class="com.xh.back.controller.DateConverter"/>
 				<bean class="com.xh.back.controller.StringConvertor"/>
 			</list>
-			
 		</property>
 	</bean>
 	
@@ -60,5 +59,14 @@
 		<property name="maxUploadSize">
 			<value>52488000</value>
 		</property>
-	</bean>
+	</bean>	
+<!-- 拦截器的配置 
+	  <mvc:interceptors> 
+	  配置具体的拦截器 
+		  <mvc:interceptor> 
+		  拦截所有的请求
+			<mvc:mapping path="/**"/> 
+			<bean class="com.other.Interceptor.LoginInterceptor"/>
+		</mvc:interceptor> 
+	 </mvc:interceptors> --> 
 </beans>

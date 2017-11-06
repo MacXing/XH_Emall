@@ -35,12 +35,6 @@ public class AdminServiceImpl implements AdminService{
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		try {
 			List<Xhadmin> temp = adminMapper.queryAdminList();
-//			for (Xhadmin admin : temp) {
-//				String dateTime = admin.getAdminlogintime().toString();
-//				ParsePosition pos = new ParsePosition(0);
-//				Date strtodate = df.parse(dateTime, pos);
-//				admin.setAdminlogintime(strtodate);
-//			}
 			return temp;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,9 +79,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Xhadmin getAdmin(String id) {
 		try {
-//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-//			String dateTime = df.format(new Date());
-//			admin.setAdminlogintime(new Date());
 			return adminMapper.getAdmin(Integer.parseInt(id));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

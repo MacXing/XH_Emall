@@ -15,6 +15,7 @@ import com.other.getCode.ImageCode;
 @RequestMapping("image")
 public class ImageCodeController {
 	@RequestMapping(value="imageCode.action",method={RequestMethod.GET})
+	
 	public void ImageCodeController(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		ImageCode img = new ImageCode();
 		BufferedImage bi = img.getImage();

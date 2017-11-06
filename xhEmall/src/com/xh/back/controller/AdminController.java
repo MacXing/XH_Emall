@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.other.getImage.FileUtil;
 import com.other.getip.GetIp;
 import com.other.msg.Msg;
@@ -26,8 +23,7 @@ import com.xh.back.serviceImpl.AdminServiceImpl;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
-	// queryAdminList
-	
+
 	@Autowired
 	@Qualifier("adminService")
 	private AdminServiceImpl adminService;
@@ -40,16 +36,19 @@ public class AdminController {
 		String session_code = (String)session.getAttribute("session_code");
 		
 		if(admin.getAdminname()==null || admin.getAdminname()==""||admin.getAdminpassword()==null||admin.getAdminpassword()==""||code.equals("")||code==null){
-			return "../jsp/back/loginbackstage.jsp";
+			return "/jsp/back/loginbackstage.jsp";
 		}
 		Xhadmin admin1=adminService.selectAdminByName(admin);
 		if(admin1.getAdminname().equals(admin.getAdminname())&&admin1.getAdminpassword().equals(admin.getAdminpassword())&&session_code.equalsIgnoreCase(code)){
 			admin1.setAdminlastip(ip_String);
 			admin1.setAdminlasttime(new Date());
 			adminService.updateAdminIpAndTime(admin1);
-			return "../jsp/back/index.jsp";
+			session.removeAttribute("session_code");
+			session.setAttribute("admin", admin1);
+			
+			return "/jsp/back/index.jsp";
 		}
-		return "../jsp/back/loginbackstage.jsp";
+		return "/jsp/back/loginbackstage.jsp";
 	}
 	
 	@RequestMapping("queryAdminList.action")

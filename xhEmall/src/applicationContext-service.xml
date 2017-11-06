@@ -26,4 +26,6 @@
 	<bean id="salesService" class="com.xh.back.serviceImpl.SalesServiceImpl"/>
 	<!-- <bean id="repertoryService" class="com.xh.back.serviceImpl.RepertoryServiceImpl"/> -->
 	<bean id="categoryService" class="com.xh.back.serviceImpl.CategoryServiceImpl"/>
+	<!-- <bean id="repertoryService" class="com.xh.back.serviceImpl.TrolleyServiceImpl"/> -->
+	 <bean id="xhTrolleyService" class="com.xh.back.serviceImpl.XhTrolleyServiceImpl"/>
 </beans>
