@@ -27,5 +27,8 @@
 	<!-- <bean id="repertoryService" class="com.xh.back.serviceImpl.RepertoryServiceImpl"/> -->
 	<bean id="categoryService" class="com.xh.back.serviceImpl.CategoryServiceImpl"/>
 	<!-- <bean id="repertoryService" class="com.xh.back.serviceImpl.TrolleyServiceImpl"/> -->
-	 <bean id="xhTrolleyService" class="com.xh.back.serviceImpl.XhTrolleyServiceImpl"/>
+	<bean id="xhTrolleyService" class="com.xh.back.serviceImpl.XhTrolleyServiceImpl"/>
+	<bean id="areaService" class="com.xh.back.serviceImpl.AreaServiceImpl"/>
+	<bean id="cityService" class="com.xh.back.serviceImpl.CityServiceImpl"/>
+	<bean id="provinceService" class="com.xh.back.serviceImpl.ProvinceServiceImpl"/>
 </beans>

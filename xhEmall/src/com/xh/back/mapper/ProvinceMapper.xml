@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.back.mapper.ProvinceMapper">
+
+
+	<resultMap id="selectMapeer" type="xhprovinces">
+		<id column="provinceid" property="provinceid" />
+		<result column="province" property="province" />
+		<collection property="cities" ofType="Xhcities">
+			<id column="cityid" property="cityid" />
+			<result column="city" property="city" />
+			<collection property="areass" ofType="Xhareas">
+				<result column="area" property="area" />
+			</collection>
+		</collection>
+	</resultMap>
+
+
+
+
+	<select id="selectAllprovince" resultMap="selectMapeer">
+		SELECT
+		p.provinceid provinceid, p.province province,c.cityid cityid,c.city city,a.area area from provinces p
+		JOIN cities c
+		on p.provinceid=c.provinceid
+		JOIN areas a
+		on c.cityid=a.cityid
+	</select>
+</mapper>

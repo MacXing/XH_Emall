@@ -80,6 +80,7 @@
 						<span class="nav-label">主页</span>
 					</a>
 				</li>
+				
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-cutlery"></i>
@@ -182,52 +183,45 @@
 								<li>
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/product/addProduct.jsp">添加商品</a>
 								</li>
-							</ul>
-						</li>
-						<li>
-							<a class="J_menuItem" href="${pageContext.request.contextPath }/category/queryAllCategory.action">
-								<i class="glyphicon glyphicon-barcode"></i>
-								<span class="glyphicon-class">商品分类</span>							
-							</a>					
-						</li>
-						<li>
-							<a href="#">
-								<i class="glyphicon glyphicon-comment"></i>
-								<span class="glyphicon-class">会员评论</span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库记录</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库出货管理</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库进货管理</a>
-								</li>
-							</ul>							
-						</li>
-						<li>
-							<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">
-								<i class="glyphicon glyphicon-barcode"></i>
-								<span class="glyphicon-class">商品品牌</span>							
-							</a>							
-						</li>
-						<li>
-							<a href="#">
-								<i class="glyphicon glyphicon-tree-deciduous"></i>
-								<span class="glyphicon-class">商品类型</span>
-							</a>
-						</li>
-						<li>
-							<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllProductsDelete.action">
-								<i class="glyphicon glyphicon-trash"></i>
-								<span class="glyphicon-class">商品回收站</span>
-							</a>
-						</li>
-					</ul>
-				</li>
+						</ul>
+					</li>
+					<li>
+						<a class="J_menuItem" href="${pageContext.request.contextPath }/category/queryAllCategory.action">
+							<i class="glyphicon glyphicon-barcode"></i>
+							<span class="glyphicon-class">商品分类</span>							
+						</a>					
+					</li>
+					<li>
+						<a href="#">
+							<i class="glyphicon glyphicon-comment"></i>
+							<span class="glyphicon-class">会员评论</span>
+							<span class="fa arrow"></span>
+						</a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库记录</a>
+							</li>
+							<li>
+								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库出货管理</a>
+							</li>
+							<li>
+								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库进货管理</a>
+							</li>
+						</ul>							
+					</li>
+					<li>
+						<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">
+							<i class="glyphicon glyphicon-barcode"></i>
+							<span class="glyphicon-class">商品品牌</span>							
+						</a>							
+					</li>
+					<li>
+						<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllProductsDelete.action">
+							<i class="glyphicon glyphicon-trash"></i>
+							<span class="glyphicon-class">商品回收站</span>
+						</a>
+					</li>
+				</ul>
 				<li>
 					<a href="#">
 						<i class="fa fa fa-bar-chart-o"></i>
