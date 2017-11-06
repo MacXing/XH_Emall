@@ -35,7 +35,7 @@ public class Xhusers {
 
     private Double usermoney;
 
-    private String attribute1;
+    private Integer userintegral;
 
     private String attribute2;
 
@@ -175,15 +175,15 @@ public class Xhusers {
         this.usermoney = usermoney;
     }
 
-    public String getAttribute1() {
-        return attribute1;
-    }
+    public Integer getUserintegral() {
+		return userintegral;
+	}
 
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
+	public void setUserintegral(Integer userintegral) {
+		this.userintegral = userintegral;
+	}
 
-    public String getAttribute2() {
+	public String getAttribute2() {
         return attribute2;
     }
 
