@@ -6,6 +6,11 @@ import com.xh.back.bean.Xhcategory;
 
 public interface CategoryMapper {
 	/**
+	 * 查询所有的分类情况
+	 * @return
+	 */
+	public List<Xhcategory> categoryList();
+	/**
 	 * 查询所有的分类
 	 * @return
 	 */

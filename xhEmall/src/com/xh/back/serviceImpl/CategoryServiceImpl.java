@@ -49,6 +49,12 @@ public class CategoryServiceImpl implements CategoryService{
 	public void updateCategoryById(int id) {
 		categoryMapper.updateCategoryById(id);
 	}
+
+	@Override
+	public List<Xhcategory> categoryList() {
+		
+		return categoryMapper.categoryList();
+	}
 	
 	
 }

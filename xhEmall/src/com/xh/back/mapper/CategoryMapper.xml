@@ -61,4 +61,8 @@
 		WHERE catID =#{catid}
 	</update>
 	
+	<select id="categoryList" resultType="xhcategory">
+		SELECT catID,parentID,catName,catDesc,sortOrder,isShow,catGrade FROM xhCategory
+	</select>
+	
 </mapper>

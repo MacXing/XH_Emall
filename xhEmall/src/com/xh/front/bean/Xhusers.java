@@ -207,15 +207,7 @@ public class Xhusers {
         this.usermoney = usermoney;
     }
 
-    public String getAttribute1() {
-        return attribute1;
-    }
-
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
-
-    public String getAttribute2() {
+	public String getAttribute2() {
         return attribute2;
     }
 

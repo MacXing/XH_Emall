@@ -37,4 +37,6 @@ public interface CategoryService {
   
   public void updateCategoryById(int id);
   
+  public List<Xhcategory> categoryList();
+  
 }

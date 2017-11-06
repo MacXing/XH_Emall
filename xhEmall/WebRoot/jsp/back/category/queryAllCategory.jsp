@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
     <link href="resource/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="resource/css/plugins/jsTree/style.min.css" rel="stylesheet">
 
   </head>
   
@@ -91,80 +92,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </table>
                     </div>
                 </div> --%>
-                
-                 <div class="ibox ">
+                   <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>自定义主题</h5>
+                        <h5>分类信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="ibox-content">
-	
-	                        <p class="m-b-lg">
-	                            每个列表可以自定义标准的CSS样式。每个单元响应所以你可以给它添加其他元素来改善功能列表。
-	                        </p>
-	
-	                        <div class="dd" id="nestable2">
-	                            <ol class="dd-list">
-	                                <li class="dd-item" data-id="1">
-	                                    <div class="dd-handle">
-	                                        <span class="label label-info"><i class="fa fa-users"></i></span> 群组
-	                                    </div>
-	                                    <ol class="dd-list">
-	                                        <li class="dd-item" data-id="2">
-	                                            <div class="dd-handle">
-	                                                <span class="pull-right"> 12:00 </span>
-	                                                <span class="label label-info"><i class="fa fa-cog"></i></span> 设置
-	                                            </div>
-	                                        </li>
-	                                        <li class="dd-item" data-id="3">
-	                                            <div class="dd-handle">
-	                                                <span class="pull-right"> 11:00 </span>
-	                                                <span class="label label-info"><i class="fa fa-bolt"></i></span> 筛选
-	                                            </div>
-	                                        </li>
-	                                        <li class="dd-item" data-id="4">
-	                                            <div class="dd-handle">
-	                                                <span class="pull-right"> 11:00 </span>
-	                                                <span class="label label-info"><i class="fa fa-laptop"></i></span> 电脑
-	                                            </div>
-	                                        </li>
-	                                    </ol>
-	                                </li>
-	
-	                                <li class="dd-item" data-id="5">
-	                                    <div class="dd-handle">
-	                                        <span class="label label-warning"><i class="fa fa-users"></i></span> 用户
-	                                    </div>
-	                                    <ol class="dd-list">
-	                                        <li class="dd-item" data-id="6">
-	                                            <div class="dd-handle">
-	                                                <span class="pull-right"> 15:00 </span>
-	                                                <span class="label label-warning"><i class="fa fa-users"></i></span> 列用户表
-	                                            </div>
-	                                        </li>
-	                                        <li class="dd-item" data-id="7">
-	                                            <div class="dd-handle">
-	                                                <span class="pull-right"> 16:00 </span>
-	                                                <span class="label label-warning"><i class="fa fa-bomb"></i></span> 炸弹
-	                                            </div>
-	                                        </li>
-	                                        <li class="dd-item" data-id="8">
-	                                            <div class="dd-handle">
-	                                                <span class="pull-right"> 21:00 </span>
-	                                                <span class="label label-warning"><i class="fa fa-child"></i></span> 子元素
-	                                            </div>
-	                                        </li>
-	                                    </ol>
-	                                </li>
-	                            </ol>
-	                        </div>
-	                        <div class="m-t-md">
-	                            <h5>数据：</h5>
-	                        </div>
-	                        <textarea id="nestable2-output" class="form-control"></textarea>
-	                    </div>
-	                </div>
-                
-                
+
+                        <div id="using_json"></div>
+
+                    </div>
+                </div>
+                 
             </div>
         </div>
     </div>
@@ -299,38 +245,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
     <script src="resource/js/plugins/iCheck/icheck.min.js"></script>
-     <script src="js/plugins/nestable/jquery.nestable.js"></script>
-    <script>
-        $(document).ready(function(){
-        	$(document).ready(function(){
-        		var updateOutput=function(e){
-        		var list=e.length?e:$(e.target),
-        		output=list.data("output");
-        		if(window.JSON){
-        			output.val(window.JSON.stringify(list.nestable("serialize")));}
-        		else{output.val("浏览器不支持");}};
-        		$("#nestable").nestable({group:1}).on("change",updateOutput);
-        		$("#nestable2").nestable({group:1}).on("change",updateOutput);
-        		updateOutput(
-        				$("#nestable").data("output",$("#nestable-output")));
-        		updateOutput($("#nestable2").data("output",$("#nestable2-output")));
-        		$("#nestable-menu").on("click",function(e){
-        			var target=$(e.target),action=target.data("action");
-        			if(action==="expand-all"){$(".dd").nestable("expandAll");};
-        			if(action==="collapse-all"){$(".dd").nestable("collapseAll");};});});
+    <script src="resource/js/plugins/nestable/jquery.nestable.js"></script>
+    <script src="resource/js/plugins/jsTree/jstree.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	$.ajax({
+			url:"${pageContext.request.contextPath}/category/categoryList.action",
+			type:"GET",
+			success:function(result){
+				if(result.code==100){
+					console.log(result.extend.categorys);
+					$.each(result.extend.categorys,function(index,item){
+						
+					});
+						$("#using_json").jstree({"core":{"data":[
+						                                         
+						"分类",{"text":"顶级类","state":{"opened":true},
+							"children":[{"text":"css",
+							"children":[{"text":"animate.css","icon":"none"},
+							            {"text":"bootstrap.css","icon":"none"},
+							            {"text":"main.css","icon":"none"},
+							            {"text":"style.css","icon":"none"}],"state":{"opened":true}},
+							            {"text":"js","children":[{"text":"bootstrap.js","icon":"none"},
+										{"text":"hplus.min.js","icon":"none"},
+										{"text":"jquery.min.js","icon":"none"},
+										{"text":"jsTree.min.js","icon":"none"},
+										{"text":"custom.min.js","icon":"none"}],"state":{"opened":true}},
+										{"text":"html","children":[{"text":"layout.html","icon":"none"},
+										{"text":"navigation.html","icon":"none"},
+										{"text":"navbar.html","icon":"none"},
+										{"text":"footer.html","icon":"none"},
+										{"text":"sidebar.html","icon":"none"}],"state":{"opened":true}}]},
+							 ]
+						
+						}});			    	
+					}
+			 	}
+			});
+    });
+	
+    
+    	
+  /*       $(document).ready(function(){
+        	
+        	$.ajax({
+    			url:"${pageContext.request.contextPath}/category/queryAllCategoryForJson.action",
+    			type:"GET",
+    			success:function(result){
+    				if(result.code==100){
+    					console.log(result.extend.categoryList);	
+    					var updateOutput=function(e){
+    		        		var list=e.length?e:$(e.target),
+    		        		output=list.data(result.extend.categoryList);
+    		        		if(window.JSON){
+    		        			output.val(window.JSON.stringify(list.nestable("serialize")));}
+    		        		else{output.val("浏览器不支持");}};
+    		        		$("#nestable").nestable({group:1}).on("change",updateOutput);
+    		        		$("#nestable2").nestable({group:1}).on("change",updateOutput);
+    		        		updateOutput(
+    		        				$("#nestable").data("output",$("#nestable-output")));
+    		        		updateOutput($("#nestable2").data("output",$("#nestable2-output")));
+    		        		$("#nestable-menu").on("click",function(e){
+    		        			var target=$(e.target),action=target.data("action");
+    		        			if(action==="expand-all"){$(".dd").nestable("expandAll");};
+    		        			if(action==="collapse-all"){
+    		        				$(".dd").nestable("collapseAll");};});}
+    				
+    				}
+    			
+    		}); */
+        		
         
-        $(".dataTables-example").dataTable();
+        		
+        
+   /*      $(".dataTables-example").dataTable();
         var oTable=$("#editable").dataTable();
         oTable.$("td").editable("../example_ajax.php",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);
-        oTable.fnUpdate(sValue,aPos[0],aPos[1]);},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("allUser.userid"),"column":oTable.fnGetPosition(this)[2]};},"width":"90%","height":"100%"});});
+        oTable.fnUpdate(sValue,aPos[0],aPos[1]);},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("allUser.userid"),"column":oTable.fnGetPosition(this)[2]};},"width":"90%","height":"100%"});
         function fnClickAddRow(){$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"]);};
        	$(".i-checks").iCheck({
         		checkboxClass:"icheckbox_square-green",
         		radioClass:"iradio_square-green",
-        		});
+        }); */
        	
        	
-       	$.ajax({
+       	/* $.ajax({
 			url:"${pageContext.request.contextPath}/category/queryAllCategoryForJson.action",
 			type:"GET",
 			success:function(result){
@@ -342,7 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					});  
 				}
 			}
-		});
+		}); */
         		
     </script>
     
@@ -350,11 +349,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/**
 	*点击添加分类按钮请请求分类信息并加载到select的option中
 	**/
-	$("#addCategory").on("click",function(){
-		
-	});
-
-    $("#btn_submit").on("click",function(){
+   /*  $("#btn_submit").on("click",function(){
     	if(!confirm("您确定要添加分类信息吗？")){
     		return false;
    		}else{
@@ -375,7 +370,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			});
    			
     		}
-    	});
+    	}); */
 </script>
     
     <!-- 
@@ -385,12 +380,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 /*
 刷新按钮
 */
-$("#flash").on("click",function(){
+/* $("#flash").on("click",function(){
  window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action";  	
-});
+}) */
 
 	/* 点击删除 */
-	function btn2(id){
+/* 	function btn2(id){
 		if(!confirm("您确定要删除这个分类信息吗？")){
 	 		   return false;
 	 	   }else{
@@ -407,12 +402,12 @@ $("#flash").on("click",function(){
 	 			   }	 			   
 	 		   });
 	 	   }
-	}
+	} */
 	
 	/**
 	*点击修改
 	*/
-	function btn3(id){
+/* 	function btn3(id){
 
 	 		   $.ajax({
 	 			   url:"${pageContext.request.contextPath }/category/queryCategoryById.action?id="+id,
@@ -427,12 +422,12 @@ $("#flash").on("click",function(){
 	 					  } 
 	 			   }	 			   
 	 		   });
-	}
+	} */
  
    /**
 	*点击修改
 	*/
-	$("#btn_fix").on("click",function(){
+	/* $("#btn_fix").on("click",function(){
 		if(!confirm("您确定要修改分类信息吗？")){
 			return false;
 		}else{
@@ -453,7 +448,7 @@ $("#flash").on("click",function(){
 				}
 			});
 		}
-	});
+	}) */
 	
     </script>
 </body>

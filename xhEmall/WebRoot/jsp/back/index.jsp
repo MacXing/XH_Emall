@@ -486,13 +486,10 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加积分商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/sales/queryAllNotIntegralProduct.action">添加积分商品</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改积分商品</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询积分商品</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/sales/queryAllIntegralProduct.action">移除积分商品</a>
 								</li>
 							</ul>
 						</li>
@@ -504,18 +501,68 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加会员积分</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">扣除会员积分</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询会员积分</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/sales/queryUsersIntegral.action">会员积分修改</a>
 								</li>
 							</ul>
 						</li>
 					</ul>
 				</li>
+				
+				<li>
+					<a href="#">
+						<i class="glyphicon glyphicon-tasks"></i>
+						<span class="glyphicon-class">库存管理</span>
+						<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level">
+						<li>
+							<a href="mailbox.html">
+								<i class="glyphicon glyphicon-wrench"></i>
+								<span class="glyphicon-class">库存查询 </span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="#">总库存查询</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="#">分店库存查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="mailbox.html">
+								<i class="glyphicon glyphicon-wrench"></i>
+								<span class="glyphicon-class">仓库管理 </span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllRepertory.action">仓库查询</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/jsp/back/warehouse/addhouse.jsp">增加仓库</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="mailbox.html">
+								<i class="glyphicon glyphicon-wrench"></i>
+								<span class="glyphicon-class">进出货管理 </span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="#">出货管理</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="#">进货管理</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-cog"></i>
@@ -601,8 +648,8 @@
 				<nav class="navbar navbar-static-top" role="navigation"
 					style="margin-bottom: 0">
 				<div class="navbar-header">
-					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="jsp/back/index.jsp#">
+					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary" 
+					href="${pageContext.request.contextPath}/jsp/back/index.jsp">
 						<i class="fa fa-bars"></i>
 					</a>
 					<form role="search" class="navbar-form-custom" method="post"

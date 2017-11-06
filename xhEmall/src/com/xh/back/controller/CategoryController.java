@@ -87,4 +87,16 @@ public class CategoryController {
 		}
 		return Msg.fail();
 	}
+	
+	@RequestMapping("categoryList.action")
+	@ResponseBody
+	public Msg categoryList(){
+		
+		List<Xhcategory> cateList = categoryService.categoryList();
+		if(cateList!=null){
+			
+			return Msg.success().add("categorys", cateList);
+		}
+		return Msg.fail();
+	}
 }
