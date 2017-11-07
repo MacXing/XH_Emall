@@ -2,6 +2,10 @@ package com.other.currency;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ServiceResponse<T> implements Serializable{
 	
 	private int status;
@@ -28,6 +32,8 @@ public class ServiceResponse<T> implements Serializable{
         this.msg = msg;
     }
 	
+	// 不在json中
+	@JsonIgnore
 	public boolean isSuccess(){
 		return this.status == ResponseCode.SUCCESS.getCode();
 	}
@@ -47,6 +53,10 @@ public class ServiceResponse<T> implements Serializable{
 	public static <T> ServiceResponse<T> createBySuccess(){
 		return new ServiceResponse<T>(ResponseCode.SUCCESS.getCode());
 	}
+	
+	public static <T> ServiceResponse<T> createBySuccess(T data){
+        return new ServiceResponse<T>(ResponseCode.SUCCESS.getCode(), data);
+    }
 	
 	public static <T> ServiceResponse<T> createBySuccessMessage(String msg){
 		return new ServiceResponse<T>(ResponseCode.SUCCESS.getCode(), msg);

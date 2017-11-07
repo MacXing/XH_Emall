@@ -208,7 +208,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					title : "提示",
     					text : "添加成功！！"},
     					function(){
-    						setTimeout(function () { $("#close").click(); self.location.reload();}, 300);
+    						$("#close").click();
+    						self.location.reload();
     					}
     				);
     			} else {

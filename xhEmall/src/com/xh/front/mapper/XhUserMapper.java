@@ -1,27 +1,31 @@
 package com.xh.front.mapper;
 
 
-import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 import com.xh.front.bean.Xhusers;
-import com.xh.front.bean.XhusersBean;
 
 public interface XhUserMapper {
-	/**
-	 * 用户：会员
-	 * 功能：增删改查
-	 * 属性：userid,gradeid,username,userpassword,usersex,userbirthday,userphone,useremail,
-     useraddress,userhomephone,userphoto,usermoney
-	 * */
-//	public void addUser(Xhusers user);
-//	public void deleteByPrimaryKey(int id);
-//	public Xhusers queryUserByPrimaryKey(int id);
-//	public void updateByPrimaryKeySelective(XhusersBean user);
-//	public List<Xhusers> queryAllUsers();
 	public Xhusers selectUserByPhone(Xhusers user);
 	
 	public void updateUserIpAndTime(Xhusers user);
 	
+	//userid,gradeid,username,userpassword,usersex,userbirthday,userphone,useremail,
+    //useraddress,userhomephone,userphoto,usermoney
 	
+	public Xhusers selectLogin(@Param("username") String username, @Param("password") String password);
 	
+	public int checkUserName(String userName);
+	
+	public int checkUserEmail(String userEmail);
+	
+	public int checkUserPhone(String userPhone);
+	
+	public int insert(Xhusers user);
+	
+	public String selectQuestionByUsername(String username);
+	
+	public int checkAnswer(@Param("username")String username, @Param("question")String question, @Param("answer")String answer);
+	
+	public int updataPasswordByUsername(@Param("username")String username, @Param("passwordNew")String passwordNew);
 }

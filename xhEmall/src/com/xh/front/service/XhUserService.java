@@ -1,23 +1,25 @@
 package com.xh.front.service;
 
 
-import java.util.List;
-
+import com.other.currency.ServiceResponse;
 import com.xh.front.bean.Xhusers;
-import com.xh.front.bean.XhusersBean;
 
 public interface XhUserService {
-	/**
-	 * 类型：接口
-	 * 功能：增删改查的所有接口
-	 * */
-//	public void addUser(Xhusers user);
-//	public void deleteUserById(int id);
-//	public Xhusers queryUserById(int id);
-//	public void modifyUserById(XhusersBean user);
-//	public List<Xhusers> queryAllUsers();
+	
 	public Xhusers selectUserByPhone(Xhusers user);
 	
 	public void updateUserIpAndTime(Xhusers user);
+	
+	public ServiceResponse<Xhusers> login(String username, String password);
+	
+	public ServiceResponse<String> checkValid(String str, String type);
+	
+	public ServiceResponse<String> register(Xhusers user);
+	
+	public ServiceResponse<String> selectGetQuestion(String username);
+
+	public ServiceResponse<String> checkAnswer(String username, String question, String answer);
+	
+	public ServiceResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken);
 	
 }
