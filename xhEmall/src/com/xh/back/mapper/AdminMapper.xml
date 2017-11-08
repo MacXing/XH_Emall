@@ -4,7 +4,7 @@
 <mapper namespace="com.xh.back.mapper.AdminMapper">
 	<sql id="parametername">
 		ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
-		,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE,ATTRIBUTE3
+		,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE
 	</sql>
 	<sql id="key">
 		<trim suffixOverrides=",">
@@ -34,9 +34,6 @@
 	      </if>
 	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
 	      	ADMINDESCRIBE,
-	      </if>
-	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
-	      	ATTRIBUTE3
 	      </if>
 		</trim>
 	</sql>
@@ -70,9 +67,6 @@
 	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
 	      	#{admindescribe},
 	      </if>
-	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
-	      	#{attribute3}
-	      </if>
 	    </trim>
 	</sql>
 <!-- 通过用户名查找admin信息-->
@@ -88,7 +82,7 @@
 	
 	<select id="queryAdminList" resultType="com.xh.back.bean.Xhadmin">
 		SELECT ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
-				,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE,ATTRIBUTE3
+				,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE
 		FROM xhAdmin ORDER BY ADMINID
 	</select>
 	
@@ -130,9 +124,6 @@
 	      </if>
 	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
 	      	ADMINDESCRIBE = #{admindescribe},
-	      </if>
-	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
-	      	ATTRIBUTE3 = #{attribute3}
 	      </if>
 	    </trim>
 	    WHERE ADMINID = #{adminid}

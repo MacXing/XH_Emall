@@ -64,4 +64,10 @@ public class UtilAdmin {
 		adminService.modifyAdmin(admin);
 	}
 	
+	@Test
+	public void test6(){
+		
+		adminService.queryAdminList();
+	}
+	
 }

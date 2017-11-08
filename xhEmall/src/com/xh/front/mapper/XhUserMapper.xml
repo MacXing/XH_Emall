@@ -3,6 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xh.front.mapper.XhUserMapper">
+
+	<sql id="Base_Column_List">
+		userID,gradeID,userName,userPassword,userSex,userBirthday,userPhone,userEmail
+		,userAddress,userHomePhone,userPhoto,userMoney,userintegral
+	</sql>
+
 	<select id="selectUserByPhone" resultType="xhusers" parameterType="xhusers">
 		select userphone,userpassword
 		from xhUsers
@@ -14,4 +20,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set userLastIp = #{userlastip},userLastTime = #{userlasttime}
 		where userPhone = #{userphone}
 	</update>
+	
+	
+	
+	<select id="checkUserName" resultType="int" parameterType="string">
+		select count(1) from xhUsers where username = #{username}
+	</select>
+	
+	<select id="checkUserEmail" resultType="int" parameterType="string">
+		select count(1) from xhUsers where useremail = #{useremail}
+	</select>
+	
+	<select id="checkUserPhone" resultType="int" parameterType="string">
+		select count(1) from xhUsers where userphone = #{userphone}
+	</select>
+	
+	<select id="selectQuestionByUsername" parameterType="string" resultType="string">
+		select question from xhUsers where username = #{username}
+	</select>
+	
+	<select id="checkAnswer" parameterType="map" resultType="int">
+		select count(1) from xhUsers where username = #{username} and question = #{question } and answer = #{answer }
+	</select>
+	
+	<select id="selectLogin" resultType="xhusers" parameterType="map">
+		select <include refid="Base_Column_List"/> 
+		from xhUsers where userName = #{username} and userPassword = #{password}
+	</select>
+	
+	<insert id="insert" parameterType="xhusers">
+		insert into xhUsers
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">username,</if>
+			<if test="userpassword != null">userpassword,</if>
+			<if test="usersex != null">usersex,</if>
+			<if test="userbirthday != null">userbirthday,</if>
+			<if test="userphone != null">userphone,</if>
+			<if test="useremail != null">useremail,</if>
+			<if test="useraddress != null">useraddress,</if>
+			<if test="userhomephone != null">userhomephone,</if>
+			<if test="userphoto != null">userphoto,</if>
+			<if test="usermoney != null">usermoney,</if>
+			<if test="userintegral != null">userintegral,</if>
+			<if test="userlogintime != null">userlogintime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">#{username },</if>
+			<if test="userpassword != null">#{userpassword },</if>
+			<if test="usersex != null">#{usersex },</if>
+			<if test="userbirthday != null">#{userbirthday },</if>
+			<if test="userphone != null">#{userphone },</if>
+			<if test="useremail != null">#{useremail },</if>
+			<if test="useraddress != null">#{useraddress },</if>
+			<if test="userhomephone != null">#{userhomephone },</if>
+			<if test="userphoto != null">#{userphoto },</if>
+			<if test="usermoney != null">#{usermoney },</if>
+			<if test="userintegral != null">#{userintegral },</if>
+			<if test="userlogintime != null">#{userlogintime }</if>
+		</trim>
+	</insert>
+	
+	<update id="updataPasswordByUsername" parameterType="map">
+		update xhUsers set userpassword = #{passwordNew }, updatetime = now()
+		where username = #{username }
+	</update>
+	
 </mapper>	
