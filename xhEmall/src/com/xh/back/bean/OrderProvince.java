@@ -1,31 +1,19 @@
 package com.xh.back.bean;
 
-import java.util.List;
-
-public class Xhprovinces {
+public class OrderProvince {
 	private int id;
-	private int provinceid;
+	private String provinceid;
 	private String province;
-	
-	private List<Xhcities> cities;
-	
-	
-	public List<Xhcities> getCities() {
-		return cities;
-	}
-	public void setCities(List<Xhcities> cities) {
-		this.cities = cities;
-	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getProvinceid() {
+	public String getProvinceid() {
 		return provinceid;
 	}
-	public void setProvinceid(int provinceid) {
+	public void setProvinceid(String provinceid) {
 		this.provinceid = provinceid;
 	}
 	public String getProvince() {
@@ -33,6 +21,11 @@ public class Xhprovinces {
 	}
 	public void setProvince(String province) {
 		this.province = province;
+	}
+	@Override
+	public String toString() {
+		return "OrderProvince [id=" + id + ", provinceid=" + provinceid
+				+ ", province=" + province + "]"+"\n";
 	}
 	
 }

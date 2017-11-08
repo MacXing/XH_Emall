@@ -2,11 +2,13 @@ package com.xh.back.bean;
 
 import java.util.Date;
 
+import com.xh.front.bean.Xhusers;
+
 public class Xhorderinfo {
     private Integer orderid;
 
     private Integer userid;
-
+    
     private Integer shoppingid;
 
     private Date ordertime;
@@ -21,7 +23,7 @@ public class Xhorderinfo {
 
     private String addcountry;
 
-    private String addprovice;
+    private String addprovince;
 
     private String addcity;
 
@@ -49,15 +51,29 @@ public class Xhorderinfo {
 
     private Double payfee;
 
-    private Date paytime;
-    
-    // 
-    private Xhadmin admin;
-    
+    private Date paytime;    
     
     private Xhshopping shopping;
+    
+    private Xhusers users;
 
-    private String attribute1;
+    public Xhshopping getShopping() {
+		return shopping;
+	}
+
+	public void setShopping(Xhshopping shopping) {
+		this.shopping = shopping;
+	}
+
+	public Xhusers getUsers() {
+		return users;
+	}
+
+	public void setUsers(Xhusers users) {
+		this.users = users;
+	}
+
+	private String attribute1;
 
     private String attribute2;
 
@@ -161,12 +177,12 @@ public class Xhorderinfo {
         this.addcountry = addcountry == null ? null : addcountry.trim();
     }
 
-    public String getAddprovice() {
-        return addprovice;
+    public String getAddprovince() {
+        return addprovince;
     }
 
-    public void setAddprovice(String addprovice) {
-        this.addprovice = addprovice == null ? null : addprovice.trim();
+    public void setAddprovince(String addprovince) {
+        this.addprovince = addprovince == null ? null : addprovince.trim();
     }
 
     public String getAddcity() {
@@ -408,4 +424,32 @@ public class Xhorderinfo {
     public void setAttribute16(String attribute16) {
         this.attribute16 = attribute16 == null ? null : attribute16.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhorderinfo [orderid=" + orderid + ", userid=" + userid
+				+ ", shoppingid=" + shoppingid + ", ordertime=" + ordertime
+				+ ", orderstatus=" + orderstatus + ", shoppingstatus="
+				+ shoppingstatus + ", paystatus=" + paystatus
+				+ ", addusername=" + addusername + ", addcountry=" + addcountry
+				+ ", addprovice=" + addprovince + ", addcity=" + addcity
+				+ ", adddistrict=" + adddistrict + ", addaddress=" + addaddress
+				+ ", addcode=" + addcode + ", addphone=" + addphone
+				+ ", shoppingcode=" + shoppingcode + ", shoppingname="
+				+ shoppingname + ", shoppingdesc=" + shoppingdesc + ", enable="
+				+ enable + ", shoppingimg=" + shoppingimg + ", goodamount="
+				+ goodamount + ", shoppingfee=" + shoppingfee + ", payfee="
+				+ payfee + ", paytime=" + paytime + ", shopping=" + shopping
+				+ ", users=" + users + ", attribute1=" + attribute1
+				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
+				+ ", attribute4=" + attribute4 + ", attribute5=" + attribute5
+				+ ", attribute6=" + attribute6 + ", attribute7=" + attribute7
+				+ ", attribute8=" + attribute8 + ", attribute9=" + attribute9
+				+ ", attribute10=" + attribute10 + ", attribute11="
+				+ attribute11 + ", attribute12=" + attribute12
+				+ ", attribute13=" + attribute13 + ", attribute14="
+				+ attribute14 + ", attribute15=" + attribute15
+				+ ", attribute16=" + attribute16 + "]"+"\n";
+	}
+    
 }

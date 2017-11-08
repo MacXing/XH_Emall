@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-sm-9">
                                         <input type="file" name="file"class="form-control" placeholder="" id="file">                                                                    
                                     	原头像信息：<input type="image" name="userphoto" value="${user.userphoto }"><br>
-                                    	 选择图片：<img width="80px" height="100px" id="img" onclick="showPic()">
+                                    	 选择图片：<img width="80px" height="100px" id="img" src="userphoto/${user.userphoto }" onclick="showPic()">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -248,13 +248,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function showPic(){
 		 var pic = $("#file").get(0).files[0];
 		 $("#img").prop("src" , window.URL.createObjectURL(pic));
-
 		}
 
 	function userhome(){
 		 window.location.href="${pageContext.request.contextPath }/user/queryAllUsers.action";		    	
 	} 
 	
+	/*显示图片*/
+	function showPic(){
+		 var pic = $("#file").get(0).files[0];
+		 $("#img").prop("src" , window.URL.createObjectURL(pic));
+	}
 	</script>
 	
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>

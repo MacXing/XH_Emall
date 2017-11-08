@@ -301,14 +301,11 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加订单</a>
+									<a class="J_menuItem" href="order/queryAllOrderController.action">会员订单</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改订单信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询订单信息</a>
-								</li>
+									<a class="J_menuItem" href="mail_detail.html">货物订单</a>
+								</li>						
 							</ul>
 						</li>
 						<li>
@@ -640,7 +637,7 @@
 					style="margin-bottom: 0">
 				<div class="navbar-header">
 					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary" 
-					href="${pageContext.request.contextPath}/jsp/back/index.jsp">
+					href="${pageContext.request.contextPath}/jsp/back/index.jsp#">
 						<i class="fa fa-bars"></i>
 					</a>
 					<form role="search" class="navbar-form-custom" method="post"
