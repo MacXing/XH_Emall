@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.ExpressMapper">
+
+<!-- 查询所有快递 -->
+	<select id="queryAllExpress" resultType="xhshopping">
+    	select * from xhShopping
+    </select>
+ 
+ <!-- 根据快递ID查询所有快递 -->
+    <select id="queryExpByPrimarykey" resultType="xhshopping" parameterType="int">
+    	select * from xhShopping where shoppingID=#{shoppingid}
+    </select>
+ 
+<!-- 增加快递 -->
+ <insert id="addExpress" parameterType="xhshopping">
+    insert into xhShopping (
+    	shoppingCode,
+    	shoppingName,
+    	shoppingDesc,
+    	enable,
+    	shoppingImg
+      )
+    values (#{shoppingcode}, #{shoppingname}, #{shoppingdesc},#{enable},#{shoppingimg})
+  </insert>
+  	
+ <!-- 修改快递信息 -->
+  <update id="updateExpressByPrimaryKey" parameterType="xhshopping">
+    update xhShopping set 
+    shoppingCode =#{shoppingcode}, 
+    shoppingName=#{shoppingname}, 
+    shoppingDesc=#{shoppingdesc},
+    enable=#{enable},
+    shoppingImg=#{shoppingimg}
+    where shoppingID = #{shoppingid,jdbcType=INTEGER}
+   </update>
+ 
+ <!-- 删除快递 -->
+    <delete id="deleteByPrimaryKey" parameterType="int">
+    delete from xhShopping 
+    where shoppingID=#{shoppingid,jdbcType=INTEGER}
+  	</delete>
+	
+</mapper>

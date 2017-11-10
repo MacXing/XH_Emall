@@ -20,6 +20,9 @@
 	<bean id="userGrade" class="com.xh.back.serviceImpl.UserGradeServiceImpl"/>
 	<bean id="userMessage" class="com.xh.back.serviceImpl.UserMessageServiceImpl"/>	
 	<bean id="xhUserService" class="com.xh.front.serviceImpl.XhUserServiceImpl"/>
+	<bean id="orderService" class="com.xh.back.serviceImpl.OrderServiceImpl"/>
+	<bean id="orderGoodsService" class="com.xh.back.serviceImpl.OrderGoodsServiceImpl"/>
+	<bean id="expressService" class="com.xh.back.serviceImpl.ExpressServiceImpl"/>
 	<!-- <context:component-scan base-package="com.xh.back.serviceImpl"/> -->
 	<bean id="productService" class="com.xh.back.serviceImpl.ProductServiceImpl"/>
 	<bean id="brandService" class="com.xh.back.serviceImpl.BrandServiceImpl"/> 	

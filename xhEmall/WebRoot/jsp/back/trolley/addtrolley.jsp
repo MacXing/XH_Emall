@@ -10,6 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <base href="<%=basePath%>">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
+       <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/jquery.min.js?v=2.1.4"></script>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/css/addtorlley/H-ui.min.css" />
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/css/addtorlley/H-ui.admin.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/css/addtorlley/iconfont.css" />
@@ -25,22 +27,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<label class="form-label col-xs-4 col-sm-3">
 			<span class="c-red">*</span>用户</label>
 			<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" value="${xhtrolley.userid }" placeholder="" id="userID" name="userid" datatype="*4-16" nullmsg="用户账户不能为空">
+			<select class="input-text" id="addUser" name="userid">
+			
+			</select>
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">商品</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<select id="myselect">
-					
-				</select>
-				<input type="text" class="input-text" value="${xhtrolley.pid}"  name="pid">
-			</div>
+				<select class="input-text" id="addProduct" name="pid">
+			
+			   </select>
+			 </div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">商品数量</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" name="tronum" value="${xhtrolley.tronum}" >
+			<input type="text" class="input-text" name="tronum" value="${xhtrolley.tronum}" >
 			</div>
 		</div>
 		<div class="row cl">
@@ -50,9 +53,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</form>
 </article>
-	  
-<script type="text/javascript">
 
+
+ <script src="${pageContext.request.contextPath}/resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="${pageContext.request.contextPath}/resource/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="${pageContext.request.contextPath}/resource/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="${pageContext.request.contextPath}/resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>	  
+<script type="text/javascript">
+  $(function(){
+     $.ajax({
+        url:"${pageContext.request.contextPath}/user/queryAllUsers.action",
+        type:"GET",
+        success:function(result){
+        $.each(result.extend.allUser,function(index,item){
+           var option=$("<option value='"+item.userid+"'></option>").append(item.username);
+           option.appendTo(addUser);
+        });
+        }
+     });
+   
+     $.ajax({
+       url:"${pageContext.request.contextPath}/product/queryAllProductsForJson.action",
+       type:"GET",
+       success:function(result){
+          $.each(result.extend.products,function(index,item){
+              var option=$("<option value='"+item.pid+"'></option>").append(item.pname);
+              option.appendTo(addProduct);
+          });
+       }
+  });
+ }); 
+ 
 </script>
 
    

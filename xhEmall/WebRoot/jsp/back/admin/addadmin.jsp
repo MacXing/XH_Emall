@@ -247,14 +247,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });  
 	    return o;  
 	}; 
-	$("#submitform").click(function (){
+	/* $("#submitform").click(function (){ */
 		//var id = $(this).parent().find("input[type='checkbox']").val();
 		//var formdata = new FormData($("#signupForm1"));
 		//console.log("test");
 		//console.log();
-		console.log($("#signupForm1"));
+
+		/* console.log($("#signupForm1"));
 		
-	});
+
+
+		$.ajax({
+			url : "${pageContext.request.contextPath }/admin/addAdmin.action",
+			type : "POST",
+			data : JSON.stringify($("#signupForm1").serializeObject()),
+			contentType:"application/json", 
+			success : function(result){
+    			if(result == 1){
+    				swal({
+    					title : "提示",
+    					text : "添加成功！！"},
+    					function(){
+    						$("#close").click();
+    						self.location.reload();
+    					}
+    				);
+    			} else {
+    				swal({
+    					title : "提示",
+    					text : "添加失败！！",
+    					confirmButtonColor : "#F00"
+    				});
+    			}
+    			
+    		}
+		});
+
+	}); */
     </script>
 </body>
 
