@@ -141,6 +141,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="resource/layer/layer.js"></script>
     <script src="resource/layui/layui.js"></script>
+    <script src="resource/js/validate.js" type="text/javascript"></script>
+    
+    <script>
+    $("#submitform").click(function (){
+	
+		var val = new validate({
+		
+			rules:{
+				adminname:"notEmpty",   
+				adminpassword:"password",
+				adminPhone:"mobile",
+				adminemail:"email"
+			},
+			/*submitFun里面为检验成功后要执行的方法*/
+			submitFun:function(){
+		
+				
+		$.ajax({
+    		url : "${pageContext.request.contextPath }/admin/addAdmin.action",
+    		type : "POST",
+    		data : JSON.stringify($("#signupForm1").serializeObject()),
+    		dataType: "json",
+    		contentType: "application/json",
+    		success : function(result){
+				if(result){
+					swal({
+						title : "提示",
+						text : "更新成功！！"},
+						function(){
+							$("#close").click(); 
+							self.location.reload();
+						}
+					);
+				} else {
+					swal({
+						title : "提示",
+						text : "更新失败！！",
+						confirmButtonColor : "#F00"
+					});
+				}
+				
+			}
+    		
+    	});
+				
+				
+			}
+		});
+		
+	
+	
+	});
+
+
+</script>
+    
     <script>
     layui.use('upload', function() {
         var $ = layui.jquery,
@@ -196,31 +252,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//var formdata = new FormData($("#signupForm1"));
 		//console.log("test");
 		//console.log();
-
-		$.ajax({
-			url : "${pageContext.request.contextPath }/admin/addAdmin.action",
-			type : "POST",
-			data : JSON.stringify($("#signupForm1").serializeObject()),
-			contentType:"application/json", 
-			success : function(result){
-    			if(result == 1){
-    				swal({
-    					title : "提示",
-    					text : "添加成功！！"},
-    					function(){
-    						setTimeout(function () { $("#close").click(); self.location.reload();}, 300);
-    					}
-    				);
-    			} else {
-    				swal({
-    					title : "提示",
-    					text : "添加失败！！",
-    					confirmButtonColor : "#F00"
-    				});
-    			}
-    			
-    		}
-		});
+		console.log($("#signupForm1"));
+		
 	});
     </script>
 </body>

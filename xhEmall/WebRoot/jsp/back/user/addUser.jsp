@@ -71,19 +71,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">姓名：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="username" class="form-control" placeholder="请输入姓名">
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="请输入姓名">
                                     </div>
                                 </div>                                                               
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">密码：</label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="userpassword" class="form-control" placeholder="请输入密码">
+                                        <input type="password" id="userpassword" name="userpassword" class="form-control" placeholder="请输入密码">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">性别：</label>                          
-                                    <div class="col-sm-9">
-                                    	<input type="radio"name="usersex"id="sex"value="1"<c:if test="${user.usersex>=1&&user.usersex<=200}">checked</c:if>/>男&nbsp;&nbsp;
+                                    <div class="col-sm-9" >
+                                    	<input type="radio"  name="usersex"id="sex"value="1"<c:if test="${user.usersex>=1&&user.usersex<=200}">checked</c:if>/>男&nbsp;&nbsp;
                                     	<input type="radio"name="usersex"id="sex"value="0"<c:if test="${user.usersex>200||user.usersex eq 0}">checked</c:if>/>女
                                     </div>
                                 </div>
@@ -96,19 +96,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">电话：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="userphone" class="form-control" placeholder="请输入电话号码">
+                                        <input type="text" id="userphone" name="userphone" class="form-control" placeholder="请输入电话号码">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮箱：</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="useremail" class="form-control" placeholder="请输入邮箱">
+                                        <input type="email" id="useremail" name="useremail" class="form-control" placeholder="请输入邮箱">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">地址：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="useraddress" class="form-control" placeholder="请输入地址">
+                                        <input type="text" id="useraddress" name="useraddress" class="form-control" placeholder="请输入地址">
                                     </div>
                                 </div>                        
                                 <div class="form-group">
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">消费金额：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="usermoney" class="form-control" placeholder="请输入消费金额">
+                                        <input type="text" id="usermoney" name="usermoney" class="form-control" placeholder="请输入消费金额">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -177,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group draggable">
                             	 <font color="red"><%=message %></font>
                                 <div class="col-sm-12 col-sm-offset-3">
-                                	<input type="button" value="添加会员" class="btn btn-primary" onclick="addUser()">
+                                	<input type="button" id="btn_id" value="添加会员" class="btn btn-primary" >
             	                    <input type="button" value="取消" class="btn btn-white" onclick="javascript:window.location.href='${pageContext.request.contextPath }/user/queryAllUsers.action'">
                                     <!-- <button class="btn btn-primary" type="submit">添加会员</button>
                                     <button class="btn btn-white" id="back">取消</button> -->
@@ -193,9 +193,87 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 
+
+
+
+
+
 	<script type="text/javascript">
 
-	function addUser(){
+	/* function addUser(){
+		var action="";
+		var form = $("#file").val().length;
+		var formData = new FormData($("#add")[0]);	
+		if(form==0){			 
+			 action ="addUser.action";
+		}else{
+			 action="insertUserAndFile.action";
+		}	
+		$.ajax({
+		cache: true,
+		type: "POST",
+		data:formData,
+		url:"${pageContext.request.contextPath }/user/"+action, */
+		/*async: false,
+		cache: false,*/
+	  /*   contentType: false,  
+	    processData: false,
+		success: function(result) {
+			  if(result.code==100){	
+				    alert("增加成功！");
+				    window.location.href="user/queryAllUsers.action";
+			   }else{
+				  alert("增加失败！");
+				  window.location.href="user/queryAllUsers.action";
+			   } 		
+		}
+		});
+		}   */
+	
+	/*显示图片*/
+	function showPic(){
+		 var pic = $("#file").get(0).files[0];
+		 $("#img").prop("src" , window.URL.createObjectURL(pic));
+
+		}
+	
+	function userhome(){
+		 window.location.href="${pageContext.request.contextPath }/user/queryAllUsers.action";		    	
+	}
+	
+	/*设置提示*/
+	
+	</script>
+
+    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
+    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="resource/js/demo/form-validate-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
+<script type="text/javascript" src="resource/js/validate.js"></script>
+ 
+	 <script>
+	 	 $("#btn_id").click(function (){
+		
+			var val = new validate({
+			
+				rules:{
+					username:"notEmpty",   
+					userpassword:"password",
+					usersex:"notEmpty",
+					userphone:"mobile", 
+					useremail:"email",
+					useraddress:"notEmpty",
+					usermoney:"money",
+					userintegral:"notEmpty"
+					
+				},
+				/*submitFun里面为检验成功后要执行的方法*/
+				submitFun:function(){
+	
 		var action="";
 		var form = $("#file").val().length;
 		var formData = new FormData($("#add")[0]);	
@@ -224,28 +302,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		});
 		}  
-	
-	/*显示图片*/
-	function showPic(){
-		 var pic = $("#file").get(0).files[0];
-		 $("#img").prop("src" , window.URL.createObjectURL(pic));
-
-		}
-	
-	function userhome(){
-		 window.location.href="${pageContext.request.contextPath }/user/queryAllUsers.action";		    	
-	}
-	
-	/*设置提示*/
+				
+				
+				
+			
+			});
+	});
 	
 	</script>
 
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="resource/js/demo/form-validate-demo.min.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
 </body>
 </html>
