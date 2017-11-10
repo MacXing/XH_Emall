@@ -53,6 +53,9 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("insertUserAndFile.action")
 	public Msg insertUserAndFile(Xhusers user,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
+		int resultGradeId=Integer.parseInt(request.getParameter("gradeid"));
+		Msg result=checkAddGrade(resultGradeId);
+		
 		if(file!=null){
 			String file_name = file.getOriginalFilename();
 			//判读是不是图片
@@ -65,9 +68,11 @@ public class UserController {
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
 			user.setUserphoto(file_name);
 		}
-		user.setUserlogintime(new Date());
-		user.setUserlasttime(new Date());
-		userService.addUser(user);		
+		if(result.getCode()==100 && result.getCode()==100){
+			user.setUserlogintime(new Date());
+			user.setUserlasttime(new Date());
+			userService.addUser(user);				
+		}	
 		return Msg.success();
 	}
 	
@@ -105,8 +110,12 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("updateUser.action")
 	public Msg updateUser(XhusersBean user,HttpServletRequest request,MultipartFile file,HttpSession session)throws IllegalStateException, IOException{				
+		int resultGradeId=Integer.parseInt(request.getParameter("gradeid"));
+		int sex=Integer.parseInt(request.getParameter("usersex"));
+		Msg result=checkAddGrade(resultGradeId);
+		
 		if(user!=null){
-			if(file!=null){
+			if(file!=null){				
 				String file_name = file.getOriginalFilename();
 				//判读是不是图片
 				String extName = file_name.substring(file_name.lastIndexOf(".")+1,file_name.length());
@@ -118,9 +127,10 @@ public class UserController {
 				file_name = FileUtil.uploadFile(file, savePath, file_name);
 				user.setUserphoto(file_name);
 			}
-			int sex=Integer.parseInt(request.getParameter("usersex"));
-			user.setUsersex(sex);
-			userService.modifyUserById(user);
+			if(result.getCode()==100 && result.getCode()==100){
+				user.setUsersex(sex);
+				userService.modifyUserById(user);
+			}		
 			return Msg.success();
 		}		
 		return Msg.fail();
@@ -133,4 +143,14 @@ public class UserController {
 		System.out.println(user);
 		return user;
 	}
+	
+	@RequestMapping("checkAddGrade.action")
+    @ResponseBody
+	public Msg checkAddGrade(int id){
+    	int result=userService.checkGrade(id);
+    	if(result>0){
+    		return Msg.success();
+    	}
+		return Msg.fail1();
+	} 
 }

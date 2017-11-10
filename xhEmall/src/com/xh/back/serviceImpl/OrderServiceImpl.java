@@ -25,8 +25,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderMapper orderMapper;
 	
 	@Override
-	public List<Xhorderinfo> queryAllUsersOreder() {
-		
+	public List<Xhorderinfo> queryAllUsersOreder() {		
 		List<Xhorderinfo> userorder=orderMapper.queryOrderInfor();
 		return userorder;
 		
@@ -74,29 +73,42 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.getAreaByCityId(id);
 	}
-	
-	/*@Override
-	public void deleteUserById(int id) {		
-		userMapper.deleteByPrimaryKey(id);
+
+	@Override
+	public String getProvinceName(String id) {
+		// TODO Auto-generated method stub
+		return orderMapper.getProvinceName(id);
+	}
+
+	@Override
+	public String getCityName(String id) {
+		// TODO Auto-generated method stub
+		return orderMapper.getCityName(id);
+	}
+
+	@Override
+	public String getAreaName(String id) {
+		// TODO Auto-generated method stub
+		return orderMapper.getAreaName(id);
+	}
+
+	@Override
+	public List<Xhorderinfo> getSendOrder(int status) {
+		// TODO Auto-generated method stub
+		List<Xhorderinfo> sendOrder=orderMapper.getSendOrder(status);
+		return sendOrder;
+	}
+
+	@Override
+	public int checkUser(int id) {
+		// TODO Auto-generated method stub
+		return orderMapper.checkUser(id);
+	}
+
+	@Override
+	public int checkExpress(int id) {
+		// TODO Auto-generated method stub
+		return orderMapper.checkExpress(id);
 	}
 	
-	@Override
-	public void modifyUserById(XhusersBean user) {
-		// TODO Auto-generated method stub
-		userMapper.updateByPrimaryKeySelective(user);
-	}
-
-	@Override
-	public Xhusers queryUserById(int id) {
-		// TODO Auto-generated method stub
-		return userMapper.queryUserByPrimaryKey(id);
-	}
-
-	@Override
-	public void addUser(Xhusers user) {
-		// TODO Auto-generated method stub
-		userMapper.addUser(user);
-		//System.out.println(user.getUserbirthday());
-	}*/
-
 }

@@ -17,4 +17,7 @@ public interface UserMapper {
 	public Xhusers queryUserByPrimaryKey(int id);
 	public void updateByPrimaryKeySelective(XhusersBean user);
 	public List<Xhusers> queryAllUsers();
+	
+	//检查等级是否存在
+	public int checkGrade(int id);
 }

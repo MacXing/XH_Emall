@@ -14,6 +14,7 @@ import com.xh.back.bean.Xhadmin;
 import com.xh.back.bean.Xhgrade;
 import com.xh.back.bean.Xhmessage;
 import com.xh.back.mapper.UserGradeMapper;
+import com.xh.back.service.XhUserService;
 import com.xh.back.serviceImpl.AdminServiceImpl;
 import com.xh.back.serviceImpl.UserGradeServiceImpl;
 import com.xh.back.serviceImpl.UserMessageServiceImpl;
@@ -23,6 +24,10 @@ import com.xh.front.bean.Xhusers;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext.xml")
 public class UtilUser {
+	@Autowired
+	@Qualifier("userService")
+	private XhUserService userService;
+	
 	@Autowired
 	@Qualifier("userMessage")
 	private UserMessageServiceImpl userMessage;
@@ -71,8 +76,14 @@ public class UtilUser {
 	}
 	
 	@Test
-	public void test7(){//根据留言ID清空留言
+	public void test7(){//根据等级ID查询等级
 		Xhgrade grade=userGrade.queryGradeListById(2);
 		System.out.println(grade);
+	}
+	
+	@Test
+	public void test8(){//检查等级存在与否
+		int result=userService.checkGrade(2);
+		System.out.println(result);
 	}
 }

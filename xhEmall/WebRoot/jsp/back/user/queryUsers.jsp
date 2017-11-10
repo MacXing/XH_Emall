@@ -244,7 +244,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8">
     </script>
 
-	<script>
+	<script type="text/javascript">
 	/*查询商品详细信息  */
 		function btn1(id){
 			   $.ajax({
@@ -310,9 +310,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		 
 		 /*点击修改*/
-			function btn3(id){
-				window.location.href="${pageContext.request.contextPath }/user/queryUserById.action?id="+id; 
-			}
+		function btn3(id){
+			window.location.href="${pageContext.request.contextPath }/user/queryUserById.action?id="+id; 
+		}
 		 
 		 /*点击添加*/
 		 $("#addUser").on("click", function(){

@@ -25,4 +25,13 @@ public interface OrderService {
 	public List<OrderProvince> getAllProvince();
     public List<OrderCity> getCityByProvinceId(String id);
 	public List<OrderArea> getAreaByCityId(String id);
+	
+	public String getProvinceName(String id);
+	public String getCityName(String id);
+	public String getAreaName(String id);
+	
+	public List<Xhorderinfo> getSendOrder(int status);
+	
+	public int checkUser(int id);
+	public int checkExpress(int id);
 }
