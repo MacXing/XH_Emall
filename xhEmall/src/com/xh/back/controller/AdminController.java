@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.other.getImage.FileUtil;
 import com.other.getip.GetIp;
 import com.other.msg.Msg;
 import com.xh.back.bean.Xhadmin;
-import com.xh.back.serviceImpl.AdminServiceImpl;
+import com.xh.back.service.AdminService;
 
 @Controller
 @RequestMapping("admin")
@@ -26,7 +29,7 @@ public class AdminController {
 
 	@Autowired
 	@Qualifier("adminService")
-	private AdminServiceImpl adminService;
+	private AdminService adminService;
 
 	@RequestMapping("checkAdmin.action")
 	public String checkAdmin(HttpSession session,Xhadmin admin,HttpServletRequest request,String code){

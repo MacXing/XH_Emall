@@ -1,7 +1,7 @@
 package com.xh.front.service;
 
 
-import com.other.currency.ServiceResponse;
+import com.other.currency.ServerResponse;
 import com.xh.front.bean.Xhusers;
 
 public interface XhUserService {
@@ -10,16 +10,16 @@ public interface XhUserService {
 	
 	public void updateUserIpAndTime(Xhusers user);
 	
-	public ServiceResponse<Xhusers> login(String username, String password);
+	public ServerResponse<Xhusers> login(String username, String password);
 	
-	public ServiceResponse<String> checkValid(String str, String type);
+	public ServerResponse<String> checkValid(String str, String type);
 	
-	public ServiceResponse<String> register(Xhusers user);
+	public ServerResponse<String> register(Xhusers user);
 	
-	public ServiceResponse<String> selectGetQuestion(String username);
+	public ServerResponse<String> selectGetQuestion(String username);
 
-	public ServiceResponse<String> checkAnswer(String username, String question, String answer);
+	public ServerResponse<String> checkAnswer(String username, String question, String answer);
 	
-	public ServiceResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken);
+	public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken);
 	
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.OrderGoodsMapper">
+	
+	<resultMap id="OrderGoodsResultMap" type="com.xh.back.bean.OrderGoods">
+		<id column="ogID" property="ogID"/>
+		<result column="orderID" property="orderID"/>
+		<result column="pID" property="pID"/>
+		<association property="product" javaType="com.xh.back.bean.Xhproduct">
+			<id column="pID" property="pid"/>
+			<result column="pName" property="pname"/>
+			<result column="pPrice" property="pprice"/>
+			<result column="pSale" property="psale"/>
+		</association>
+		<association property="orderInfo" javaType="com.xh.back.bean.Xhorderinfo">
+			<id column="orderID" property="orderid"/>
+			<result column="goodAmount" property="goodamount"/>
+		</association>
+	</resultMap>
+	
+	<select id="queryAllOrderGoods" resultMap="OrderGoodsResultMap">
+		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.goodAmount
+		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
+		where og.pID = p.pID and og.orderID = oi.orderID
+	</select>
+	
+	<select id="queryOrderGoodById" resultMap="OrderGoodsResultMap" parameterType="int">
+		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.goodAmount
+		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
+		where og.ogID = #{ogid } and og.pID = p.pID and og.orderID = oi.orderID
+	</select>
+	
+	<delete id="deleteOrderGoodById" parameterType="int">
+		delete from xhOrderGoods where ogid = #{ogid }
+	</delete>
+	
+	<delete id="deleteOrderGoodBatch" parameterType="list">
+		delete from xhOrderGoods where ogid in
+		<foreach collection="list" open="(" separator="," close=")" item="item">
+			#{item }
+		</foreach>
+	</delete>
+
+	<select id="checkOrderId" parameterType="int" resultType="int">
+		select count(1) from xhOrderInfo where OrderID = #{orderid}
+	</select>
+	
+	<select id="checkProductId" parameterType="int" resultType="int"> 
+		select count(1) from xhProduct where pID = #{pid}
+	</select>
+	
+	<insert id="addOrderGoodInfo" parameterType="map">
+		insert into xhOrderGoods (pID, orderID) values (#{pid }, #{orderid})
+	</insert>
+	
+	<update id="updateOrderGoodInfo" parameterType="com.xh.back.bean.OrderGoods">
+		update xhOrderGoods set pID = #{pID}, orderID = #{orderID}
+		where ogID = #{ogID}
+	</update>
+
+</mapper>

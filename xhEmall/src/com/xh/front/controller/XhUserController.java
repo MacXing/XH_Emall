@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.other.currency.Const;
-import com.other.currency.ServiceResponse;
+import com.other.currency.ServerResponse;
 import com.other.getip.GetIp;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.service.XhUserService;
@@ -61,8 +61,8 @@ public class XhUserController {
 	// 登录
 	@RequestMapping(value = "login.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServiceResponse<Xhusers> login(String username, String userpassword, HttpSession session){
-		ServiceResponse<Xhusers> response = xhUserService.login(username, userpassword);
+	public ServerResponse<Xhusers> login(String username, String userpassword, HttpSession session){
+		ServerResponse<Xhusers> response = xhUserService.login(username, userpassword);
 		if(response.isSuccess()){
 			session.setAttribute(Const.CURRENT_USER, response.getData());
 		}
@@ -72,54 +72,54 @@ public class XhUserController {
 	// 退出登录
 	@RequestMapping(value = "logout.action", method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResponse<String> logout(HttpSession session){
+    public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
-        return ServiceResponse.createBySuccess();
+        return ServerResponse.createBySuccess();
     }
 	
 	// 检查参数
 	@RequestMapping(value = "checkValid.action", method = RequestMethod.GET)
 	@ResponseBody
-	public ServiceResponse<String> checkValid(String str, String Type){
+	public ServerResponse<String> checkValid(String str, String Type){
 		return xhUserService.checkValid(str, Type);
 	}
 	
 	// 注册
 	@RequestMapping(value = "register.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServiceResponse<String> register(Xhusers user){
+	public ServerResponse<String> register(Xhusers user){
 		return xhUserService.register(user);
 	}
 	
 	// 获取登录用户信息
 	@RequestMapping(value = "getUserInfo.action", method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResponse<Xhusers> getUserInfo(HttpSession session){
+    public ServerResponse<Xhusers> getUserInfo(HttpSession session){
 		Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
 		if(user != null){
-			return ServiceResponse.createBySuccess(user);
+			return ServerResponse.createBySuccess(user);
 		}
-		return ServiceResponse.createByErrorMassage("用户未登录，无法获得当前信息");
+		return ServerResponse.createByErrorMassage("用户未登录，无法获得当前信息");
 	}
 	
 	// 获取问题
 	@RequestMapping(value = "forgetGetQuestion.action", method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResponse<String> forgetGetQuestion(String username){
+    public ServerResponse<String> forgetGetQuestion(String username){
         return xhUserService.selectGetQuestion(username);
     }
 	
 	// 校验问题和答案
 	@RequestMapping(value = "forgetCheckAnswer.action", method = RequestMethod.POST)
     @ResponseBody
-	public ServiceResponse<String> forgetCheckAnswer(String username, String question, String answer){
+	public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer){
         return xhUserService.checkAnswer(username, question, answer);
     }
 	
 	// 更改密码
 	@RequestMapping(value = "forgetRestPassword.action", method = RequestMethod.POST)
     @ResponseBody
-	public ServiceResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken){
+	public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken){
 		return xhUserService.forgetRestPassword(username, passwordNew, forgetToken);
 	}
 }
