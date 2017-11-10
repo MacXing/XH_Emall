@@ -17,7 +17,7 @@ public class Msg {
 			result.setMsg("处理成功!");
 			return result;
 		}
-
+			
 		public static Msg fail() {
 			Msg result = new Msg();
 			result.setCode(200);
@@ -25,6 +25,13 @@ public class Msg {
 			return result;
 		}
 
+		public static Msg fail1() {
+			Msg result = new Msg();
+			result.setCode(200);
+			result.setMsg("ID不存在!");
+			return result;
+		}
+		
 		public Msg add(String key, Object value) {
 			this.extend.put(key, value);
 			return this;

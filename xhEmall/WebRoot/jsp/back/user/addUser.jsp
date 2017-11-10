@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+
   </head>
   
   <body>
@@ -88,9 +89,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">生日：</label>
+                                    <label class="col-sm-3 control-label">出生年月：</label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="userbirthday" class="form-control" placeholder="请输入生日" id="erro">
+                                    	<i class="fa fa-calendar">                               	                                
+                                        <input type="date" name="userbirthday" class="form-control" placeholder="请输入生日" id="erro"> 
+                                        </i>                                   	
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -165,12 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     	原头像信息：<input type="image" name="userphoto" value="${user.userphoto }"><br>
                                     	 选择图片：<img width="80px" height="100px" id="img" src="userphoto/${user.userphoto }" onclick="showPic()">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-9">
-                                        <input type="hidden" name="attribute1" value="${user.attribute1 }" class="form-control" placeholder="">                                        
-                                    </div>
-                                </div>
+                                </div>                             
                                 <div class="form-group">
                                     <div class="col-sm-9">
                                         <input type="hidden" name="attribute2" value="${user.attribute2 }" class="form-control" placeholder="">                                        

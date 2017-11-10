@@ -67,7 +67,7 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="login.html">安全退出</a>
+								<a href="jsp/back/loginbackstage.jsp">安全退出</a>
 							</li>
 						</ul>
 					</div>
@@ -294,77 +294,17 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">订单维护 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="order/queryAllOrderController.action">会员订单</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">货物订单</a>
-								</li>						
-							</ul>
+							<a href="order/queryAllOrderController.action" class="J_menuItem">
+								<i class="glyphicon glyphicon-file"></i>
+								<span class="glyphicon-class">会员订单</span>								
+							</a>					
 						</li>
 						<li>
-							<a href="mailbox.html">
+							<a href="mailbox.html" class="J_menuItem">
 								<i class="glyphicon glyphicon-duplicate"></i>
-								<span class="glyphicon-class">合并订单 </span>
-								<span class="fa arrow"></span>
+								<span class="glyphicon-class">货物订单 </span>							
 							</a>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-print"></i>
-								<span class="glyphicon-class">打印订单 </span>
-								<span class="fa arrow"></span>
-							</a>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-minus"></i>
-								<span class="glyphicon-class">缺货登记 </span>
-								<span class="fa arrow"></span>
-							</a>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">发货单管理 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">添加发货单</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改发货单信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询发货单信息</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">退货单管理 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">添加退货单</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改退货单信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询发货单信息</a>
-								</li>
-							</ul>
-						</li>
+						</li>						
 					</ul>
 				</li>
 				<li>
@@ -388,40 +328,6 @@
 									<a class="J_menuItem" href="${pageContext.request.contextPath}/trolley/myTrolley.action">查询购物车信息</a>
 								</li>
 							</ul>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">
-						<i class="glyphicon glyphicon-edit"></i>
-						<span class="glyphicon-class">文章管理</span>
-						<span class="fa arrow"></span>
-					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">文章维护 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">添加文章</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改文章</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询查询文章</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-th"></i>
-								<span class="glyphicon-class">文章分类 </span>
-								<span class="fa arrow"></span>
-							</a>
 						</li>
 					</ul>
 				</li>
@@ -549,83 +455,7 @@
 							</ul>
 						</li>
 					</ul>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="glyphicon glyphicon-cog"></i>
-						<span class="glyphicon-class">系统设置</span>
-						<span class="fa arrow"></span>
-					</a>
-					<ul class="nav nav-second-level">
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-wrench"></i>
-								<span class="glyphicon-class">商店设置 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">商店信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_detail.html">商品显示</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">购物流程</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">基本设置</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-bitcoin"></i>
-								<span class="glyphicon-class">支付方式 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">添加支付方式</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询支付方式</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-road"></i>
-								<span class="glyphicon-class">配送方式 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">添加配送方式</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询配送方式</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-globe"></i>
-								<span class="glyphicon-class">地区管理 </span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="mailbox.html">添加地区</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询地区</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+				</li>		
 			</ul>
 		</div>
 		</nav>
@@ -770,7 +600,7 @@
 						</li>
 					</ul>
 				</div>
-				<a href="login.html" class="roll-nav roll-right J_tabExit">
+				<a href="jsp/back/loginbackstage.jsp" class="roll-nav roll-right J_tabExit">
 					<i class="fa fa fa-sign-out"></i> 退出
 				</a>
 			</div>
