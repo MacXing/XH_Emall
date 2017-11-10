@@ -26,6 +26,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+    
+    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
+    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="resource/js/demo/form-validate-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
   </head>
   
   <body>
@@ -65,9 +73,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <input name="userid" value="${user.userid }" type="hidden" class="form-control" placeholder="请输入ID">
                                     </div>
                                 </div>
-                                <div class="form-group">                            	    
-                                    <div class="col-sm-9">
-                                        <input name="gradeid" value="${user.gradeid }" type="hidden" class="form-control" placeholder="请输入ID">
+                                <div class="form-group">  
+                                	<label class="col-sm-3 control-label">等级编号：</label>                          	    
+                                    <div class="col-sm-9">                                  	
+                                        <input name="gradeid" value="${user.gradeid }" type="text" class="form-control" id="checkgradebyid">
+                                   		<div class="checkgrade" style="color:red;margin-top:auto"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,70 +102,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">生日：</label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="userbirthday" value="${user.userbirthday }" class="form-control" placeholder="请输入生日">
+                                        <input type="date" name="userbirthday" value="${user.userbirthday }" class="form-control">
                                     原出生年月：<fmt:formatDate value="${user.userbirthday }" type="date" pattern="yyyy-MM-dd"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">电话：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="userphone" value="${user.userphone }" class="form-control" placeholder="请输入电话号码">
+                                        <input type="text" name="userphone" value="${user.userphone }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮箱：</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="useremail" value="${user.useremail }" class="form-control" placeholder="请输入邮箱">
+                                        <input type="email" name="useremail" value="${user.useremail }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">地址：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="useraddress" value="${user.useraddress }" class="form-control" placeholder="请输入地址">
+                                        <input type="text" name="useraddress" value="${user.useraddress }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">注册时间：</label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="userlogintime" value="${user.userlogintime }" class="form-control" placeholder="请输入地址">
+                                        <input type="date" name="userlogintime" value="${user.userlogintime }" class="form-control">
                                         原注册时间：<fmt:formatDate value="${user.userlogintime }" type="date" pattern="yyyy-MM-dd"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">最后登录时间：</label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="userlasttime" value="${user.userlogintime }" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="date" name="userlasttime" value="${user.userlogintime }" class="form-control">
                                         最后登录时间：<fmt:formatDate value="${user.userlogintime }" type="date" pattern="yyyy-MM-dd"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">最后登录IP：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="userlastip" value="${user.userlastip }" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="text" name="userlastip" value="${user.userlastip }" class="form-control" data-mask="999.999.999.9999" placeholder>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">访问数：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="uservisitcount" value="${user.uservisitcount }" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="text" name="uservisitcount" value="${user.uservisitcount }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">家庭电话：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="userhomephone" value="${user.userhomephone }" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="text" name="userhomephone" value="${user.userhomephone }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">会员积分：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="userintegral" value="${user.userintegral }" class="form-control" placeholder="请输入会员积分">
+                                        <input type="text" name="userintegral" value="${user.userintegral }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">消费金额：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="usermoney" value="${user.usermoney }" class="form-control" placeholder="请输入家庭电话">
+                                        <input type="text" name="usermoney" value="${user.usermoney }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -213,6 +223,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 	
+	<script>
+	/*检查等级ID */	 	
+	$("#checkgradebyid").blur(function(){
+		var gradeid = $(this).val();		
+		$.ajax({
+			cache: true,
+			type: "GET",
+			url: "user/checkAddGrade.action?id="+gradeid,				
+			success : function(result){
+				if(result.code!=100){					
+					$(".checkgrade").html(result.msg);
+				} 
+				if(result.code ==100) {
+					$(".checkgrade").html("");
+				}
+			}
+		});
+	});
+	</script>
+	
 	<script type="text/javascript">
 	function doupdate(){
 		var action="";
@@ -221,8 +251,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		action="updateUser.action";	
 		$.ajax({
 		cache: true,
-		type: "POST",
-		
+		type: "POST",		
 		url:"${pageContext.request.contextPath }/user/"+action,
 		data:formData,
 	    contentType: false,  
@@ -237,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   } 	
 		}
 		});
-		} 
+		}
 	
 	/*显示图片*/
 	function showPic(){
@@ -256,12 +285,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	</script>
 	
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="resource/js/demo/form-validate-demo.min.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
 </html>

@@ -25,10 +25,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="resource/css/animate.min.css" rel="stylesheet">
     <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
-
+	
+	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
+    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="resource/js/demo/form-validate-demo.min.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+	
   </head>
   
-  <body>
+<body>
 <div class="container">
 	 	<%
         	String message=(String)request.getAttribute("message");
@@ -66,7 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                 	<label class="col-sm-3 control-label">会员等级：</label>                            	    
                                     <div class="col-sm-9">
-                                        <input name="gradeid" type="text" class="form-control" placeholder="请输入ID">
+                                        <input name="gradeid" type="text" class="form-control" placeholder="请输入ID" id="checkgradebyid">
+                                        <div class="checkgrade" style="color:red;margin-top:auto"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -196,6 +205,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 
+<script>
+	/*检查等级ID */	 	
+	$("#checkgradebyid").blur(function(){
+		var gradeid = $(this).val();		
+		$.ajax({
+			cache: true,
+			type: "GET",
+			url: "user/checkAddGrade.action?id="+gradeid,				
+			success : function(result){
+				if(result.code!=100){					
+					$(".checkgrade").html(result.msg);
+				} 
+				if(result.code ==100) {
+					$(".checkgrade").html("");
+				}
+			}
+		});
+	});
+</script>
+
 	<script type="text/javascript">
 
 	function addUser(){
@@ -243,12 +272,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	</script>
 
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="resource/js/demo/form-validate-demo.min.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
 </html>

@@ -50,4 +50,10 @@ public class XhUserServiceImpl implements XhUserService {
 		//System.out.println(user.getUserbirthday());
 	}
 
+	@Override
+	public int checkGrade(int id) {
+		// TODO Auto-generated method stub
+		return userMapper.checkGrade(id);
+	}
+
 }

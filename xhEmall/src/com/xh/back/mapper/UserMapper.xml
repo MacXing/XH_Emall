@@ -98,5 +98,10 @@
     delete from xhUsers
     where userID = #{userid,jdbcType=INTEGER}
   	</delete>
-
+	
+	<!-- 检查等级是否存在 -->
+	<select id="checkGrade" resultType="int" parameterType="int">
+  	select count(*) from xhGrade where gradeID=#{gradeid,jdbcType=INTEGER}
+    </select>
+	
 </mapper>
