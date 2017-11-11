@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
     <script src="resource/js/demo/form-validate-demo.min.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <script type="text/javascript" src="resource/js/validate.js"></script>
   </head>
   
   <body>
@@ -102,8 +103,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">生日：</label>
                                     <div class="col-sm-9">
+                                    	<i class="fa fa-calendar">
                                         <input type="date" name="userbirthday" value="${user.userbirthday }" class="form-control">
                                     原出生年月：<fmt:formatDate value="${user.userbirthday }" type="date" pattern="yyyy-MM-dd"/>
+                                        </i>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -127,23 +130,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">注册时间：</label>
                                     <div class="col-sm-9">
+                                    	<i class="fa fa-calendar">
                                         <input type="date" name="userlogintime" value="${user.userlogintime }" class="form-control">
                                         原注册时间：<fmt:formatDate value="${user.userlogintime }" type="date" pattern="yyyy-MM-dd"/>
+                                        </i>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">最后登录时间：</label>
                                     <div class="col-sm-9">
+                                    	<i class="fa fa-calendar">
                                         <input type="date" name="userlasttime" value="${user.userlogintime }" class="form-control">
                                         最后登录时间：<fmt:formatDate value="${user.userlogintime }" type="date" pattern="yyyy-MM-dd"/>
+                                        </i>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">最后登录IP：</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="userlastip" value="${user.userlastip }" class="form-control" data-mask="999.999.999.9999" placeholder>
-                                    </div>
-                                </div>
+                                </div>                         
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">访问数：</label>
                                     <div class="col-sm-9">
@@ -159,13 +160,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">会员积分：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="userintegral" value="${user.userintegral }" class="form-control">
+                                        <input type="text" id="userintegral" name="userintegral" value="${user.userintegral }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">消费金额：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="usermoney" value="${user.usermoney }" class="form-control">
+                                        <input type="text" id="usermoney" name="usermoney" value="${user.usermoney }" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -244,6 +245,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 	
 	<script type="text/javascript">
+	
+	/*显示图片*/
+	function showPic(){
+		 var pic = $("#file").get(0).files[0];
+		 $("#img").prop("src" , window.URL.createObjectURL(pic));
+		}
+
+	function userhome(){
+		 window.location.href="${pageContext.request.contextPath }/user/queryAllUsers.action";		    	
+	} 
+	
+	/*显示图片*/
+	function showPic(){
+		 var pic = $("#file").get(0).files[0];
+		 $("#img").prop("src" , window.URL.createObjectURL(pic));
+	}
+	</script>
+	
+	
+	<script type="text/javascript">
 	 $("#btn_id").click(function (){
 		
 			var val = new validate({
@@ -255,8 +276,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					userphone:"mobile", 
 					useremail:"email",
 					useraddress:"notEmpty",
-					usermoney:"money",
-					userintegral:"notEmpty"
+					userintegral:"notEmpty",
+					usermoney:"money"
 					
 				},
 				/*submitFun里面为检验成功后要执行的方法*/
@@ -265,7 +286,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var action="";
 		var form = $("#file").val().length;
 		var formData = new FormData($("#update")[0]);		
-		action="updateUser.action";	
+		if(form==0){			 
+			action="updateUser.action";
+		}else{
+			 action="updateUserAndFile.action";
+		}	
 		$.ajax({
 		cache: true,
 		type: "POST",		
@@ -286,23 +311,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 			});
 	});
-	
-	/*显示图片*/
-	function showPic(){
-		 var pic = $("#file").get(0).files[0];
-		 $("#img").prop("src" , window.URL.createObjectURL(pic));
-		}
-
-	function userhome(){
-		 window.location.href="${pageContext.request.contextPath }/user/queryAllUsers.action";		    	
-	} 
-	
-	/*显示图片*/
-	function showPic(){
-		 var pic = $("#file").get(0).files[0];
-		 $("#img").prop("src" , window.URL.createObjectURL(pic));
-	}
 	</script>
-	
 </body>
 </html>

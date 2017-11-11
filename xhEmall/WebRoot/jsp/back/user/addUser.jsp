@@ -205,11 +205,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 
-
-
-
-
-=======
 <script>
 	/*检查等级ID */	 	
 	$("#checkgradebyid").blur(function(){
@@ -246,14 +241,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/*设置提示*/
 	
 	</script>
-
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="resource/js/demo/form-validate-demo.min.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 
 <script type="text/javascript" src="resource/js/validate.js"></script>
  

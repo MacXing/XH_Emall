@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.AdMapper">
+	 <!--查看所有的广告信息  -->
+	 <resultMap type="xhqueryAd" id="queryAllAdsMap">
+	    <result column="adID" property="adid"/>
+	    <result column="adName" property="adname"/>
+	    <result column="adTxt" property="adtxt"/>
+	    <result column="adImg" property="adimg"/>
+	    <result column="adLink" property="adlink"/>
+	    <result column="adStartTime" property="adstarttime"/>
+	    <result column="adEndTime" property="adendtime"/>
+	    <result column="adClick" property="adclick"/>
+	    <result column="adSort" property="adsort"/>
+	    <result column="adstatue" property="adstatue"/>
+	    <collection property="position" ofType="xhposition">
+	       <result column="positionName" property="positionName"/>
+	       <result column="positionWidth" property="positionWidth"/>
+	       <result column="positionHeight" property="positionHeight"/>
+	    </collection>
+	 </resultMap>
+	 
+	 <!--查看所有未投放的广告信息  -->
+	 <select id="queryNotSattueAllAds" resultMap="queryAllAdsMap">
+	    SELECT a.adID,a.adName,a.adTxt,a.positionID positionid,
+        a.adImg,a.adLink,a.adStartTime,a.adstatue,
+        a.adEndTime,a.adClick,a.adSort,
+        p.positionID,p.positionName,p.positionFlag,
+		p.positionWidth,p.positionHeight
+        FROM xhAd a 
+	    JOIN xhposition p 
+	    ON   a.positionID=p.positionID
+	    WHERE a.adstatue=0
+	 </select>
+	 
+	  <!--查看所有投放的广告信息  -->
+	 <select id="queryStatueAllAds" resultMap="queryAllAdsMap">
+	    SELECT a.adID,a.adName,a.adTxt,a.positionID positionid,
+        a.adImg,a.adLink,a.adStartTime,a.adstatue,
+        a.adEndTime,a.adClick,a.adSort,
+        p.positionID,p.positionName,p.positionFlag,
+		p.positionWidth,p.positionHeight
+        FROM xhAd a 
+	    JOIN xhposition p 
+	    ON   a.positionID=p.positionID
+	    WHERE a.adstatue=1
+	 </select>
+	 
+	 <!--查看所有广告信息列表  -->
+	 <select id="queryAllAdsList" resultMap="queryAllAdsMap">
+	    SELECT a.adID,a.adName,a.adTxt,a.positionID positionid,
+        a.adImg,a.adLink,a.adStartTime,a.adstatue,
+        a.adEndTime,a.adClick,a.adSort,
+        p.positionID,p.positionName,p.positionFlag,
+		p.positionWidth,p.positionHeight
+        FROM xhAd a 
+	    JOIN xhposition p 
+	    ON   a.positionID=p.positionID
+	 </select>
+	 
+	 
+
+	 
+	 
+	 
+	
+	 
+	 <!--查看某条广告的信息  -->
+	 <select id="queryadById" parameterType="int" resultMap="queryAllAdsMap">
+	   SELECT a.adID,a.adName,a.adTxt,a.positionID positionid,
+       a.adImg,a.adLink,a.adStartTime,
+       a.adEndTime,a.adClick,a.adSort,a.adstatue,
+	   p.positionID,p.positionName,p.positionFlag,
+	   p.positionWidth,p.positionHeight
+	   FROM xhAd a
+       JOIN xhposition p 
+	   ON   a.positionID=p.positionID
+	   WHERE a.adID=#{id}
+	 </select>
+	 
+	 
+	 <!--添加广告  -->
+	 <insert id="insertAd" parameterType="xhqueryAd">
+	   INSERT INTO xhAd(positionID,adName,adTxt,adLink,adImg,adTime,adstatue) 
+       VALUES(#{positionid},#{adname},#{adtxt},#{adlink},#{adimg},#{adtime},0);
+	 </insert>
+	 
+	 <!--修改广告信息  -->
+	 <update id="updateAd" parameterType="java.util.List">
+	   UPDATE xhAd SET
+	    positionID=#{positionid},
+	    adStartTime=#{adstarttime},
+	    adEndTime=#{adendtime}
+	     WHERE adID in
+	      <foreach collection="idslist" item="ids" open="(" close=")" separator=",">
+	         #{ids}
+	     </foreach>
+	   
+	 </update>
+	<!--删除广告  -->
+	<delete id="deleteAd" parameterType="int">
+	    DELETE FROM xhAd WHERE adID=#{aid}
+	</delete> 
+	
+	<!--批量添加投放广告  -->
+	<update id="updateaAdStatue" parameterType="java.util.List">
+	    UPDATE xhAd SET adstatue=1 WHERE adID in
+	      <foreach collection="idslist" item="ids" open="(" close=")" separator=",">
+	           #{ids}
+	      </foreach>  
+	</update>
+	
+	<!--添加某一条投放广告  -->
+	<update id="updateaAdById" parameterType="int">
+	    UPDATE xhAd SET adstatue=1 WHERE adID=#{ids} 
+	</update>
+	
+	<!--批量删除投放广告  -->
+	<update id="updateaAdStatuede" parameterType="java.util.List">
+	    UPDATE xhAd SET adstatue=2 WHERE adID in
+	      <foreach collection="ids" item="idss" open="(" close=")" separator=",">
+	           #{idss}
+	      </foreach>  
+	</update>
+	
+	<!--删除某一条投放广告  -->
+	<update id="updateaAddeById" parameterType="int">
+	    UPDATE xhAd SET adstatue=2 WHERE adID=#{id}
+	       
+	</update>
+	 
+	
+	 
+</mapper>

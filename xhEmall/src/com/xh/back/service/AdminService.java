@@ -26,4 +26,6 @@ public interface AdminService {
 	//添加单个管理员信息
 	public int addAdmin(Xhadmin admin);
 	
+	public Xhadmin queryAdminByName(String name);
+	
 }

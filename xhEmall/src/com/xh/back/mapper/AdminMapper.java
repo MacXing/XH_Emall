@@ -137,5 +137,12 @@ public interface AdminMapper {
     * @throws Exception  - 异常捕捉
     */
    public void getUpdateBatch(List<Xhadmin> list) throws Exception;
+   
+   /**
+    * 用于shiro的查找
+    * @param name
+    * @return
+    */
+   public Xhadmin queryAdminByName(String name);
     
 }

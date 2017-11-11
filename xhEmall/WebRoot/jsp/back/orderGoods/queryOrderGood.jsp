@@ -155,7 +155,7 @@
 				                        <div class="form-group draggable">
 				                            <div class="col-sm-12 col-sm-offset-4">
 				                                <button type="button" class="btn btn-default closemodel" data-dismiss="modal">关闭</button>
-				                                <button type="button" class="btn btn-primary" onclick="addOG()">添加订单</button>
+				                                <button type="button" id="btn_addog" class="btn btn-primary" onclick="addOG()">添加订单</button>
 				                            </div>
 				                        </div>
 				                    </form>
@@ -197,7 +197,7 @@
 				                        <div class="form-group draggable">
 				                            <div class="col-sm-12 col-sm-offset-4">
 				                                <button type="button" class="btn btn-default closemodel" data-dismiss="modal">关闭</button>
-				                                <button type="button" class="btn btn-primary" onclick="modifyOG()">更新订单</button>
+				                                <button type="button" id="btn_modifyog" class="btn btn-primary" onclick="modifyOG()">更新订单</button>
 				                            </div>
 				                        </div>
 				                    </form>
@@ -220,24 +220,23 @@
     <script src="resource/js/admin/back-admin.js"></script>
     <script src="resource/layer/layer.js"></script>
     <script src="resource/layui/layui.js"></script>
-	<script>
-	$(".modify").click(function (){
-		var id = $(this).parent().parent().find("input[type='checkbox']").val();
-		$.ajax({
-			url: "admin/queryOrderGoodById.action?ogid=" + id,
-			contentType:"application/json", 
-			success : function(result){
-				if(result.status == 0) {
-					$("#newogid").attr("value", result.data.ogID);
-					$("#neworderid").attr("value", result.data.orderID);
-					$("#newpid").attr("value", result.data.pID);
-				} else {
-					layer.msg(result.msg);
-				}
-			}
-		});
-	});
-	function addOG(){
+    <script type="text/javascript" src="resource/js/validate.js"></script>
+   
+   <script type="text/javascript">
+		$("#btn_addog")
+				.click(
+						function() {
+
+							var val = new validate(
+									{
+
+										rules : {
+											addorderid : "numberEnglish",
+											addpid : "numberEnglish",
+											
+										},
+										/*submitFun里面为检验成功后要执行的方法*/
+										submitFun :function addOG(){
 		var addorderid = $("#addorderid").val();
 		var addpid = $("#addpid").val();
 		$.ajax({
@@ -261,7 +260,25 @@
 			}
 		});
 	}
-	function modifyOG(){
+										
+
+									});
+						});
+					//更新	
+					$("#btn_modifyog")
+				.click(
+						function() {
+
+							var val = new validate(
+									{
+
+										rules : {
+											neworderid : "numberEnglish",
+											newpid : "numberEnglish",
+											
+										},
+										/*submitFun里面为检验成功后要执行的方法*/
+										submitFun :function modifyOG(){
 		var neworderid = $("#neworderid").val();
 		var newpid = $("#newpid").val();
 		var newogid = $("#newogid").val();
@@ -290,6 +307,30 @@
 			}
 		});
 	}
+										
+
+									});
+						});
+						
+	</script>
+    
+	<script>
+	$(".modify").click(function (){
+		var id = $(this).parent().parent().find("input[type='checkbox']").val();
+		$.ajax({
+			url: "admin/queryOrderGoodById.action?ogid=" + id,
+			contentType:"application/json", 
+			success : function(result){
+				if(result.status == 0) {
+					$("#newogid").attr("value", result.data.ogID);
+					$("#neworderid").attr("value", result.data.orderID);
+					$("#newpid").attr("value", result.data.pID);
+				} else {
+					layer.msg(result.msg);
+				}
+			}
+		});
+	});
 	
 	$(".orderid").blur(function(){
 		var ordercueid = $(this).val();

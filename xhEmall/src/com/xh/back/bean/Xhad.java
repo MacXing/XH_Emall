@@ -7,13 +7,25 @@ public class Xhad {
 
     private String adname;
 
-    private Integer adposition;
+    private Integer positionid;
 
     private String adtxt;
 
     private String adlink;
 
     private Date adtime;
+    
+    private String adimg;
+    
+    private Date adstarttime;
+    
+    private Date adendtime;
+    
+    private String adclick;
+    
+    private  Integer adsort;
+    
+    private int adstatue;
 
     private String attribute1;
 
@@ -37,15 +49,65 @@ public class Xhad {
         this.adname = adname == null ? null : adname.trim();
     }
 
-    public Integer getAdposition() {
-        return adposition;
-    }
+    
 
-    public void setAdposition(Integer adposition) {
-        this.adposition = adposition;
-    }
+    public Integer getPositionid() {
+		return positionid;
+	}
 
-    public String getAdtxt() {
+	public void setPositionid(Integer positionid) {
+		this.positionid = positionid;
+	}
+	
+	public int getAdstatue() {
+		return adstatue;
+	}
+
+	public void setAdstatue(int adstatue) {
+		this.adstatue = adstatue;
+	}
+
+	public String getAdimg() {
+		return adimg;
+	}
+
+	public void setAdimg(String adimg) {
+		this.adimg = adimg;
+	}
+
+	public Date getAdstarttime() {
+		return adstarttime;
+	}
+
+	public void setAdstarttime(Date adstarttime) {
+		this.adstarttime = adstarttime;
+	}
+
+	public Date getAdendtime() {
+		return adendtime;
+	}
+
+	public void setAdendtime(Date adendtime) {
+		this.adendtime = adendtime;
+	}
+
+	public String getAdclick() {
+		return adclick;
+	}
+
+	public void setAdclick(String adclick) {
+		this.adclick = adclick;
+	}
+
+	public Integer getAdsort() {
+		return adsort;
+	}
+
+	public void setAdsort(Integer adsort) {
+		this.adsort = adsort;
+	}
+
+	public String getAdtxt() {
         return adtxt;
     }
 
@@ -92,4 +154,18 @@ public class Xhad {
     public void setAttribute3(String attribute3) {
         this.attribute3 = attribute3 == null ? null : attribute3.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhad [adid=" + adid + ", adname=" + adname + ", positionid="
+				+ positionid + ", adtxt=" + adtxt + ", adlink=" + adlink
+				+ ", adtime=" + adtime + ", adimg=" + adimg + ", adstarttime="
+				+ adstarttime + ", adendtime=" + adendtime + ", adclick="
+				+ adclick + ", adsort=" + adsort + ", adstatue=" + adstatue
+				+ ", attribute1=" + attribute1 + ", attribute2=" + attribute2
+				+ ", attribute3=" + attribute3 + "]";
+	}
+
+	
+    
 }

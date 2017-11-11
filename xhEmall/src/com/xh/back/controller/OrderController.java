@@ -68,12 +68,18 @@ public class OrderController {
 		String provinceid=request.getParameter("addprovince");
 		String cityid=request.getParameter("addcity");
 		String areaid=request.getParameter("adddistrict");	
-		int status=Integer.parseInt(request.getParameter("shoppingstatus"));
-		int resultuserid=Integer.parseInt(request.getParameter("userid"));
-		int resultexpid=Integer.parseInt(request.getParameter("shoppingid"));
+		String resultuserid=request.getParameter("userid");
+		String resultexpid=request.getParameter("shoppingid");
+		Msg result1=new Msg();
+		Msg result2=new Msg();
 		
-		Msg result1=checkAddUser(resultuserid);
-		Msg result2=checkAddExpress(resultexpid);
+		if(resultuserid.equals("")||resultexpid.equals("")){
+			result1=checkAddUser(0);
+			result2=checkAddExpress(0);
+		}else{
+			result1=checkAddUser(Integer.parseInt(resultuserid));
+			result2=checkAddExpress(Integer.parseInt(resultexpid));
+		}
 		
 		if(result1.getCode()==100 && result2.getCode()==100){
 			//通过ID
@@ -81,7 +87,7 @@ public class OrderController {
 			order.setPaytime(new Date());
 			
 			//添加发货时间
-			if(status==1){
+			if(order.getShoppingstatus()==1){
 				order.setSendtime(new Date());
 			}
 			
@@ -112,12 +118,17 @@ public class OrderController {
 		String provinceid=request.getParameter("addprovince");
 		String cityid=request.getParameter("addcity");
 		String areaid=request.getParameter("adddistrict");	
-        int status=Integer.parseInt(request.getParameter("shoppingstatus"));
-		int resultuserid=Integer.parseInt(request.getParameter("userid"));
-		int resultexpid=Integer.parseInt(request.getParameter("shoppingid"));
-		
-		Msg result1=checkAddUser(resultuserid);
-		Msg result2=checkAddExpress(resultexpid);
+		String resultuserid=request.getParameter("userid");
+		String resultexpid=request.getParameter("shoppingid");
+		Msg result1=new Msg();
+		Msg result2=new Msg();
+		if(resultuserid.equals("")||resultexpid.equals("")){
+			result1=checkAddUser(0);
+			result2=checkAddExpress(0);
+		}else{
+			result1=checkAddUser(Integer.parseInt(resultuserid));
+			result2=checkAddExpress(Integer.parseInt(resultexpid));
+		}
 		
 		if(result1.getCode()==100 && result2.getCode()==100){
 			//通过ID
@@ -125,7 +136,7 @@ public class OrderController {
 			order.setPaytime(new Date());
 			
 			//更新发货时间
-			if(status==1){
+			if(order.getShoppingstatus()==1){
 				order.setSendtime(new Date());
 			}
 			

@@ -436,7 +436,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label class="col-sm-3 control-label">城市：</label>
                                     <div class="col-sm-9">
                                         <select data-placeholder="城市" id="cityId1" name="addcity" class="form-control" data-rel="chosen">				                           
-				                        	<option>选择城市</option>	
+				                        	<option id="addcity1">选择城市</option>	
 				                        </select>
                                     </div>
                                 </div>
@@ -444,7 +444,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label class="col-sm-3 control-label">地区：</label>
                                     <div class="col-sm-9">
                                         <select data-placeholder="区域" name="adddistrict" id="areaId1" class="form-control" data-rel="chosen">				                            
-				                        	<option>选择地区</option>	
+				                        	<option id="adddistrict1">选择地区</option>	
 				                        </select>
                                     </div>
                                 </div>
@@ -530,8 +530,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									{
 
 										rules : {
-											userid11 : "numberEnglish",
-											shoppingid11 : "numberEnglish",
+											//userid11 : "numberEnglish",
+											//shoppingid11 : "numberEnglish",
 											addusername11:"notEmpty",
 											addaddress11:"notEmpty",
 											addcode11:"notEmpty",
@@ -553,7 +553,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    contentType: false,  
 	    processData: false,
 		success: function(result) {
-			  if(result.code!=100){	
+			  if(result.code==100){	
 				    alert("增加成功！");
 				    window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
 			   }else{
@@ -579,8 +579,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									{
 
 										rules : {
-											userid1 : "numberEnglish",
-											shoppingid1 : "numberEnglish",
+											//userid1 : "numberEnglish",
+											//shoppingid1 : "numberEnglish",
 											addusername1:"notEmpty",
 											addaddress1:"notEmpty",
 											addcode1:"notEmpty",
@@ -602,7 +602,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    contentType: false,  
 				    processData: false,
 					success: function(result) {
-						  if(result.code!=100){	
+						  if(result.code==100){	
 							    alert("修改成功！");
 							    window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
 						   }else{
@@ -818,9 +818,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 		 	$("#addphone1").html("value",result.addphone);		 		 	
 		 		 	$("#addusername1").attr("value",result.addusername);
 		 		 	$("#addcountry1").attr("value",result.addcountry);
-		 		 	$("#addprovince1").attr("value",result.addprovince);
-		 		 	$("#addcity1").attr("value",result.addcity);
-		 		 	$("#adddistrict1").attr("value",result.adddistrict);
+		 		 	$("#addprovince1").text(result.addprovince).text(); 		 		 	
+		 		 	$("#addcity1").text(result.addcity).text();		 		 	
+		 		 	$("#adddistrict1").text(result.adddistrict).text();
 		 		 	$("#addaddress1").attr("value",result.addaddress);		 	
 		 		 	$("#addcode1").attr("value",result.addcode);
 		 		 	$("#shoppingname1").attr("value",result.shopping.shoppingname);
@@ -837,6 +837,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 /*检查用户ID和邮寄ID */	 	
 		$(".checkuserbyid").blur(function(){
 			var userid = $(this).val();
+			if(userid==""){
+				userid=0;
+			}
 			$.ajax({
 				cache: true,
 				type: "GET",
@@ -854,6 +857,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 
 		$(".checkexpbyid").blur(function(){			
 			var shoppingid = $(this).val();
+			if(shoppingid==""){
+				shoppingid=0;
+			}
 			$.ajax({
 				cache: true,
 				type: "GET",

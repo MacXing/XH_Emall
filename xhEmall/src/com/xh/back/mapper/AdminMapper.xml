@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xh.back.mapper.AdminMapper">
-	<sql id="parametername">
+	 <sql id="parametername">
 		ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
-		,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE
+		,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE,ATTRIBUTE3
 	</sql>
 	<sql id="key">
 		<trim suffixOverrides=",">
@@ -34,6 +34,9 @@
 	      </if>
 	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
 	      	ADMINDESCRIBE,
+	      </if>
+	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
+	      	ATTRIBUTE3
 	      </if>
 		</trim>
 	</sql>
@@ -67,11 +70,15 @@
 	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
 	      	#{admindescribe},
 	      </if>
+	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
+	      	#{attribute3}
+	      </if>
 	    </trim>
 	</sql>
 <!-- 通过用户名查找admin信息-->
-    <select id="selectAdminByName" parameterType="xhadmin" resultType="xhadmin">
-  		SELECT adminId,adminName,adminPassword FROM xhAdmin where adminName=#{adminname}
+    <select id="selectAdminByName" parameterType="xhadmin" resultType="com.xh.back.bean.Xhadmin">
+  		SELECT adminId,adminName,adminPassword FROM xhAdmin 
+  		where adminName=#{adminname} and adminPassword=#{adminpassword}
     </select>
 	
 	<update id="updateAdminIpAndTime" parameterType="xhadmin">
@@ -82,7 +89,7 @@
 	
 	<select id="queryAdminList" resultType="com.xh.back.bean.Xhadmin">
 		SELECT ADMINID,ADMINNAME,ADMINPASSWORD,ADMINPHONE,ADMINEMAIL,ADMINLOGINTIME
-				,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE
+				,ADMINLASTTIME,ADMINLASTIP,ADMINPHOTO,ADMINDESCRIBE,ATTRIBUTE3
 		FROM xhAdmin ORDER BY ADMINID
 	</select>
 	
@@ -125,6 +132,9 @@
 	      <if test="admindescribe != null and !&quot;&quot;.equals(admindescribe.trim())">
 	      	ADMINDESCRIBE = #{admindescribe},
 	      </if>
+	      <if test="attribute3 != null and !&quot;&quot;.equals(attribute3.trim())">
+	      	ATTRIBUTE3 = #{attribute3}
+	      </if>
 	    </trim>
 	    WHERE ADMINID = #{adminid}
 	</update>
@@ -133,4 +143,8 @@
 	  INSERT INTO xhAdmin (<include refid="key" />) values(<include refid="values"/>)
 	</insert>
 	
+	<select id="queryAdminByName" parameterType="string" resultType="xhadmin">
+		SELECT adminId,adminName,adminPassword FROM xhAdmin 
+  		where adminName=#{name}
+	</select>
 </mapper>

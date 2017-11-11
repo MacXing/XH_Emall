@@ -8,6 +8,12 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,9 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.other.error.CustomException;
 import com.other.getImage.FileUtil;
 import com.other.getip.GetIp;
 import com.other.msg.Msg;
+import com.other.shiro.CustomFormAuthenticationFilter;
+import com.xh.back.bean.ActiveAdmin;
 import com.xh.back.bean.Xhadmin;
 import com.xh.back.service.AdminService;
 
@@ -30,6 +39,54 @@ public class AdminController {
 	@Autowired
 	@Qualifier("adminService")
 	private AdminService adminService;
+	
+	@RequestMapping("login.action")
+
+	public String login(HttpServletRequest request,Xhadmin admin,String code) throws Exception{
+		
+		if(admin.getAdminname()==null||admin.getAdminname().equals("")||admin.getAdminpassword()==null
+				||admin.getAdminpassword().equals("")||code==null||code.equals("")){
+			
+			throw new CustomException("用户名、密码、验证码不能为空 ");
+			
+		}
+		CustomFormAuthenticationFilter filter = new CustomFormAuthenticationFilter();
+		boolean falg = filter.modifyCode(code, request);
+		
+		if(falg==false){
+			throw new CustomException("验证码错误 ");
+		}
+		
+		Subject subject=SecurityUtils.getSubject();
+		UsernamePasswordToken token = new UsernamePasswordToken(admin.getAdminname(),admin.getAdminpassword());
+		subject.login(token);
+		
+		boolean is_true   =  subject.isAuthenticated();
+		if(is_true==false){
+			throw new CustomException("密码错误！");	
+		}
+		
+		GetIp getip = new GetIp();
+		String ip = getip.getIpAddr(request);
+		admin.setAdminlastip(ip);
+		admin.setAdminlasttime(new Date());
+		adminService.updateAdminIpAndTime(admin);
+		return "forward:/admin/home.action";
+	}
+	
+	@RequestMapping("home.action")
+	public String home (Model model){
+		
+		//从shiro的session中取activeUser
+		Subject subject = SecurityUtils.getSubject();
+				//取身份信息
+		ActiveAdmin admin = (ActiveAdmin) subject.getPrincipal();
+				//通过model传到页面
+		model.addAttribute("admin", admin);
+		
+		return "/jsp/back/index.jsp";
+	}
+	
 
 	@RequestMapping("checkAdmin.action")
 	public String checkAdmin(HttpSession session,Xhadmin admin,HttpServletRequest request,String code){

@@ -45,16 +45,44 @@ public class UserController {
 	}
 	
 	@RequestMapping("addUser.action")
-	public String addUser(Xhusers user,HttpServletRequest request,HttpSession session){
-		userService.addUser(user);
-		return "/user/queryAllUsers.action";
+	@ResponseBody
+	public Msg addUser(Xhusers user,HttpServletRequest request,HttpSession session){
+		String resultGradeId=request.getParameter("gradeid");
+		String userbirthday=request.getParameter("userbirthday");
+		System.out.println(resultGradeId);
+		Msg result=new Msg();
+		
+		if(userbirthday.equals("")){
+			user.setUserbirthday(new Date());
+		}
+		if(resultGradeId.equals("")){
+			result=checkAddGrade(0);
+		}else{
+			result=checkAddGrade(Integer.parseInt(resultGradeId));
+		}
+		if(result.getCode()==100){
+			user.setUserlogintime(new Date());
+			user.setUserlasttime(new Date());
+			userService.addUser(user);
+		}		
+		return Msg.success();
 	}
 	
 	@ResponseBody
 	@RequestMapping("insertUserAndFile.action")
 	public Msg insertUserAndFile(Xhusers user,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
-		int resultGradeId=Integer.parseInt(request.getParameter("gradeid"));
-		Msg result=checkAddGrade(resultGradeId);
+		String resultGradeId=request.getParameter("gradeid");
+		String userbirthday=request.getParameter("userbirthday");
+		Msg result=new Msg();
+		
+		if(userbirthday.equals("")){
+			user.setUserbirthday(new Date());
+		}		
+		if(resultGradeId.equals("")){
+			result=checkAddGrade(0);
+		}else{
+			result=checkAddGrade(Integer.parseInt(resultGradeId));
+		}
 		
 		if(file!=null){
 			String file_name = file.getOriginalFilename();
@@ -68,7 +96,7 @@ public class UserController {
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
 			user.setUserphoto(file_name);
 		}
-		if(result.getCode()==100 && result.getCode()==100){
+		if(result.getCode()==100){
 			user.setUserlogintime(new Date());
 			user.setUserlasttime(new Date());
 			userService.addUser(user);				
@@ -107,13 +135,63 @@ public class UserController {
 		return "/jsp/back/user/updateUser.jsp";
 	}
 	
-	@ResponseBody
 	@RequestMapping("updateUser.action")
-	public Msg updateUser(XhusersBean user,HttpServletRequest request,MultipartFile file,HttpSession session)throws IllegalStateException, IOException{				
-		int resultGradeId=Integer.parseInt(request.getParameter("gradeid"));
-		int sex=Integer.parseInt(request.getParameter("usersex"));
-		Msg result=checkAddGrade(resultGradeId);
+	@ResponseBody
+	public Msg updateUser(XhusersBean user,HttpServletRequest request){
+		String resultGradeId=request.getParameter("gradeid");
+		String userbirthday=request.getParameter("userbirthday");
+		String userlogintime=request.getParameter("userlogintime");
+		String userlasttime=request.getParameter("userlasttime");
+		System.out.println(resultGradeId);
+		Msg result=new Msg();
 		
+		if(userbirthday.equals("")){
+			user.setUserbirthday(new Date());
+		}
+		if(userlogintime.equals("")){
+			user.setUserbirthday(new Date());
+		}
+		if(userlasttime.equals("")){
+			user.setUserbirthday(new Date());
+		}
+		if(resultGradeId.equals("")){
+			result=checkAddGrade(0);
+		}else{
+			result=checkAddGrade(Integer.parseInt(resultGradeId));
+		}
+		if(result.getCode()==100){
+			user.setUserlogintime(new Date());
+			user.setUserlasttime(new Date());
+			userService.modifyUserById(user);
+		}		
+		return Msg.success();
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateUserAndFile.action")
+	public Msg updateUserAndFile(XhusersBean user,HttpServletRequest request,MultipartFile file,HttpSession session)throws IllegalStateException, IOException{				
+		String resultGradeId=request.getParameter("gradeid");
+		int sex=Integer.parseInt(request.getParameter("usersex"));
+		String userbirthday=request.getParameter("userbirthday");
+		String userlogintime=request.getParameter("userlogintime");
+		String userlasttime=request.getParameter("userlasttime");
+		Msg result=new Msg();
+		
+		if(userbirthday.equals("")){
+			user.setUserbirthday(new Date());
+		}
+		if(userlogintime.equals("")){
+			user.setUserlogintime(new Date());
+		}
+		if(userlasttime.equals("")){
+			user.setUserlasttime(new Date());
+		}
+		if(resultGradeId.equals("")){
+			result=checkAddGrade(0);
+		}else{
+			result=checkAddGrade(Integer.parseInt(resultGradeId));
+		}
+				
 		if(user!=null){
 			if(file!=null){				
 				String file_name = file.getOriginalFilename();
@@ -127,7 +205,7 @@ public class UserController {
 				file_name = FileUtil.uploadFile(file, savePath, file_name);
 				user.setUserphoto(file_name);
 			}
-			if(result.getCode()==100 && result.getCode()==100){
+			if(result.getCode()==100){
 				user.setUsersex(sex);
 				userService.modifyUserById(user);
 			}		

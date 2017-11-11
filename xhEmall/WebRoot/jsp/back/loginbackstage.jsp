@@ -37,7 +37,7 @@
 			<div class="col-sm-5 col-md-offset-3">
 
 				<form id="defaultForm" method="post"
-						action="${pageContext.request.contextPath }/admin/checkAdmin.action">
+						action="${pageContext.request.contextPath }/admin/login.action">
 
 					<p class="m-t-md">后台登录</p>
 					<div class="form-group ">
@@ -53,7 +53,7 @@
 							placeholder="请输入验证码" name="code" id="code" /> <a
 							href="javascript:change()"><img
 							class="img-rounded  imgverify" id="img" alt=""
-							src="${pageContext.request.contextPath }/image/imageCode.action"></a>
+							src="${pageContext.request.contextPath }/resource/validatecode.jsp"></a>
 					</div>
 					<br /> <a href="#" style="color:#fff">忘记密码</a>
 
@@ -142,7 +142,7 @@
 	<script type="text/javascript">
 		function change() {//通过a标签的href属性调用此方法
 			var img = document.getElementById("img");
-			img.src = "${pageContext.request.contextPath }/image/imageCode.action?a="
+			img.src="${pageContext.request.contextPath }/resource/validatecode.jsp?a="
 					+ new Date().getTime();
 		}
 	</script>
