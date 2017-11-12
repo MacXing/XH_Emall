@@ -112,12 +112,9 @@
 											</button>
 
 											&nbsp;
-											<button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+											<button type="button" class="btn btn-primary btn-sm modal1" data-toggle="modal"
 												data-target="#myModal5">
-												<a class="requestdate" href="javascript:requestdata('${admin.adminid }');">
-													<span class="glyphicon glyphicon-pencil"></span>
-												</a>
-
+												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
 										</td>
 									</tr>
@@ -189,6 +186,7 @@
 			                                <label class="col-sm-3 control-label">管理员头像：</label>
 			                                <div class="col-sm-8">
 			                                    <div class="layui-upload">
+			                                    	<input name="adminphoto" id="adminphoto" type="hidden">
 			                                        <button type="button" class="layui-btn" id="test1">上传图片</button>
 			                                        <div class="layui-upload-list">
 			                                            <img class="layui-upload-img" id="demo1">
@@ -281,25 +279,13 @@
 	$("#addadmin").on("click", function (){
 	    layer.open({
 	        type: 2,
-	        area: ['600px', '650px'],
+	        area: ['600px', '400px'],
 	        
 	        //area: ['600px', '360px'],
 	        shadeClose: true, //点击遮罩关闭
 	        content: 'jsp/back/admin/addadmin.jsp'
 	    });
 	});
-
-	
-	function requestdata(id){
-		$.ajax({
-			url : "${pageContext.request.contextPath }/admin/getAdmin.action?id="+id,
-			type : "GET",
-			success : function(result){
-				console.log(result);
-				setdata(result);
-			}
-		});
-	}
 	function setdata(result){
 		$("#adminid").attr("value",result.adminid);
 		$("#adminname").attr("value",result.adminname);
@@ -308,6 +294,7 @@
 		$("#email").attr("value", result.adminemail);
  		$("#admindescribe").html(result.admindescribe);
 		$("#demo1").attr("src", "${pageContext.request.contextPath }/upload/" + result.adminphoto);
+		$("#adminphoto").attr("value", result.adminphoto);
 		
 /* 		$("#adminlogintime").attr(result.adminlogintime);
 		$("#adminlasttime").attr(result.adminlasttime);
@@ -315,12 +302,24 @@
 		//var formdata = new FormData($("#signupForm"));
 		
 	}
+	
+	$(".modal1").click(function (){
+		var adminid = $(this).parent().parent().find("input[type='checkbox']").val();
+		$.ajax({
+			url : "${pageContext.request.contextPath }/admin/getAdmin.action?id="+adminid,
+			type : "GET",
+			success : function(result){
+				console.log(result);
+				setdata(result);
+			}
+		});
+	});
+	
 	$(".sbmt").click(function (){
 		//var id = $(this).parent().find("input[type='checkbox']").val();
 		//var formdata = new FormData($("#signupForm"));
 		//console.log("test");
 		//console.log();
-
 		$.ajax({
 			url : "admin/modifyAdmin.action",
 			type : "POST",
@@ -360,6 +359,7 @@
 					confirmButtonColor : "#DD6B55",
 					confirmButtonText : "是的，我要删除！",
 					cancelButtonText : "让我再考虑一下…",
+					
 					closeOnConfirm : false,
 					closeOnCancel : false
 				}, function(isConfirm) {
