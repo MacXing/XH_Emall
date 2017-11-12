@@ -34,7 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<style media ="print" ></style>
+	<OBJECT classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 height=0  
+                         id= "WebBrowser" name="WebBrowser" width=0></OBJECT>
   </head>
   
   <body class="gray-bg">
@@ -51,7 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <ul class="dropdown-menu dropdown-user">
                                 <li><a data-toggle="modal" data-target="#myModal" id="addorderforposition">添加订单</a>                                
                                 </li>
-                                <li><a id="expresslist">快递表</a>                                
+                                <li><a id="sendlist">发货订单</a>                                
+                                </li>
+                                <li><a id="expresslist">邮寄方式</a>                                
                                 </li>
                             </ul>
                             <a class="collapse-link">
@@ -63,6 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">
+            
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
@@ -103,7 +108,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </tr>
                             </tfoot>
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -187,8 +191,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </table>
                     </div>
 		      </div>
-		      <div class="modal-footer">		       
+		      <div class="modal-footer">		      			      			       
 		        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		        <input type="button" onclick="doprint()" value="打印预览" class="btn btn-primary">	        
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
@@ -208,41 +213,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                <div class="form-group">
                                 	<label class="col-sm-3 control-label">会员编号：</label>                            	    
                                     <div class="col-sm-9">
-                                        <input name="userid" type="text" class="form-control" placeholder="请输入会员编号">
+
+                                       
+
+                                        <input name="userid" id="userid11" type="text" class="form-control checkuserbyid" placeholder="请输入会员编号">
+                                    	<div class="checkuser" style="color:red;margin-top:auto"></div>
+
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮寄编号：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="shoppingid" class="form-control" placeholder="请输入邮寄编号">
+
+                                      
+                                        <input type="text" id="shoppingid11" name="shoppingid" class="form-control checkexpbyid" placeholder="请输入邮寄编号">
+                                    	<div class="checkexpress" style="color:red;margin-top:auto"></div>
+
                                     </div>
                                 </div>                                                               
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">订单状态：</label>
                                     <div class="col-sm-9">                             
-                                        <input type="radio"name="orderstatus" value="1"<c:if test="${user.orderstatus==1}">checked</c:if>/>安排&nbsp;&nbsp;&nbsp;&nbsp;
-                                    	<input type="radio"name="orderstatus" value="0"<c:if test="${user.orderstatus eq 0}">checked</c:if>/>未安排
+                                        <input type="radio"name="orderstatus" value="1"/>安排&nbsp;&nbsp;&nbsp;&nbsp;
+                                    	<input type="radio"name="orderstatus" value="0"/>未安排
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮寄状态：</label>                          
                                     <div class="col-sm-9">
-                                    	<input type="radio"name="shoppingstatus" value="1"<c:if test="${user.shoppingstatus==1&&user.orderstatus==1}">checked</c:if>/>已发货&nbsp;&nbsp;&nbsp;&nbsp;
-                                    	<input type="radio"name="shoppingstatus" value="-1"<c:if test="${user.shoppingstatus==1&&user.orderstatus eq 0}">checked</c:if>/>安排未发货&nbsp;&nbsp;&nbsp;&nbsp;
-                                    	<input type="radio"name="shoppingstatus" value="0"<c:if test="${user.shoppingstatus eq 0}">checked</c:if>/>未发货
+                                    	<input type="radio"name="shoppingstatus" value="1"/>已发货&nbsp;&nbsp;&nbsp;&nbsp;
+                                    	<input type="radio"name="shoppingstatus" value="-1"/>已安排未发货&nbsp;&nbsp;&nbsp;&nbsp;
+                                    	<input type="radio"name="shoppingstatus" value="0"/>待安排
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">支付状态：</label>
                                     <div class="col-sm-9">                             
-                                        <input type="radio"name="paystatus" value="1"<c:if test="${user.paystatus==1&&user.shoppingstatus==1}">checked</c:if>/>已支付&nbsp;&nbsp;&nbsp;&nbsp;                                    
-                                    	<input type="radio"name="paystatus" value="0"<c:if test="${user.paystatus eq 0}">checked</c:if>/>未支付
+                                        <input type="radio"name="paystatus" value="1"/>已支付&nbsp;&nbsp;&nbsp;&nbsp;                                                                    
+                                    	<input type="radio"name="paystatus" value="0"/>未支付
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">收货人姓名：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="addusername" class="form-control" placeholder="请输入收货人姓名">
+                                        <input type="text" id="addusername11" name="addusername" class="form-control" placeholder="请输入收货人姓名">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -281,37 +295,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">详细地址：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="addaddress" class="form-control" placeholder="请输入详细地址">
+                                        <input type="text" id="addaddress11" name="addaddress" class="form-control" placeholder="请输入详细地址">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮寄编码：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="shoppingcode" class="form-control" placeholder="请输入邮政编码">
+                                        <input type="text" id="shoppingcode11" name="shoppingcode" class="form-control" placeholder="请输入邮政编码">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">收货人电话：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="addphone" class="form-control" placeholder="请输入收货人联系方式">                                        
+                                        <input type="text" id="addphone11" name="addphone" class="form-control" placeholder="请输入收货人联系方式">                                        
                                     </div>
                                 </div>                                       
                                 <div class="form-group">
                                 	<label class="col-sm-3 control-label">货物数量：</label>
                                     <div class="col-sm-9">                            	
-                                        <input type="text" name="goodamount" class="form-control" placeholder="商品数量">                                        
+                                        <input type="text" id="goodamount11" name="goodamount" class="form-control" placeholder="商品数量">                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
                                 	<label class="col-sm-3 control-label">邮寄费用：</label>
                                     <div class="col-sm-9">                                   
-                                        <input type="text" name="shoppingfee" class="form-control" placeholder="邮寄费用">                                        
+                                        <input type="text" id="shoppingfee11" name="shoppingfee" class="form-control" placeholder="邮寄费用">                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
                                 	<label class="col-sm-3 control-label">支付费用：</label>                                       
                                     <div class="col-sm-9">                                  	                                     
-                                        <input type="text" name="payfee" class="form-control" placeholder="支付费用">                                        
+                                        <input type="text" id="payfee11" name="payfee" class="form-control" placeholder="支付费用">                                        
                                     </div>
                                 </div>
                                 <div class="form-group">                                 
@@ -334,7 +348,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group draggable">                   
                                 <div class="col-sm-12 col-sm-offset-4">                              
             	                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                					<button type="button" class="btn btn-primary" onclick="addorder()">添加订单</button>                  
+                					<button id="btn_id" type="button" class="btn btn-primary" onclick="addorder()">添加订单</button>                  
                                 </div>  	     
                            </div>
                 </form>                    
@@ -362,13 +376,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                <div class="form-group">
                                 	<label class="col-sm-3 control-label">会员编号：</label>                            	    
                                     <div class="col-sm-9">
-                                        <input name="userid" id="userid1" type="text"  class="form-control">
+                                        <input name="userid" id="userid1" type="text"  class="form-control checkuserbyid">
+                                    	<div class="checkuser" style="color:red;margin-top:auto;"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮寄编号：</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="shoppingid1" type="text" name="shoppingid" class="form-control">
+                                        <input type="text" id="shoppingid1" type="text" name="shoppingid" class="form-control checkexpbyid">
+                                    	<div class="checkexpress" style="color:red;margin-top:auto;"></div>
                                     </div>
                                 </div>                                                               
                                 <div class="form-group">
@@ -382,14 +398,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label class="col-sm-3 control-label">邮寄状态：</label>                          
                                     <div class="col-sm-9">
                                     	<input type="radio"name="shoppingstatus" id="shoppingstatus1" value="1" />已发货&nbsp;&nbsp;&nbsp;&nbsp;
-                                    	<input type="radio"name="shoppingstatus" id="shoppingstatus1" value="-1"/>安排未发货&nbsp;&nbsp;&nbsp;&nbsp;
-                                    	<input type="radio"name="shoppingstatus" id="shoppingstatus1" value="0" />未发货
+                                    	<input type="radio"name="shoppingstatus" id="shoppingstatus1" value="-1"/>已安排未发货&nbsp;&nbsp;&nbsp;&nbsp;
+                                    	<input type="radio"name="shoppingstatus" id="shoppingstatus1" value="0" />待安排
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">支付状态：</label>
                                     <div class="col-sm-9">                             
-                                        <input type="radio"name="paystatus" id="paystatus1" value="1" />已支付&nbsp;&nbsp;&nbsp;&nbsp;                                    
+                                        <input type="radio"name="paystatus" id="paystatus1" value="1" />已支付&nbsp;&nbsp;&nbsp;&nbsp;                                                                        	
                                     	<input type="radio"name="paystatus" id="paystatus1" value="0" />未支付
                                     </div>
                                 </div>
@@ -420,7 +436,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label class="col-sm-3 control-label">城市：</label>
                                     <div class="col-sm-9">
                                         <select data-placeholder="城市" id="cityId1" name="addcity" class="form-control" data-rel="chosen">				                           
-				                        	<option>选择城市</option>	
+				                        	<option id="addcity1">选择城市</option>	
 				                        </select>
                                     </div>
                                 </div>
@@ -428,7 +444,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label class="col-sm-3 control-label">地区：</label>
                                     <div class="col-sm-9">
                                         <select data-placeholder="区域" name="adddistrict" id="areaId1" class="form-control" data-rel="chosen">				                            
-				                        	<option>选择地区</option>	
+				                        	<option id="adddistrict1">选择地区</option>	
 				                        </select>
                                     </div>
                                 </div>
@@ -488,7 +504,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group draggable">                           
                                 <div class="col-sm-12 col-sm-offset-4">                              
             	                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                					<button type="button" class="btn btn-primary" onclick="update()">保存修改</button>                  
+                					<button id="btn_id2" type="button" class="btn btn-primary" onclick="update()">保存修改</button>                  
                                 </div>  	     
                            </div>
                 </form>                    
@@ -503,6 +519,105 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="resource/js/content.min.js?v=1.0.0"></script>
     <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
+   <script type="text/javascript" src="resource/js/validate.js"></script>
+   
+   <script type="text/javascript">
+		$("#btn_id")
+				.click(
+						function() {
+
+							var val = new validate(
+									{
+
+										rules : {
+											//userid11 : "numberEnglish",
+											//shoppingid11 : "numberEnglish",
+											addusername11:"notEmpty",
+											addaddress11:"notEmpty",
+											addcode11:"notEmpty",
+											addphone11:"mobile",
+											goodamount11:"notEmpty",										
+											shoppingfee11:"money",
+											payfee11:"money",
+										},
+										/*submitFun里面为检验成功后要执行的方法*/
+										submitFun :function addorder(){
+		var formData = new FormData($("#addorders")[0]);
+		$.ajax({
+		cache: true,
+		type: "POST",
+		data:formData,
+		url:"${pageContext.request.contextPath }/order/addOrder.action",
+		/* async: false,
+		cache: false,   */
+	    contentType: false,  
+	    processData: false,
+		success: function(result) {
+			  if(result.code==100){	
+				    alert("增加成功！");
+				    window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
+			   }else{
+				  alert("增加失败！");
+				  window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
+			   } 		
+		}
+		});
+		}			 
+										
+
+									});
+						});
+	</script>
+   
+   
+	<script type="text/javascript">
+		$("#btn_id2")
+				.click(
+						function() {
+
+							var val = new validate(
+									{
+
+										rules : {
+											//userid1 : "numberEnglish",
+											//shoppingid1 : "numberEnglish",
+											addusername1:"notEmpty",
+											addaddress1:"notEmpty",
+											addcode1:"notEmpty",
+											addphone1:"mobile",
+											goodamount1:"notEmpty",
+											shoppingfee1:"money",
+											payfee1:"money",
+										},
+										/*submitFun里面为检验成功后要执行的方法*/
+										submitFun :function update(){
+				 var formData = new FormData($("#updateorders")[0]);
+					$.ajax({
+					cache: true,
+					type: "POST",
+					data:formData,
+					url:"${pageContext.request.contextPath }/order/updateOrder.action",
+					async: false,
+					cache: false,
+				    contentType: false,  
+				    processData: false,
+					success: function(result) {
+						  if(result.code==100){	
+							    alert("修改成功！");
+							    window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
+						   }else{
+							  alert("修改失败！");
+							  window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
+						   } 		
+					}
+					});
+			 }
+										
+
+									});
+						});
+	</script>
+   
     
     <script>
         $(document).ready(function(){$(".dataTables-example").dataTable();
@@ -515,8 +630,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8">
     </script>
 
-	<!--获取省份、城市、地区  -->
-	
+	<!--获取省份、城市、地区  -->	
 <script type="text/javascript">
 
     /*页面加载就开始执行js*/   	
@@ -618,7 +732,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	$("#addphone").html(result.addphone);		 	
 		 	$("#shoppingstatus").html(result.shoppingstatus);
 		 	$("#paystatus").html(result.paystatus);
-		 	$("#addusername").html(result.addusename);
+		 	$("#addusername").html(result.addusername);
 		 	$("#addcountry").html(result.addcountry);
 		 	$("#addprovince").html(result.addprovince);
 		 	$("#addcity").html(result.addcity);
@@ -633,28 +747,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	$("#shoppingImg").attr("src","${pageContext.request.contextPath }/shoppingphoto/"+result.shopping.shoppingimg);
 		 	
 		 	if(result.orderstatus==1){
-		 		$("#orderstatus").html("安排");
+		 		$("#orderstatus").html("已安排");
 		 	}else{
 		 		$("#orderstatus").html("未安排");
 		 	}
 		 	if(result.orderstatus==1){
 		 		if(result.shoppingstatus==1){
-			 		$("#shoppingstatus").html("发货");
+			 		$("#shoppingstatus").html("已发货");		 		
+			 	}else if(result.shoppingstatus==-1){
+			 		$("#shoppingstatus").html("已安排未发货");
 			 	}else{
-			 		$("#shoppingstatus").html("安排未发货");
+			 		$("#shoppingstatus").html("未发货");
 			 	}
 		 	}else{
 		 		$("#shoppingstatus").html("待安排");
+		 	}	 	
+		 	if(result.paystatus==1){
+		 		$("#paystatus").html("已支付");
+		 	}else{
+		 		$("#paystatus").html("未支付");
 		 	}
-			if(result.orderstatus==1){
-				if(result.paystatus==1){
-			 		$("#paystatus").html("支付");
-			 	}else{
-			 		$("#paystatus").html("发货未支付");
-			 	}
-			}else{
-				$("#paystatus").html("待安排");
-			}		
 		 }		 
 		  	
 		 /* 时间格式转换 */
@@ -706,9 +818,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 		 	$("#addphone1").html("value",result.addphone);		 		 	
 		 		 	$("#addusername1").attr("value",result.addusername);
 		 		 	$("#addcountry1").attr("value",result.addcountry);
-		 		 	$("#addprovince1").attr("value",result.addprovince);
-		 		 	$("#addcity1").attr("value",result.addcity);
-		 		 	$("#adddistrict1").attr("value",result.adddistrict);
+		 		 	$("#addprovince1").text(result.addprovince).text(); 		 		 	
+		 		 	$("#addcity1").text(result.addcity).text();		 		 	
+		 		 	$("#adddistrict1").text(result.adddistrict).text();
 		 		 	$("#addaddress1").attr("value",result.addaddress);		 	
 		 		 	$("#addcode1").attr("value",result.addcode);
 		 		 	$("#shoppingname1").attr("value",result.shopping.shoppingname);
@@ -721,59 +833,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                $("input[name=paystatus][value="+result.paystatus+"]").attr("checked",true);		 		 		 	
 				 	
 				 }		 
-		 
-	    	 function update(){
-				 var formData = new FormData($("#updateorders")[0]);
-					$.ajax({
-					cache: true,
-					type: "POST",
-					data:formData,
-					url:"${pageContext.request.contextPath }/order/updateOrder.action",
-					async: false,
-					cache: false,
-				    contentType: false,  
-				    processData: false,
-					success: function(result) {
-						  if(result.code!=100){	
-							    alert("修改成功！");
-							    window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
-						   }else{
-							  alert("修改失败！");
-							  window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
-						   } 		
+		 	
+		 /*检查用户ID和邮寄ID */	 	
+		$(".checkuserbyid").blur(function(){
+			var userid = $(this).val();
+			if(userid==""){
+				userid=0;
+			}
+			$.ajax({
+				cache: true,
+				type: "GET",
+				url: "order/checkAddUser.action?id="+userid,				
+				success : function(result){
+					if(result.code!=100){					
+						$(".checkuser").html(result.msg);
+					} 
+					if(result.code ==100) {
+						$(".checkuser").html("");
 					}
-					});
-			 }
-	    	 
-		 /*点击添加*/		 
-		function addorder(){
-		var formData = new FormData($("#addorders")[0]);
-		$.ajax({
-		cache: true,
-		type: "POST",
-		data:formData,
-		url:"${pageContext.request.contextPath }/order/addOrder.action",
-		/* async: false,
-		cache: false,   */
-	    contentType: false,  
-	    processData: false,
-		success: function(result) {
-			  if(result.code!=100){	
-				    alert("增加成功！");
-				    window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
-			   }else{
-				  alert("增加失败！");
-				  window.location.href="${pageContext.request.contextPath }/order/queryAllOrderController.action";
-			   } 		
-		}
+				}
+			});
 		});
-		}			 
+		 
+		$(".checkexpbyid").blur(function(){			
+			var shoppingid = $(this).val();
+			if(shoppingid==""){
+				shoppingid=0;
+			}
+			$.ajax({
+				cache: true,
+				type: "GET",
+				url: "order/checkAddExpress.action?id=" + shoppingid,		
+				success : function(result){
+					if(result.code!=100){					
+						$(".checkexpress").html(result.msg);
+					} 
+					if(result.code==100) {
+						$(".checkexpress").html("");
+					}
+				}
+			});
+		});
+		 
+		/*点击显示发货单*/
+		 $("#sendlist").on("click", function(){
+			 window.location.href="${pageContext.request.contextPath }/order/querySendOrderController.action";		    	
+		    });
+		 
 
 		/*点击显示快递表*/
 		 $("#expresslist").on("click", function(){
 			 window.location.href="${pageContext.request.contextPath }/exp/queryAllExpress.action";		    	
 		    });
 </script>
+
+<!-- 打印订单 -->
+<script type="text/javascript">  
+    function doprint(){  
+    	if (!confirm("确定打印吗？")){
+    		return false;
+    	}else {
+    		/**不打印按钮*/
+    		//var cen = document.getElementById("sheet");
+    		//cen.innerHTML =window.document.body.innerHTML;
+    		/**执行打印*/
+    		//wb.execwb(6,6);
+    		//WebBrowser.execwb(6,1);
+    		//window.print();
+    		bdhtml=window.document.body.innerHTML; 
+    		sprnstr=""; 
+    		eprnstr=""; 
+    		prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+17); 
+    		prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); 
+    		window.document.body.innerHTML=prnhtml; 
+    		window.print(); 
+    	}      
+    }  
+</script>
+
 </body>
 
 </html>

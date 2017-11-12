@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -80,7 +81,9 @@
 						<span class="nav-label">主页</span>
 					</a>
 				</li>
-				
+				<!-- 高级管理 -->
+			 	
+			 	<shiro:hasPermission name="root">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-cutlery"></i>
@@ -122,47 +125,25 @@
 						</li>
 						<li>
 							<a href="mailbox.html">
-								<i class="glyphicon glyphicon-euro"></i>
-								<span class="glyphicon-class">商家管理</span>
-								<span class="fa arrow"></span>
-							</a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="jsp/back/form_vallidate.jsp"
-										data-index="0">添加商家</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="#">修改商家信息</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="#">查询所有商家</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="mailbox.html">
 								<i class="glyphicon glyphicon-ok"></i>
 								<span class="glyphicon-class">管理员权限管理</span>
 								<span class="fa arrow"></span>
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="jsp/back/form_vallidate.jsp"
-										data-index="0">添加管理员权限</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/role/queryAllRoles.action"
+										data-index="0">权限管理</a>
 								</li>
-								<li>
-									<a class="J_menuItem" href="#">修改管理员权限</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="#">查询管理员权限</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="#">删除管理员权限</a>
-								</li>
+								
 							</ul>
 						</li>
 					</ul>
 				</li>
+				
+				</shiro:hasPermission>
+				<!-- 商品管理 -->
+				
+				<shiro:hasPermission name="root">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-gift"></i>
@@ -222,6 +203,11 @@
 						</a>
 					</li>
 				</ul>
+				</li>
+				
+				</shiro:hasPermission>
+				<!-- 报表管理 -->		
+				<shiro:hasPermission name="root">
 				<li>
 					<a href="#">
 						<i class="fa fa fa-bar-chart-o"></i>
@@ -258,7 +244,10 @@
 						</li>
 					</ul>
 				</li>
-
+			
+				</shiro:hasPermission>
+			
+				<shiro:hasPermission name="root">
 				<li>
 					<a href="mailbox.html">
 						<i class="glyphicon glyphicon-user"></i>
@@ -286,6 +275,10 @@
 						</li>
 					</ul>
 				</li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="root">
+				<!-- 订单管理 -->
+				
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-list-alt"></i>
@@ -307,6 +300,10 @@
 						</li>						
 					</ul>
 				</li>
+				</shiro:hasPermission>
+		
+				<!-- 购物车管理 -->
+				<shiro:hasPermission name="root">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-shopping-cart"></i>
@@ -331,6 +328,10 @@
 						</li>
 					</ul>
 				</li>
+				</shiro:hasPermission>
+				<!-- 文章管理 -->
+				
+				<shiro:hasPermission name="root">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-earphone"></i>
@@ -346,13 +347,16 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="mailbox.html">添加广告</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/ad/addAd.jsp">添加广告</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_detail.html">修改广告信息</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/ad/queryAllAdsList.action">广告信息列表</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="mail_compose.html">查询广告信息</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/ad/queryStatueAllAds.action">移除投放广告</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/ad/queryNotSattueAllAds.action">添加投放广告</a>
 								</li>
 							</ul>
 						</li>
@@ -365,6 +369,9 @@
 						</li>
 					</ul>
 				</li>
+				</shiro:hasPermission>
+				<!-- 促销管理 -->
+				<shiro:hasPermission name="root">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-yen"></i>
@@ -401,6 +408,10 @@
 						</li>
 					</ul>
 				</li>
+				</shiro:hasPermission>
+				<!-- 库存管理 -->
+				
+				<shiro:hasPermission name="root">	
 				
 				<li>
 					<a href="#">
@@ -455,8 +466,10 @@
 							</ul>
 						</li>
 					</ul>
-				</li>		
+				</li>
+				</shiro:hasPermission>	
 			</ul>
+			
 		</div>
 		</nav>
 		<!--左侧导航结束-->
@@ -600,7 +613,7 @@
 						</li>
 					</ul>
 				</div>
-				<a href="jsp/back/loginbackstage.jsp" class="roll-nav roll-right J_tabExit">
+				<a href="${pageContext.request.contextPath}/logout.action" class="roll-nav roll-right J_tabExit">
 					<i class="fa fa fa-sign-out"></i> 退出
 				</a>
 			</div>

@@ -145,7 +145,20 @@ public class ProductController {
 			return Msg.success().add("filename",file_name);
 		}	
 		return Msg.fail();
-	}	
+	}
+	
+	@RequestMapping("queryAllProductsForJson.action")
+	@ResponseBody
+	public Msg queryAllProudctsForJson(){
+		List<Xhproduct> products = new ArrayList<Xhproduct>();
+		products=productService.selectAllProducts(0);
+		if(products!=null){
+			return Msg.success().add("products", products);
+		}
+		return Msg.fail();
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping("checkForm.action")

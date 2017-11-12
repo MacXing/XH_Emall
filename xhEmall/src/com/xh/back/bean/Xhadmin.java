@@ -1,6 +1,7 @@
 package com.xh.back.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Xhadmin {
     private Integer adminid;
@@ -23,9 +24,37 @@ public class Xhadmin {
     
     private String admindescribe;
 
-    private String attribute3;
+    private String salt;
+    
+    private Role role;
+    
+    private List<Role> roles;
 
-    public String getAdminphoto() {
+    public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getAdminphoto() {
 		return adminphoto;
 	}
 
@@ -114,11 +143,5 @@ public class Xhadmin {
         this.admindescribe = admindescribe;
     }
 
-    public String getAttribute3() {
-        return attribute3;
-    }
-
-    public void setAttribute3(String attribute3) {
-        this.attribute3 = attribute3;
-    }
+  
 }

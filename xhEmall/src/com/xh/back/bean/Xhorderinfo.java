@@ -73,7 +73,7 @@ public class Xhorderinfo {
 		this.users = users;
 	}
 
-	private String attribute1;
+	private Date sendtime;
 
     private String attribute2;
 
@@ -296,16 +296,16 @@ public class Xhorderinfo {
     public void setPaytime(Date paytime) {
         this.paytime = paytime;
     }
+    
+    public Date getSendtime() {
+		return sendtime;
+	}
 
-    public String getAttribute1() {
-        return attribute1;
-    }
+	public void setSendtime(Date sendtime) {
+		this.sendtime = sendtime;
+	}
 
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
-
-    public String getAttribute2() {
+	public String getAttribute2() {
         return attribute2;
     }
 
@@ -432,7 +432,7 @@ public class Xhorderinfo {
 				+ ", orderstatus=" + orderstatus + ", shoppingstatus="
 				+ shoppingstatus + ", paystatus=" + paystatus
 				+ ", addusername=" + addusername + ", addcountry=" + addcountry
-				+ ", addprovice=" + addprovince + ", addcity=" + addcity
+				+ ", addprovince=" + addprovince + ", addcity=" + addcity
 				+ ", adddistrict=" + adddistrict + ", addaddress=" + addaddress
 				+ ", addcode=" + addcode + ", addphone=" + addphone
 				+ ", shoppingcode=" + shoppingcode + ", shoppingname="
@@ -440,7 +440,7 @@ public class Xhorderinfo {
 				+ enable + ", shoppingimg=" + shoppingimg + ", goodamount="
 				+ goodamount + ", shoppingfee=" + shoppingfee + ", payfee="
 				+ payfee + ", paytime=" + paytime + ", shopping=" + shopping
-				+ ", users=" + users + ", attribute1=" + attribute1
+				+ ", users=" + users + ", sendtime=" + sendtime
 				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
 				+ ", attribute4=" + attribute4 + ", attribute5=" + attribute5
 				+ ", attribute6=" + attribute6 + ", attribute7=" + attribute7

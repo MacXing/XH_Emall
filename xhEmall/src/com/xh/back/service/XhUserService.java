@@ -16,4 +16,6 @@ public interface XhUserService {
 	public Xhusers queryUserById(int id);
 	public void modifyUserById(XhusersBean user);
 	public List<Xhusers> queryAllUsers();
+	
+	public int checkGrade(int id);
 }

@@ -25,4 +25,16 @@ public interface OrderMapper {
 	public List<OrderProvince> getProvince();
 	public List<OrderCity> getCityByProvinceId(String id);
 	public List<OrderArea> getAreaByCityId(String id);
+	
+	//通过所属id获取省份、城市、地区
+	public String getProvinceName(String id);
+	public String getCityName(String id);
+	public String getAreaName(String id);
+	
+	//查询发货单
+	public List<Xhorderinfo> getSendOrder(int status);
+	
+	//添加和修改时，判断用户和邮寄方式是否存在
+	public int checkUser(int id);
+	public int checkExpress(int id);
 }

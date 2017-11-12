@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.RoleMapper">
+	<select id="queryAllRoleById" parameterType="int" resultType="role">
+		SELECT r.id,r.roleName,r.permission FROM xhAdmin a
+		JOIN role_admin ra
+		ON a.adminId =ra.adminId
+		JOIN role r
+		ON ra.roleId=r.id
+	
+	</select>
+	
+	<resultMap type="admin_role" id="queryAllRoleAndPermissionMap">
+		<id column="id" property="id"/>
+		<association property="admin" javaType="xhadmin">
+			<id column="adminId" property="adminid"/>
+			<result column="adminName" property="adminname"/>			
+		</association>
+		<association property="role" javaType="role">
+			<id column="roleid" property="id"/>
+			<result column="roleName" property="rolename"/>
+			<result column="permission" property="permission"/>
+		</association>
+	</resultMap>
+
+	<select id="queryAllRoleAndPermission" resultMap="queryAllRoleAndPermissionMap">
+		SELECT ra.id,a.adminId,a.adminName,r.id roleid,r.roleName,r.permission
+		FROM xhAdmin a
+		JOIN role_admin ra
+		ON a.adminId =ra.adminId
+		JOIN role r
+		ON ra.roleId =r.id
+	</select>
+	
+	<select id="queryRoleAndPermissionByAdminId" resultType="admin_role" parameterType="int">
+		SELECT * FROM role_admin
+		WHERE adminId=#{id}
+	</select>
+	
+	<select id="queryAllAdmins" resultType="xhadmin">
+	 	SELECT adminId,adminName FROM xhAdmin
+	</select>
+	
+	<select id="queryAllRoles" resultType="role">
+		SELECT id,roleName,permission FROM role
+	</select>
+	
+	<insert id="insertAdmin_Role" parameterType="admin_role">
+		INSERT INTO role_admin(adminId,roleId)
+		VALUES(#{adminid},#{roleid})
+	</insert>
+	
+	<delete id="deleteAdmin_Role" parameterType="admin_role">
+		DELETE FROM role_admin WHERE adminId =#{adminid} AND roleId =#{roleid}
+	</delete>
+	
+	<update id="updateAdmin_Role" parameterType="admin_role">
+		UPDATE role_admin
+		SET roleId=#{roleid}
+		WHERE id=#{id}
+	</update>
+	
+	<select id="queryRoleAndPermissionByAdminIdAndRoleId" parameterType="admin_role" resultMap="queryAllRoleAndPermissionMap">
+		SELECT ra.id, a.adminId,a.adminName,
+		r.id,r.roleName
+		FROM xhAdmin a
+		JOIN role_admin ra
+		ON a.adminId =ra.adminId
+		JOIN role r
+		ON ra.roleId =r.id
+		where ra.adminId =#{adminid}
+		AND ra.roleId = #{roleid}	
+	</select>
+	
+		
+</mapper>

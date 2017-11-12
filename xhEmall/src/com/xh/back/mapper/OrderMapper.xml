@@ -21,6 +21,7 @@
 	    <result column="shoppingFee" jdbcType="DOUBLE" property="shoppingfee" />
 	    <result column="payFee" jdbcType="DOUBLE" property="payfee" />
 	    <result column="payTime" jdbcType="VARCHAR" property="paytime" />
+	    <result column="sendTime" jdbcType="VARCHAR" property="sendtime" />
 	    <association property="users" javaType="com.xh.front.bean.Xhusers">
 	    	<id column="userID" jdbcType="INTEGER" property="userid" />
 			<result column="gradeID" jdbcType="VARCHAR" property="gradeid" />
@@ -65,9 +66,19 @@
     SELECT o.orderID,o.userID,o.shoppingID,u.userName,o.orderTime,o.orderStatus,o.shoppingStatus,
     o.payStatus,o.addUserName,o.addCountry,o.addProvince,o.addCity, 
     o.addDistrict,o.addAddress,o.addCode,o.addphone,s.shoppingCode,s.shoppingName,s.shoppingImg,
-    o.goodAmount,o.shoppingFee,o.payFee,o.payTime
+    o.goodAmount,o.shoppingFee,o.payFee,o.payTime,o.sendTime
 	FROM xhOrderInfo o,xhUsers u,xhShopping s
 	where o.userID=u.userID and o.shoppingID=s.shoppingID and o.orderID=#{orderid,jdbcType=INTEGER}
+    </select>
+    
+    <!-- 根据发货状态确定发货时间 -->
+    <select id="getSendOrder" resultMap="queryOrderInforByIdMap" parameterType="int">
+    SELECT o.orderID,o.userID,o.shoppingID,u.userName,o.orderTime,o.orderStatus,o.shoppingStatus,
+    o.payStatus,o.addUserName,o.addCountry,o.addProvince,o.addCity, 
+    o.addDistrict,o.addAddress,o.addCode,o.addphone,s.shoppingCode,s.shoppingName,s.shoppingImg,
+    o.goodAmount,o.shoppingFee,o.payFee,o.payTime,o.sendTime
+	FROM xhOrderInfo o,xhUsers u,xhShopping s
+	where o.userID=u.userID and o.shoppingID=s.shoppingID and o.shoppingStatus=#{shoppingstatus,jdbcType=INTEGER}
     </select>
     
     
@@ -85,13 +96,13 @@
     	payStatus,addUserName,
     	addCountry,addProvince,
     	addCity,addDistrict,addAddress,
-    	addCode,addPhone,goodAmount,shoppingFee,payFee,payTime
+    	addCode,addPhone,goodAmount,shoppingFee,payFee,payTime,sendTime
       )
     values(#{userid},#{shoppingid},#{ordertime},#{orderstatus},#{shoppingstatus},
     		#{paystatus},#{addusername},#{addcountry},
     		#{addprovince},#{addcity},#{adddistrict},
     		#{addaddress},#{addcode},#{addphone}, 
-    		#{goodamount},#{shoppingfee},#{payfee},#{paytime})
+    		#{goodamount},#{shoppingfee},#{payfee},#{paytime},#{sendtime})
   </insert>
   
   <!-- 修改订单 -->
@@ -102,7 +113,7 @@
      addUserName=#{addusername},addCountry=#{addcountry},addProvince=#{addprovince},
      addCity=#{addcity},addDistrict=#{adddistrict},addAddress=#{addaddress},
      addCode=#{addcode},addPhone=#{addphone},goodAmount=#{goodamount},
-     shoppingFee=#{shoppingfee},payFee=#{payfee},payTime=#{paytime}
+     shoppingFee=#{shoppingfee},payFee=#{payfee},payTime=#{paytime},sendTime=#{sendtime}
        
      where orderID = #{orderid,jdbcType=INTEGER}
   	</update>
@@ -134,49 +145,27 @@
   	select * from areas where cityid = #{id,jdbcType=VARCHAR}
   </select>
   	
-  <!--  查询快递列表
-    <select id="queryAllMessage" resultType="xhmessage">
-    	select * from xhMessage
-    </select>
-    
-    根据用户ID查询留言列表
-    <select id="queryMsgByPrimarykey" resultType="xhmessage" parameterType="int">
-    	select * from xhMessage where msgID=#{msgid}
-    </select>
-    
-	增加留言列表
-	<insert id="addMessage" parameterType="xhmessage">
-    insert into xhMessage (
-    	userId,
-    	msgInitTime,
-    	msgTxt
-      )
-    values (#{userid}, #{msginittime}, #{msgtxt})
-  </insert>
+  <!-- 根据省市县所属id查询对应的名称 -->
+  <select id="getProvinceName" resultType="String" parameterType="java.lang.String">
+  	select province from provinces where provinceid=#{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getCityName" resultType="String" parameterType="java.lang.String">
+  	select city from cities where cityid=#{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getAreaName" resultType="String" parameterType="java.lang.String">
+  	select area from areas where areaid=#{id,jdbcType=VARCHAR}
+  </select>
 	
-	根据用户ID清空留言内容
-	<update id="cleanMessageContextByPrimaryKey" parameterType="int">
-    update xhMessage set msgTxt =null 
-    where msgID = #{msgid,jdbcType=INTEGER}
-   </update>
-	
-	根据用户ID清空留言信息
-	<update id="cleanMessageByPrimaryKey" parameterType="int">
-    update xhMessage set msgTxt =null,msgInitTime=null 
-    where msgID = #{msgid,jdbcType=INTEGER}
-   </update>
-	
-	根据留言ID更新留言信息
-	<delete id="updateMessageByPrimaryKey" parameterType="xhmessage">
-     update xhMessage set msgTxt =#{msgtxt,jdbcType=VARCHAR},msgInitTime=#{msginittime}  
-     where msgID = #{msgid,jdbcType=INTEGER}
-  	</delete>
-	
-	根据留言ID删除留言信息
-	<delete id="deleteMessageByPrimaryKey" parameterType="int">
-    delete from xhMessage 
-    where msgID=#{msgid,jdbcType=INTEGER}
-  	</delete> -->
-	
-	
+	<!-- 检查会员是否存在 -->
+  <select id="checkUser" resultType="int" parameterType="int">
+  	select count(*) from xhUsers where userID=#{userid,jdbcType=INTEGER}
+  </select>	
+
+	<!-- 检查邮寄方式是否存在 -->
+  <select id="checkExpress" resultType="int" parameterType="int">
+  	select count(*) from xhShopping where shoppingID=#{shoppingid,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

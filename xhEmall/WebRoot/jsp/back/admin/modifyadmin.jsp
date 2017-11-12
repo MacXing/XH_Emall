@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>添加管理员</h5>
+                        <h5>修改管理员</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -64,15 +64,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">帐号：</label>
                                 <div class="col-sm-8">
-                                    <input id="adminname" name="adminname" minlength="2" type="text" class="form-control" required="" aria-required="true" value="">
-                                </div>
+                                    <input id="adminname" name="adminname" " type="text" class="form-control" ">
+                                </div><span id = "s1"></span>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">密码：</label>
                                 <div class="col-sm-8">
                                     <input id="adminpwd" name="adminpassword"
-                                        class="form-control" type="password">
-                                </div>
+                                        class="form-control" type="password" >
+                                </div><div id="s2"></div>
                             </div>
                             <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label">确认密码：</label>
@@ -87,8 +87,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">联系电话：</label>
                                 <div class="col-sm-8">
-                                    <input id="adminPhone" name="adminphone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
-                                </div>
+                                    <input id="adminPhone" name="adminphone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" >
+                                </div><span id = "s3"></span>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">E-mail：</label>
@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 col-sm-offset-3">
-                                    <button type="button" class="btn btn-primary" id="submitform">提交</button>
+                                    <button type="button" class="btn btn-primary "  id="submitform">提交</button>
                                 </div>
                             </div>
                         </form>
@@ -136,16 +136,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    
+    <script src="resource/js/bootstrap.min.js?v=3.3.5"></script> 
     <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <!-- <script src="js/plugins/validate/jquery.validate.min.js"></script> -->
     <!-- <script src="js/plugins/validate/messages_zh.min.js"></script> -->
     <!-- <script src="js/demo/form-validate-demo.min.js"></script> -->
     <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="resource/layer/layer.js"></script>
     <script src="resource/layui/layui.js"></script>
     <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="resource/js/validate.js" type="text/javascript"></script>
+    <script src="resource/js/jquery.min.js" type="text/javascript"></script> 
+    
+
+
+<script>
+
+  
+
+    $("#submitform").click(function (){
+	
+		var val = new validate({
+		
+			rules:{
+				adminname:"notEmpty",   
+				adminpwd:"password",
+				adminPhone:"mobile",
+				email:"email"
+			},
+			/*submitFun里面为检验成功后要执行的方法*/
+			submitFun:function(){
+		
+				
+		$.ajax({
+    		url : "${pageContext.request.contextPath }/admin/addAdmin.action",
+    		type : "POST",
+    		data : JSON.stringify($("#signupForm1").serializeObject()),
+    		dataType: "json",
+    		contentType: "application/json",
+    		success : function(result){
+				if(result){
+					swal({
+						title : "提示",
+						text : "更新成功！！"},
+						function(){
+							$("#close").click(); 
+							self.location.reload();
+						}
+					);
+				} else {
+					swal({
+						title : "提示",
+						text : "更新失败！！",
+						confirmButtonColor : "#F00"
+					});
+				}
+				
+			}
+    		
+    	});
+				
+				
+			}
+		});
+		
+	
+	
+	});
+
+
+</script>
+    
     <script>
     layui.use('upload', function() {
         var $ = layui.jquery,
@@ -180,7 +241,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 });
             }
         });
+        
+        
+    
+        
     });
+    
+    
+    
+    
     $.fn.serializeObject = function () {  
 	    var o = {};  
 	    var a = this.serializeArray();  
@@ -197,35 +266,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    return o;  
 	};
 	$("#submitform").click(function (){
-		$.ajax({
-    		url : "${pageContext.request.contextPath }/admin/addAdmin.action",
-    		type : "POST",
-    		data : JSON.stringify($("#signupForm1").serializeObject()),
-    		dataType: "json",
-    		contentType: "application/json",
-    		success : function(result){
-				if(result){
-					swal({
-						title : "提示",
-						text : "更新成功！！"},
-						function(){
-							$("#close").click(); 
-							self.location.reload();
-						}
-					);
-				} else {
-					swal({
-						title : "提示",
-						text : "更新失败！！",
-						confirmButtonColor : "#F00"
-					});
-				}
-				
-			}
-    		
-    	});
+	
+		console.log($("#signupForm1"));
+	
+		
 	});
     </script>
+    
+  
+
+
 </body>
 
 </html>

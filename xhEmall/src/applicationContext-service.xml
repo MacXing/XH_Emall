@@ -34,4 +34,9 @@
 	<bean id="areaService" class="com.xh.back.serviceImpl.AreaServiceImpl"/>
 	<bean id="cityService" class="com.xh.back.serviceImpl.CityServiceImpl"/>
 	<bean id="provinceService" class="com.xh.back.serviceImpl.ProvinceServiceImpl"/>
+	<bean id="roleService" class="com.xh.back.serviceImpl.RoleServiceImpl"/>
+	<!-- <bean id="adService" class="com.xh.back.serviceImpl.AdServiceImpl"/> -->
+	<bean id="adService" class="com.xh.back.serviceImpl.AdServiceImpl"/>
+	
 </beans>
+	

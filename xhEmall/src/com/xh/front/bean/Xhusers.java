@@ -2,6 +2,8 @@ package com.xh.front.bean;
 
 import java.util.Date;
 
+import com.xh.back.bean.Xhgrade;
+
 public class Xhusers {
     private Integer userid;
 
@@ -36,8 +38,18 @@ public class Xhusers {
     private Double usermoney;
 
     private Integer userintegral;
+    
+    private Xhgrade xhgrade;
 
-    private String attribute2;
+    public Xhgrade getXhgrade() {
+		return xhgrade;
+	}
+
+	public void setXhgrade(Xhgrade xhgrade) {
+		this.xhgrade = xhgrade;
+	}
+
+	private String attribute2;
 
     private String attribute3;
 

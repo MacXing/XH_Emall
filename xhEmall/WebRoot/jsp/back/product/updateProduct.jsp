@@ -168,7 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="resource/js/plugins/markdown/to-markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.zh.js"></script>
-
+	<script type="text/javascript" src="resource/js/validate.js"></script>
     <script type="text/javascript">
     
     $(function(){
@@ -218,37 +218,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </script>
     
 <script type="text/javascript">
-$("#btn_id").on("click",function(){
-	 var action="";
-	if(!confirm("您确定要增加商品？")){
-		return false;
-	}else{
-		var form = $("#file").val().length;
-		var formData= new FormData($("#myform")[0]);		
-		 if(form==0){
-			 action ="updateProduct.action";
-		}else{
-			 action="updateProductAndFile.action";
-		}		 
-		$.ajax({		
-			url:"${pageContext.request.contextPath }/product/"+action,
-			   type:"POST",
-			   data:formData,
-			  /*  async: false,  
-		       cache: false,  */ 
-		       contentType: false,  
-		       processData: false, 
-			   success:function(result){ 
-				  if(result.code==100){	
-					    alert("修改成功！");
-					    window.location.href="${pageContext.request.contextPath}/product/queryAllProducts.action";
-				   }else{
-					  alert("修改失败！");
-				   } 				 
-			   }
-		});
-	}
-});
+$("#btn_id").on("click", function() {
+				var val = new validate({
+						rules: {
+							pname: "notEmpty",
+							pdesc: "notEmpty",
+							pprice: "money",
+							psale: "money",
+							pimgdetail: "notEmpty",
+							psize: "notEmpty",
+							punit: "notEmpty",
+							pdiscount: "notEmpty"
+						},
+						/*submitFun里面为检验成功后要执行的方法*/ submitFun: function() {
+							var action = "";
+							if(!confirm("您确定要增加商品？")) {
+								return false;
+							} else {
+								var form = $("#file").val().length;
+								var formData = new FormData($("#myform")[0]);
+								if(form == 0) {
+									action = "updateProduct.action";
+								} else {
+									action = "updateProductAndFile.action";
+								}
+								$.ajax({
+									url: "${pageContext.request.contextPath }/product/" + action,
+									type: "POST",
+									data: formData,
+									/* async: false, cache: false, */ contentType: false,
+									processData: false,
+									success: function(result) {
+										if(result.code == 100) {
+											alert("修改成功！");
+											window.location.href = "${pageContext.request.contextPath}/product/queryAllProducts.action";
+										} else {
+											alert("修改失败！");
+										}
+									}
+								
+								
+								});
+							}
+							}
+						});
+				
+			})
 
 </script>
 

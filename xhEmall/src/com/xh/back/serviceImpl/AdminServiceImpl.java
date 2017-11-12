@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.xh.back.bean.Xhadmin;
 import com.xh.back.mapper.AdminMapper;
@@ -14,9 +15,9 @@ import com.xh.back.service.AdminService;
  * 通过Name查找admin信息
  * 
  * */
+@Service
 public class AdminServiceImpl implements AdminService{
-	
-	private static final Xhadmin admin = null;
+
 	@Autowired
 	@Qualifier("adminMapper")
 	private AdminMapper adminMapper;
@@ -88,6 +89,12 @@ public class AdminServiceImpl implements AdminService{
 			return null;
 		}
 		
+	}
+
+	@Override
+	public Xhadmin queryAdminByName(String name) {
+		
+		return adminMapper.queryAdminByName(name);
 	}
 
 }

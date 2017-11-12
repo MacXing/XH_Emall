@@ -141,18 +141,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="modal-body">
             	<form id="addmessage" novalidate="novalidate">
-            		<label class="col-sm-3 control-label">会员编号：</label>                            	    
-                    <div class="form-group has-error">
-                        <input name="userid" type="text" class="form-control" placeholder="请输入会员编号"  aria-required="true">
-                        <span class="help-block m-b-none" style="display: none;"></span>
-                        <i class="fa fa-times-circle"></i> 请输入会员编号
-                        </span>
-                        
-                    </div>                       	    
+            	<div class="form-group ">
+            		<label class="col-sm-3 control-label">会员编号11：</label>                            	    
                     <div>
-                    <label class="col-sm-3 control-label">留言内容：</label>
+                        <input id="userid11" name="userid" type="text" class="form-control" placeholder="请输入会员编号"  aria-required="true">
+                        <span class="help-block m-b-none" style="display: none;"></span>                        
+                        </span>
+                       </div> 
+                    </div >                       	    
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label">留言内容11：</label>
                     <div style="height:150px">
-                         <textarea rows="5" cols="74" name="msgtxt" data-provide="markdown" class="md-input" style="resize: none; display: block;" placeholder="从这里开始"></textarea>
+                         <textarea id="msgtxt11" rows="5" cols="74" name="msgtxt" data-provide="markdown" class="md-input" style="resize: none; display: block;" placeholder="从这里开始"></textarea>
                     </div>
                     </div>               
             	</form>
@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <font color="red"><%=message %></font>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addmessagetolist()">提交添加</button>
+                <button type="button" id="btn_id" class="btn btn-primary" onclick="addmessagetolist()">提交添加</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -218,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             		<div>
                    		<input type="hidden" id="msgid1" name="msgid">
                     </div>             	    
-                    <div>
+                    <div class="form-group">
                     <label class="col-sm-3 control-label">留言内容：</label>
                     <div style="height:150px">                    	                       
                          <textarea rows="5" cols="74" name="msgtxt" id="msgtxt1" data-provide="markdown" class="md-input" style="resize: none; display: block;"></textarea>
@@ -228,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="update()">提交修改</button>
+                <button id="btn_id2" type="button" class="btn btn-primary" onclick="update()">提交修改</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -242,6 +242,88 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="resource/js/content.min.js?v=1.0.0"></script>
     <script src="resource/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script type="text/javascript" src="resource/js/validate.js"></script>
+	<script type="text/javascript">
+		$("#btn_id")
+				.click(
+						function() {
+
+							var val = new validate(
+									{
+
+										rules : {
+											userid11 : "notEmpty",
+											msgtxt11 : "notEmpty",
+										},
+										/*submitFun里面为检验成功后要执行的方法*/
+										submitFun : function addmessagetolist(){
+		var formData = new FormData($("#addmessage")[0]);
+		$.ajax({
+		cache: true,
+		type: "POST",
+		data:formData,
+		url:"${pageContext.request.contextPath }/message/addMessageList.action",
+		async: false,
+		cache: false,  
+	    contentType: false,  
+	    processData: false,
+		success: function(result) {
+			  if(result.status="seccuss"){	
+				    alert("增加成功！");
+				    window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
+			   }else{
+				  alert("增加失败！");
+				  window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
+			   } 		
+		}
+		});
+		}
+
+									});
+						});
+	</script>
+    
+    <script type="text/javascript">
+		$("#btn_id2")
+				.click(
+						function() {
+
+							var val = new validate(
+									{
+
+										rules : {											
+											msgtxt1 : "notEmpty",
+										},
+										/*submitFun里面为检验成功后要执行的方法*/
+										submitFun : function update(){
+			var formData = new FormData($("#updatemessage")[0]);
+			$.ajax({
+			cache: true,
+			type: "POST",
+			data:formData,
+			url:"${pageContext.request.contextPath }/message/updateMessage.action",
+			async: false,
+			cache: false,  
+		    contentType: false,  
+		    processData: false,
+			success: function(result) {
+				  if(result.code=100){	
+					    alert("修改成功！");
+					    window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
+				   }else{
+					  alert("修改失败！");
+					  window.location.href="${pageContext.request.contextPath }/message/queryAllMessage.action";
+				   } 		
+			}
+			});
+			
+		}
+
+									});
+						});
+	</script>
+    
+    
     
     <script>
         $(document).ready(function(){$(".dataTables-example").dataTable();
@@ -323,7 +405,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	$("#msgtxt1").html(result.msgtxt);		  	
 		 } 
 		 
-		function update(){
+		/* function update(){
 			var formData = new FormData($("#updatemessage")[0]);
 			$.ajax({
 			cache: true,
@@ -345,10 +427,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 			});
 			
-		}
+		} */
 		 
 		/*modal框添加*/
-		function addmessagetolist(){
+		/* function addmessagetolist(){
 		var formData = new FormData($("#addmessage")[0]);
 		$.ajax({
 		cache: true,
@@ -369,7 +451,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   } 		
 		}
 		});
-		}
+		} */
 		
 		function btn4(id){
 			alert("清空成功！");
