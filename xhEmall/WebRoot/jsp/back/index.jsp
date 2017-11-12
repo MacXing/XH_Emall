@@ -41,7 +41,7 @@
 				<li class="nav-header">
 					<div class="dropdown profile-element">
 						<span>
-							<img alt="image" class="img-circle" src="resource/img/profile_small.jpg" />
+							<img alt="image" style="width:64px; hight:64px;" class="img-circle" src="${pageContext.request.contextPath }/upload/${sessionScope.admin.adminphoto }" />
 						</span>
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">

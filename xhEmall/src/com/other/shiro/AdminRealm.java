@@ -2,6 +2,7 @@ package com.other.shiro;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -11,6 +12,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.other.error.CustomException;
 import com.xh.back.bean.ActiveAdmin;
 import com.xh.back.bean.Role;
@@ -50,12 +52,12 @@ public class AdminRealm extends AuthorizingRealm {
  		
  		if(admin==null){
  			
-		 try {
-			throw new CustomException("用户名错误！");
-		} catch (CustomException e) {
-			
-			e.printStackTrace();
-		}
+			 try {
+				throw new CustomException("用户名错误！");
+			} catch (CustomException e) {
+				
+				e.printStackTrace();
+			}
 					
  		}
  		
@@ -70,6 +72,7 @@ public class AdminRealm extends AuthorizingRealm {
 
  		activeAdmin.setId(admin.getAdminid());
  		activeAdmin.setAdminname(admin.getAdminname());
+ 		activeAdmin.setAdminphoto(admin.getAdminphoto());
  		
  		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
  				activeAdmin, password, this.getName());

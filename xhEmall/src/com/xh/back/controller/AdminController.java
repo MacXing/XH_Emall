@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -81,6 +78,7 @@ public class AdminController {
 		Subject subject = SecurityUtils.getSubject();
 				//取身份信息
 		ActiveAdmin admin = (ActiveAdmin) subject.getPrincipal();
+		System.out.println(admin.toString());
 				//通过model传到页面
 		model.addAttribute("admin", admin);
 		
