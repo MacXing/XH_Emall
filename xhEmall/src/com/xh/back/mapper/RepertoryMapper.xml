@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.RepertoryMapper">	
+
+	<resultMap type="xhrepertory" id="queryStockMap">
+		<id column="repID" property="repid"/>
+		<result column="repName" property="repname"/>
+		<result column="repAddress" property="repaddress"/>
+		<collection property="xhstocks" ofType="xhstock">
+			<!-- <id column="stoID" property="stoid"/> -->
+			<result column="stoNumber" property="stonumber"/>
+			<association property="xhproduct" javaType="xhproduct">
+				<id column="pID" property="pid" />
+				<result column="pName" property="pname" />
+				<result column="pDesc" property="pdesc" />
+				<association property="brand" javaType="xhbrand">
+					<!-- <id column="brandID" property="brandid" /> -->
+					<result column="brandName" property="brandname" />
+				</association>
+			</association>
+		</collection>
+	</resultMap>
+	
+	<select id="queryStock" resultMap="queryStockMap">
+		select r.repID,r.repName,r.repAddress,p.pID,p.pName,b.brandName,p.pDesc,s.stoNumber
+		from xhRepertory r 
+		join xhStock s on r.repID=s.repID 
+		join xhProduct p on s.pID=p.pID
+		join xhBrand b on p.brandID=b.brandID
+	</select>		
+	
+	<select id="queryAllRepertory" resultType="xhrepertory">
+		select * 
+		from xhRepertory
+	</select>
+	
+	<select id="queryRepertoryById" parameterType="int" resultType="xhrepertory">
+		select repName,repAddress,repPhone,repAdmin
+		from xhRepertory
+		where repID = #{repid}
+	</select>
+	
+	<insert id="addRepertory" parameterType="xhrepertory">
+		insert into xhRepertory(repName,repAddress,repPhone,repAdmin)
+		values(#{repname},#{repaddress},#{repphone},#{repadmin})
+	</insert>
+	
+	<update id="updateRepertory" parameterType="xhrepertory">
+		update xhRepertory
+		set repName = #{repname},repAddress = #{repaddress},repPhone = #{repphone},repAdmin = #{repadmin}
+		where repID = #{repid}
+	</update>
+	
+	<delete id="deleteRepertory" parameterType="int">
+		delete 
+		from xhRepertory
+		where repID = #{repid}
+	</delete>
+	
+	<resultMap type="xhproduct" id="queryAllProductMap">
+		<id column="pID" property="pid" />
+		<result column="pImg" property="pimg" />
+		<result column="pName" property="pname" />
+		<result column="pPrice" property="pprice" />
+	    <result column="pSale" property="psale" />
+	    <result column="pSize" property="psize" />
+	    <result column="pUnit" property="punit" />
+	    <association property="brand" javaType="com.xh.back.bean.Xhbrand">
+	    	<id column="brandID" property="brandid" />
+			<result column="brandName" property="brandname" />   
+	    </association>
+	</resultMap>
+		
+	<select id="queryAllProduct" resultMap="queryAllProductMap">
+		select p.pID,p.pImg,b.brandName,p.pName,p.pPrice,p.pSale,p.pSize,p.pUnit
+		from xhProduct p join xhBrand b 
+		on p.brandID = b.brandID		
+	</select>
+	
+	<insert id="addInput" parameterType="xhinput">
+		insert into xhInput(pID,repID,inputTime,inputNumber,inputPrice)
+		value(#{pid},#{repid},#{inputtime},#{inputnumber},#{inputprice})		
+	</insert>
+	
+	<select id="queryStockById" parameterType="xhstock" resultType="xhstock">
+		select stoID,stoNumber
+		from xhStock
+		where pID = #{pid} and repID = #{repid}
+	</select>
+	
+	<insert id="addStock" parameterType="xhstock">
+		insert into xhStock(pID,repID,stoNumber)
+		value(#{pid},#{repid},#{stonumber})
+	</insert>
+	
+	<update id="updateStock" parameterType="xhstock">
+		update xhStock
+		set stoNumber = stoNumber + #{stonumber}
+		where stoID = #{stoid}
+	</update>
+	
+	<update id="cutStock" parameterType="xhstock">
+		update xhStock
+		set stoNumber = stoNumber - #{stonumber}
+		where pID = #{pid} and repID = #{repid}
+	</update>
+	
+	<insert id="addOutput" parameterType="xhoutput">
+		insert into xhOutput(pID,repID,repID2,outputTime,outputNumber)
+		value(#{pid},#{repid},#{repid2},#{outputtime},#{outputnumber})
+	</insert>
+	
+	<select id="queryRepertoryByPid" parameterType="int" resultType="xhrepertory">
+		select repID,repName
+		from xhRepertory
+		where repID in
+		(
+			select repID
+			from xhStock
+			where pID = #{pid}
+		)	
+	</select>
+	
+	<resultMap type="xhinput" id="queryAllInputMap">
+		<id column="inputID" property="inputid"/>
+		<result column="inputTime" property="inputtime"/>
+		<result column="inputNumber" property="inputnumber"/>
+		<result column="inputPrice" property="inputprice"/>		
+		<association property="xhrepertory" javaType="xhrepertory">			
+			<id column="repID" property="repid"/>
+			<result column="repName" property="repname"/>
+			<result column="repAddress" property="repaddress"/>			
+		</association>
+		<association property="xhproduct" javaType="xhproduct">
+			<id column="pID" property="pid" />
+			<result column="pName" property="pname" />
+			<result column="pDesc" property="pdesc" />
+			<association property="brand" javaType="xhbrand">					
+				<result column="brandName" property="brandname" />
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="queryAllInput" resultMap="queryAllInputMap">
+		select i.inputID,r.repID,r.repName,r.repAddress,i.inputTime,p.pID,p.pName,
+			   b.brandName,p.pDesc,i.inputNumber,i.inputPrice
+		from xhInput i
+		join xhRepertory r on r.repID = i.repID
+		join xhProduct p on i.pID = p.pID
+		join xhBrand b on p.brandID = b.brandID
+	</select>
+	
+	<resultMap type="xhoutput" id="queryAllOutputMap">
+		<id column="outputID" property="outputid" />
+		<result column="outputTime" property="outputtime"/>
+		<result column="outputNumber" property="outputnumber"/>
+		<association property="xhrepertory" javaType="xhrepertory">
+			<id column="repID1" property="repid" />
+			<result column="repName1" property="repname"/>
+			<result column="repAddress1" property="repaddress"/>
+		</association>
+		<association property="xhrepertory2" javaType="xhrepertory">
+			<id column="repID2" property="repid" />
+			<result column="repName2" property="repname"/>
+			<result column="repAddress2" property="repaddress"/>
+		</association>
+		<association property="xhproduct" javaType="xhproduct">
+				<id column="pID" property="pid" />
+				<result column="pName" property="pname" />				
+				<association property="brand" javaType="xhbrand">					
+					<result column="brandName" property="brandname" />
+				</association>
+		</association>
+	</resultMap>
+	
+	<select id="queryAllOutput" resultMap="queryAllOutputMap">
+		select o.outputID,r1.repID repID1,r1.repName repName1,r1.repAddress repAddress1,o.outputTime,r2.repID repID2,r2.repName repName2,r2.repAddress repAddress2
+			   ,p.pID,p.pName,b.brandName,o.outputNumber
+		from xhOutput o 
+		join xhRepertory r1 on o.repID = r1.repID
+		join xhRepertory r2 on o.repID2 = r2.repID
+		join xhProduct p on o.pID = p.pID
+		join xhBrand b on p.brandID = b.brandID
+	</select>
+    
+</mapper>

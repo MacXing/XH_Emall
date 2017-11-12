@@ -7,11 +7,15 @@ public class Xhstock {
 
     private Integer repid;
 
-    private String pname;
+    //private String pname;
 
-    private String pdesc;
+    //private String pdesc;
 
     private Integer stonumber;
+    
+    private Xhproduct xhproduct;
+    
+   // private Xhrepertory xhrepertory;
 
     public Integer getStoid() {
         return stoid;
@@ -19,45 +23,46 @@ public class Xhstock {
 
     public void setStoid(Integer stoid) {
         this.stoid = stoid;
-    }
+    }         
 
     public Integer getPid() {
-        return pid;
-    }
+		return pid;
+	}
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
+	public void setPid(Integer pid) {
+		this.pid = pid;
+	}
 
-    public Integer getRepid() {
-        return repid;
-    }
+	public Integer getRepid() {
+		return repid;
+	}
 
-    public void setRepid(Integer repid) {
-        this.repid = repid;
-    }
+	public void setRepid(Integer repid) {
+		this.repid = repid;
+	}
 
-    public String getPname() {
-        return pname;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname == null ? null : pname.trim();
-    }
-
-    public String getPdesc() {
-        return pdesc;
-    }
-
-    public void setPdesc(String pdesc) {
-        this.pdesc = pdesc == null ? null : pdesc.trim();
-    }
-
-    public Integer getStonumber() {
+	public Integer getStonumber() {
         return stonumber;
     }
 
     public void setStonumber(Integer stonumber) {
         this.stonumber = stonumber;
     }
+
+	public Xhproduct getXhproduct() {
+		return xhproduct;
+	}
+
+	public void setXhproduct(Xhproduct xhproduct) {
+		this.xhproduct = xhproduct;
+	}
+
+	@Override
+	public String toString() {
+		return "Xhstock [stoid=" + stoid + ", pid=" + pid + ", repid=" + repid
+				+ ", stonumber=" + stonumber + ", xhproduct=" + xhproduct + "]";
+	}
+	
+    
+    
 }

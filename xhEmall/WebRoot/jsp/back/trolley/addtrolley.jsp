@@ -27,9 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<label class="form-label col-xs-4 col-sm-3">
 			<span class="c-red">*</span>用户</label>
 			<div class="formControls col-xs-8 col-sm-9">
-			<select class="input-text" id="addUser" name="userid">
-			
-			</select>
+			<input type="text" class="input-text" name="tronum" value="" >
 			</div>
 		</div>
 		<div class="row cl">

@@ -71,13 +71,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <thead>
                     <tr>
                         <th class="text-center">商品编号</th>
-                        <th class="text-center">品牌编号</th>
-                        <th class="text-center">品牌名称</th>
+                        <th class="text-center">商品图片</th>
+                        <th class="text-center">品牌</th>
                         <th class="text-center">商品名称</th>
-                        <th class="text-center">商品价格</th>
+                        <th class="text-center">商品定价</th>
                         <th class="text-center">商品售价</th>
-                        <th class="text-center">商品大小</th>
-                        <th class="text-center">商品单位</th>
+                        <th class="text-center">大小</th>
+                        <th class="text-center">单位</th>
                         <th class="text-center">添加为积分商品</th>
                     </tr>
                 </thead>
@@ -85,7 +85,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <c:forEach items="${xhproducts }" var="product">
 					<tr>
 						<td>${product.pid }</td>
-						<td>${product.brandid }</td>
+						<td>
+			    			<a class="fancybox" href="${pageContext.request.contextPath }/upload/${product.pimg}" title="">
+	                            <img style="width:80px"; src="${pageContext.request.contextPath }/upload/${product.pimg}" />
+	                        </a>
+			    		</td>
 						<td>${product.brand.brandname }</td>
 						<td>${product.pname }</td>
 						<td>${product.pprice }</td>

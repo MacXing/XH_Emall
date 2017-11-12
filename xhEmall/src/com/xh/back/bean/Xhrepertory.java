@@ -1,5 +1,7 @@
 package com.xh.back.bean;
 
+import java.util.List;
+
 public class Xhrepertory {
     private Integer repid;
 
@@ -18,6 +20,10 @@ public class Xhrepertory {
     private String attribute3;
 
     private String attribute4;
+    
+    private List<Xhstock> xhstocks;
+    
+    private Xhstock xhstock;        
 
     public Integer getRepid() {
         return repid;
@@ -90,4 +96,33 @@ public class Xhrepertory {
     public void setAttribute4(String attribute4) {
         this.attribute4 = attribute4 == null ? null : attribute4.trim();
     }
+            
+	public List<Xhstock> getXhstocks() {
+		return xhstocks;
+	}
+
+	public void setXhstocks(List<Xhstock> xhstocks) {
+		this.xhstocks = xhstocks;
+	}
+
+	public Xhstock getXhstock() {
+		return xhstock;
+	}
+
+	public void setXhstock(Xhstock xhstock) {
+		this.xhstock = xhstock;
+	}
+
+	@Override
+	public String toString() {
+		return "Xhrepertory [repid=" + repid + ", repname=" + repname
+				+ ", repaddress=" + repaddress + ", repphone=" + repphone
+				+ ", repadmin=" + repadmin + ", attribute1=" + attribute1
+				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
+				+ ", attribute4=" + attribute4 + ", xhstocks=" + xhstocks
+				+ ", xhstock=" + xhstock + "]";
+	}		
+	
+   
+    
 }

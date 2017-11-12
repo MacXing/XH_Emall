@@ -180,14 +180,8 @@
 						</a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库记录</a>
-							</li>
-							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库出货管理</a>
-							</li>
-							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库进货管理</a>
-							</li>
+								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">评论管理</a>
+							</li>					
 						</ul>							
 					</li>
 					<li>
@@ -428,11 +422,8 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="#">总库存查询</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="#">分店库存查询</a>
-								</li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryStock.action">库存查询</a>
+								</li>								
 							</ul>
 						</li>
 						<li>
@@ -458,11 +449,14 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="#">出货管理</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllOutput.action">出货查询</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="#">进货管理</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllInput.action">进货查询</a>
 								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllProduct.action">进出货操作</a>
+								</li>								
 							</ul>
 						</li>
 					</ul>

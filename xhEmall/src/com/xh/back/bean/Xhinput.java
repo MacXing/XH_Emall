@@ -9,11 +9,11 @@ public class Xhinput {
 
     private Integer repid;
 
-    private Integer inputtime;
+    private String inputtime;
 
-    private Date inputfactory;
+    private String inputfactory;
 
-    private String inputnumber;
+    private Integer inputnumber;
 
     private Double inputprice;
 
@@ -28,6 +28,10 @@ public class Xhinput {
     private String attribute4;
 
     private String attribute5;
+    
+    private Xhrepertory xhrepertory;
+    
+    private Xhproduct xhproduct;
 
     public Integer getInputid() {
         return inputid;
@@ -53,31 +57,31 @@ public class Xhinput {
         this.repid = repid;
     }
 
-    public Integer getInputtime() {
-        return inputtime;
-    }
+	public String getInputtime() {
+		return inputtime;
+	}
 
-    public void setInputtime(Integer inputtime) {
-        this.inputtime = inputtime;
-    }
+	public void setInputtime(String inputtime) {
+		this.inputtime = inputtime;
+	}
 
-    public Date getInputfactory() {
-        return inputfactory;
-    }
+	public String getInputfactory() {
+		return inputfactory;
+	}
 
-    public void setInputfactory(Date inputfactory) {
-        this.inputfactory = inputfactory;
-    }
+	public void setInputfactory(String inputfactory) {
+		this.inputfactory = inputfactory;
+	}	
 
-    public String getInputnumber() {
-        return inputnumber;
-    }
+    public Integer getInputnumber() {
+		return inputnumber;
+	}
 
-    public void setInputnumber(String inputnumber) {
-        this.inputnumber = inputnumber == null ? null : inputnumber.trim();
-    }
+	public void setInputnumber(Integer inputnumber) {
+		this.inputnumber = inputnumber;
+	}
 
-    public Double getInputprice() {
+	public Double getInputprice() {
         return inputprice;
     }
 
@@ -131,5 +135,38 @@ public class Xhinput {
 
     public void setAttribute5(String attribute5) {
         this.attribute5 = attribute5 == null ? null : attribute5.trim();
-    }
+    }    
+
+	public Xhrepertory getXhrepertory() {
+		return xhrepertory;
+	}
+
+	public void setXhrepertory(Xhrepertory xhrepertory) {
+		this.xhrepertory = xhrepertory;
+	}
+
+	public Xhproduct getXhproduct() {
+		return xhproduct;
+	}
+
+	public void setXhproduct(Xhproduct xhproduct) {
+		this.xhproduct = xhproduct;
+	}
+
+	@Override
+	public String toString() {
+		return "Xhinput [inputid=" + inputid + ", pid=" + pid + ", repid="
+				+ repid + ", inputtime=" + inputtime + ", inputfactory="
+				+ inputfactory + ", inputnumber=" + inputnumber
+				+ ", inputprice=" + inputprice + ", inputaddress="
+				+ inputaddress + ", attribute1=" + attribute1 + ", attribute2="
+				+ attribute2 + ", attribute3=" + attribute3 + ", attribute4="
+				+ attribute4 + ", attribute5=" + attribute5 + ", xhrepertory="
+				+ xhrepertory + ", xhproduct=" + xhproduct + "]";
+	}
+
+	
+    
+    
+    
 }

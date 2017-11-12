@@ -4,22 +4,22 @@
 <mapper namespace="com.xh.back.mapper.XhsalesMapper">
 	
 	<resultMap type="xhproduct" id="queryIntegralProductMap">
-		<id column="pID" jdbcType="INTEGER" property="pid" />
-		<result column="brandID" jdbcType="INTEGER" property="brandid" />
-		<result column="pName" jdbcType="VARCHAR" property="pname" />
-		<result column="pPrice" jdbcType="DOUBLE" property="pprice" />
-	    <result column="pSale" jdbcType="DOUBLE" property="psale" />
-	    <result column="pSize" jdbcType="VARCHAR" property="psize" />
-	    <result column="pUnit" jdbcType="VARCHAR" property="punit" />
+		<id column="pID" property="pid" />
+		<result column="pImg" property="pimg" />
+		<result column="pName" property="pname" />
+		<result column="pPrice" property="pprice" />
+	    <result column="pSale" property="psale" />
+	    <result column="pSize" property="psize" />
+	    <result column="pUnit" property="punit" />
 	    <association property="brand" javaType="com.xh.back.bean.Xhbrand">
-	    	<id column="brandID" jdbcType="INTEGER" property="brandid" />
-			<result column="brandName" jdbcType="VARCHAR" property="brandname" />   
+	    	<id column="brandID" property="brandid" />
+			<result column="brandName" property="brandname" />   
 	    </association>
 	</resultMap>
 	
 	<!-- 查询（非）积分商品 -->
 	<select id="queryIntegralProduct" resultMap="queryIntegralProductMap" parameterType="int">
-		select p.pID,p.brandID,b.brandName,p.pName,p.pPrice,p.pSale,p.pSize,p.pUnit
+		select p.pID,p.pImg,b.brandName,p.pName,p.pPrice,p.pSale,p.pSize,p.pUnit
 		from xhProduct p join xhBrand b 
 		on p.brandID = b.brandID
 		where pIntegral = #{flag}
