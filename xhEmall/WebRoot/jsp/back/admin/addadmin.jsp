@@ -208,10 +208,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					title : "提示",
     					text : "添加成功！！"},
     					function(){
-    						$("#close").click();
-    						self.location.reload();
+    						//$(".close").click();
+    						//window.location.herf="${pageContext.request.contextPath }/admin/queryAdminList.action";
+    						//self.location.reload();
+    						parent.layer.closeAll();
+    	    				window.parent.location.reload();
     					}
     				);
+    				
+    				
+    				
     			} else {
     				swal({
     					title : "提示",
