@@ -69,7 +69,6 @@ public class AdminRealm extends AuthorizingRealm {
  		//activeUser就是用户身份信息
  		ActiveAdmin activeAdmin = new ActiveAdmin();
  		
-
  		activeAdmin.setId(admin.getAdminid());
  		activeAdmin.setAdminname(admin.getAdminname());
  		activeAdmin.setAdminphoto(admin.getAdminphoto());

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -78,9 +79,11 @@ public class AdminController {
 		Subject subject = SecurityUtils.getSubject();
 				//取身份信息
 		ActiveAdmin admin = (ActiveAdmin) subject.getPrincipal();
-		System.out.println(admin.toString());
+		
+		subject.getSession().setAttribute("admin", admin);
+		/*System.out.println(admin.toString());*/
 				//通过model传到页面
-		model.addAttribute("admin", admin);
+		/*model.addAttribute("admin", admin);*/
 		
 		return "/jsp/back/index.jsp";
 	}
