@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -46,10 +47,10 @@
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
 								<span class="block m-t-xs">
-									<strong class="font-bold">CJ技术</strong>
+									<strong class="font-bold">${sessionScope.admin.adminname }</strong>
 								</span>
 								<span class="text-muted text-xs block">
-									超级管理员<b class="caret"></b>
+									${sessionScope.admin.rolename }<b class="caret"></b>
 								</span>
 							</span>
 						</a>
@@ -83,7 +84,7 @@
 				</li>
 				<!-- 高级管理 -->
 			 	
-			 	<shiro:hasPermission name="root">
+			 	<shiro:hasAnyPermission name="root">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-cutlery"></i>
@@ -140,10 +141,10 @@
 					</ul>
 				</li>
 				
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 				<!-- 商品管理 -->
 				
-				<shiro:hasPermission name="root">
+				<shiro:hasAnyPermission name="root,good">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-gift"></i>
@@ -172,7 +173,7 @@
 							<span class="glyphicon-class">商品分类</span>							
 						</a>					
 					</li>
-					<li>
+					<%-- <li>
 						<a href="#">
 							<i class="glyphicon glyphicon-comment"></i>
 							<span class="glyphicon-class">会员评论</span>
@@ -180,16 +181,10 @@
 						</a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库记录</a>
-							</li>
-							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库出货管理</a>
-							</li>
-							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">仓库进货管理</a>
+								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">评论管理</a>
 							</li>
 						</ul>							
-					</li>
+					</li> --%>
 					<li>
 						<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">
 							<i class="glyphicon glyphicon-barcode"></i>
@@ -205,9 +200,9 @@
 				</ul>
 				</li>
 				
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 				<!-- 报表管理 -->		
-				<shiro:hasPermission name="root">
+				<shiro:hasAnyPermission name="root,report,ceo">
 				<li>
 					<a href="#">
 						<i class="fa fa fa-bar-chart-o"></i>
@@ -245,9 +240,9 @@
 					</ul>
 				</li>
 			
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 			
-				<shiro:hasPermission name="root">
+				<shiro:hasAnyPermission name="root,user">
 				<li>
 					<a href="mailbox.html">
 						<i class="glyphicon glyphicon-user"></i>
@@ -275,8 +270,8 @@
 						</li>
 					</ul>
 				</li>
-				</shiro:hasPermission>
-				<shiro:hasPermission name="root">
+				</shiro:hasAnyPermission>
+				<shiro:hasAnyPermission name="root,order">
 				<!-- 订单管理 -->
 				
 				<li>
@@ -300,10 +295,10 @@
 						</li>						
 					</ul>
 				</li>
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 		
 				<!-- 购物车管理 -->
-				<shiro:hasPermission name="root">
+				<shiro:hasAnyPermission name="root,good,order">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-shopping-cart"></i>
@@ -328,10 +323,10 @@
 						</li>
 					</ul>
 				</li>
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 				<!-- 文章管理 -->
 				
-				<shiro:hasPermission name="root">
+				<shiro:hasAnyPermission name="root,user">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-earphone"></i>
@@ -369,9 +364,9 @@
 						</li>
 					</ul>
 				</li>
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 				<!-- 促销管理 -->
-				<shiro:hasPermission name="root">
+				<shiro:hasAnyPermission name="root,user">
 				<li>
 					<a href="#">
 						<i class="glyphicon glyphicon-yen"></i>
@@ -408,10 +403,10 @@
 						</li>
 					</ul>
 				</li>
-				</shiro:hasPermission>
+				</shiro:hasAnyPermission>
 				<!-- 库存管理 -->
 				
-				<shiro:hasPermission name="root">	
+				<shiro:hasAnyPermission name="root,house">	
 				
 				<li>
 					<a href="#">
@@ -467,7 +462,7 @@
 						</li>
 					</ul>
 				</li>
-				</shiro:hasPermission>	
+				</shiro:hasAnyPermission>	
 			</ul>
 			
 		</div>

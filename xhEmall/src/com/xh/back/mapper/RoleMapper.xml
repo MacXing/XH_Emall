@@ -8,7 +8,7 @@
 		ON a.adminId =ra.adminId
 		JOIN role r
 		ON ra.roleId=r.id
-	
+		WHERE a.adminId=#{id}
 	</select>
 	
 	<resultMap type="admin_role" id="queryAllRoleAndPermissionMap">
