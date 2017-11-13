@@ -43,7 +43,7 @@ public class AdminRealm extends AuthorizingRealm {
 		
 		String adminname =(String) token.getPrincipal();
 		Xhadmin admin = null;
-		
+		String rolename="";
  		try {
  			admin = adminService.queryAdminByName(adminname);
  		} catch (Exception e) {
@@ -61,18 +61,27 @@ public class AdminRealm extends AuthorizingRealm {
 					
  		}
  		
+ 		List<Role> roles = new ArrayList<>();
+ 		try {
+			roles = roleService.queryAllRoleById(admin.getAdminid());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
  		String password = admin.getAdminpassword();
  		
+ 		if(roles!=null){
+ 			rolename=roles.get(0).getRolename();
+ 		}
  		//盐
 // 		String salt = admin.getSalt();
  		
  		//activeUser就是用户身份信息
  		ActiveAdmin activeAdmin = new ActiveAdmin();
  		
-
  		activeAdmin.setId(admin.getAdminid());
  		activeAdmin.setAdminname(admin.getAdminname());
  		activeAdmin.setAdminphoto(admin.getAdminphoto());
+ 		activeAdmin.setRolename(rolename);
  		
  		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
  				activeAdmin, password, this.getName());
@@ -84,13 +93,16 @@ public class AdminRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		ActiveAdmin activeAdmin = (ActiveAdmin) principals.getPrimaryPrincipal();
+		
 		if(activeAdmin==null){
 			return null;
 		}
-		List<Role> roelsList = roleService.queryAllRoleById(activeAdmin.getId());
+		int id = activeAdmin.getId();		
+		List<Role> roelsList = roleService.queryAllRoleById(id);
+		
 		List<String> list=new ArrayList<>();
 		for(Role role: roelsList){
-			System.out.println(role.getPermission());
+			
 			list.add(role.getPermission());
 		}
 		/*list.add("root");

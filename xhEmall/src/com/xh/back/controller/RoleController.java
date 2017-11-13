@@ -89,6 +89,7 @@ public class RoleController {
 	public Msg updateRole(Admin_Role ar){
 		
 		System.out.println(ar);
+		
 		List<Admin_Role> admin_Roles = null;
 		
 		if(ar.getAdminid()>0){

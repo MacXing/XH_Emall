@@ -3,48 +3,35 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
-    <title>404页面</title>
-    <meta name="keywords" content="">
-
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="${pageContext.request.contextPath }/resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="${pageContext.request.contextPath }/resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-
-    <link href="${pageContext.request.contextPath }/resource/css/animate.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath }/resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
-
+<meta charset="utf-8">
+<title>错误页面</title>
+<link href="../resource/css/pintuer.css" rel="stylesheet"/>
 </head>
 
-<body class="gray-bg">
-    <div class="middle-box text-center animated fadeInDown">
-        <h1>404</h1>
-        <h3 class="font-bold">${message}</h3>
-
-        <div class="error-desc">
-            抱歉，页面好像去火星了~
-            <form class="form-inline m-t" role="form">
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="请输入您需要查找的内容 …">
-                </div>
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </form>
-        </div>
-    </div>
-    <script src="${pageContext.request.contextPath }/resource/js/jquery.min.js?v=2.1.4"></script>
-    <script src="${pageContext.request.contextPath }/resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script type="text/javascript" charset="UTF-8">
-    
-    </script>
+<body>
+<div class="container" style=" margin-top:8%;"> 
+   <div class="panel margin-big-top">
+      <div class="text-center">
+         <br>
+         <h2 class="padding-top"> <stong>${message }</stong> </h2>
+         <div class=""> 
+            <div class="float-left">
+                <img src="http://www.pintuer.com/images/ds-1.gif">
+                <div class="alert"> 卧槽！页面不见了！ </div>
+            </div>
+            <div class="float-right">
+               <img src="http://www.pintuer.com/images/ds-2.png" width="260"> 
+            </div>
+          </div>
+          <div class="padding-big">
+               <a href="${pageContext.request.contextPath }/jsp/back/loginbackstage.jsp" class="button bg-yellow">返回登录页面</a>
+               <a href="" class="button">保证不打死管理员</a>
+          </div> 
+      </div> 
+   </div> 
+</div>
 </body>
-
 </html>

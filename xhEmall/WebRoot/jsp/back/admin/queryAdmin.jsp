@@ -208,7 +208,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-white" data-dismiss="modal" id="close">关闭</button>
-								<button type="button" class="btn btn-primary sbmt">保存</button>
+								<button type="button" id="btn_sbmt" class="btn btn-primary sbmt">保存</button>
 							</div>
 						</div>
 					</div>
@@ -225,6 +225,7 @@
     <script src="resource/js/admin/back-admin.js"></script>
     <script src="resource/layer/layer.js"></script>
     <script src="resource/layui/layui.js"></script>
+    <script src="resource/js/validate.js" type="text/javascript"></script>
 	<script>
 	layui.use('upload', function() {
         var $ = layui.jquery,
@@ -315,37 +316,7 @@
 		});
 	});
 	
-	$(".sbmt").click(function (){
-		//var id = $(this).parent().find("input[type='checkbox']").val();
-		//var formdata = new FormData($("#signupForm"));
-		//console.log("test");
-		//console.log();
-		$.ajax({
-			url : "admin/modifyAdmin.action",
-			type : "POST",
-			data : JSON.stringify($("#signupForm").serializeObject()),
-			contentType:"application/json", 
-			success : function(result){
-				if(result){
-					swal({
-						title : "提示",
-						text : "更新成功！！"},
-						function(){
-							$(".close").click(); 
-							self.location.reload();
-						}
-					);
-				} else {
-					swal({
-						title : "提示",
-						text : "更新失败！！",
-						confirmButtonColor : "#F00"
-					});
-				}
-				
-			}
-		});
-	});
+
 	$(".demo4").click(
 			function() {
 				var id = $(this).parent().parent().find(
@@ -380,6 +351,48 @@
 					}
 				})
 			});
+	</script>
+	<script type="text/javascript">
+	 $("#btn_sbmt").click(function (){
+		var val = new validate({
+			rules:{
+				adminname:"notEmpty",   
+				adminpwd:"password",
+				adminPhone:"mobile",
+				email:"email",
+				admindescribe:"notEmpty"
+			},
+			/*submitFun里面为检验成功后要执行的方法*/
+			submitFun:function(){
+				$.ajax({
+			url : "admin/modifyAdmin.action",
+			type : "POST",
+			data : JSON.stringify($("#signupForm").serializeObject()),
+			contentType:"application/json", 
+			success : function(result){
+				if(result){
+					swal({
+						title : "提示",
+						text : "更新成功！！"},
+						function(){
+							$(".close").click(); 
+							self.location.reload();
+						}
+					);
+				} else {
+					swal({
+						title : "提示",
+						text : "更新失败！！",
+						confirmButtonColor : "#F00"
+					});
+				}
+				
+			}
+		});
+
+			}
+		});
+	});
 	</script>
 </body>
 

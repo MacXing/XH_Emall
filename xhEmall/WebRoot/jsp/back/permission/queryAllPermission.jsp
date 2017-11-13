@@ -147,18 +147,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	<form class="form-horizontal m-t" id="myform3">
                 			<div class="form-group"> 
                                 <div class="col-sm-8">                              		                             
-			                         <input type="hidden" id="arid" name="id" />			                          			           					
+			                         <input id="arid" name="id" type="hidden" class="form-control" >                          			           					
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-8">                              		                                   		                          
-									<input type="hidden" id="adminid" name="adminid">
+									<input id="adminid" name = "adminid" type="hidden" class="form-control" >
                        	    	</div>
-                            </div>                			
+                            </div>          			
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">管理员名称：</label>
                                 <div class="col-sm-8">
-                                    <input id="adminname" name="adminid" type="text" disabled="" class="form-control">
+                                    <input id="adminname" type="text" class="form-control" disabled>
                                 </div>                     
                            </div>
                            
@@ -204,7 +204,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	success:function(result){
         		$.each(result.extend.admins,function(index,item){
     				 var option=$("<option value='"+item.adminid+"'></option>").append(item.adminname);
-    				 option.appendTo(admin);
+    				 option.appendTo(admin);	 
     			});
         	}
         });	
@@ -294,11 +294,11 @@ $("#flash").on("click",function(){
 	 			   success:function(result){
 	 					  if(result.code==100){
 	 						  console.log(result);
-	 						 $("#arid").val(roleid);
-	 						 $("#adminid").val(adminid);
-	 						 $("#adminname").html(result.extend.ars.admin.adminname);
-	 						 $("#role").find("option[='value"+result.extend.ars.role.roleid+"']").attr("selected",true);
-	 						 /* $("#role").find("option:selected").text(result.extend.ars.role.rolename); */ 
+	 						 $("#arid").val(result.extend.ars.id);
+	 						 $("#adminid").val(result.extend.ars.admin.adminid);
+	 						 $("#adminname").val(result.extend.ars.admin.adminname);
+	 						 $("#role2").find("option[='value"+result.extend.ars.role.roleid+"']").attr("selected",true);
+	 						 
 	 					  } 
 	 			   }	 			   
 	 		   });

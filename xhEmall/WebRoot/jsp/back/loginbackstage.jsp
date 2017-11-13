@@ -105,7 +105,8 @@
 								validators : {
 									notEmpty : {
 										message : '请输入密码'
-									}
+									},
+									
 								}
 							}
 
