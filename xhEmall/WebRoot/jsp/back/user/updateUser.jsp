@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">  
                                 	<label class="col-sm-3 control-label">等级编号：</label>                          	    
                                     <div class="col-sm-9">                                  	
-                                        <input id="gradeid" name="gradeid" value="${user.gradeid }" type="text" class="form-control" id="checkgradebyid">
+                                        <input name="gradeid" value="${user.gradeid }" type="text" class="form-control" id="checkgradebyid">
                                    		<div class="checkgrade" style="color:red;margin-top:auto"></div>
                                     </div>
                                 </div>
@@ -227,7 +227,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 	/*检查等级ID */	 	
 	$("#checkgradebyid").blur(function(){
-		var gradeid = $(this).val();		
+		var gradeid = $(this).val();
+		if(gradeid==""){
+			gradeid=0;
+		}
 		$.ajax({
 			cache: true,
 			type: "GET",

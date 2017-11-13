@@ -21,7 +21,7 @@ public class CustomFormAuthenticationFilter{
 		String randomcode = code;
 	
 		
-		if(randomcode!=null && validateCode!=null && !randomcode.equals(validateCode)){
+		if(randomcode!=null && validateCode!=null && !randomcode.equalsIgnoreCase(validateCode)){
 			//如果校验失败，放回false
 			
 			return false; 
