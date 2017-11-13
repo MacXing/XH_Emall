@@ -208,7 +208,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 	/*检查等级ID */	 	
 	$("#checkgradebyid").blur(function(){
-		var gradeid = $(this).val();		
+		var gradeid = $(this).val();
+		if(gradeid==""){
+			gradeid=0;
+		}
 		$.ajax({
 			cache: true,
 			type: "GET",

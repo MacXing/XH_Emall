@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>商品管理</title>
+    <title>评论管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>增加商品</h5>
+                        <h5>增加评论</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -53,35 +53,87 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="ibox-content">
                         <form id="myform" method="post"  class="form-horizontal" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">名称：</label>
-
+                                <label class="col-sm-2 control-label">会员名：</label>
                                 <div class="col-md-3">
-                                    <input id="pname" type="text" class="form-control" name="pname">
+                                     <div class="input-group">
+			                                <select id="users"  name="userid" class="chosen-select" style="width:350px;height:28px;" tabindex="2">
+			                                	 
+			                                </select>
+			                        </div>   
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">商品描述：</label>
+                                <label class="col-sm-2 control-label">商品：</label>
                                 <div class="col-sm-10">
-                                    <input id="pdesc" type="text" class="form-control" name="pdesc"> <span class="help-block m-b-none">商品说明，50字内说明商品信息。</span>
+                                    <div class="input-group">
+			                                <select id="product" name="pid" class="chosen-select" style="width:350px;height:28px;" tabindex="2">
+			                                	 
+			                                </select>
+			                        </div>   
                                 </div>
                             </div>
+                            
                              <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">定价：</label>
-
-                                <div class="col-md-3">
-                                    <input id="pprice" type="text" class="form-control" name="pprice">
-                                </div>
+                                <label class="col-sm-2 control-label">商品详细：</label>
+                                   <div class="col-sm-10" id="file-pretty">
+			                                <textarea name="commenttxt" id="commenttxt" data-provide="markdown" rows="10"></textarea>
+			                       </div>                                
                             </div>
-                             <div class="hr-line-dashed"></div>
+                			<div class="hr-line-dashed"></div>
+                			
+                       
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">售价：</label>
+                                <label class="col-sm-2 control-label">服务等级：</label>
                                 <div class="col-md-3">
-                                    <input id="psale" type="text" class="form-control" name="psale">
+                                	<div class="input-group">
+			                                <select id="commentservice" name="commentservice" data-placeholder="选择角色..." class="chosen-select" style="width:350px;height:28px;" tabindex="2" >
+			                                	 <option value="1">1星级</option>
+			                                	 <option value="2">2星级</option>
+			                                	 <option value="3">3星级</option>
+			                                	 <option value="4">4星级</option>
+			                                	 <option value="5">5星级</option>
+			                                </select>
+			                        </div> 
                                 </div>
                             </div>
-                             <div class="hr-line-dashed"></div>
+                            
+                            <div class="hr-line-dashed"></div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">物流等级：</label>		
+                                <div class="col-md-3">                                
+                                    <div class="input-group">
+			                                <select id="commentshopping" name="commentshopping" data-placeholder="选择品牌..." class="chosen-select" style="width:350px;" tabindex="2" >
+			                                	 <option value="1">1星级</option>
+			                                	 <option value="2">2星级</option>
+			                                	 <option value="3">3星级</option>
+			                                	 <option value="4">4星级</option>
+			                                	 <option value="5">5星级</option>
+			                                </select>
+			                        </div>   
+                                </div>
+                            </div>
+                            
+                            <div class="hr-line-dashed"></div>
+                             
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">商品等级：</label>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+			                                <select id="commentgoods" name="commentgoods" data-placeholder="选择角色..." class="chosen-select" style="width:350px;height:28px;" tabindex="2">
+			                                	 <option value="1">1星级</option>
+			                                	 <option value="2">2星级</option>
+			                                	 <option value="3">3星级</option>
+			                                	 <option value="4">4星级</option>
+			                                	 <option value="5">5星级</option>
+			                                </select>
+			                        </div> 
+                                </div>
+                            </div>
+                            
+                            <div class="hr-line-dashed"></div>
                              
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">商品图片：</label>
@@ -97,57 +149,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">商品详细：</label>
-                                   <div class="col-sm-10" id="file-pretty">
-			                                <textarea data-provide="markdown" rows="10" name="pimgdetail" id="pimgdetail"></textarea>
-			                       </div>                                
-                            </div>
-                			<div class="hr-line-dashed"></div>
-                			
-                			<div class="form-group">
-                                <label class="col-sm-2 control-label">品牌：</label>		
-                                <div class="col-md-3">                                
-                                    <div class="input-group">
-			                                <select id="addBrand" data-placeholder="选择品牌..." class="chosen-select" style="width:350px;" tabindex="2" name="brandid">
-			                                	 
-			                                </select>
-			                        </div>   
-                                </div>
-                            </div>
-                			
-                			<div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">商品大小：</label>
 
-                                <div class="col-md-3">
-                                    <input id="psize" type="text" class="form-control" name="psize">
-                                </div>
-                            </div>
-                			
-                			<div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">商品单位：</label>
-
-                                <div class="col-md-3">
-                                    <input id="punit" type="text" class="form-control" name="punit">
-                                </div>
-                            </div>
-                			<div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">商品折扣：</label>
-                                <div class="col-md-3">
-                                    <input id="pdiscount" type="text" class="form-control" name="pdiscount">
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="button" id="btn_id">保存内容</button>
-                                    <!-- <button class="btn btn-white" id="return">返回</button> -->
+                                    <button class="btn btn-primary" type="button" id="btn_id">保存内容</button>                               
                                     <input type="button" class="btn" value="返回" onclick="javascript:history.go(-1);"/>
                                 </div>
                             </div>
+                            
                         </form> 
                     </div>
                 </div>
@@ -168,6 +177,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.js"></script>
     <script type="text/javascript" src="resource/js/plugins/markdown/bootstrap-markdown.zh.js"></script>
 	<script type="text/javascript" src="resource/js/validate.js"></script>
+ 	<script type="text/javascript">
+ 		$(document).ready(function(){
+ 			$.ajax({
+ 				url:"${pageContext.request.contextPath }/user/queryAllUsersForJson.action",
+ 				type:"GET",
+ 				success:function(result){
+ 					$.each(result.extend.users,function(index,item){
+ 	    				 var option=$("<option value='"+item.userid+"'></option>").append(item.username);
+ 	    				 option.appendTo(users);	 
+ 	    			});
+ 				}
+ 			});
+ 			
+ 			$.ajax({
+ 				url:"${pageContext.request.contextPath }/product/queryAllProductsForJson.action",
+ 				type:"GET",
+ 				success:function(result){
+ 					$.each(result.extend.products,function(index,item){
+ 	    				 var option=$("<option value='"+item.pid+"'></option>").append(item.pname);
+ 	    				 option.appendTo(product);	 
+ 	    			});
+ 				}
+ 			});
+ 			
+ 		});
+ 	
+ 	
+ 	</script>
  
 	 <script>
 	 	 $("#btn_id").click(function (){
@@ -175,32 +212,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var val = new validate({
 			
 				rules:{
-					pname:"notEmpty",   
-					pdesc:"notEmpty",
-					pprice:"money",
-					psale:"money", 
-					pimgdetail:"notEmpty",
-					psize:"notEmpty",
-					punit:"notEmpty",
-					pdiscount:"notEmpty"
-					
+					commenttxt:"notEmpty",   				
 				},
 				/*submitFun里面为检验成功后要执行的方法*/
 				submitFun:function(){
 				var action="";
-	if(!confirm("您确定要增加商品？")){
+	if(!confirm("您确定要增加评论？")){
 		return false;
 	}else{
 		var form = $("#file").val().length;
 		var formData= new FormData($("#myform")[0]);
 		
 		 if(form==0){
-			 action ="insertProduct.action";
+			 action ="insertComment.action";
 		}else{
-			 action="insertProductAndFile.action";
+			 action="insertCommentAndFile.action";
 		}		 
 		$.ajax({		
-			url:"${pageContext.request.contextPath }/product/"+action,
+			url:"${pageContext.request.contextPath }/comment/"+action,
 			   type:"POST",
 			   data:formData,
 			  /*  async: false,  
@@ -226,76 +255,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 	</script>
- 
- 
-    <script>
-    
-    $(function(){
-    	$.ajax({
-     		url:"${pageContext.request.contextPath}/brand/queryAllBrandsForJson.action",
-     		type:"GET",
-     		success:function(result){
-     			$.each(result.extend.brands,function(index,item){
-     				 var option=$("<option value='"+item.brandid+"'></option>").append(item.brandname);
-     				 option.appendTo(addBrand);
-     			});
-     		}
-     	});
-    	
-    });
-    	
-   
-    </script>
    
 <script type="text/javascript">
-/* $("#btn_id").on("click",function(){
-	 var action="";
-	if(!confirm("您确定要增加商品？")){
-		return false;
-	}else{
-		var form = $("#file").val().length;
-		var formData= new FormData($("#myform")[0]);
-		
-		 if(form==0){
-			 action ="insertProduct.action";
-		}else{
-			 action="insertProductAndFile.action";
-		}		 
-		$.ajax({		
-			url:"${pageContext.request.contextPath }/product/"+action,
-			   type:"POST",
-			   data:formData, */
-			  /*  async: false,  
-		       cache: false,  */ 
-		      /*  contentType: false,  
-		       processData: false, 
-			   success:function(result){ 
-				  if(result.code==100){						  	
-					    alert("增加成功！");
-					    clean();
-				   }else{
-					  alert("增加失败！");
-				   } 
-			   }
-		});
-	}
-}); */
+
 function clean()
 {	
-$("#pname").val("");
-$("#pdesc").val("");
-$("#pprice").val("");
-$("#psale").val("");
-$("#addBrand").val("");
-$("#pimgdetail").val("");
-$("#psize").val("");
-$("#punit").val("");
-$("#pdiscount").val("");
-var file = $("#file"); 
-file.after(file.clone().val("")); 
-file.remove();
-$("#img").attr("src",null);
-$("#addBrand").val(1);
+	$("#commenttxt").val("");
+	var file = $("#file"); 
+	file.after(file.clone().val("")); 
+	file.remove();
+	$("#img").attr("src",null);
 }
 
 </script>

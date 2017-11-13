@@ -27,7 +27,7 @@
 	<bean id="productService" class="com.xh.back.serviceImpl.ProductServiceImpl"/>
 	<bean id="brandService" class="com.xh.back.serviceImpl.BrandServiceImpl"/> 	
 	<bean id="salesService" class="com.xh.back.serviceImpl.SalesServiceImpl"/>
-	<!-- <bean id="repertoryService" class="com.xh.back.serviceImpl.RepertoryServiceImpl"/> -->
+	<bean id="repertoryService" class="com.xh.back.serviceImpl.RepertoryServiceImpl"/>
 	<bean id="categoryService" class="com.xh.back.serviceImpl.CategoryServiceImpl"/>
 	<!-- <bean id="repertoryService" class="com.xh.back.serviceImpl.TrolleyServiceImpl"/> -->
 	<bean id="xhTrolleyService" class="com.xh.back.serviceImpl.XhTrolleyServiceImpl"/>
@@ -37,6 +37,6 @@
 	<bean id="roleService" class="com.xh.back.serviceImpl.RoleServiceImpl"/>
 	<!-- <bean id="adService" class="com.xh.back.serviceImpl.AdServiceImpl"/> -->
 	<bean id="adService" class="com.xh.back.serviceImpl.AdServiceImpl"/>
-	
+	<bean id="commentService" class="com.xh.back.serviceImpl.CommentServiceImpl"/>
 </beans>
 	

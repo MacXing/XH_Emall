@@ -173,7 +173,7 @@
 							<span class="glyphicon-class">商品分类</span>							
 						</a>					
 					</li>
-					<%-- <li>
+					<li>
 						<a href="#">
 							<i class="glyphicon glyphicon-comment"></i>
 							<span class="glyphicon-class">会员评论</span>
@@ -181,10 +181,12 @@
 						</a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">评论管理</a>
+								<a class="J_menuItem" href="${pageContext.request.contextPath }/comment/queryAllComment.action">评论管理</a>
+							</li>					
 							</li>
 						</ul>							
-					</li> --%>
+					</li>
+					
 					<li>
 						<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">
 							<i class="glyphicon glyphicon-barcode"></i>
@@ -423,11 +425,8 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="#">总库存查询</a>
-								</li>
-								<li>
-									<a class="J_menuItem" href="#">分店库存查询</a>
-								</li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryStock.action">库存查询</a>
+								</li>								
 							</ul>
 						</li>
 						<li>
@@ -453,11 +452,14 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="#">出货管理</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllOutput.action">出货查询</a>
 								</li>
 								<li>
-									<a class="J_menuItem" href="#">进货管理</a>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllInput.action">进货查询</a>
 								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath}/repertory/queryAllProduct.action">进出货操作</a>
+								</li>								
 							</ul>
 						</li>
 					</ul>
@@ -487,87 +489,6 @@
 					</form>
 				</div>
 				<ul class="nav navbar-top-links navbar-right">
-					<li class="dropdown">
-						<a class="dropdown-toggle count-info" data-toggle="dropdown"
-							href="#">
-							<i class="fa fa-envelope"></i>
-							<span class="label label-warning">16</span>
-						</a>
-						<ul class="dropdown-menu dropdown-messages">
-							<li class="m-t-xs">
-								<div class="dropdown-messages-box">
-									<a href="profile.html" class="pull-left">
-										<img alt="image" class="img-circle" src="resource/img/a7.jpg">
-									</a>
-									<div class="media-body">
-										<small class="pull-right">46小时前</small> <strong>小四</strong>
-										这个在日本投降书上签字的军官，建国后一定是个不小的干部吧？ <br> <small
-											class="text-muted">3天前 2014.11.8</small>
-									</div>
-								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="dropdown-messages-box">
-									<a href="profile.html" class="pull-left">
-										<img alt="image" class="img-circle" src="resource/img/a4.jpg">
-									</a>
-									<div class="media-body ">
-										<small class="pull-right text-navy">25小时前</small> <strong>国民岳父</strong>
-										如何看待“男子不满自己爱犬被称为狗，刺伤路人”？——这人比犬还凶 <br> <small
-											class="text-muted">昨天</small>
-									</div>
-								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="text-center link-block">
-									<a class="J_menuItem" href="mailbox.html">
-										<i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-									</a>
-								</div>
-							</li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle count-info" data-toggle="dropdown"
-							href="#">
-							<i class="fa fa-bell"></i>
-							<span class="label label-primary">8</span>
-						</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li>
-								<a href="mailbox.html">
-									<div>
-										<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-										<span class="pull-right text-muted small">4分钟前</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="profile.html">
-									<div>
-										<i class="fa fa-qq fa-fw"></i> 3条新回复
-										<span class="pull-right text-muted small">12分钟钱</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="text-center link-block">
-									<a class="J_menuItem" href="notifications.html">
-										<strong>查看所有 </strong> <i class="fa fa-angle-right"></i>
-									</a>
-								</div>
-							</li>
-						</ul>
-					</li>
-					<li class="hidden-xs">
-						<a href="index_v1.html" class="J_menuItem" data-index="0">
-							<i class="fa fa-cart-arrow-down"></i> 购买
-						</a>
-					</li>
 					<li class="dropdown hidden-xs">
 						<a class="right-sidebar-toggle" aria-expanded="false">
 							<i class="fa fa-tasks"></i> 主题
@@ -714,242 +635,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="tab-2" class="tab-pane">
-
-						<div class="sidebar-title">
-							<h3>
-								<i class="fa fa-comments-o"></i> 最新通知
-							</h3>
-							<small><i class="fa fa-tim"></i> 您当前有10条未读信息</small>
-						</div>
-
-						<div>
-
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a1.jpg">
-
-										<div class="m-t-xs">
-											<i class="fa fa-star text-warning"></i> <i
-												class="fa fa-star text-warning"></i>
-										</div>
-									</div>
-									<div class="media-body">
-
-										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> <small
-											class="text-muted">今天 4:21</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a2.jpg">
-									</div>
-									<div class="media-body">
-										HCY48之音乐大魔王会员专属皮肤已上线，快来一键换装拥有他，宣告你对华晨宇的爱吧！ <br> <small
-											class="text-muted">昨天 2:45</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a3.jpg">
-
-										<div class="m-t-xs">
-											<i class="fa fa-star text-warning"></i> <i
-												class="fa fa-star text-warning"></i> <i
-												class="fa fa-star text-warning"></i>
-										</div>
-									</div>
-									<div class="media-body">
-										写的好！与您分享 <br> <small class="text-muted">昨天 1:10</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a4.jpg">
-									</div>
-
-									<div class="media-body">
-										国外极限小子的炼成！这还是亲生的吗！！ <br> <small class="text-muted">昨天
-											8:37</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a8.jpg">
-									</div>
-									<div class="media-body">
-
-										一只流浪狗被收留后，为了减轻主人的负担，坚持自己觅食，甚至......有些东西，可能她比我们更懂。 <br> <small
-											class="text-muted">今天 4:21</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a7.jpg">
-									</div>
-									<div class="media-body">
-										这哥们的新视频又来了，创意杠杠滴，帅炸了！ <br> <small class="text-muted">昨天
-											2:45</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a3.jpg">
-
-										<div class="m-t-xs">
-											<i class="fa fa-star text-warning"></i> <i
-												class="fa fa-star text-warning"></i> <i
-												class="fa fa-star text-warning"></i>
-										</div>
-									</div>
-									<div class="media-body">
-										最近在补追此剧，特别喜欢这段表白。 <br> <small class="text-muted">昨天
-											1:10</small>
-									</div>
-								</a>
-							</div>
-							<div class="sidebar-message">
-								<a href="#">
-									<div class="pull-left text-center">
-										<img alt="image" class="img-circle message-avatar"
-											src="resource/img/a4.jpg">
-									</div>
-									<div class="media-body">
-										我发起了一个投票 【你认为下午大盘会翻红吗？】 <br> <small class="text-muted">星期一
-											8:37</small>
-									</div>
-								</a>
-							</div>
-						</div>
-
-					</div>
-					<div id="tab-3" class="tab-pane">
-
-						<div class="sidebar-title">
-							<h3>
-								<i class="fa fa-cube"></i> 最新任务
-							</h3>
-							<small><i class="fa fa-tim"></i> 您当前有14个任务，10个已完成</small>
-						</div>
-
-						<ul class="sidebar-list">
-							<li>
-								<a href="#">
-									<div class="small pull-right m-t-xs">9小时以后</div>
-									<h4>市场调研</h4>
-									按要求接收教材；
-
-									<div class="small">已完成： 22%</div>
-									<div class="progress progress-mini">
-										<div style="width: 22%;"
-											class="progress-bar progress-bar-warning"></div>
-									</div>
-									<div class="small text-muted m-t-xs">项目截止： 4:00 -
-										2015.10.01</div>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<div class="small pull-right m-t-xs">9小时以后</div>
-									<h4>可行性报告研究报上级批准</h4>
-									编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
-
-									<div class="small">已完成： 48%</div>
-									<div class="progress progress-mini">
-										<div style="width: 48%;" class="progress-bar"></div>
-									</div>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<div class="small pull-right m-t-xs">9小时以后</div>
-									<h4>立项阶段</h4>
-									东风商用车公司 采购综合综合查询分析系统项目进度阶段性报告武汉斯迪克科技有限公司
-
-									<div class="small">已完成： 14%</div>
-									<div class="progress progress-mini">
-										<div style="width: 14%;"
-											class="progress-bar progress-bar-info"></div>
-									</div>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="label label-primary pull-right">NEW</span>
-									<h4>设计阶段</h4>
-									<!--<div class="small pull-right m-t-xs">9小时以后</div>-->
-									项目进度报告(Project Progress Report)
-									<div class="small">已完成： 22%</div>
-									<div class="small text-muted m-t-xs">项目截止： 4:00 -
-										2015.10.01</div>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<div class="small pull-right m-t-xs">9小时以后</div>
-									<h4>拆迁阶段</h4>
-									科研项目研究进展报告 项目编号: 项目名称: 项目负责人:
-
-									<div class="small">已完成： 22%</div>
-									<div class="progress progress-mini">
-										<div style="width: 22%;"
-											class="progress-bar progress-bar-warning"></div>
-									</div>
-									<div class="small text-muted m-t-xs">项目截止： 4:00 -
-										2015.10.01</div>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<div class="small pull-right m-t-xs">9小时以后</div>
-									<h4>建设阶段</h4>
-									编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
-
-									<div class="small">已完成： 48%</div>
-									<div class="progress progress-mini">
-										<div style="width: 48%;" class="progress-bar"></div>
-									</div>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<div class="small pull-right m-t-xs">9小时以后</div>
-									<h4>获证开盘</h4>
-									编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
-
-									<div class="small">已完成： 14%</div>
-									<div class="progress progress-mini">
-										<div style="width: 14%;"
-											class="progress-bar progress-bar-info"></div>
-									</div>
-								</a>
-							</li>
-
-						</ul>
-
-					</div>
 				</div>
-
 			</div>
 		</div>
 		<!--右侧边栏结束-->

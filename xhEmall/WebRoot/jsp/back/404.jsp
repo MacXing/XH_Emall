@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
           </div>
           <div class="padding-big">
-               <a href="" class="button bg-yellow">返回登录页面</a>
+               <a href="${pageContext.request.contextPath }/jsp/back/loginbackstage.jsp" class="button bg-yellow">返回登录页面</a>
                <a href="" class="button">保证不打死管理员</a>
           </div> 
       </div> 

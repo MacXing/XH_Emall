@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.w3c.dom.ls.LSInput;
 
 import com.other.getImage.FileUtil;
 import com.other.getip.GetIp;
@@ -64,7 +65,9 @@ public class UserController {
 			user.setUserlogintime(new Date());
 			user.setUserlasttime(new Date());
 			userService.addUser(user);
-		}		
+		}else{
+			return Msg.fail();
+		}
 		return Msg.success();
 	}
 	
@@ -100,7 +103,9 @@ public class UserController {
 			user.setUserlogintime(new Date());
 			user.setUserlasttime(new Date());
 			userService.addUser(user);				
-		}	
+		}else{
+			return Msg.fail();
+		}
 		return Msg.success();
 	}
 	
@@ -163,7 +168,9 @@ public class UserController {
 			user.setUserlogintime(new Date());
 			user.setUserlasttime(new Date());
 			userService.modifyUserById(user);
-		}		
+		}else{
+			return Msg.fail();
+		}
 		return Msg.success();
 	}
 	
@@ -208,7 +215,9 @@ public class UserController {
 			if(result.getCode()==100){
 				user.setUsersex(sex);
 				userService.modifyUserById(user);
-			}		
+			}else{
+				return Msg.fail();
+			}
 			return Msg.success();
 		}		
 		return Msg.fail();
@@ -231,4 +240,18 @@ public class UserController {
     	}
 		return Msg.fail1();
 	} 
+	
+	@RequestMapping("queryAllUsersForJson.action")
+    @ResponseBody
+    public Msg queryAllUsersForJson(){
+		List<Xhusers> users = userService.queryAllUsers();
+		if(users!=null){
+			
+			return Msg.success().add("users", users);
+			
+		}
+		
+		return Msg.fail();
+	}
+	
 }

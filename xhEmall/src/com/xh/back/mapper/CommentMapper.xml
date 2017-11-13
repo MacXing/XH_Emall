@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.CommentMapper">
+<!--Comment信息-->
+	<resultMap type="xhcomment" id="queryAllCommentMap">
+		<id column="commentId" property="commentid"/>
+		<result column="userId" property="userid"/>
+		<result column="pId" property="pid"/>
+		<result column="commentTime" property="commenttime"/>
+		<result column="commentTxt" property="commenttxt"/>
+		<result column="commentService" property="commentservice"/>
+		<result column="commentShopping" property="commentshopping"/>
+		<result column="commentShopping" property="commentshopping"/>
+		<result column="commentGoods" property="commentgoods"/>
+		<result column="commentImg" property="commentimg"/>
+		<association property="users" javaType="xhusers">
+			<id column="userId" property="userid"/>
+			<result column="userName" property="username"/>
+		</association>
+		<association property="product" javaType="xhproduct">
+			<id column="pId" property="pid"/>
+			<result column="pName" property="pname"/>
+		</association>
+	</resultMap>
+
+	<select id="queryAllComment" resultMap="queryAllCommentMap">
+		SELECT u.userID,u.userName, 
+		p.pID,p.pName, 
+		c.commentId,c.commentTime,c.commentTxt,
+		c.commentService, c.commentGoods,c.commentShopping,c.commentImg 
+		FROM xhUsers u 
+		JOIN xhComment c 
+		ON u.userID = c .userId
+		JOIN xhProduct p 
+		ON c.pId = p.pID 
+	</select>
+	<insert id="insertComment" parameterType="xhcomment">
+		INSERT INTO xhComment(userId,pId,commentTime,commentTxt,
+		commentService,commentShopping,commentGoods,commentImg)
+		VALUES(#{userid},#{pid},#{commenttime},#{commenttxt},
+		#{commentservice},#{commentshopping},#{commentgoods},#{commentimg})
+	</insert>
+	
+	<delete id="deleteCommentById" parameterType="int">
+		DELETE FROM xhComment
+		WHERE commentId = #{id}
+	</delete>
+	
+	<select id="queryCommentById" parameterType="int" resultMap="queryAllCommentMap">
+		SELECT u.userID,u.userName, 
+		p.pID,p.pName, 
+		c.commentId,c.commentTime,c.commentTxt,
+		c.commentService, c.commentGoods,c.commentShopping,c.commentImg 
+		FROM xhUsers u 
+		JOIN xhComment c 
+		ON u.userID = c .userId
+		JOIN xhProduct p 
+		ON c.pId = p.pID
+		WHERE c.commentId=7
+	</select>
+	
+</mapper>

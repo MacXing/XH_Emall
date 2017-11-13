@@ -2,14 +2,16 @@ package com.xh.back.bean;
 
 import java.util.Date;
 
+import com.xh.front.bean.Xhusers;
+
 public class Xhcomment {
     private Integer commentid;
 
-    private Integer xhuUserid;
+    private Integer userid;
 
     private Integer pid;
 
-    private Date userid;
+	private Date commenttime;
 
     private String commenttxt;
 
@@ -17,9 +19,13 @@ public class Xhcomment {
 
     private Integer commentshopping;
 
-    private Integer comtgoods;
+    private Integer commentgoods;
 
     private String commentimg;
+    
+    private Xhusers users;
+    
+    private Xhproduct product;
 
     private String attribute1;
 
@@ -34,29 +40,29 @@ public class Xhcomment {
     public void setCommentid(Integer commentid) {
         this.commentid = commentid;
     }
+    
+	public Xhusers getUsers() {
+		return users;
+	}
 
-    public Integer getXhuUserid() {
-        return xhuUserid;
-    }
+	public void setUsers(Xhusers users) {
+		this.users = users;
+	}
 
-    public void setXhuUserid(Integer xhuUserid) {
-        this.xhuUserid = xhuUserid;
-    }
+	public Xhproduct getProduct() {
+		return product;
+	}
 
-    public Integer getPid() {
+	public void setProduct(Xhproduct product) {
+		this.product = product;
+	}
+
+	public Integer getPid() {
         return pid;
     }
 
     public void setPid(Integer pid) {
         this.pid = pid;
-    }
-
-    public Date getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Date userid) {
-        this.userid = userid;
     }
 
     public String getCommenttxt() {
@@ -83,15 +89,15 @@ public class Xhcomment {
         this.commentshopping = commentshopping;
     }
 
-    public Integer getComtgoods() {
-        return comtgoods;
-    }
+    public Integer getCommentgoods() {
+		return commentgoods;
+	}
 
-    public void setComtgoods(Integer comtgoods) {
-        this.comtgoods = comtgoods;
-    }
+	public void setCommentgoods(Integer commentgoods) {
+		this.commentgoods = commentgoods;
+	}
 
-    public String getCommentimg() {
+	public String getCommentimg() {
         return commentimg;
     }
 
@@ -122,4 +128,22 @@ public class Xhcomment {
     public void setAttribute3(String attribute3) {
         this.attribute3 = attribute3 == null ? null : attribute3.trim();
     }
+    
+    public Integer getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+
+	public Date getCommenttime() {
+		return commenttime;
+	}
+
+	public void setCommenttime(Date commenttime) {
+		this.commenttime = commenttime;
+	}
+
+	
 }
