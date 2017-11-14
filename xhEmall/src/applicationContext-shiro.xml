@@ -23,7 +23,7 @@
               	/admin/login.action=anon
               	/logout.action=logout           	
                 <!-- /** = user -->
-                /**=anon
+                /**=<!-- authc -->anon
             </value>
    		 </property>
     </bean>

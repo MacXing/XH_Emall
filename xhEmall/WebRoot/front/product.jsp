@@ -1,5 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -478,10 +480,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
                 <div id="tsImgSCon">
                     <ul>
-                        <li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img src="front/images/ps1.jpg" tsImgS="front/images/ps1.jpg" width="79" height="79" /></li>
+                    	<c:forEach items="${productImages }" var="image">
+                    		<li onclick="showPic(${image.picid })" rel="MagicZoom">
+                    		<img src="${pageContext.request.contextPath}${image.url }" 
+                    			tsImgS="${pageContext.request.contextPath}${image.url }" width="79" height="79" />
+                    		</li>
+                    	</c:forEach>
+                        <!-- <li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img src="front/images/ps1.jpg" tsImgS="front/images/ps1.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(1)" rel="MagicZoom"><img src="front/images/ps2.jpg" tsImgS="front/images/ps2.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(2)" rel="MagicZoom"><img src="front/images/ps3.jpg" tsImgS="front/images/ps3.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(3)" rel="MagicZoom"><img src="front/images/ps4.jpg" tsImgS="front/images/ps4.jpg" width="79" height="79" /></li>
+                        <li onclick="showPic(3)" rel="MagicZoom"><img src="front/images/ps4.jpg" tsImgS="front/images/ps4.jpg" width="79" height="79" /></li> -->
                         <!-- <li onclick="showPic(4)" rel="MagicZoom"><img src="front/images/ps1.jpg" tsImgS="front/images/ps1.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(5)" rel="MagicZoom"><img src="front/images/ps2.jpg" tsImgS="front/images/ps2.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(6)" rel="MagicZoom"><img src="front/images/ps3.jpg" tsImgS="front/images/ps3.jpg" width="79" height="79" /></li>
@@ -495,16 +503,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
         <div class="pro_des">
         	<div class="des_name">
-            	<p><span id="pname"></span></p>
+            	<p>${xhproduct.pname }</p>
                 	限时折扣，欲购从速！
             </div>
             <div class="des_price">
-            	本店价格：<b id="psale"></span></b><br />
-              	 市场价：<del id="pprice"></del>
+            	本店价格：<b>¥${xhproduct.psale }</b><br />
+              	 市场价：<del>¥${xhproduct.pprice }</del>
             </div>
             <div class="des_choice">
             	<span class="fl">型号：</span>
-            	<span id="psize"></span>
+            	<span>${xhproduct.psize }(${xhproduct.punit })</span>
                 <!-- <ul>
                 	<li class="checked">30ml<div class="ch_img"></div></li>
                     <li>50ml<div class="ch_img"></div></li>
@@ -643,10 +651,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	
                 	<table border="0" align="center" style="width:100%; font-family:'宋体'; margin:10px auto;" cellspacing="0" cellpadding="0">                                           	                                          
                       <tr>
-                      	<td>商品编号：<span id="pid"></td>
-                        <td>品牌： <span id="brand"></td>
-                        <td>上架时间：<span id="paddtime"> </td>
-                        <td>商品大小：<span id="psizes"></td>                        
+                      	<td>商品编号：${xhproduct.pid }</td>
+                        <td>品牌： ${xhproduct.brand.brandname }</td>
+                        <td>上架时间：<fmt:formatDate value="${xhproduct.paddtime }" pattern="yyyy-MM-dd"/> </td>
+                        <td>商品大小：${xhproduct.psize }(${xhproduct.punit })</td>                        
                       </tr>
                       <tr>
                         <td>&nbsp;</td>
@@ -667,14 +675,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <tr>
                         <td width="265"><img src="front/images/de1.jpg" width="206" height="412" /></td>
                         <td>
-                        	<b>迪奥真我香水(Q版)</b><br />
-                            	【商品规格】：5ml<br />
-                            	【商品质地】：液体<br />
-                            	【商品日期】：与专柜同步更新<br />
-                            	【商品产地】：法国<br />
-                            	【商品包装】：无外盒 无塑封<br />
-                            	【商品香调】：花束花香调<br />
-                            	【适用人群】：适合女性（都市白领，性感，有女人味的成熟女性）<br />
+                        	<b>${xhproduct.pname }</b><br />
+                            	【商品规格】：${xhproduct.psize }(${xhproduct.punit })<br />
+                            	【品牌】： ${xhproduct.brand.brandname }  <br />                          	
+                            	【商品日期】：<fmt:formatDate value="${xhproduct.paddtime }" pattern="yyyy-MM-dd"/><br />                            	                            	
+                            	【${xhproduct.pdesc }】<br />
                         </td>
                       </tr>
                     </table>
@@ -924,56 +929,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <!--End Footer End -->    
 </div>
-
-<script type="text/javascript">   
-    jQuery(document).ready(function($){
-    	console.log(258);  	
-    	  $.ajax({
-		   url:"${pageContext.request.contextPath }/product/queryProductById.action?id="+getID(),
-		   type:"GET",
-		   success:function(result){	
-		   			console.log(result);			   	
-				   	$("#pid").html(result.pid); 
-	    			$("#pname").html(result.pname);	    			
-	    			$("#psale").html("¥"+result.psale);
-	    			$("#pprice").html("¥"+result.pprice);
-	    			$("#psize").html(result.psize+result.punit);
-	    			$("#psizes").html(result.psize+result.punit);
-	    			$("#brand").html(result.brand.brandname);
-	    			$("#paddtime").html(fmtDate(result.paddtime));
-	    			/* $("#pdesc").html(result.pdesc);	    				    				    			
-	    			$("#pimgdetail").html(result.pimgdetail);	    			
-	    			$("#punit").html(result.punit);
-	    			$("#pdiscount").html(result.pdiscount);	    			
-	    			$("#img").attr("src","${pageContext.request.contextPath}/upload/"+result.pimg);
-	    			$("#pupdatetime").html(fmtDate(result.pupdatetime));
-	    			if(result.pIntegral==0){
-	    				$("#pintegral").html("否");
-	    			}else{
-	    				$("#pintegral").html("是");
-	    			} */
-		   }   
-	   }); 	
-    });   	   
-</script>
-
-<script type="text/javascript">
-function getID(){
-	var Ohref=window.location.href;
-	var arrhref=Ohref.split("?id=");
-	var id = arrhref[1];
-	return id;
-}
-
-/* 时间格式转换 */
-function fmtDate(obj){
-    var date =  new Date(obj);
-    var y = 1900+date.getYear();
-    var m = "0"+(date.getMonth()+1);
-    var d = "0"+date.getDate();
-    return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
-} 
-</script>
 
 </body>
 

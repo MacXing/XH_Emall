@@ -540,7 +540,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	
                 <ul class="cate_list">
                 	<li>
-                    	<div class="img"><a href="front/product.jsp?id=41" target="_blank"><img src="front/images/per_1.jpg" width="210" height="185" /></a></div>
+                    	<div class="img"><a href="${pageContext.request.contextPath}/ProductDetails/queryImagesByPid.action?pid=41" target="_blank"><img src="front/images/per_1.jpg" width="210" height="185" /></a></div>
                         <div class="price">
                             <font>￥<span>198.00</span></font> &nbsp; 26R
                         </div>
