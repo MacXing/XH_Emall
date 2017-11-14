@@ -356,6 +356,13 @@
 							</ul>
 						</li>
 						<li>
+							<a class="J_menuItem" href="${pageContext.request.contextPath}/navbar/queryAllNavbar.action">
+								<i class="glyphicon glyphicon-thumbs-up"></i>
+								<span class="glyphicon-class">轮播图管理</span>
+								<span class="fa arrow"></span>
+							</a>
+						</li>
+						<li>
 							<a href="mailbox.html">
 								<i class="glyphicon glyphicon-thumbs-up"></i>
 								<span class="glyphicon-class">商品推荐 </span>

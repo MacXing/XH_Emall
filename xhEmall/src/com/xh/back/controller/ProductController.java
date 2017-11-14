@@ -217,9 +217,12 @@ public class ProductController {
 	public Msg insertImageById(ProductImage productImage,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
 		String url = "";
 		String pname="";
+		String pathname="";
 		if(productImage.getPid()>0){
-			
-			pname = productService.selectProductById(productImage.getPid()).getPname();
+			Xhproduct product = productService.selectProductById(productImage.getPid());
+			int pid = product.getPid();
+			pname=product.getPname();
+			pathname =""+pid;
 		}
 		if(file!=null){
 			System.out.println(productImage);
@@ -230,9 +233,9 @@ public class ProductController {
 			if(!Pattern.matches(regex, extName)){
 				Msg.fail().add("msg", "请上传图片");	
 			}
-			String savePath = request.getServletContext().getRealPath("/product/"+pname);
+			String savePath = request.getServletContext().getRealPath("/product/"+pathname);
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
-			url="/product/"+pname+"/"+file_name;
+			url="/product/"+pathname+"/"+file_name;
 		}
 		
 		productImage.setUrl(url);
