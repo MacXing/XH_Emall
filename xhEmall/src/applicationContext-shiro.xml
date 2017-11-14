@@ -18,12 +18,12 @@
         <property name="filterChainDefinitions">
             <value>
             	/jsp/back/loginbackstage.jsp=anon
-            	/jsp/front/**=anon
+            	/front/**=anon
             	/resource/**=anon
               	/admin/login.action=anon
               	/logout.action=logout           	
                 <!-- /** = user -->
-                /**=authc
+                /**=anon
             </value>
    		 </property>
     </bean>
