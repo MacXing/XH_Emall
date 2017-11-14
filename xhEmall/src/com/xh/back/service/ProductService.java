@@ -2,6 +2,7 @@ package com.xh.back.service;
 
 import java.util.List;
 
+import com.xh.back.bean.ProductImage;
 import com.xh.back.bean.Xhproduct;
 
 public interface ProductService {
@@ -27,5 +28,7 @@ public interface ProductService {
 	public void updatePrductIsDeleteById(int id);
 	
 	public void updatePrductDeleteById(int id);
+	
+	public void insertImage(ProductImage productImage);
 	
 }

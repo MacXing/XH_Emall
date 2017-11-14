@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.xh.back.bean.ProductImage;
 import com.xh.back.bean.Xhproduct;
 import com.xh.back.mapper.ProductMapper;
 import com.xh.back.service.ProductService;
@@ -68,6 +69,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void updatePrductDeleteById(int id) {
 		productMapper.updatePrductDeleteById(id);
+	}
+
+	@Override
+	public void insertImage(ProductImage productImage) {
+		productMapper.insertImage(productImage);
 	}
 
 }

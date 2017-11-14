@@ -156,7 +156,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
    
-    
     <script src="resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
     <script src="resource/js/plugins/jeditable/jquery.jeditable.js"></script>

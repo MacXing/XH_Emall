@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.other.getImage.FileUtil;
 import com.other.msg.Msg;
+import com.xh.back.bean.ProductImage;
 import com.xh.back.bean.Xhproduct;
 import com.xh.back.serviceImpl.ProductServiceImpl;
 
@@ -209,5 +210,34 @@ public class ProductController {
 			return Msg.success();
 		}
 		return Msg.fail();
+	}
+	
+	@RequestMapping("insertImage.action")
+	@ResponseBody
+	public Msg insertImageById(ProductImage productImage,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
+		String url = "";
+		String pname="";
+		if(productImage.getPid()>0){
+			
+			pname = productService.selectProductById(productImage.getPid()).getPname();
+		}
+		if(file!=null){
+			System.out.println(productImage);
+			String file_name = file.getOriginalFilename();
+			//判读是不是图片
+			String extName = file_name.substring(file_name.lastIndexOf(".")+1,file_name.length());
+			String regex="(gif|jpg|jpeg|png|JPG|PNG)";
+			if(!Pattern.matches(regex, extName)){
+				Msg.fail().add("msg", "请上传图片");	
+			}
+			String savePath = request.getServletContext().getRealPath("/product/"+pname);
+			file_name = FileUtil.uploadFile(file, savePath, file_name);
+			url=request.getServletContext().getRealPath("/product/"+pname+"/"+file_name);
+		}
+		
+		productImage.setUrl(url);
+		productImage.setPname(pname);
+		productService.insertImage(productImage);	
+		return Msg.success();
 	}
 }

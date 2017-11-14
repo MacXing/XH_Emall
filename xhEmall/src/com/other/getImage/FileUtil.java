@@ -3,7 +3,6 @@ package com.other.getImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtil {
@@ -31,6 +30,18 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	public static String uploadFile(MultipartFile file,String savePath,String fileName) throws IllegalStateException, IOException{
+		
+		File dir =new File(savePath);    
+		//如果文件夹不存在则创建    
+		if  (!dir .exists()  && !dir .isDirectory())      
+		{       
+		    System.out.println("//不存在");  
+		    dir .mkdirs();   
+		} else   
+		{  
+		    System.out.println("//目录存在");  
+		}    
+		
 		String extName=fileName.substring(fileName.lastIndexOf("."));
 		fileName = UUID.randomUUID().toString();
 		String path=savePath+File.separator+fileName+extName;

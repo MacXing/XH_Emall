@@ -77,5 +77,10 @@
   <update id="updatePrductDeleteById" parameterType="int">
   		UPDATE xhProduct SET pIsDelete=0 WHERE pid=#{id}
   </update>
+  
+  <insert id="insertImage" parameterType="productimage">
+  	INSERT INTO productImage(pId,pname,url)
+	VALUES(#{pid},#{pname},#{url})
+  </insert>
 
 </mapper>

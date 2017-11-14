@@ -2,6 +2,7 @@ package com.xh.back.mapper;
 
 import java.util.List;
 
+import com.xh.back.bean.ProductImage;
 import com.xh.back.bean.Xhproduct;
 /**
  * 商品信息的管理
@@ -26,5 +27,7 @@ public interface ProductMapper {
 	public void updatePrductIsDeleteById(int id);
 	
 	public void updatePrductDeleteById(int id);
+	
+	public void insertImage(ProductImage productImage);
 	
 }
