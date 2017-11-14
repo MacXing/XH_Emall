@@ -31,4 +31,10 @@ public interface ProductService {
 	
 	public void insertImage(ProductImage productImage);
 	
+	public List<ProductImage> queryAllImages();
+	
+	public void deleteImageById(int id);
+	
+	public ProductImage queryImageById(int id);
+	
 }

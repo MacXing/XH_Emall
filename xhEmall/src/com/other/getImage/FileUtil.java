@@ -12,12 +12,17 @@ public class FileUtil {
 	 * @param fileName：删除的文件名称
 	 * @throws Exception
 	 */
-	public static void deleteFile(String filePath, String fileName)
+	public static void deleteFile(String url)
 			throws Exception {
-		File file = new File(filePath + fileName);
-		if (file.exists()) {
-			file.delete();
-		}
+		System.out.println(url);
+		File file = new File(url);
+		if(!file.exists()){
+			System.out.println("文件不存在");
+			}
+			else{
+			System.out.println("存在文件");
+			file.delete();//删除文件
+			}
 	}
 	
 	/**

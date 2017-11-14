@@ -2,6 +2,8 @@ package com.xh.back.mapper;
 
 import java.util.List;
 
+import org.omg.CORBA.INTERNAL;
+
 import com.xh.back.bean.ProductImage;
 import com.xh.back.bean.Xhproduct;
 /**
@@ -29,5 +31,11 @@ public interface ProductMapper {
 	public void updatePrductDeleteById(int id);
 	
 	public void insertImage(ProductImage productImage);
+	
+	public List<ProductImage> queryAllImages();
+	
+	public void deleteImageById(int id);
+	
+	public ProductImage queryImageById(int id);
 	
 }

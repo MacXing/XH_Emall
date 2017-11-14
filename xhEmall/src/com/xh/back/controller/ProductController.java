@@ -232,7 +232,7 @@ public class ProductController {
 			}
 			String savePath = request.getServletContext().getRealPath("/product/"+pname);
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
-			url=request.getServletContext().getRealPath("/product/"+pname+"/"+file_name);
+			url="/product/"+pname+"/"+file_name;
 		}
 		
 		productImage.setUrl(url);
@@ -240,4 +240,32 @@ public class ProductController {
 		productService.insertImage(productImage);	
 		return Msg.success();
 	}
+	
+	@RequestMapping("queryAllImages.action")
+	public String queryAllImages(Model model){
+		
+		List<ProductImage> productImages=productService.queryAllImages();
+		model.addAttribute("productImages", productImages);
+		
+		return "/jsp/back/product/queryAllImages.jsp";
+		
+	}
+	
+	@RequestMapping("deleteImage.action")
+	@ResponseBody
+	
+	public Msg deleteImage(int id,HttpServletRequest request) throws Exception{
+		String url="";
+		if(id>0){
+			url = productService.queryImageById(id).getUrl();
+		}
+		if(!url.equals("")){
+			String urlpath = request.getServletContext().getRealPath(url);
+			FileUtil.deleteFile(urlpath);
+			productService.deleteImageById(id);
+			return Msg.success();
+		}		
+		return Msg.fail();
+	}
+	
 }
