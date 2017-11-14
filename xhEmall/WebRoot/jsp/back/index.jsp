@@ -166,6 +166,9 @@
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/product/addProduct.jsp">添加商品</a>
 								</li>
 								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/product/queryAllImages.action">查看商品图片</a>
+								</li>
+								<li>
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/product/addImage.jsp">添加商品图片</a>
 								</li>
 						</ul>
@@ -177,18 +180,11 @@
 						</a>					
 					</li>
 					<li>
-						<a href="#">
+						<a class="J_menuItem" href="${pageContext.request.contextPath }/comment/queryAllComment.action">
 							<i class="glyphicon glyphicon-comment"></i>
-							<span class="glyphicon-class">会员评论</span>
-							<span class="fa arrow"></span>
-						</a>
-						<ul class="nav nav-second-level">
-							<li>					
-								<a class="J_menuItem" href="${pageContext.request.contextPath }/comment/queryAllComment.action">评论管理</a>
-							</li>
-						</ul>							
+							<span class="glyphicon-class">会员评论</span>							
+						</a>								
 					</li>
-					
 					<li>
 						<a class="J_menuItem" href="${pageContext.request.contextPath }/brand/queryAllBrands.action">
 							<i class="glyphicon glyphicon-barcode"></i>

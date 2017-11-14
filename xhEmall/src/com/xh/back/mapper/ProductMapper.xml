@@ -82,5 +82,19 @@
   	INSERT INTO productImage(pId,pname,url)
 	VALUES(#{pid},#{pname},#{url})
   </insert>
+	
+  <select id="queryAllImages" resultType="productimage">
+  	SELECT picId,pId,url,pname FROM productImage
+  </select>	
+
+	<delete id="deleteImageById" parameterType="int">
+		DELETE FROM productImage
+		WHERE picId =#{id}
+	</delete>
+	
+	<select id="queryImageById" parameterType="int" resultType="ProductImage">
+		SELECT picId,pId,url,pname FROM productImage
+		WHERE picid =#{id}
+	</select>	
 
 </mapper>

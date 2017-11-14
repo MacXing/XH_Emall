@@ -76,4 +76,21 @@ public class ProductServiceImpl implements ProductService{
 		productMapper.insertImage(productImage);
 	}
 
+	@Override
+	public List<ProductImage> queryAllImages() {
+		// TODO Auto-generated method stub
+		return productMapper.queryAllImages();
+	}
+
+	@Override
+	public void deleteImageById(int id) {
+		productMapper.deleteImageById(id);
+		
+	}
+
+	public ProductImage queryImageById(int id) {
+		
+		return productMapper.queryImageById(id);
+	}
+
 }
