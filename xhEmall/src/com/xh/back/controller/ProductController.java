@@ -233,9 +233,9 @@ public class ProductController {
 			if(!Pattern.matches(regex, extName)){
 				Msg.fail().add("msg", "请上传图片");	
 			}
-			String savePath = request.getServletContext().getRealPath("/product/"+pathname);
+			String savePath = request.getServletContext().getRealPath("/upload/product/"+pathname);
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
-			url="/product/"+pathname+"/"+file_name;
+			url="/upload/product/"+pathname+"/"+file_name;
 		}
 		
 		productImage.setUrl(url);

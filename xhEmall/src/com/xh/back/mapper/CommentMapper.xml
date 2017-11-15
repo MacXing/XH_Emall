@@ -57,7 +57,7 @@
 		ON u.userID = c .userId
 		JOIN xhProduct p 
 		ON c.pId = p.pID
-		WHERE c.commentId=7
+		WHERE c.commentId=#{id}
 	</select>
 	
 </mapper>

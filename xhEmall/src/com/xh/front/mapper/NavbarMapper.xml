@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.front.mapper.NavbarMapper">
+
+	<select id="queryAllNavbar" resultType="navbar">
+		SELECT bid,bname,url,bdate,isshow FROM navbar
+	</select>
+	
+	<insert id="insertNavbar" parameterType="navbar">
+		INSERT INTO navbar(bname,url,bdate,isshow)
+		VALUES(#{bname},#{url},#{bDate},#{isshow})
+	</insert>
+	
+	<delete id="deleteNavbar" parameterType="int">
+		DELETE FROM navbar WHERE bid=#{id}
+	</delete>
+	
+	<select id="queryNavbarById" parameterType="int" resultType="navbar">
+		SELECT bid,bname,url,bdate,isshow 
+		FROM navbar
+		WHERE bid=#{id}
+	</select>
+	
+	<update id="updateNavbarById" parameterType="navbar">
+		UPDATE navbar
+		SET isshow = #{isshow}
+		WHERE bid =#{bid}
+	</update>
+</mapper>	

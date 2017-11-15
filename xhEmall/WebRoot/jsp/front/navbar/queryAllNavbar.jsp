@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" contentType="text/html; charset=utf-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -14,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>商品管理</title>
+    <title>导航栏管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -43,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>商品信息</h5>
+                        <h5>轮播图信息</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -52,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a id="addComment">添加评论</a>
+                                <li><a id="addNavbar">添加轮播图</a>
                                
                                 </li>
                             </ul>
@@ -68,36 +67,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead >
                                 <tr>
-                                	<th class="text-center">ID</th>
-                                    <th class="text-center">会员名</th>
-                               		<th class="text-center">评论图</th>
-                                    <th class="text-center">商品名</th>
-                                    <th class="text-center">服务等级</th>                           
-                                    <th class="text-center">商品等级</th>                           
-                                    <th class="text-center">物流等级</th>
-                    
+                                	<th class="text-center">Id</th>
+                                    <th class="text-center">轮播图名字</th>
+                               		<th class="text-center">轮播图</th>
+                                    <th class="text-center">添加时间</th> 
+                                    <th class="text-center">是否展示</th>                                   
                                     <th class="text-center">操作</th>
                                 </tr>
                             </thead>
                             <tbody id="table_data" class="text-center">             
-                             <c:forEach items="${comments }" var="comm">
-							    	<tr>												    	
-							    		<td>${comm.commentid }</td>
-							    		<td>${comm.users.username }</td>
+                             <c:forEach items="${navbars }" var="item">
+							    	<tr>
+							    		<td>${item.bid }</td>
+							    		<td>${item.bname }</td>				
 							    		<td>
-							    			<a class="fancybox" href="${pageContext.request.contextPath }${comm.commentimg}" title="">
-					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }${comm.commentimg}" />
+							    			<a class="fancybox" href="${pageContext.request.contextPath}/${item.url}" title="">
+					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath}/${item.url}" />
 					                        </a>
 							    		</td>	
-							    		<td>${comm.product.pname }</td>
-							    		<td>${comm.commentservice }</td>
-							    		<td>${comm.commentgoods}</td>
-							    		<td>${comm.commentshopping }</td>
-							    		<td class="text-center">
-							    			
-							    			<a onclick="btn1(${comm.commentid })" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
-							    			&nbsp;&nbsp; 							    			
-							    			<a onclick="btn2(${comm.commentid })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
+							    		<td><fmt:formatDate value="${item.bDate }" pattern="yyyy-MM-dd"/></td>
+							    		
+										<c:if test="${item.isshow==1 }">
+											<td><a onclick="btn1(${item.bid },${item.isshow })"><li class="fa fa-check"></li></a></td>
+										</c:if>
+										
+										<c:if test="${item.isshow==0 }">
+											<td><a onclick="btn3(${item.bid },${item.isshow })"><li class="fa fa-close"></li></a></td>
+										</c:if>
+	    							    						   
+							    		<td class="text-center">							    							    			
+							    			<a onclick="btn2(${item.bid })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
 							    		</td> 						    									    									    		
 							    	</tr>
     							</c:forEach> 
@@ -125,7 +124,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         oTable.fnUpdate(sValue,aPos[0],aPos[1]);},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("allUser.userid"),"column":oTable.fnGetPosition(this)[2]};},"width":"90%","height":"100%"});});
         function fnClickAddRow(){$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"]);};
     </script>
-   
+    
+    <script type="text/javascript" 
+    src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8">
+    </script>
+    
     <!-- 
     	单选删除按钮
      -->
@@ -134,73 +137,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		刷新按钮
 	*/
 	$("#flash").on("click",function(){
-		 window.location.href="${pageContext.request.contextPath }/comment/queryAllComment.action";  	
+		 window.location.href="${pageContext.request.contextPath }/navbar/queryAllNavbar.action";  	
 	});
-    
-    
-    /* 查看单个商品信息 */
-    
-    
-    
-   function btn1(id){
-    	
-	   window.location.href="${pageContext.request.contextPath }/jsp/back/comment/commentInfo.jsp?id="+id;
-  		  
-    }
-    
- 
-    /* 时间格式转换 */
-    function fmtDate(obj){
-	    var date =  new Date(obj);
-	    var y = 1900+date.getYear();
-	    var m = "0"+(date.getMonth()+1);
-	    var d = "0"+date.getDate();
-	    return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
-	} 
-    
+
 	/* 点击删除 */
 	function btn2(id){
-		if(!confirm("您确定要删除这条评论记录吗？")){
+		if(!confirm("您确定要删除该商品图片吗？")){
 	 		   return false;
 	 	   }else{
 	 		   $.ajax({
-	 			   url:"${pageContext.request.contextPath }/comment/deleteComment.action?id="+id,
+	 			   url:"${pageContext.request.contextPath }/navbar/deleteNavbar.action?id="+id,
 	 			   type:"GET",
 	 			   success:function(result){
 	 					   if(result.code==100){
 	 						   alert("删除成功！");
-	 						  window.location.href="${pageContext.request.contextPath }/comment/queryAllComment.action";
+	 						  window.location.href="navbar/queryAllNavbar.action";
 	 					   }else{
 	 						  alert("删除失败！");
 	 					   }	  
 	 			   }
 	 			   
 	 		   });
-	 	   }
+	 	   };
 	}
-	
-	/**
-	*点击修改
-	*/
-	
-	function btn3(id){ 		  
-	 		window.location.href="${pageContext.request.contextPath }/jsp/back/comment/updateComment.jsp?id="+id;	   	 			 
-	}	
 	/**
 	*点击跳转到增加页面
 	*/
-   $("#addComment").on("click", function(){
-    	/*  $.ajax({
-    		url:"${pageContext.request.contextPath }/brand/queryAllBrands.action",
-    		type:"GET",
-    		success:function(){
-    			window.location.href="${pageContext.request.contextPath }/brand/queryAllBrands.action";
-    		}
-    	});  */
-	   window.location.href="${pageContext.request.contextPath }/jsp/back/comment/addComment.jsp";
+   $("#addNavbar").on("click", function(){
+	   
+	   window.location.href="${pageContext.request.contextPath }/jsp/front/navbar/addNavbar.jsp";
+	   
     }); 
     
     
+    </script>
+    
+    <script type="text/javascript">
+    	function btn1(id,isshow){
+    		$.ajax({
+    			url:"${pageContext.request.contextPath }/navbar/updateNavbar.action?bid="+id+"&isshow="+isshow,
+    			type:"GET",
+    			success:function(){
+    				window.location.href="${pageContext.request.contextPath }/navbar/queryAllNavbar.action";  	
+    			}
+    		});
+    	}
+    	
+    	function btn3(id,isshow){
+    		$.ajax({
+    			url:"${pageContext.request.contextPath }/navbar/updateNavbar.action?bid="+id+"&isshow="+isshow,
+    			type:"GET",
+    			success:function(){
+    				window.location.href="${pageContext.request.contextPath }/navbar/queryAllNavbar.action";  	
+    			}
+    		});
+    	}
     </script>
 </body>
 
