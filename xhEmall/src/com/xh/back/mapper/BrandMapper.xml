@@ -5,11 +5,11 @@
 <!--brand信息-->
 	
 	<select id="queryAllBrands" resultType="xhbrand">
-		SELECT brandID,brandName,brandDesc FROM xhBrand
+		SELECT brandID,brandName,brandDesc,image FROM xhBrand
 	</select>
 	
 	<select id="queryBrandById" parameterType="int" resultType="xhbrand">
-		SELECT brandID,brandName,brandDesc FROM xhBrand WHERE brandID=#{id}
+		SELECT brandID,brandName,brandDesc,image FROM xhBrand WHERE brandID=#{id}
 	</select>
 	
 	<select id="insertBrand" parameterType="xhbrand">
@@ -18,7 +18,7 @@
 	
 	<update id="updateBrandById" parameterType="xhbrand">
 		UPDATE xhBrand 
-		SET brandName=#{brandname}, brandDesc=#{branddesc}
+		SET brandName=#{brandname}, brandDesc=#{branddesc},image=#{image}
 		WHERE brandID=#{brandid}
 	</update> 
 	

@@ -60,9 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <tr>
                                 	<th class="text-center">ID</th>
                                     <th class="text-center">品牌名称</th>
-                               		
                                 	<th class="text-center">品牌描述</th>
-                                
+                                	<th class="text-center">品牌图片</th>
                                     <th class="text-center">操作</th>
                                 </tr>
                             </thead>
@@ -71,7 +70,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    	<tr>
 							    		<td>${brand.brandid }</td>
 							    		<td>${brand.brandname }</td>
-							    		<td>${brand.branddesc }</td>		    		
+							    		<td>${brand.branddesc }</td>
+							    		<td>
+							    			<a class="fancybox" href="${pageContext.request.contextPath }${brand.image}" title="">
+					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }${brand.image}" />
+					                        </a>
+							    		</td>			    		
 							    		<td class="text-center">							    			
 							    			<a onclick="btn1(${brand.brandid })" data-toggle="modal" data-target="#myModel2" style="color:#000"><span class="glyphicon glyphicon-search"></span></a>
 							    			&nbsp;&nbsp; 							    			
@@ -113,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-sm-8">
                                     <textarea id="branddesc1" name="branddesc" class="form-control" datatype="s" required="" aria-required="true"></textarea>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>		       
@@ -160,14 +164,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </table>
 					<div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		
 				    </div>
                     </div>
 		      </div>
-		 
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		    </div>
+		  </div>
+		</div>
 		<!--
 		 模态框三
 		 -->
@@ -198,7 +200,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-sm-8">
                                     <textarea id="branddesc3" name="branddesc" class="form-control"></textarea>
                                 </div>
-                            </div> 
+                            </div>
+                             <div class="form-group">
+                                <label class="col-sm-3 control-label">品牌图片：</label>
+                                <div class="col-md-8">
+                                    <div id="file-pretty">
+			                            <div class="form-group">
+			                                <input type="file" id="file" class="form-control" name="file" onchange="showPic()"/>
+			                               		
+									 		<img class="img-rounded" id="image" width="150" height="150"> 	
+			                            </div>  
+		                            </div>
+                                </div>  
+                            </div>  
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>		       
@@ -225,7 +239,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#btn_submit")
 				.click(
 						function() {
-
 							var val = new validate(
 									{
 
@@ -237,12 +250,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										submitFun : function(){
     		if(!confirm("您确定要添加品牌信息吗？")){
     			return false;
-    		}else{
-    			var brand= new FormData($("#myform1")[0]);
+    		}else{   			
+    			var formData= new FormData($("#myform1")[0]);
     			$.ajax({
     				url:"${pageContext.request.contextPath}/brand/insertBrand.action",
     				type:"POST",
-    				data:brand,
+    				data:formData,
     				contentType: false,  
     			    processData: false, 
     				success:function(result){
@@ -277,11 +290,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		if(!confirm("您确定要修改品牌信息吗？")){
 			return false;
 		}else{
-			var brand= new FormData($("#myform3")[0]);
+			var form = $("#file").val().length;
+			if(form==0){
+				alert("请插入图片");
+				return;
+			}
+			var formdata= new FormData($("#myform3")[0]);
 			$.ajax({
 				url:"${pageContext.request.contextPath}/brand/updateBrand.action",
 				type:"POST",
-				data:brand,
+				data:formdata,
 				contentType: false,  
 			    processData: false, 
 				success:function(result){
@@ -365,7 +383,7 @@ $("#flash").on("click",function(){
 	*点击修改
 	*/
 	function btn3(id){
-
+			
 	 		   $.ajax({
 	 			   url:"${pageContext.request.contextPath }/brand/queryBrandById.action?id="+id,
 	 			   type:"get",
@@ -382,7 +400,10 @@ $("#flash").on("click",function(){
    /**
 	*点击修改
 	*/
-	
+	 function showPic(){
+		  var pic = $("#file").get(0).files[0];
+		  $("#image").prop("src",window.URL.createObjectURL(pic));
+		 }
 	
     </script>
 </body>

@@ -110,7 +110,9 @@ public class ProductController {
 		String pathname="";
 		if(product.getPid()>0){
 			Xhproduct pro=productService.selectProductById(product.getPid());
-			url=pro.getPimg();
+			if(pro.getPimg()!=null){
+				url=pro.getPimg();
+			}
 			pathname =pro.getPid()+"";
 		}
 		if(!url.equals("")){

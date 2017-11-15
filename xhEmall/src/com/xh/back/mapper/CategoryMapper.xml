@@ -57,7 +57,7 @@
 	<update id="updateCategoryById" parameterType="xhcategory">
 		UPDATE xhCategory
 		SET parentID=#{parentid},catName=#{catname},catDesc=#{catdesc},
-		sortOrder=#{sortorder},isShow=#{ishow},catGrade=#{catgrade}
+		sortOrder=#{sortorder},isShow=#{isshow},catGrade=#{catgrade}
 		WHERE catID =#{catid}
 	</update>
 	

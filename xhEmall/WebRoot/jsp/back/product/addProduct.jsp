@@ -178,7 +178,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					pdesc:"notEmpty",
 					pprice:"money",
 					psale:"money", 
-					
 					psize:"notEmpty",
 					punit:"notEmpty",
 					pdiscount:"notEmpty"
@@ -246,38 +245,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
    
 <script type="text/javascript">
-/* $("#btn_id").on("click",function(){
-	 var action="";
-	if(!confirm("您确定要增加商品？")){
-		return false;
-	}else{
-		var form = $("#file").val().length;
-		var formData= new FormData($("#myform")[0]);
-		
-		 if(form==0){
-			 action ="insertProduct.action";
-		}else{
-			 action="insertProductAndFile.action";
-		}		 
-		$.ajax({		
-			url:"${pageContext.request.contextPath }/product/"+action,
-			   type:"POST",
-			   data:formData, */
-			  /*  async: false,  
-		       cache: false,  */ 
-		      /*  contentType: false,  
-		       processData: false, 
-			   success:function(result){ 
-				  if(result.code==100){						  	
-					    alert("增加成功！");
-					    clean();
-				   }else{
-					  alert("增加失败！");
-				   } 
-			   }
-		});
-	}
-}); */
+
 function clean()
 {	
 $("#pname").val("");

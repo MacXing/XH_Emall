@@ -35,7 +35,7 @@ public interface CategoryService {
    */
   public void deleteCategoryById(int id);
   
-  public void updateCategoryById(int id);
+  public void updateCategoryById(Xhcategory category);
   
   public List<Xhcategory> categoryList();
   

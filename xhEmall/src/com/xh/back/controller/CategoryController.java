@@ -1,16 +1,12 @@
 package com.xh.back.controller;
 
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.other.msg.Msg;
 import com.xh.back.bean.Xhcategory;
 import com.xh.back.serviceImpl.CategoryServiceImpl;
@@ -80,9 +76,9 @@ public class CategoryController {
 	
 	@RequestMapping("updateCategory.action")
 	@ResponseBody
-	public Msg updateCategoryById(int id){
-		if(id>1){
-			categoryService.updateCategoryById(id);
+	public Msg updateCategoryById(Xhcategory category){
+		if(category!=null&&category.getCatid()>0){
+			categoryService.updateCategoryById(category);
 			return Msg.success();
 		}
 		return Msg.fail();

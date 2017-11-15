@@ -92,25 +92,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </table>
                     </div>
                 </div>
-               <!--     <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>分类信息</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div id="using_json"></div>
-
-                    </div>
-                </div>
-                  -->
             </div>
         </div>
     </div>
@@ -185,9 +166,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <div class="modal-body"> 		        
                 	<form class="form-horizontal m-t" id="myform3" method="post" action="">
                 			<div class="form-group">
-                                <label class="col-sm-3 control-label">ID：</label>
+                                
                                 <div class="col-sm-8">
-                                    <input id="catid3" name="catid" minlength="2" type="text" class="form-control">
+                                    <input id="catid3" name="catid" minlength="2" type="hidden" class="form-control">
                                 </div>
                             </div>
                 			
@@ -249,87 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="resource/js/plugins/jsTree/jstree.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-    	$.ajax({
-			url:"${pageContext.request.contextPath}/category/categoryList.action",
-			type:"GET",
-			success:function(result){
-				if(result.code==100){
-					console.log(result.extend.categorys);
-					$.each(result.extend.categorys,function(index,item){
-						
-					});
-						$("#using_json").jstree({"core":{"data":[
-						                                         
-						"分类",{"text":"顶级类","state":{"opened":true},
-							"children":[{"text":"css",
-							"children":[{"text":"animate.css","icon":"none"},
-							            {"text":"bootstrap.css","icon":"none"},
-							            {"text":"main.css","icon":"none"},
-							            {"text":"style.css","icon":"none"}],"state":{"opened":true}},
-							            {"text":"js","children":[{"text":"bootstrap.js","icon":"none"},
-										{"text":"hplus.min.js","icon":"none"},
-										{"text":"jquery.min.js","icon":"none"},
-										{"text":"jsTree.min.js","icon":"none"},
-										{"text":"custom.min.js","icon":"none"}],"state":{"opened":true}},
-										{"text":"html","children":[{"text":"layout.html","icon":"none"},
-										{"text":"navigation.html","icon":"none"},
-										{"text":"navbar.html","icon":"none"},
-										{"text":"footer.html","icon":"none"},
-										{"text":"sidebar.html","icon":"none"}],"state":{"opened":true}}]},
-							 ]
-						
-						}});			    	
-					}
-			 	}
-			});
-    });
-	
-    
-    	
-  /*       $(document).ready(function(){
-        	
-        	$.ajax({
-    			url:"${pageContext.request.contextPath}/category/queryAllCategoryForJson.action",
-    			type:"GET",
-    			success:function(result){
-    				if(result.code==100){
-    					console.log(result.extend.categoryList);	
-    					var updateOutput=function(e){
-    		        		var list=e.length?e:$(e.target),
-    		        		output=list.data(result.extend.categoryList);
-    		        		if(window.JSON){
-    		        			output.val(window.JSON.stringify(list.nestable("serialize")));}
-    		        		else{output.val("浏览器不支持");}};
-    		        		$("#nestable").nestable({group:1}).on("change",updateOutput);
-    		        		$("#nestable2").nestable({group:1}).on("change",updateOutput);
-    		        		updateOutput(
-    		        				$("#nestable").data("output",$("#nestable-output")));
-    		        		updateOutput($("#nestable2").data("output",$("#nestable2-output")));
-    		        		$("#nestable-menu").on("click",function(e){
-    		        			var target=$(e.target),action=target.data("action");
-    		        			if(action==="expand-all"){$(".dd").nestable("expandAll");};
-    		        			if(action==="collapse-all"){
-    		        				$(".dd").nestable("collapseAll");};});}
-    				
-    				}
-    			
-    		}); */
-        		
-        
-        		
-        
-   /*      $(".dataTables-example").dataTable();
-        var oTable=$("#editable").dataTable();
-        oTable.$("td").editable("../example_ajax.php",{"callback":function(sValue,y){var aPos=oTable.fnGetPosition(this);
-        oTable.fnUpdate(sValue,aPos[0],aPos[1]);},"submitdata":function(value,settings){return{"row_id":this.parentNode.getAttribute("allUser.userid"),"column":oTable.fnGetPosition(this)[2]};},"width":"90%","height":"100%"});
-        function fnClickAddRow(){$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"]);};
-       	$(".i-checks").iCheck({
-        		checkboxClass:"icheckbox_square-green",
-        		radioClass:"iradio_square-green",
-        }); */
-       	
-       	
-       	/* $.ajax({
+       	 $.ajax({
 			url:"${pageContext.request.contextPath}/category/queryAllCategoryForJson.action",
 			type:"GET",
 			success:function(result){
@@ -341,15 +242,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					});  
 				}
 			}
-		}); */
-        		
+		}); 
+  });        		
     </script>
     
 <script type="text/javascript">
 	/**
 	*点击添加分类按钮请请求分类信息并加载到select的option中
 	**/
-   /*  $("#btn_submit").on("click",function(){
+    $("#btn_submit").on("click",function(){
     	if(!confirm("您确定要添加分类信息吗？")){
     		return false;
    		}else{
@@ -370,7 +271,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			});
    			
     		}
-    	}); */
+    	});
 </script>
     
     <!-- 
@@ -380,12 +281,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 /*
 刷新按钮
 */
-/* $("#flash").on("click",function(){
- window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action";  	
-}) */
+$("#flash").on("click",function(){
+	 
+ 	window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action";  
+ 
+});
 
 	/* 点击删除 */
-/* 	function btn2(id){
+	function btn2(id){
 		if(!confirm("您确定要删除这个分类信息吗？")){
 	 		   return false;
 	 	   }else{
@@ -402,12 +305,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 			   }	 			   
 	 		   });
 	 	   }
-	} */
+	} 
 	
 	/**
 	*点击修改
 	*/
-/* 	function btn3(id){
+	function btn3(id){
 
 	 		   $.ajax({
 	 			   url:"${pageContext.request.contextPath }/category/queryCategoryById.action?id="+id,
@@ -422,12 +325,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 					  } 
 	 			   }	 			   
 	 		   });
-	} */
+	} 
  
    /**
 	*点击修改
 	*/
-	/* $("#btn_fix").on("click",function(){
+	 $("#btn_fix").on("click",function(){
 		if(!confirm("您确定要修改分类信息吗？")){
 			return false;
 		}else{
@@ -441,14 +344,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				success:function(result){
 					if(result.code==100){
 						alert("修改成功！");
-						window.location.href="${pageContext.request.contextPath }/category/updateCategory.action";
+						window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action";
 					}else{
 						alert("修改失败！");
 					}
 				}
 			});
 		}
-	}) */
+	});
 	
     </script>
 </body>

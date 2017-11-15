@@ -43,6 +43,6 @@ public interface CategoryMapper {
    * 根据id来更新表格
    * @param id
    */
-  public void updateCategoryById(int id);
+  public void updateCategoryById(Xhcategory category);
   
 }

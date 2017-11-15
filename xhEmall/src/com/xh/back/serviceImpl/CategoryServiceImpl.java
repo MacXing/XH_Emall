@@ -46,8 +46,8 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void updateCategoryById(int id) {
-		categoryMapper.updateCategoryById(id);
+	public void updateCategoryById(Xhcategory category) {
+		categoryMapper.updateCategoryById(category);
 	}
 
 	@Override
