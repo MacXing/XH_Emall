@@ -199,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			$("#punit").val(result.punit);
     			$("#pdiscount").val(result.pdiscount);
     			$("#brand").val(result.brand.brandid);
-    			$("#img").attr("src","${pageContext.request.contextPath}/upload/"+result.pimg);
+    			$("#img").attr("src","${pageContext.request.contextPath}"+result.pimg);
     		}
     	});
     });
@@ -225,7 +225,7 @@ $("#btn_id").on("click", function() {
 							pdesc: "notEmpty",
 							pprice: "money",
 							psale: "money",
-							pimgdetail: "notEmpty",
+							
 							psize: "notEmpty",
 							punit: "notEmpty",
 							pdiscount: "notEmpty"

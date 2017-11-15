@@ -20,12 +20,15 @@ import com.xh.front.serviceImpl.NavbarServiceImpl;
 public class IndexController {
 	@Autowired
 	@Qualifier("navbarService")
+	/**
+	 * 轮播图
+	 */
 	private NavbarServiceImpl navbarService;
 	
 	@RequestMapping("home.action")
 	@ResponseBody
 	public Msg home(Model model){
-		List<Navbar> navbars = navbarService.queryAllNavbar();
+		List<Navbar> navbars = navbarService.queryAllNavbarIsshow();
 		if(navbars!=null){
 			return Msg.success().add("navbars", navbars);
 		}

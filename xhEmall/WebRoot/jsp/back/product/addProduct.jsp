@@ -178,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					pdesc:"notEmpty",
 					pprice:"money",
 					psale:"money", 
-					pimgdetail:"notEmpty",
+					
 					psize:"notEmpty",
 					punit:"notEmpty",
 					pdiscount:"notEmpty"
@@ -194,16 +194,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var formData= new FormData($("#myform")[0]);
 		
 		 if(form==0){
-			 action ="insertProduct.action";
+			 alert("请插入图片！");
+			 return;
 		}else{
 			 action="insertProductAndFile.action";
 		}		 
 		$.ajax({		
 			url:"${pageContext.request.contextPath }/product/"+action,
 			   type:"POST",
-			   data:formData,
-			  /*  async: false,  
-		       cache: false,  */ 
+			   data:formData, 
 		       contentType: false,  
 		       processData: false, 
 			   success:function(result){ 

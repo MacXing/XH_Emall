@@ -40,5 +40,11 @@ public class NavbarServiceImpl implements NavbarService {
 	public void updateNavbarById(Navbar navbar) {
 		navbarMapper.updateNavbarById(navbar);
 	}
+
+	@Override
+	public List<Navbar> queryAllNavbarIsshow() {
+		
+		return navbarMapper.queryAllNavbarIsshow();
+	}
 	
 }

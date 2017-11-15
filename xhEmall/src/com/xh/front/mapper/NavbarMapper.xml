@@ -28,4 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET isshow = #{isshow}
 		WHERE bid =#{bid}
 	</update>
+	<select id="queryAllNavbarIsshow" resultType="navbar">
+		SELECT bid,bname,url,bdate,isshow 
+		FROM navbar
+		WHERE isshow=1
+	</select>
+	
 </mapper>	

@@ -15,4 +15,6 @@ public interface NavbarMapper {
 	public void deleteNavbar(int id);
 	
 	public void updateNavbarById(Navbar navbar);
+	
+	public List<Navbar> queryAllNavbarIsshow();
 }

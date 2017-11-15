@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,13 +42,17 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping("delectProduct.action")
-	public Msg deleteProduct(int id){
-		
+	public Msg deleteProduct(int id,HttpServletRequest request) throws Exception{
+		String url = "";
 		if(id>0){
+			url = productService.selectProductById(id).getPimg();
+			if(!url.equals("")){
+				String urlpath = request.getServletContext().getRealPath(url);
+				FileUtil.deleteFile(urlpath);	
+			}
 			productService.deleteProductById(id);
 			return Msg.success();
 		}
-		
 		return Msg.fail();
 	}
 	
@@ -63,19 +66,24 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping("insertProductAndFile.action")
 	public Msg insertProductAndFileById(Xhproduct product,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
+		String url = "";
+		String pathname="";
+		if(product.getPid()>0){
+			pathname=product.getPid()+"";
+		}
 		if(file!=null){
 			String file_name = file.getOriginalFilename();
 			//判读是不是图片
 			String extName = file_name.substring(file_name.lastIndexOf(".")+1,file_name.length());
 			String regex="(gif|jpg|jpeg|png|JPG|PNG)";
 			if(!Pattern.matches(regex, extName)){
-				Msg.fail();
-				
+				return Msg.fail();	
 			}
-			String savePath = request.getServletContext().getRealPath("/upload");			
+			String savePath = request.getServletContext().getRealPath("/upload/onlyimg/"+pathname);			
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
-			product.setPimg(file_name);
+			url="/upload/onlyimg/"+pathname+"/"+file_name;	
 		}
+		product.setPimg(url);
 		product.setPaddtime(new Date());
 		
 		productService.insertProduct(product);
@@ -97,9 +105,19 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping("updateProductAndFile.action")
-	public Msg updateProductAndFile(Xhproduct product,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
-		if(product!=null){
-			System.out.println(product);
+	public Msg updateProductAndFile(Xhproduct product,MultipartFile file,HttpServletRequest request) throws Exception{
+		String url="";
+		String pathname="";
+		if(product.getPid()>0){
+			Xhproduct pro=productService.selectProductById(product.getPid());
+			url=pro.getPimg();
+			pathname =pro.getPid()+"";
+		}
+		if(!url.equals("")){
+			String urlpath = request.getServletContext().getRealPath(url);
+			FileUtil.deleteFile(urlpath);				
+		}
+		if(product!=null){			
 			if(file!=null){
 				String file_name = file.getOriginalFilename();
 				//判读是不是图片
@@ -108,10 +126,11 @@ public class ProductController {
 				if(!Pattern.matches(regex, extName)){
 					Msg.fail();					
 				}
-				String savePath = request.getServletContext().getRealPath("/upload");			
+				String savePath = request.getServletContext().getRealPath("/upload/onlyimg/"+pathname);			
 				file_name = FileUtil.uploadFile(file, savePath, file_name);
-				product.setPimg(file_name);
+				url="/upload/onlyimg/"+pathname+"/"+file_name;	
 			}
+			product.setPimg(url);
 			product.setPupdatetime(new Date());
 			productService.updateProductById(product);
 			return Msg.success();
@@ -159,22 +178,6 @@ public class ProductController {
 		return Msg.fail();
 	}
 	
-	
-	
-	@ResponseBody
-	@RequestMapping("checkForm.action")
-	public Msg deleteImg(HttpServletRequest request,Xhproduct product,String file){
-		if(request.getContentType().contains("multipart/form-data")){
-			System.out.println(product.getPimg());
-			System.out.println(file);
-			
-			return Msg.fail();
-		}
-		
-		System.out.println(product.getPimg());
-		
-		return Msg.fail();
-	}
 	/*
 	 * 将商品加入到商品回收站
 	 */

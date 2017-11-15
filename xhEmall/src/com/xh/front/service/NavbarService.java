@@ -17,4 +17,6 @@ public interface NavbarService {
 	
 	public void updateNavbarById(Navbar navbar);
 	
+	public List<Navbar> queryAllNavbarIsshow();
+	
 }
