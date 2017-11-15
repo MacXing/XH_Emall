@@ -1,13 +1,16 @@
 package com.xh.back.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.other.msg.Msg;
+import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhcategory;
 import com.xh.back.serviceImpl.CategoryServiceImpl;
 
@@ -95,4 +98,32 @@ public class CategoryController {
 		}
 		return Msg.fail();
 	}
+	
+	@RequestMapping("categoryProduct.action")
+	public String categoryProduct(Model model){
+		List<Category_Product> cps=categoryService.queryAllCP();
+		model.addAttribute("cps", cps);
+		return "/jsp/back/category/queryAllCP.jsp";
+	}
+	
+	@RequestMapping("insertCP.action")
+	@ResponseBody
+	public Msg insertCP(Category_Product CP){
+		if(CP!=null){
+			categoryService.insertCP(CP);
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+	
+	@RequestMapping("deleteCP.action")
+	@ResponseBody
+	public Msg deleteCP(int id){
+		if(id>0){
+			categoryService.deleteCP(id);
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+	
 }

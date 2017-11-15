@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhadmin;
 import com.xh.back.bean.Xhcategory;
 import com.xh.back.bean.Xhmessage;
@@ -34,5 +35,11 @@ public class UtilCategory {
 	public void test(){
 		List<List<Xhcategory>> categorys  = categoryService.queryAllCategory();
 		System.out.println(categorys);
-	}	
+	}
+	
+	@Test
+	public void test2(){
+		List<Category_Product> cp = categoryService.queryAllCP();
+		System.out.println(cp);
+	}
 }

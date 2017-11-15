@@ -2,6 +2,7 @@ package com.xh.back.service;
 
 import java.util.List;
 
+import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhcategory;
 
 public interface CategoryService {
@@ -38,5 +39,13 @@ public interface CategoryService {
   public void updateCategoryById(Xhcategory category);
   
   public List<Xhcategory> categoryList();
+  
+  public List<Category_Product> queryAllCP();
+  
+  public List<Category_Product> queryALLCPById(int id);
+  
+  public void insertCP(Category_Product cp);
+  
+  public void deleteCP(int id);
   
 }

@@ -171,6 +171,9 @@
 								<li>
 									<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/product/addImage.jsp">添加商品图片</a>
 								</li>
+								<li>
+									<a class="J_menuItem" href="${pageContext.request.contextPath }/category/categoryProduct.action">商品归类</a>
+								</li>
 						</ul>
 					</li>
 					<li>
