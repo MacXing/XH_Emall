@@ -130,7 +130,7 @@ table.c_tab tr th{
 	width:1200px; height:140px;
 }
 .logo{
-	width:207px; height:55px; overflow:hidden; float:left; display:inline; margin-top:40px;
+	width:207px; height:100px; overflow:hidden; float:left; display:inline; margin-top:40px;
 }
 .search{
 	width:520px; height:65px; overflow:hidden; float:left; display:inline; margin-left:134px; margin-top:50px;
@@ -1467,7 +1467,7 @@ ul.brand li .name span{
 	height:64px; line-height:32px; overflow:hidden; font-family:"宋体"; margin-top:25px; margin-bottom:20px;
 }
 .des_price b{
-	color:#ff3200; font-size:18px; font-family:"Microsoft YaHei";
+	color:#ff3200; font-size:25px; font-family:"Microsoft YaHei";
 }
 .des_price span{
 	font-size:14px; font-family:"Microsoft YaHei";
