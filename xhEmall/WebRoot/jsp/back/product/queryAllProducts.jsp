@@ -86,8 +86,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    		<td>${product.pid }</td>
 							    		<td>${product.pname }</td>
 							    		<td>
-							    			<a class="fancybox" href="${pageContext.request.contextPath }/upload/${product.pimg}" title="">
-					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }/upload/${product.pimg}" />
+							    			<a class="fancybox" href="${pageContext.request.contextPath }${product.pimg}" title="">
+					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }${product.pimg}" />
 					                        </a>
 							    		</td>							    	
 							    		<td>${product.pprice }</td>

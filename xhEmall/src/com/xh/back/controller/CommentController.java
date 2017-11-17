@@ -41,6 +41,11 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping("insertCommentAndFile.action")
 	public Msg insertProductAndFileById(Xhcomment comment,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException{
+		String url = "";
+		String pathname="";
+		if(comment.getPid()>0){
+			pathname=comment.getPid()+"";
+		}
 		if(file!=null){
 			String file_name = file.getOriginalFilename();
 			//判读是不是图片
@@ -49,12 +54,12 @@ public class CommentController {
 			if(!Pattern.matches(regex, extName)){
 				return Msg.fail();
 			}
-			String savePath = request.getServletContext().getRealPath("/upload");			
+			String savePath = request.getServletContext().getRealPath("/upload/comment/"+pathname);			
 			file_name = FileUtil.uploadFile(file, savePath, file_name);
-			comment.setCommentimg(file_name);
+			url="/upload/comment/"+pathname+"/"+file_name;
 		}
 		comment.setCommenttime(new Date());
-		
+		comment.setCommentimg(url);
 		commentService.insertComment(comment);
 		
 		return Msg.success();
@@ -73,8 +78,14 @@ public class CommentController {
 	
 	@ResponseBody
 	@RequestMapping("deleteComment.action")
-	public Msg deleteComment(int id){
+	public Msg deleteComment(int id,HttpServletRequest request) throws Exception{
+		String url="";
 		if(id>0){
+			url=commentService.queryCommentById(id).getCommentimg();
+		}
+		if(!url.equals("")){
+			String urlpath = request.getServletContext().getRealPath(url);
+			FileUtil.deleteFile(urlpath);
 			commentService.deleteCommentById(id);
 			return Msg.success();
 		}

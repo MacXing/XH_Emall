@@ -1,6 +1,8 @@
 package com.xh.back.mapper;
 
 import java.util.List;
+
+import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhcategory;
 
 
@@ -43,6 +45,13 @@ public interface CategoryMapper {
    * 根据id来更新表格
    * @param id
    */
-  public void updateCategoryById(int id);
+  public void updateCategoryById(Xhcategory category);
   
+  public List<Category_Product> queryAllCP();
+  
+  public List<Category_Product> queryALLCPById(int id);
+  
+  public void insertCP(Category_Product cp);
+  
+  public void deleteCP(int id);
 }

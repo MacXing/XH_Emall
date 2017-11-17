@@ -57,12 +57,52 @@
 	<update id="updateCategoryById" parameterType="xhcategory">
 		UPDATE xhCategory
 		SET parentID=#{parentid},catName=#{catname},catDesc=#{catdesc},
-		sortOrder=#{sortorder},isShow=#{ishow},catGrade=#{catgrade}
+		sortOrder=#{sortorder},isShow=#{isshow},catGrade=#{catgrade}
 		WHERE catID =#{catid}
 	</update>
 	
 	<select id="categoryList" resultType="xhcategory">
 		SELECT catID,parentID,catName,catDesc,sortOrder,isShow,catGrade FROM xhCategory
 	</select>
+
+<resultMap type="category_product" id="queryAllCPMap">
+	<id column="id" property="id"/>
+	<result column="pId" property="pid"/>
+	<result column="catId" property="catid"/>
+	<association property="product" javaType="xhproduct">
+		
+		<result column="pName" property="pname"/>
+	</association>
+	<association property="category" javaType="xhcategory">
+		
+		<result column="catName" property="catname"/>
+	</association>
+</resultMap>
 	
+<select id="queryAllCP" resultMap="queryAllCPMap">
+	SELECT cp.id,p.pID,p.pName,c.catID,c.catName FROM xhProduct p
+	JOIN category_product cp
+	ON p.pID = cp.pId
+	JOIN xhCategory c
+	ON cp.catId = c.catID
+</select>
+
+<select id="queryALLCPById" parameterType="int">
+	SELECT cp.id,cp.pID,p.pName,cp.catID,c.catName FROM xhProduct p
+	JOIN category_product cp
+	ON p.pID = cp.pId
+	JOIN xhCategory c
+	ON cp.catId = c.catID
+	WHERE c.catID =#{id}
+</select>
+
+<insert id="insertCP" parameterType="category_product">
+	INSERT INTO category_product(pID,catID)
+	VALUES(#{pid},#{catid})
+</insert>
+
+<delete id="deleteCP" parameterType="int">
+	DELETE FROM category_product
+	WHERE id=#{id}	
+</delete>	
 </mapper>

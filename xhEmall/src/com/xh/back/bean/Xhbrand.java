@@ -1,13 +1,6 @@
 package com.xh.back.bean;
 
 public class Xhbrand {
-    @Override
-	public String toString() {
-		return "Xhbrand [brandid=" + brandid + ", brandname=" + brandname
-				+ ", branddesc=" + branddesc + ", attribute1=" + attribute1
-				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
-				+ "]";
-	}
 
 	private Integer brandid;
 
@@ -15,7 +8,7 @@ public class Xhbrand {
 
     private String branddesc;
 
-    private String attribute1;
+    private String image;
 
     private String attribute2;
 
@@ -45,15 +38,16 @@ public class Xhbrand {
         this.branddesc = branddesc == null ? null : branddesc.trim();
     }
 
-    public String getAttribute1() {
-        return attribute1;
-    }
+    
+    public String getImage() {
+		return image;
+	}
 
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-    public String getAttribute2() {
+	public String getAttribute2() {
         return attribute2;
     }
 
@@ -68,4 +62,13 @@ public class Xhbrand {
     public void setAttribute3(String attribute3) {
         this.attribute3 = attribute3 == null ? null : attribute3.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhbrand [brandid=" + brandid + ", brandname=" + brandname
+				+ ", branddesc=" + branddesc + ", image=" + image
+				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
+				+ "]";
+	}
+ 
 }

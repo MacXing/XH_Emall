@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-12">
                <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>分类信息</h5>
+                        <h5>商品归类</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -61,30 +61,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <thead >
                                 <tr>
                                 	<th class="text-center">ID</th>
-                                    <th class="text-center">上级类名</th>
-                                	<th class="text-center">分类名字</th>
-                                	<th class="text-center">分类描述</th>
-                                	<th class="text-center">是否展示</th>
-                                	<th class="text-center">分类等级</th>
-                                	<th class="text-center">分类排序</th>
+                                    <th class="text-center">商品ID</th>
+                                	<th class="text-center">商品名字</th>
+                                	<th class="text-center">分类ID</th>
+                                	<th class="text-center">分类名字</th>                
                                     <th class="text-center">操作</th>
                                 </tr>
                             </thead>
                             <tbody id="table_data" class="text-center">             
-                             <c:forEach items="${categoryList }" var="item" >
+                             <c:forEach items="${cps }" var="item" >
 	                             	 	                          
 	                             			<tr>
+									    		<td>${item.id }</td>
+									    		<td>${item.pid }</td>
+									    		<td>${item.product.pname }</td>						   		
 									    		<td>${item.catid }</td>
-									    		<td>${item.category.catname }</td>
-									    		<td>${item.catname }</td>						   		
-									    		<td>${item.catdesc }</td>
-									    		<td>${item.isshow }</td>
-									    		<td>${item.catgrade }</td>
-									    		<td>${item.sortorder }</td>		    		
+									    		<td>${item.category.catname }</td>								    		    		
 									    		<td class="text-center">							    										    			
-									    			<a onclick="btn2(${item.catid  })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>
-									    			&nbsp;&nbsp;
-									    			<a onclick="btn3(${item.catid  })" data-toggle="modal" data-target="#myModel3" style="color:#000"><span class="glyphicon glyphicon-pencil"></span></a>
+									    			<a onclick="btn2(${item.id  })" style="color:#000"><span class="glyphicon glyphicon-trash"></span></a>									    
 									    		</td> 						    									    									    		
 									    	</tr>                             			                        
     						</c:forEach> 
@@ -110,36 +104,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <div class="modal-body"> 		        
                 	<form class="form-horizontal m-t" id="myform1" method="post" action="">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">分类名称：</label>
+                                <label class="col-sm-3 control-label">商品名称：</label>
                                 <div class="col-sm-8">
-                                    <input id="catname1" name="catname" minlength="2" type="text" class="form-control">
+                                    <select class="form-control m-b" name="pid" id="productSelect">
+                                        
+                                    </select>
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="col-sm-3 control-label">上级分类名称：</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control m-b" name="parentid" id="categorySelect">
+                                    <select class="form-control m-b" name="catid" id="categorySelect">
                                         
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">分类描述：</label>
-                                <div class="col-sm-8">
-                                    <textarea id="catdesc1" name="catdesc" class="form-control" ></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">分类展示：</label>
-                                <div class="col-sm-8">	                            
-		                                    <div class="radio i-checks">
-		                                        <label>
-		                                            <input type="radio" name="isshow" value=0> <i></i>不展示</label>
-		                                        <label>
-		                                            <input type="radio" checked="" name="isshow" value=1> <i></i> 展示（选中）</label>
-		                                    </div>	              
-                                </div>
-                            </div>  
+                            </div>           
                             <div class="form-group">
                                 <div class="col-sm-8 col-sm-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>		       
@@ -243,6 +222,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			}
 		}); 
+       	 
+       	 $.ajax({
+ 			url:"${pageContext.request.contextPath}/product/queryAllProductsForJson.action",
+ 			type:"GET",
+ 			success:function(result){
+ 				if(result.code==100){
+ 					console.log(result.extend.products);
+ 					$.each(result.extend.products,function(index,item){					
+ 								var option=$("<option value='"+item.pid+"'></option>").append(item.pname);
+ 								option.appendTo(productSelect);
+ 					});  
+ 				}
+ 			}
+ 		});  
   });        		
     </script>
     
@@ -251,19 +244,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	*点击添加分类按钮请请求分类信息并加载到select的option中
 	**/
     $("#btn_submit").on("click",function(){
-    	if(!confirm("您确定要添加分类信息吗？")){
+    	if(!confirm("您确定要将该商品添加到该类吗？")){
     		return false;
    		}else{
    			var form = $("#myform1").serialize();
    			console.log(form);
    			$.ajax({
-   				url:"${pageContext.request.contextPath}/category/insertCategory.action",
+   				url:"${pageContext.request.contextPath}/category/insertCP.action",
    				type:"post",
    				data:form,   		
    				success:function(result){
    					if(result.code==100){
    						alert("增加成功！");
-   						window.location.href="${pageContext.request.contextPath}/category/queryAllCategory.action";
+   						window.location.href="${pageContext.request.contextPath}/category/categoryProduct.action";
    					}else{
    						alert("增加失败！");
    					}
@@ -283,22 +276,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 */
 $("#flash").on("click",function(){
 	 
- 	window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action";  
+	window.location.href="${pageContext.request.contextPath}/category/categoryProduct.action";
  
 });
 
-	/* 点击删除 */
+/* 点击删除 */
 	function btn2(id){
 		if(!confirm("您确定要删除这个分类信息吗？")){
 	 		   return false;
 	 	   }else{
 	 		   $.ajax({
-	 			   url:"${pageContext.request.contextPath }/category/deleteCategory.action?id="+id,
+	 			   url:"${pageContext.request.contextPath }/category/deleteCP.action?id="+id,
 	 			   type:"delete",
 	 			   success:function(result){
 	 					  if(result.code==100){
 	 						  alert("删除成功！");
-	 						  window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action"; 
+	 						 window.location.href="${pageContext.request.contextPath}/category/categoryProduct.action";
 	 					  }else{
 	 						  alert("删除失败！");
 	 					  }	   
@@ -307,51 +300,6 @@ $("#flash").on("click",function(){
 	 	   }
 	} 
 	
-	/**
-	*点击修改
-	*/
-	function btn3(id){
-
-	 		   $.ajax({
-	 			   url:"${pageContext.request.contextPath }/category/queryCategoryById.action?id="+id,
-	 			   type:"get",
-	 			   success:function(result){
-	 					  if(result.code==100){
-	 						 $("#catid3").val(result.extend.category.catid);
-							 $("#catname3").val(result.extend.category.catname);
-							 $("#catdesc3").val(result.extend.category.catdesc);
-							 $("#isshow3").val(result.extend.category.isshow);
-							 $("#categorySelect").find("option:selected").val(result.extend.category.parentid);
-	 					  } 
-	 			   }	 			   
-	 		   });
-	} 
- 
-   /**
-	*点击修改
-	*/
-	 $("#btn_fix").on("click",function(){
-		if(!confirm("您确定要修改分类信息吗？")){
-			return false;
-		}else{
-			var brand= new FormData($("#myform3")[0]);
-			$.ajax({
-				url:"${pageContext.request.contextPath}/category/updateCategory.action",
-				type:"POST",
-				data:brand,
-				contentType: false,  
-			    processData: false, 
-				success:function(result){
-					if(result.code==100){
-						alert("修改成功！");
-						window.location.href="${pageContext.request.contextPath }/category/queryAllCategory.action";
-					}else{
-						alert("修改失败！");
-					}
-				}
-			});
-		}
-	});
 	
     </script>
 </body>

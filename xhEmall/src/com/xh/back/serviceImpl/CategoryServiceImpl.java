@@ -2,8 +2,11 @@ package com.xh.back.serviceImpl;
 
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
+import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhcategory;
 import com.xh.back.mapper.CategoryMapper;
 import com.xh.back.service.CategoryService;
@@ -46,14 +49,37 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void updateCategoryById(int id) {
-		categoryMapper.updateCategoryById(id);
+	public void updateCategoryById(Xhcategory category) {
+		categoryMapper.updateCategoryById(category);
 	}
 
 	@Override
 	public List<Xhcategory> categoryList() {
 		
 		return categoryMapper.categoryList();
+	}
+
+	@Override
+	public List<Category_Product> queryAllCP() {
+		
+		return categoryMapper.queryAllCP();
+	}
+
+	@Override
+	public List<Category_Product> queryALLCPById(int id) {
+		
+		return categoryMapper.queryALLCPById(id);
+	}
+
+	@Override
+	public void insertCP(Category_Product cp) {
+		
+		categoryMapper.insertCP(cp);
+	}
+	
+	public void deleteCP(int id) {
+		
+		categoryMapper.deleteCP(id);
 	}
 	
 	

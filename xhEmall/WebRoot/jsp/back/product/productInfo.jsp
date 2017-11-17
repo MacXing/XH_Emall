@@ -189,7 +189,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			$("#punit").html(result.punit);
 	    			$("#pdiscount").html(result.pdiscount);
 	    			$("#brand").html(result.brand.brandname);
-	    			$("#img").attr("src","${pageContext.request.contextPath}/upload/"+result.pimg);
+	    			$("#img").attr("src","${pageContext.request.contextPath}"+result.pimg);
 	    			$("#pupdatetime").html(fmtDate(result.pupdatetime));
 	    			if(result.pIntegral==0){
 	    				$("#pintegral").html("否");
