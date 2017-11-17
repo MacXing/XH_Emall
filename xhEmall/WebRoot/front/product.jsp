@@ -21,11 +21,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   	
+  	<!-- <link rel="stylesheet" href="front/css/pager.css"/> -->
 	<link type="text/css" rel="stylesheet" href="front/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="front/css/ShopShow.css" />
     <link rel="stylesheet" type="text/css" href="front/css/MagicZoom.css" />
     
-    <script src="resource/js/jquery.min.js?v=2.1.4"></script>
+    
+    <script type="text/javascript" src="front/js/jquery-1.11.1.min_044d0927.js"></script>
+	<script type="text/javascript" src="front/js/jquery.bxslider_e88acd1b.js"></script>   
+    <script type="text/javascript" src="front/js/jquery-1.8.2.min.js"></script>    
+    <!-- <script src="resource/js/jquery.min.js?v=2.1.4"></script> -->
     <script type="text/javascript" src="front/js/menu.js"></script>                
 	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>            
 	<script type="text/javascript" src="front/js/n_nav.js"></script>        
@@ -34,7 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	var jq = jQuery.noConflict();
     </script>        
     <script type="text/javascript" src="front/js/p_tab.js"></script>    
-    <script type="text/javascript" src="front/js/shade.js"></script>
+    <script type="text/javascript" src="front/js/shade.js"></script>    
+	<script src="front/js/pager.js">  </script>	
     
 
 </head>
@@ -473,8 +479,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>    
     <div class="content">    	                    
         <div id="tsShopContainer">
-            <div id="tsImgS"><a href="front/images/p_big.jpg" title="Images" class="MagicZoom" id="MagicZoom">
-            	<img src="front/images/p_big.jpg" width="390" height="390" /></a>
+            <div id="tsImgS"><a href="${pageContext.request.contextPath}${productImages[0].url }" title="Images" class="MagicZoom" id="MagicZoom">
+            	<img src="${pageContext.request.contextPath}${productImages[0].url }" width="390" height="390" /></a>
             </div>
             <div id="tsPicContainer">
                 <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
@@ -485,15 +491,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		<img src="${pageContext.request.contextPath}${image.url }" 
                     			tsImgS="${pageContext.request.contextPath}${image.url }" width="79" height="79" />
                     		</li>
-                    	</c:forEach>
-                        <!-- <li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img src="front/images/ps1.jpg" tsImgS="front/images/ps1.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(1)" rel="MagicZoom"><img src="front/images/ps2.jpg" tsImgS="front/images/ps2.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(2)" rel="MagicZoom"><img src="front/images/ps3.jpg" tsImgS="front/images/ps3.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(3)" rel="MagicZoom"><img src="front/images/ps4.jpg" tsImgS="front/images/ps4.jpg" width="79" height="79" /></li> -->
-                        <!-- <li onclick="showPic(4)" rel="MagicZoom"><img src="front/images/ps1.jpg" tsImgS="front/images/ps1.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(5)" rel="MagicZoom"><img src="front/images/ps2.jpg" tsImgS="front/images/ps2.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(6)" rel="MagicZoom"><img src="front/images/ps3.jpg" tsImgS="front/images/ps3.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(7)" rel="MagicZoom"><img src="front/images/ps4.jpg" tsImgS="front/images/ps4.jpg" width="79" height="79" /></li> -->
+                    	</c:forEach>                      
                     </ul>
                 </div>
                 <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
@@ -503,21 +501,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
         <div class="pro_des">
         	<div class="des_name">
-            	<p>${xhproduct.pname }</p>
+            	<p style="font-size:25px">${xhproduct.pname }</p>
                 	限时折扣，欲购从速！
             </div>
-            <div class="des_price">
+            <div class="des_price" style="font-size:15px">
             	本店价格：<b>¥${xhproduct.psale }</b><br />
-              	 市场价：<del>¥${xhproduct.pprice }</del>
+              	市场价：<del>¥${xhproduct.pprice }</del>
             </div>
-            <div class="des_choice">
+            <div class="des_choice" style="font-size:13px">
             	<span class="fl">型号：</span>
-            	<span>${xhproduct.psize }(${xhproduct.punit })</span>
-                <!-- <ul>
-                	<li class="checked">30ml<div class="ch_img"></div></li>
-                    <li>50ml<div class="ch_img"></div></li>
-                    <li>100ml<div class="ch_img"></div></li>
-                </ul> -->
+            	<span>${xhproduct.psize }(${xhproduct.punit })</span>                
             </div>
             <!-- <div class="des_choice">
             	<span class="fl">颜色选择：</span>
@@ -640,13 +633,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
             </div>
             <div class="des_border">
-                <div class="des_tit">
-                	<ul>
-                    	<li class="current"><a href="#p_attribute">商品属性</a></li>
-                        <li><a href="#p_details">商品详情</a></li>
-                        <li><a href="#p_comment">商品评论</a></li>
-                    </ul>
-                </div>
+                <div class="des_t">商品属性</div>
                 <div class="des_con" id="p_attribute">
                 	
                 	<table border="0" align="center" style="width:100%; font-family:'宋体'; margin:10px auto;" cellspacing="0" cellpadding="0">                                           	                                          
@@ -673,7 +660,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="des_con">
                 	<table border="0" align="center" style="width:745px; font-size:14px; font-family:'宋体';" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td width="265"><img src="front/images/de1.jpg" width="206" height="412" /></td>
+                        <td width="265"><img src="${pageContext.request.contextPath}${productImages[0].url }" width="390" height="390" /></td>
                         <td>
                         	<b>${xhproduct.pname }</b><br />
                             	【商品规格】：${xhproduct.psize }(${xhproduct.punit })<br />
@@ -683,6 +670,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </td>
                       </tr>
                     </table>
+                    <br />
                     
                     <p align="center">
                     <img src="front/images/de2.jpg" width="746" height="425" /><br /><br />
@@ -728,61 +716,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 				
                 <table border="0" class="jud_list" style="width:100%; margin-top:30px;" cellspacing="0" cellpadding="0">
+                <c:forEach items="${pageInfo.list}" var="comm">
                   <tr valign="top">
-                    <td width="160"><img src="front/images/peo1.jpg" width="20" height="20" align="absmiddle" />&nbsp;向死而生</td>
-                    <td width="180">
-                    	颜色分类：<font color="#999999">粉色</font> <br />
-                        型号：<font color="#999999">50ml</font>
+                    <td width="30">
+                    <img src="front/images/peo1.png" width="20" height="20" align="absmiddle" />
+                    <font size="2" color="black" >${comm.users.username }</font><br /><br />                   
+                    </td>                    
+                    <td width="80">  
+                    	商品：<font color="#999999">${comm.product.pname }</font><br />                 	                    	
+                      	 型号：<font color="#999999">${comm.product.psize }</font>                     	                      	 
                     </td>
-                    <td>
-                    	产品很好，香味很喜欢，必须给赞。 <br />
-                        <font color="#999999">2015-09-24</font>
-                    </td>
-                  </tr>
-                  <tr valign="top">
-                    <td width="160"><img src="front/images/peo2.jpg" width="20" height="20" align="absmiddle" />&nbsp;就是这么想的</td>
-                    <td width="180">
-                    	颜色分类：<font color="#999999">粉色</font> <br />
-                        型号：<font color="#999999">50ml</font>
-                    </td>
-                    <td>
-                    	送朋友，她很喜欢，大爱。 <br />
-                        <font color="#999999">2015-09-24</font>
-                    </td>
-                  </tr>
-                  <tr valign="top">
-                    <td width="160"><img src="front/images/peo3.jpg" width="20" height="20" align="absmiddle" />&nbsp;墨镜墨镜</td>
-                    <td width="180">
-                    	颜色分类：<font color="#999999">粉色</font> <br />
-                        型号：<font color="#999999">50ml</font>
-                    </td>
-                    <td>
-                    	大家都说不错<br />
-                        <font color="#999999">2015-09-24</font>
-                    </td>
-                  </tr>
-                  <tr valign="top">
-                    <td width="160"><img src="front/images/peo4.jpg" width="20" height="20" align="absmiddle" />&nbsp;那*****洋 <br /><font color="#999999">（匿名用户）</font></td>
-                    <td width="180">
-                    	颜色分类：<font color="#999999">粉色</font> <br />
-                        型号：<font color="#999999">50ml</font>
-                    </td>
-                    <td>
-                    	下次还会来买，推荐。<br />
-                        <font color="#999999">2015-09-24</font>
-                    </td>
-                  </tr>
-                </table>
-
-                	
-                    
-                <div class="pages">
-                    <a href="#" class="p_pre">上一页</a><a href="#" class="cur">1</a><a href="#">2</a><a href="#">3</a>...<a href="#">20</a><a href="#" class="p_pre">下一页</a>
-                </div>
-                
-          	</div>
-            
-            
+                    <td width="40" align=center>  
+                    	服务等级：${comm.commentservice }<br />
+                		商品等级：${comm.commentgoods}<br />
+                		物流等级：${comm.commentshopping }<br />                     	                      	 
+                    </td>  
+                    <td width="190">                   	                    	                      	
+                      	<font size="4" color="black">${comm.commenttxt }</font> <br />                      	
+                       	<font color="#999999"><fmt:formatDate value="${comm.commenttime }" pattern="yyyy-MM-dd HH:mm:ss"/></font>
+                    </td>                  
+                  </tr>                  
+                </c:forEach>                  
+                </table> 
+                <div class="pages">   
+                <c:if test="${pageInfo.hasPreviousPage==true }">                  
+                   <a class="p_pre" href="ProductDetails/queryImagesByPid.action?pageNum=${pageInfo.pageNum-1}&pid=${xhproduct.pid}">上一页</a>
+                </c:if>
+                <c:if test="${pageInfo.hasPreviousPage==false }">
+                	<a class="p_pre" href="ProductDetails/queryImagesByPid.action?pageNum=${pageInfo.pageNum}&pid=${xhproduct.pid}">上一页</a>
+                </c:if> 
+                <c:forEach items="${pageInfo.navigatepageNums }" var="n">
+                	<a href="ProductDetails/queryImagesByPid.action?pageNum=${n}&pid=${xhproduct.pid}">${n}</a>
+                </c:forEach>
+                <c:if test="${pageInfo.hasNextPage==true }">                  
+                   <a class="p_pre" href="ProductDetails/queryImagesByPid.action?pageNum=${pageInfo.pageNum+1}&pid=${xhproduct.pid}">下一页</a>
+                </c:if>
+                <c:if test="${pageInfo.hasNextPage==false }">                  
+                   <a class="p_pre" href="ProductDetails/queryImagesByPid.action?pageNum=${pageInfo.pageNum}&pid=${xhproduct.pid}">下一页</a>
+                </c:if> 
+                </div>                              
+          	</div>                        
         </div>
     </div>
     
@@ -829,8 +802,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <tr valign="top">
                     <td width="40"><img src="front/images/suc.png" /></td>
                     <td>
-                    	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />
-                    	购物车共有1种宝贝（3件） &nbsp; &nbsp; 合计：1120元
+                    	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />                    	
                     </td>
                   </tr>
                   <tr height="50" valign="bottom">
@@ -929,6 +901,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <!--End Footer End -->    
 </div>
+
+<script>
+	Page({
+		num:7,					//页码数
+		startnum:6,				//指定页码
+		elem:$('#page2'),		//指定的元素
+		callback:function(n){	//回调函数
+			console.log(n);
+		}
+	});
+</script>
 
 </body>
 

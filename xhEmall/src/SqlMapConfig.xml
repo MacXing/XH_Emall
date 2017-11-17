@@ -13,4 +13,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     	<package name="com.xh.back.bean"/>
     	<package name="com.xh.front.bean"/>
     </typeAliases>
+    <plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- 分页参数合理化 -->
+			<property name="reasonable" value="true" />
+		</plugin>
+	</plugins>	
 </configuration>

@@ -14,6 +14,7 @@ import com.other.currency.ServerResponse;
 import com.other.currency.TokenCache;
 import com.other.tools.MD5Util;
 import com.xh.back.bean.ProductImage;
+import com.xh.back.bean.Xhcomment;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.mapper.ProductDetailsMapper;
 import com.xh.front.mapper.XhUserMapper;
@@ -28,6 +29,11 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 	@Override
 	public List<ProductImage> queryImagesByPid(Integer pid) {
 		return productDetailsMapper.queryImagesByPid(pid);
+	}
+
+	@Override
+	public List<Xhcomment> queryCommentByPid(Integer pid) {		
+		return productDetailsMapper.queryCommentByPid(pid);
 	}
 	
 	
