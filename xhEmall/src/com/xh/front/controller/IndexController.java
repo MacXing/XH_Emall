@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.other.msg.Msg;
+import com.xh.back.bean.Category_Product;
+import com.xh.back.bean.Xhcategory;
+import com.xh.back.bean.Xhproduct;
+import com.xh.back.serviceImpl.CategoryServiceImpl;
 import com.xh.front.bean.Navbar;
-import com.xh.front.service.NavbarService;
 import com.xh.front.serviceImpl.NavbarServiceImpl;
 
 @Controller
@@ -20,20 +22,35 @@ import com.xh.front.serviceImpl.NavbarServiceImpl;
 public class IndexController {
 	@Autowired
 	@Qualifier("navbarService")
-	/**
-	 * 轮播图
-	 */
 	private NavbarServiceImpl navbarService;
 	
+	@Autowired
+	@Qualifier("categoryService")
+	private CategoryServiceImpl categoryService;
+	
 	@RequestMapping("home.action")
-	@ResponseBody
-	public Msg home(Model model){
+	public String home(Model model){
 		List<Navbar> navbars = navbarService.queryAllNavbarIsshow();
-		if(navbars!=null){
-			return Msg.success().add("navbars", navbars);
-		}
-		return Msg.fail();
+		List<Xhcategory> categorys = categoryService.categoryList();
+		List<Category_Product> CP = categoryService.queryAllCPForHome();
+		model.addAttribute("navbars", navbars);
+		model.addAttribute("categoryList", categorys);
+		model.addAttribute("CP", CP);
+		
+		return "/front/index.jsp";
 	}
 	
+	@RequestMapping("queryproductsByCategory.action")
+	public String queryAll(int catid){
+		List<Xhproduct> products = categoryService.queryAllProductByCategory(catid);
+		System.out.println(products);
+		return "";
+	}
 	
+	@RequestMapping("queryAllProductsByCatid.action")
+	public String queryAllProductsByCatid(int catid){
+		List<Xhproduct> products = categoryService.queryAllProductsByCatid(catid);
+		System.out.println(products);
+		return "";
+	}
 }

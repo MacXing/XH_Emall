@@ -1,11 +1,15 @@
 package com.xh.back.bean;
 
+import java.util.List;
+
 public class Category_Product {
 	private int id;
 	private int pid;
 	private int catid;
 	private Xhcategory category;
 	private Xhproduct product;
+	private List<Xhcategory> categorys;
+	private List<Xhproduct> products;
 	
 	public int getId() {
 		return id;
@@ -38,6 +42,18 @@ public class Category_Product {
 		this.product = product;
 	}
 	
+	public List<Xhcategory> getCategorys() {
+		return categorys;
+	}
+	public void setCategorys(List<Xhcategory> categorys) {
+		this.categorys = categorys;
+	}
+	public List<Xhproduct> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Xhproduct> products) {
+		this.products = products;
+	}
 	@Override
 	public String toString() {
 		return "Category_Product [id=" + id + ", pid=" + pid + ", catid="

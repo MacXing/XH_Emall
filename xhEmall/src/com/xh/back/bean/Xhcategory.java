@@ -26,6 +26,16 @@ public class Xhcategory {
     private List<Xhcategory> categorys;
     
 	private Xhcategory category;
+	
+	private List<Xhproduct> products;
+
+	public List<Xhproduct> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Xhproduct> products) {
+		this.products = products;
+	}
 
 	public Xhcategory getCategory() {
 		return category;

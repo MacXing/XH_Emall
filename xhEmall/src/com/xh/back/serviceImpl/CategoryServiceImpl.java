@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhcategory;
+import com.xh.back.bean.Xhproduct;
 import com.xh.back.mapper.CategoryMapper;
 import com.xh.back.service.CategoryService;
 /**
@@ -80,6 +81,24 @@ public class CategoryServiceImpl implements CategoryService{
 	public void deleteCP(int id) {
 		
 		categoryMapper.deleteCP(id);
+	}
+
+	@Override
+	public List<Category_Product> queryAllCPForHome() {
+		// TODO Auto-generated method stub
+		return categoryMapper.queryAllCPForHome();
+	}
+
+	@Override
+	public List<Xhproduct> queryAllProductByCategory(int id) {
+		
+		return categoryMapper.queryAllProductByCategory(id);
+	}
+
+	@Override
+	public List<Xhproduct> queryAllProductsByCatid(int catid) {
+		// TODO Auto-generated method stub
+		return categoryMapper.queryAllProductsByCatid(catid);
 	}
 	
 	

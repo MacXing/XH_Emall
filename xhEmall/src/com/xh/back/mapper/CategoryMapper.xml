@@ -17,7 +17,7 @@
 	    	<result column="parentID2" jdbcType="INTEGER" property="parentid" />
 			<result column="catName2" jdbcType="VARCHAR" property="catname"/>
 			<result column="catDesc2" jdbcType="VARCHAR" property="catdesc" />
-		    <result column="sortOrder2" jdbcType="INTEGER" property="sortorder" />
+		    <result column="catGrade" jdbcType="INTEGER" property="catgrade" />
 		    <result column="isShow2" jdbcType="INTEGER" property="isshow" />
 		    
 	    </collection>
@@ -25,7 +25,7 @@
 	  </resultMap>
 
 	<select id="queryAllCategory" resultMap="queryAllCategoryMap">
-		SELECT c1.catName catName1,c1.catID catID1,c1.catDesc catDesc1,c1.sortOrder sortOrder1,
+		SELECT c1.catName catName1,c1.catID catID1,c1.catDesc catDesc1,c1.catGrade catGrade,
 		c1.isShow isShow1,c1.catGrade catGrade1,c1.parentID parentID1,  
 		c2.catID catID2,c2.parentID parentID2,c2.catName catName2 ,c2.catDesc catDesc2,
 		c2.isShow isShow2,c2.sortOrder sortOrder2 
@@ -104,5 +104,56 @@
 <delete id="deleteCP" parameterType="int">
 	DELETE FROM category_product
 	WHERE id=#{id}	
-</delete>	
+</delete>
+<resultMap type="com.xh.back.bean.Xhcategory" id="queryAllCPForHomeMap">
+	<id column="catID" property="catid"/>
+	<result column="catName" property="catname"/>
+	<collection property="categorys" ofType="xhcategory">
+		<id column="catID1" property="catid"/>
+		<result column="catName1" property="catname"/>
+		<collection property="products" ofType="xhproduct">
+			<id column="pID" property="pid"/>
+			<result column="pName" property="pname"/>
+			<result column="pImg" property="pimg"/>
+			<result column="pSale" property="psale"/>
+		</collection>
+	</collection>
+</resultMap>
+
+<select id="queryAllCPForHome" resultMap="queryAllCPForHomeMap">
+	SELECT c1.catID,c1.catName,
+	c2.catID catId1,c2.catName catName1,
+	p.pID,p.pName,p.pImg,p.pSale 
+	FROM xhCategory c1
+	JOIN xhCategory c2
+	ON c1.catID=c2.parentID
+	JOIN category_product cp
+	ON c2.catID=cp.catId
+	JOIN xhProduct p
+	ON cp.pId=p.pID
+	WHERE c1.catID NOT IN (1)
+</select>
+
+<select id="queryAllProductByCategory" resultType="xhproduct" parameterType="int">
+	SELECT p.pID,p.pName,p.pImg,p.pSale 
+	FROM xhCategory c
+	JOIN category_product cp
+	ON c.catID=cp.catId
+	JOIN xhProduct p
+	ON cp.pId=p.pID
+	WHERE c.catID=#{id}
+</select>
+
+<select id="queryAllProductsByCatid" resultType="xhproduct" parameterType="int">
+	SELECT p.pID,p.pName,p.pImg,p.pSale
+	FROM xhCategory c1
+	JOIN xhCategory c2
+	ON c2.parentID=c1.catID
+	JOIN category_product cp
+	ON c2.catID=cp.catId
+	JOIN xhProduct p
+	ON cp.pId=p.pID
+	WHERE c1.catID=#{id}	
+</select>
+	
 </mapper>

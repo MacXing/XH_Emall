@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.xh.back.bean.Category_Product;
 import com.xh.back.bean.Xhcategory;
+import com.xh.back.bean.Xhproduct;
 
 
 public interface CategoryMapper {
@@ -54,4 +55,11 @@ public interface CategoryMapper {
   public void insertCP(Category_Product cp);
   
   public void deleteCP(int id);
+  
+  public List<Category_Product> queryAllCPForHome();
+  
+  public List<Xhproduct> queryAllProductByCategory(int id);
+  
+  public List<Xhproduct> queryAllProductsByCatid(int catid);
+  
 }
