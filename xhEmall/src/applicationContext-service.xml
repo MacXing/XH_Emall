@@ -40,6 +40,6 @@
 	<bean id="commentService" class="com.xh.back.serviceImpl.CommentServiceImpl"/>
 	<bean id="productDetailsService" class="com.xh.front.serviceImpl.ProductDetailsServiceImpl"/>
 	<bean id="productListService" class="com.xh.front.serviceImpl.ProductListServiceImpl"></bean>
-	<!-- <bean id="navbarService" class="com.xh.front.serviceImpl.NavbarServiceImpl"/> -->
+	<bean id="navbarService" class="com.xh.front.serviceImpl.NavbarServiceImpl"/>
 </beans>
 	
