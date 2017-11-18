@@ -530,14 +530,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <span class="i_up">销量从低到高显示</span>
                         <span class="i_down">销量从高到低显示</span>                                                     
                     </a>
-                    <a href="#">
+                    <a href="ProductList/queryProductOrderByPsaleDesc.action?pname=${keyword}">
                     	<span class="fl">价格</span>                        
                         <span class="i_up">价格从低到高显示</span>
                         <span class="i_down">价格从高到低显示</span>     
                     </a>
                     <a href="#">新品</a>
                 </span>
-                <span class="fr">共发现120件</span>
+                <span class="fr">共发现${count}件</span>
             </div>
             <div class="list_c">           	
                 <ul class="cate_list">
@@ -545,7 +545,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	<li>
                     	<div class="img">
 	                    	<a href="${pageContext.request.contextPath}/ProductDetails/queryImagesByPid.action?pid=${product.pid }" target="_blank">
-	                    		<img src="front/images/per_1.jpg" width="210" height="185" />
+	                    		<img src="${pageContext.request.contextPath}${product.pimg }" width="210" height="185" />
 	                    	</a>
                     	</div>
                         <div class="price">
@@ -565,16 +565,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    <a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum-1}&pname=${keyword}">上一页</a>
                 </c:if>
                 <c:if test="${pageInfo.hasPreviousPage==false }">
-                	<a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum}&pname=${keyword}">上一页</a>
+                	<a class="p_pre">上一页</a>
                 </c:if> 
                 <c:forEach items="${pageInfo.navigatepageNums }" var="n">
-                	<a href="ProductList/queryAllProductByFind.action?pageNum=${n}&pname=encodeURI(encodeURI(${keyword}))">${n}</a>
+                	<a href="ProductList/queryAllProductByFind.action?pageNum=${n}&pname=${keyword}">${n}</a>
                 </c:forEach>
                 <c:if test="${pageInfo.hasNextPage==true }">                  
                    <a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum+1}&pname=${keyword}">下一页</a>
                 </c:if>
                 <c:if test="${pageInfo.hasNextPage==false }">                  
-                   <a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum}&pname=${keyword}">下一页</a>
+                   <a class="p_pre">下一页</a>
                 </c:if> 
                 </div>
                                                 
