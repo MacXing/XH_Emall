@@ -93,4 +93,10 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.queryImageById(id);
 	}
 
+	@Override
+	public List<Xhproduct> queryProductByBrandid(int id) {
+		
+		return productMapper.queryProductByBrandid(id);
+	}
+
 }

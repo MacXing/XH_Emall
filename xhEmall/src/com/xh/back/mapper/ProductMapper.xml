@@ -97,4 +97,8 @@
 		WHERE picid =#{id}
 	</select>	
 
+	<select id="queryProductByBrandid" parameterType="int" resultType="xhproduct">
+		SELECT pID,pName,pSale,pImg FROM xhProduct
+		WHERE brandID =#{id}
+	</select>
 </mapper>

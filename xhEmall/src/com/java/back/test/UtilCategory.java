@@ -42,4 +42,10 @@ public class UtilCategory {
 		List<Category_Product> cp = categoryService.queryAllCP();
 		System.out.println(cp);
 	}
+	
+	@Test
+	public void test3(){
+		List<Category_Product> cp = categoryService.queryAllCPForHome();
+		System.out.println(cp);
+	}
 }
