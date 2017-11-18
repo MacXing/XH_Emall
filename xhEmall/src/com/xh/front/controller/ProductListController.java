@@ -58,7 +58,7 @@ public class ProductListController {
 	@RequestMapping("queryAllProductByFind.action")
 	public String queryAllProductByFind(Model model,String pname,
 			@RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
-			@RequestParam(value="pageSize",defaultValue="10")Integer pageSize) throws UnsupportedEncodingException{
+			@RequestParam(value="pageSize",defaultValue="16")Integer pageSize) throws UnsupportedEncodingException{
 		
 		pname = URLDecoder.decode(pname,"UTF-8");
 		
@@ -68,6 +68,7 @@ public class ProductListController {
 		
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("keyword", pname);
+		
 		return "/front/brandlist.jsp";
 	}
 	

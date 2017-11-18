@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
@@ -30,12 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="front/js/hban.js"></script>
     <script type="text/javascript" src="front/js/tban.js"></script>   
 	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>
-    
-	
-  </head>
+
+</head>
   
-  <body>
-   <!--Begin Header Begin-->
+<body>
+<!--Begin Header Begin-->
 <div class="soubg">
 	<div class="sou">
     	<!--Begin 所在收货地区 Begin-->
@@ -168,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<input type="text" value="" class="s_ipt" />
             <input type="submit" value="搜索" class="s_btn" />
         </form>                      
-        <span class="fl"><a href="#">咖啡</a><a href="#">iphone 6S</a><a href="#">新鲜美食</a><a href="#">蛋糕</a><a href="#">日用品</a><a href="#">连衣裙</a></span>
+        
     </div>
     <div class="i_car">
     	<div class="car_t">购物车 [ <span>3</span> ]</div>
@@ -209,16 +208,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<div class="nav_t">全部商品分类</div>
             <div class="leftNav">
                 <ul id="category">
-                <c:forEach items="${categoryList }" var="item" varStatus="i">   
-                    
+                <c:set var="i" value="-1"/>
+                <c:forEach items="${categoryList }" var="item" varStatus="j">   
                      <c:if test="${item.catid!=1 }">
                      	<c:if test="${item.catgrade==1 }">
+                     	<c:set var="i" value="${i+1 }"></c:set>	
                      	<li>
                     	<div class="fj">
                         	<span class="n_img"><span></span><img src="front/images/nav1.png" /></span>
                             <span class="fl">${item.catname}</span> 
                         </div>
-                        <div class="zj" style="top:${-40*i.index}px;">
+                        <div class="zj" style="top:${-i*40}px;" test="${i}">
                             <div class="zj_l">
                                 <div class="zj_l_c">
                                     <c:forEach items="${categoryList }" var="item2">
@@ -233,6 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <a href="#"><img src="front/images/n_img2.jpg" width="236" height="200" /></a>
                             </div>
                         </div>
+                       
                          </li> 
                         </c:if>
                        </c:if> 
@@ -245,13 +246,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<ul class="menu_r">
     		<li><a href="Index.html">首页</a></li>
     		<c:forEach items="${CP }" var="item">                                                                                                                                              
-        	<li><a href="${ pageContext.request.contextPath}/queryAllProductsByCatid.action?catid=${item.catid}">${item.catname }</a></li>
+        	<li><a href="${ pageContext.request.contextPath}/home/queryAllProductsByCatid.action?catid=${item.catid}">${item.catname }</a></li>
             </c:forEach> 
         </ul>
-        <div class="m_ad">中秋送好礼！</div>
+        <div class="m_ad">双十二·送好礼</div>
     </div>
 </div>
-<!--End Menu End--> 
+<!--End Menu End-->
+
+
 <div class="i_bg bg_color">
 	<div class="i_ban_bg">
 		<!--Begin Banner Begin-->
@@ -409,11 +412,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
         </div>
-    </div>
-    <div class="content mar_20">
-    	<img src="front/images/mban_1.jpg" width="1200" height="110" />
-    </div>
-    
+    </div>  
+	    <div class="content mar_20">
+	    <c:forEach items="${brands }" var="item" begin="0" end="21">
+	    	<a href="${pageContext.request.contextPath}/home/queryProductsByBrand.action?brandid=${item.brandid}"><img src="${pageContext.request.contextPath}${item.image }" width="100" height="70" /></a>
+	    </c:forEach>
+	    </div>
     <!--Begin 食品饮料 Begin-->
     
     <c:forEach items="${CP }" var="item" varStatus="i">

@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>  
+
 <jsp:include page="/front/head.jsp" flush="true"/>
 <div class="i_bg">
 	<div class="postion">
@@ -86,15 +87,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	</ul>
         </div>
         <div class="l_list">
-        	<!-- <table border="0" style="width:100%; margin-bottom:30px; border:1px solid #eaeaea;" cellspacing="0" cellpadding="0">
-              <tr valign="top">
-                <td width="248"><div class="brand_img"><img src="front/images/brand5.jpg" width="226" height="108" /></div></td>
-                <td class="td_b" style="padding:15px 40px;">
-                	所有分类<br />
-                    <a href="#" class="now">香水（10）</a><a href="#">彩妆套装（2）</a><a href="#">洁面（1）</a><a href="#">精华（1）</a><a href="#">化妆水（2）</a><a href="#">嫩肤（3）</a>
-                </td>
-              </tr>
-            </table> -->
         	<div class="list_t">
             	<span class="fl list_or">
                 	<a href="#" class="now">默认</a>
@@ -118,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	<li>
                     	<div class="img">
 	                    	<a href="${pageContext.request.contextPath}/ProductDetails/queryImagesByPid.action?pid=${product.pid }" target="_blank">
-	                    		<img src="front/images/per_1.jpg" width="210" height="185" />
+	                    		<img src="${pageContext.request.contextPath}${product.pimg}" width="210" height="185" />
 	                    	</a>
                     	</div>
                         <div class="price">
@@ -135,19 +127,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 <div class="pages">   
                 <c:if test="${pageInfo.hasPreviousPage==true }">                  
-                   <a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum-1}&pname=${keyword}">上一页</a>
+                   <a class="p_pre" href="home/queryProductsByBrand.action?pageNum=${pageInfo.pageNum-1}&brandid=${brandid}">上一页</a>
                 </c:if>
                 <c:if test="${pageInfo.hasPreviousPage==false }">
-                	<a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum}&pname=${keyword}">上一页</a>
+                	<a class="p_pre" href="home/queryProductsByBrand.action?pageNum=${pageInfo.pageNum}&brandid=${brandid}">上一页</a>
                 </c:if> 
                 <c:forEach items="${pageInfo.navigatepageNums }" var="n">
-                	<a href="ProductList/queryAllProductByFind.action?pageNum=${n}&pname=encodeURI(encodeURI(${keyword}))">${n}</a>
+                	<a href="home/queryProductsByBrand.action?pageNum=${n}&brandid=encodeURI(encodeURI(${brandid}))">${n}</a>
                 </c:forEach>
                 <c:if test="${pageInfo.hasNextPage==true }">                  
-                   <a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum+1}&pname=${keyword}">下一页</a>
+                   <a class="p_pre" href="home/queryProductsByBrand.action?pageNum=${pageInfo.pageNum+1}&brandid=${brandid}">下一页</a>
                 </c:if>
                 <c:if test="${pageInfo.hasNextPage==false }">                  
-                   <a class="p_pre" href="ProductList/queryAllProductByFind.action?pageNum=${pageInfo.pageNum}&pname=${keyword}">下一页</a>
+                   <a class="p_pre" href="home/queryProductsByBrand.action?pageNum=${pageInfo.pageNum}&brandid=${brandid}">下一页</a>
                 </c:if> 
                 </div>
                                                 
@@ -238,26 +230,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <!--End Footer End -->    
 </div>
-
-
-<!-- <script>
-	$("#findbtn").click(function(){		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/ProductList/queryAllProductByFind.action",
-			type : "POST",
-			data : $("#findform").serialize(),
-			success:function(result){
-				alert(258);
-				window.location.href="${pageContext.request.contextPath}/front/brandlist.jsp";				
-			}
-		})
-	})
-</script> -->
-
 </body>
 
-
-<!--[if IE 6]>
-<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
-<![endif]-->
 </html>

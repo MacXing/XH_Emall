@@ -37,4 +37,6 @@ public interface ProductService {
 	
 	public ProductImage queryImageById(int id);
 	
+	public List<Xhproduct> queryProductByBrandid(int id);
+	
 }
