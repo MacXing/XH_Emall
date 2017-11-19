@@ -61,6 +61,7 @@
     <!-- 根据收藏ID删除收藏信息 -->
 	<update id="deleteCollectByPrimaryKey" parameterType="int">
     update collect set
+    deletetime=now(),
     isdelete=1
     where collectid=#{collectid,jdbcType=INTEGER}
   	</update>

@@ -449,14 +449,17 @@
 					<c:forEach items="${collect }" varStatus="status" var="collect">
 						<tr>
 							<td>
+								<input type="hidden" value="${collect.product.pid }" id="pid"/>
 								收藏编号：<font color="#ff4e00">${collect.collectid}</font>&nbsp;
 								用户编号：<font color="#ff4e00">${collect.users.userid }</font>&nbsp;
-								用户姓名：<font color="#ff4e00">${collect.users.username }</font>&nbsp;  				
+								用户姓名：<font color="#ff4e00">${collect.users.username }</font>&nbsp; 
+								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp; 
+								<input type="button" onclick="addCar()" style="color:#fff" value="加入购物车"
+									class="btn_tj">				
 							</td>
 						</tr>
-						<tr>
+						<tr>						
 							<td>
-								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp;
 								<textarea class="add_txt">${collect.product.pname }</textarea>
 								</font> <img id="collectImg" width="90" height="90" src="collectImg/${collect.product.pimg }" />
 							</td>
@@ -475,7 +478,7 @@
 				<div class="pages1">
 					<c:if test="${pageInfo.hasPreviousPage==true }">
 						<a
-							href="${pageContext.request.contextPath }/userComment/queryCommentById.action?pageNum=${pageInfo.pageNum-1}&id=${current_user.userid}">
+							href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?pageNum=${pageInfo.pageNum-1}&id=${current_user.userid}">
 							<font style="font-size: 1px">上一页</font>
 						</a>
 					</c:if>
@@ -486,13 +489,13 @@
 					</c:if>
 					<c:forEach items="${pageInfo.navigatepageNums }" var="n">
 						<a
-							href="${pageContext.request.contextPath }/userComment/queryCommentById.action?pageNum=${n}&id=${current_user.userid}">
+							href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?pageNum=${n}&id=${current_user.userid}">
 							<font style="font-size: 1px">${n}</font>
 						</a>
 					</c:forEach>
 					<c:if test="${pageInfo.hasNextPage==true }">
 						<a
-							href="${pageContext.request.contextPath }/userComment/queryCommentById.action?pageNum=${pageInfo.pageNum+1}&id=${current_user.userid}">
+							href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?pageNum=${pageInfo.pageNum+1}&id=${current_user.userid}">
 							<font style="font-size: 1px">下一页</font>
 						</a>
 					</c:if>
@@ -670,8 +673,21 @@
 	<script type="text/javascript">
 
 		/*点击添加购物车*/
-		function addcmt() {
-			window.location.href = "front/Member_Cmtadd.jsp";
+		function addCar() {
+			var pid=$("#pid").val();
+			$.ajax({
+				url :"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&pnum="+1,
+				type : "post",
+				success : function(result) {
+					if (result.code == 100) {
+						alert("添加成功！");
+						window.location.href = "${pageContext.request.contextPath }/trolley/findByUser.action";
+					} else {
+						alert("添加失败！");
+						window.location.href = "${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id="+${current_user.userid };
+					}
+				}
+			});
 		}
 
 		/* 点击删除*/
@@ -685,18 +701,17 @@
 					success : function(result) {
 						if (result.code == 100) {
 							alert("删除成功！");
-							window.location.href = "${pageContext.request.contextPath }/userComment/queryCommentById.action?id="
-									+ ${current_user.userid};
+							window.location.href = "${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id="+${current_user.userid };
 						} else {
 							alert("删除失败！");
-							window.location.href = "${pageContext.request.contextPath }/userComment/queryCommentById.action?id="
-									+ ${current_user.userid};
+							window.location.href = "${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id="+${current_user.userid };
 						}
 					}
 				});
 			}
 		}
 	</script>
+	
 	<script type="text/javascript" src="front/js/logout.js"></script>
 
 </body>

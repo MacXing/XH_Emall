@@ -46,11 +46,11 @@ public class UserCollectController {
 	@RequestMapping("queryAllCollect")
 	public String queryAllCollect(int id,Model model,
 			@RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
-			@RequestParam(value="pageSize",defaultValue="5")Integer pageSize){
+			@RequestParam(value="pageSize",defaultValue="3")Integer pageSize){
 		
 		PageHelper.startPage(pageNum, pageSize);
 		List<UserCollection> collect =userCollectService.queryAllCollect(id);
-		PageInfo pageInfo = new PageInfo(collect,5);
+		PageInfo pageInfo = new PageInfo(collect,3);
 		
 		model.addAttribute("collect", collect);
 		model.addAttribute("pageInfo", pageInfo);
@@ -74,6 +74,7 @@ public class UserCollectController {
 	public Msg addCollect(UserCollection collected){
 		if(collected!=null){
 			collected.setCollecttime(new Date());
+			collected.setDeletetime(new Date());
 			userCollectService.addCollect(collected);
 			return Msg.success();
 		}else {
