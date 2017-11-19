@@ -6,8 +6,6 @@ import com.xh.back.bean.OrderArea;
 import com.xh.back.bean.OrderCity;
 import com.xh.back.bean.OrderProvince;
 import com.xh.back.bean.Xhorderinfo;
-import com.xh.front.bean.Xhusers;
-import com.xh.front.bean.XhusersBean;
 
 public interface OrderMapper {
 	/**

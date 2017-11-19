@@ -28,6 +28,16 @@ public class OrderGoods implements Serializable {
     private Xhorderinfo orderInfo;
     
     private long orderNumber;
+    
+    private int isDelete;
+
+	public int getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	public long getOrderNumber() {
 		return orderNumber;
@@ -127,11 +137,13 @@ public class OrderGoods implements Serializable {
 
 	@Override
 	public String toString() {
-		return "XhOrderGoods [ogID=" + ogID + ", orderID=" + orderID + ", pID="
+		return "OrderGoods [ogID=" + ogID + ", orderID=" + orderID + ", pID="
 				+ pID + ", goodsName=" + goodsName + ", goodsNumber="
 				+ goodsNumber + ", marketPrice=" + marketPrice
 				+ ", goodsPrice=" + goodsPrice + ", sendNumber=" + sendNumber
-				+ ", isReal=" + isReal + "]";
+				+ ", isReal=" + isReal + ", product=" + product
+				+ ", orderInfo=" + orderInfo + ", orderNumber=" + orderNumber
+				+ ", isDelete=" + isDelete + "]";
 	}
 
 }

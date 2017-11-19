@@ -21,7 +21,7 @@ import com.xh.back.service.ExpressService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.bean.Xhusers;
-import com.xh.front.serviceImpl.UserAddressServiceImpl;
+import com.xh.front.mapper.FrontOrderMapper;
 
 @Controller
 @RequestMapping("trolley")
@@ -29,9 +29,11 @@ public class XhTrolleyController {
 	@Autowired
 	@Qualifier("xhTrolleyService")
 	private XhTrolleyServiceImpl xhTrolleyService;
+
 	@Autowired
-	@Qualifier("userAddressService")
-	private UserAddressServiceImpl userAddressService;
+	@Qualifier("frontOrderMapper")
+	private FrontOrderMapper frontOrderMapper;
+	
 	@Autowired
 	@Qualifier("expressService")
 	private ExpressService expressService;
@@ -151,15 +153,21 @@ public class XhTrolleyController {
 
 	// 加载前端数据
 	@RequestMapping("loadItemsFront.action")
-	public String loadItemsFront(Model model, String id, String total) {
-		// String ids=req.getParameter("itemids");
-		// Double total1=Double.parseDouble(req.getParameter("total"));
-
+	public String loadItemsFront(Model model, String id, String total, HttpSession session) {
+		//String ids=req.getParameter("itemids");
+		//Double total1=Double.parseDouble(req.getParameter("total"));
+		
+		Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
+		int uid = user.getUserid();
+		
 		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(id);
 		System.out.println(items);
 		model.addAttribute("items", items);
 		model.addAttribute("total", Double.parseDouble(total));
-		UserAddress ua = userAddressService.queryAllUserAddressByUser(1);
+		
+		
+		UserAddress ua = frontOrderMapper.queryDefaultAddInfoById(uid);
+		
 		model.addAttribute("ua", ua);
 		List<Xhshopping> expresslist = expressService.queryAllExpress();
 		model.addAttribute("expresslist", expresslist);
