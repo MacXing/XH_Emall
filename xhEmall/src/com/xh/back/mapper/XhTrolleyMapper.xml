@@ -4,15 +4,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--查询购物车信息  -->
 <mapper namespace="com.xh.back.mapper.XhTrolleyMapper">
-    <resultMap type="XhQueryTrolley" id="TrolleyItemMap">
+
+  <resultMap type="Xhtrolley" id="TrolleyItemMap">
          <result column="tid" property="troid"/>
          <result column="tnum" property="tronum"/>
-         <association property="xhusers" javaType="xhusers">
+         <association property="xhusers" javaType="com.xh.front.bean.Xhusers">
             <result column="uid" property="userid"/>
             <result column="uname" property="username"/>
             <result column="uphoto" property="userphoto"/>
-         </association>
-         <collection  property="xhproduct"  ofType="xhproduct">
+         </association> 
+         <collection property="xhproduct"  ofType="com.xh.back.bean.Xhproduct">
             <result column="pid" property="pid"/>
             <result column="pname" property="pname"/>
             <result column="pdesc" property="pdesc"/>
@@ -21,9 +22,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <result column="pdiscount" property="pdiscount"/>
             <result column="paddtime" property="paddtime"/>
             <result column="pupdatetime" property="pupdatetime"/>
+            <result column="pUnit" property="punit"/>
          </collection>
-    </resultMap>
-    <!-- 查询购物车信息 -->
+    </resultMap> 
+    
+	<!-- 查询通过用户 -->
+	<select id="queryTrolleyByUser" resultMap="TrolleyItemMap" parameterType="int">
+	   SELECT u.userID uid,u.userName uname,u.userPhoto uphoto,
+       t.troID tid,t.troNum tnum,
+       p.pID pid,p.pName pname,p.pUnit,p.pDesc pdesc,p.pImg pimg,p.pSale psale,p.pDiscount pdiscount,p.pAddtime paddtime,p.pUpdatetime pupdatetime
+       from xhTrolley t
+       join xhUsers  u
+       on t.userID=u.userID
+       join xhProduct p
+       on   t.pID=p.pID
+       WHERE u.userID=#{id}
+	</select>
+	
+	<!-- 查询购物车信息 -->
 	<select id="TrolleyItem" resultMap="TrolleyItemMap">
 	   SELECT u.userID uid,u.userName uname,u.userPhoto uphoto,
        t.troID tid,t.troNum tnum,
@@ -35,14 +51,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        on   t.pID=p.pID 
 	</select>
 	
+	
+	
 	<!--添加购物车  -->
 	<insert id="addTrolley" parameterType="xhtrolley">
 	    insert into xhTrolley(userID,pID,troNum) values(#{userid},#{pid},#{tronum})
  	</insert>
  	
- 	<!-- 删除购物车信息通过pid -->
+ 	<!-- 删除购物车信息通过troid -->
  	<delete id="deleteTrolleyById" parameterType="int">
  	  delete from xhTrolley where troId=#{id}
+ 	</delete>
+ 	
+ 	<!-- 删除通过pid -->
+ 	<delete id="deleteById" parameterType="int">
+ 	  delete from xhTrolley where pID=#{id}
  	</delete>
  	
  	<!--通过使用<foreach>批量删除用户  -->
@@ -51,8 +74,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	<foreach collection="idslist"  item="id" open="("  separator="," close=")">
         		#{id}
         	</foreach>
-    </delete> 
+    </delete>                         
  	
  	<!-- 前端Trolley -->
- 
+    <!--修改商品的数量  -->
+       <update id="updateProductById" parameterType="xhtrolley">
+	    UPDATE xhTrolley SET troNum=#{tronum} WHERE troId=#{troid} 
+    </update>
+    
+    <!--查询某条购物车商品通过ID  -->
+      <!-- <select id="queryItemById" resultMap="TrolleyItemMap" parameterType="string">
+         SELECT u.userID uid,u.userName uname,u.userPhoto uphoto,
+       t.troID tid,t.troNum tnum,
+       p.pID pid,p.pName pname,p.pUnit,p.pDesc pdesc,p.pImg pimg,p.pSale psale,p.pDiscount pdiscount,p.pAddtime paddtime,p.pUpdatetime pupdatetime
+       from xhTrolley t
+       join xhUsers  u
+       on t.userID=u.userID
+       join xhProduct p
+       on   t.pID=p.pID
+       WHERE t.troID=#(troid)
+      </select> -->
+    
+    <!--查询某个用户的某个商品的购物车条目是否存在  -->
+    <select id="queryByUidAndPid" resultMap="TrolleyItemMap" parameterType="int">
+       SELECT u.userID uid,u.userName uname,u.userPhoto uphoto,
+       t.troID tid,t.troNum tnum,
+       p.pID pid,p.pName pname,p.pUnit,p.pDesc pdesc,p.pImg pimg,p.pSale psale,p.pDiscount pdiscount,p.pAddtime paddtime,p.pUpdatetime pupdatetime
+       from xhTrolley t
+       join xhUsers  u
+       on t.userID=u.userID
+       join xhProduct p
+       on   t.pID=p.pID
+       WHERE t.userID=#{uid} AND t.pID=#{pid}
+    </select>
+    
+    <!--加载前端数据  -->
+      <select id="loadItemsFront" resultMap="TrolleyItemMap" parameterType="java.util.List">
+       SELECT u.userID uid,u.userName uname,u.userPhoto uphoto,
+       t.troID tid,t.troNum tnum,
+       p.pID pid,p.pName pname,p.pUnit,p.pDesc pdesc,p.pImg pimg,p.pSale psale,p.pDiscount pdiscount,p.pAddtime paddtime,p.pUpdatetime pupdatetime
+       from xhTrolley t
+       join xhUsers  u
+       on t.userID=u.userID
+       join xhProduct p
+       on   t.pID=p.pID
+       WHERE t.troID in 
+       <foreach collection="idlist" item="id" open="(" close=")" separator=",">
+           #{id}
+       </foreach>
+      </select>
+    
+    <!--添加购物车条目  -->
+    <insert id="addTroItem" parameterType="xhtrolley">
+       insert into xhTrolley(userID,pID,troNum) values(#{userid},#{pid},#{tronum})
+    </insert>
 </mapper>	

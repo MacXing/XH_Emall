@@ -25,6 +25,7 @@ import com.other.getImage.FileUtil;
 import com.other.getip.GetIp;
 import com.other.msg.Msg;
 import com.xh.back.bean.OrderCity;
+import com.xh.back.bean.Xhcomment;
 import com.xh.back.bean.Xhshopping;
 import com.xh.back.service.ExpressService;
 import com.xh.back.service.XhUserService;
@@ -47,10 +48,16 @@ public class ExpressController {
 		return "/jsp/back/order/queryAllExpress.jsp";
 	}
 	
+	@ResponseBody
 	@RequestMapping("addExpress.action")
-	public String addExpress(Xhshopping express,HttpServletRequest request,HttpSession session){
-		expressService.addExpress(express);
-		return "/exp/queryAllExpress.action";
+	public Msg addExpress(Xhshopping express,HttpServletRequest request,HttpSession session){
+		if(express!=null){
+			int enable=Integer.parseInt(request.getParameter("enable"));
+			express.setEnable(enable);
+			expressService.addExpress(express);
+			return Msg.success();
+		}
+		return Msg.fail();
 	}
 	
 	@ResponseBody
@@ -105,7 +112,19 @@ public class ExpressController {
 	
 	@ResponseBody
 	@RequestMapping("updateExpress.action")
-	public Msg updateExpress(Xhshopping express,HttpServletRequest request,MultipartFile file,HttpSession session)throws IllegalStateException, IOException{				
+	public Msg updateExpress(Xhshopping express,HttpServletRequest request){
+		if(express!=null){
+			int enable=Integer.parseInt(request.getParameter("enable"));
+			express.setEnable(enable);
+			expressService.updateExpressByPrimaryKey(express);
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateExpressAndFile.action")
+	public Msg updateExpressAndFile(Xhshopping express,HttpServletRequest request,MultipartFile file,HttpSession session)throws IllegalStateException, IOException{				
 		if(express!=null){
 			if(file!=null){
 				String file_name = file.getOriginalFilename();
@@ -123,8 +142,9 @@ public class ExpressController {
 			express.setEnable(enable);
 			expressService.updateExpressByPrimaryKey(express);
 			return Msg.success();
-		}		
-		return Msg.fail();
+		}else{
+			return Msg.fail();
+		}
 	}
 	
 	@ResponseBody

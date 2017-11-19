@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>尤洪</title>        
+    <title>孝和电商</title>        
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="front/css/ShopShow.css" />
     <link rel="stylesheet" type="text/css" href="front/css/MagicZoom.css" />
     
-    
+   	<script type="text/javascript" src="front/js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="front/js/jquery-1.11.1.min_044d0927.js"></script>
 	<script type="text/javascript" src="front/js/jquery.bxslider_e88acd1b.js"></script>   
     <script type="text/javascript" src="front/js/jquery-1.8.2.min.js"></script>    
@@ -40,20 +40,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>        
     <script type="text/javascript" src="front/js/p_tab.js"></script>    
     <script type="text/javascript" src="front/js/shade.js"></script>    
-	<script src="front/js/pager.js">  </script>	
-    
+	<script src="front/js/pager.js"></script>	
 
 </head>
 <body>  
-
 <jsp:include page="/front/head.jsp" flush="true"/>
 
 <div class="i_bg">
-
 	<div class="postion">
     	
     </div>    
-
     <div class="content">    	                    
         <div id="tsShopContainer">
             <div id="tsImgS"><a href="${pageContext.request.contextPath}${productImages[0].url }" title="Images" class="MagicZoom" id="MagicZoom">
@@ -74,8 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
             </div>
             <img class="MagicZoomLoading" width="16" height="16" src="front/images/loading.gif" alt="Loading..." />				
-        </div>
-        
+        </div>       
         <div class="pro_des">
         	<div class="des_name">
             	<p style="font-size:25px">${xhproduct.pname }</p>
@@ -89,14 +84,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<span class="fl">型号：</span>
             	<span>${xhproduct.psize }(${xhproduct.punit })</span>                
             </div>
-            <!-- <div class="des_choice">
-            	<span class="fl">颜色选择：</span>
-                <ul>
-                	<li>红色<div class="ch_img"></div></li>
-                    <li class="checked">白色<div class="ch_img"></div></li>
-                    <li>黑色<div class="ch_img"></div></li>
-                </ul>
-            </div> -->
             <div class="des_share">
             	<div class="d_sh">
                 	分享
@@ -108,22 +95,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><img src="front/images/sh_5.gif" /></a>
                     </div>
                 </div>
-                <div class="d_care"><a onclick="ShowDiv('MyDiv','fade')">关注商品</a></div>
+                <div class="d_care"><a onclick1="ShowDiv('MyDiv','fade')">关注商品</a></div>
             </div>
             <div class="des_join">
             	<div class="j_nums">
-                	<input type="text" value="1" name="" class="n_ipt" />
+            		<form  id="addform" >
+            		<input type="hidden" name="pid"  id="addpid" value="${xhproduct.pid }"/>
+                	<input type="text" value="1"  name="pnum" id="addnum" class="n_ipt" />
                     <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
-                    <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />   
+                    <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
+                    </form>   
                 </div>
-                <span class="fl"><a onclick="ShowDiv_1('MyDiv1','fade1')"><img src="front/images/j_car.png" /></a></span>
+                <span class="fl"><a id="test" href="javascript:addItem()" onclick=""><img src="front/images/j_car.png" /></a></span>
             </div>            
-        </div>    
-        <!-- 
+        </div>           
         <div class="s_brand">
         	<div class="s_brand_img"><img src="front/images/sbrand.jpg" width="188" height="132" /></div>
             <div class="s_brand_c"><a href="#">进入品牌专区</a></div>
-        </div> -->    
+        </div>    
         
         
     </div>
@@ -206,8 +195,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	套餐价：￥<span>1517</span><br />
                     <input type="text" value="1" class="sum_ipt" /><br />
                     <a href="#"><img src="front/images/z_buy.gif" /></a> 
-                </div>
-                
+                </div>                
             </div>
             <div class="des_border">
                 <div class="des_t">商品属性</div>
@@ -362,7 +350,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     
             </div>
         </div>
-    </div>    
+    </div>
     <!--End 弹出层-收藏成功 End-->
     
     
@@ -377,17 +365,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            		
                 <table border="0" align="center" style="margin-top:;" cellspacing="0" cellpadding="0">
                   <tr valign="top">
-                    <td width="40"><img src="front/images/suc.png" /></td>
+                    <td width="40"><img src="images/suc.png" /></td>
                     <td>
-                    	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />                    	
+                    	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />
+                    	
                     </td>
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="#" class="b_sure">去购物车结算</a><a class="b_buy refresh">继续购物</a></td>
+                    <td><a href="${pageContext.request.contextPath}/trolley/findByUser.action" class="b_sure">去购物车结算</a><a href="${pageContext.request.contextPath }/home/home.action" class="b_buy">继续购物</a></td>
                   </tr>
-                </table>
-                    
+                </table>    
             </div>
         </div>
     </div>    
@@ -479,17 +467,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--End Footer End -->    
 </div>
 
-<script type="text/javascript">
-		$(".refresh").on("click",function(){
-			self.location.reload();
-		});
+<script>
+	Page({
+		num:7,					//页码数
+		startnum:6,				//指定页码
+		elem:$('#page2'),		//指定的元素
+		callback:function(n){	//回调函数
+			console.log(n);
+		}
+	});
 </script>
-
+ <script type="text/javascript">
+     function addItem(){
+        var formData= new FormData($("#addform")[0]);
+        $.ajax({
+        	url:"${pageContext.request.contextPath}/trolley/addTroItem.action",
+        	type:"POST",
+        	data:formData, 
+		    contentType: false,
+		    processData: false, 
+        	success:function(result){
+        		if(result.code==100){
+					ShowDiv_1('MyDiv1','fade1');
+        		}else{
+        			alert(result.extend.msg);
+        		}
+        	}
+        });
+     }
+     
+     function set_sure(){
+       $("#buy_sure").submit();
+     }
+    </script>
 </body>
 
-<script src="front/js/ShopShow.js"></script>
+<script src="front/js/ShopShow.js">
+	
 
-<!--[if IE 6]>
-<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
-<![endif]-->
+</script>
+
 </html>

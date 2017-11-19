@@ -1,6 +1,14 @@
 package com.xh.back.bean;
 
+import java.math.BigDecimal;
+
+import com.xh.front.bean.Xhusers;
+
 public class Xhtrolley {
+	private Xhproduct xhproduct;
+	
+	private Xhusers xhusers;
+	
     private Integer troid;
 
     private Integer pid;
@@ -20,8 +28,31 @@ public class Xhtrolley {
     private String attribute5;
 
     private String attribute6;
+    
+    public Double getSubTotal(){
+    	BigDecimal b1=new BigDecimal(xhproduct.getPsale()+"");
+    	BigDecimal b2=new BigDecimal(tronum); 
+    	BigDecimal b3=b1.multiply(b2);
+    	return b3.doubleValue();
+    }
 
-    public Integer getTroid() {
+    public Xhproduct getXhproduct() {
+		return xhproduct;
+	}
+
+	public void setXhproduct(Xhproduct xhproduct) {
+		this.xhproduct = xhproduct;
+	}
+
+	public Xhusers getXhusers() {
+		return xhusers;
+	}
+
+	public void setXhusers(Xhusers xhusers) {
+		this.xhusers = xhusers;
+	}
+
+	public Integer getTroid() {
         return troid;
     }
 

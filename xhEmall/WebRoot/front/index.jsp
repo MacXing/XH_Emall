@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 <div class="top">
-    <div class="logo"><a href="Index.html"><img src="front/images/logo11.png" /></a></div>
+    <div class="logo"><a href="home/home.action"><img src="front/images/logo.png" /></a></div>
     <div class="search">
     	<form>
         	<input type="text" value="" class="s_ipt" />

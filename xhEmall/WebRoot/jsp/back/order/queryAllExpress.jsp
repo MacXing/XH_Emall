@@ -180,7 +180,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" id="btn_add" class="btn btn-primary"
-						onclick="addexpresstolist()">提交添加</button>
+					>提交添加</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -284,9 +284,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">上传图片：</label>
 							<div class="col-sm-4">
-								选择图片：<img width="80px" height="100px" id="img1"
-									onclick="showPic()"> <input type="file" name="file"
-									id="file" class="form-control">
+								选择图片：<img width="80px" height="100px" id="img1" onclick="showPic1()"> 
+									<input type="file" name="file" id="file1" class="form-control">
 							</div>
 						</div>
 					</form>
@@ -311,48 +310,48 @@
 	<script type="text/javascript" src="resource/js/validate.js"></script>
 
 	<script type="text/javascript">
-		$("#btn_add")
-				.click(
-						function() {
-
-							var val = new validate(
-									{
-
-										rules : {
-											shoppingid11 : "numberEnglish",
-											shoppingcode11 : "numberEnglish",
-											shoppingname11 : "notEmpty",
-											shoppingdesc11 : "notEmpty",
-										},
-										/*submitFun里面为检验成功后要执行的方法*/
-										submitFun : function addorder() {
-											var formData = new FormData(
-													$("#addorders")[0]);
-											$
-													.ajax({
-														cache : true,
-														type : "POST",
-														data : formData,
-														url : "${pageContext.request.contextPath }/order/addOrder.action",
-														/* async: false,
-														cache: false,   */
-														contentType : false,
-														processData : false,
-														success : function(
-																result) {
-															if (result.code != 100) {
-																alert("增加成功！");
-																window.location.href = "${pageContext.request.contextPath }/order/queryAllOrderController.action";
-															} else {
-																alert("增加失败！");
-																window.location.href = "${pageContext.request.contextPath }/order/queryAllOrderController.action";
-															}
-														}
-													});
+		$("#btn_add").click(function(){
+		var val = new validate(
+				{
+					rules : {
+						shoppingid11 : "numberEnglish",
+						shoppingcode11 : "numberEnglish",
+						shoppingname11 : "notEmpty",
+						shoppingdesc11 : "notEmpty",
+					},
+					/*submitFun里面为检验成功后要执行的方法*/
+					submitFun : function addExp() {
+						var action = "";
+						var form = $("#file").val().length;
+						var formData = new FormData($("#add")[0]);
+						if(form==0){			 
+							action="addExpress.action";
+						}else{
+							 action="insertExpressAndFile.action";
+						}
+								$.ajax({
+									cache : true,
+									type : "POST",
+									data : formData,
+									url : "${pageContext.request.contextPath }/exp/"+action,
+									/* async: false,
+									cache: false,   */
+									contentType : false,
+									processData : false,
+									success : function(result) {
+										if (result.code != 100) {
+											alert("增加成功！");
+											window.location.href = "${pageContext.request.contextPath }/order/queryAllOrderController.action";
+										} else {
+											alert("增加失败！");
+											window.location.href = "${pageContext.request.contextPath }/order/queryAllOrderController.action";
 										}
+									}
+								});
+					}
 
-									});
-						});
+				});
+			});
 
 		$("#btn_update")
 				.click(
@@ -370,17 +369,18 @@
 										/*submitFun里面为检验成功后要执行的方法*/
 										submitFun : function update() {
 											var action = "";
-											var form = $("#file").val().length;
-											var formData = new FormData(
-													$("#update")[0]);
-											action = "updateExpress.action";
-											$
-													.ajax({
+											var form = $("#file1").val().length;
+											var formData = new FormData($("#update")[0]);
+											if(form==0){			 
+												action="updateExpress.action";
+											}else{
+												 action="updateExpressAndFile.action";
+											}											
+													$.ajax({
 														cache : true,
 														type : "POST",
 														data : formData,
-														url : "${pageContext.request.contextPath }/exp/"
-																+ action,
+														url : "${pageContext.request.contextPath }/exp/"+action,
 														contentType : false,
 														processData : false,
 														success : function(
@@ -445,16 +445,14 @@
 	<script>
 		/*查询留言详细信息  */
 		function btn1(id) {
-			$
-					.ajax({
-						url : "${pageContext.request.contextPath }/exp/queryExpByIdForDetail.action?id="
-								+ id,
-						type : "GET",
-						success : function(result) {
-							console.log(result);
-							build_table(result);
-						}
-					});
+			$.ajax({
+				url : "${pageContext.request.contextPath }/exp/queryExpByIdForDetail.action?id="+id,
+				type : "GET",
+				success : function(result) {
+					console.log(result);
+					build_table(result);
+				}
+			});
 		}
 
 		function build_table(result) {
@@ -462,10 +460,7 @@
 			$("#shoppingcode").html(result.shoppingcode);
 			$("#shoppingname").html(result.shoppingname);
 			$("#shoppingdesc").html(result.shoppingdesc);
-			$("#shoppingimg").attr(
-					"src",
-					"${pageContext.request.contextPath }/shoppingphoto/"
-							+ result.shoppingimg);
+			$("#shoppingimg").attr("src","${pageContext.request.contextPath }/shoppingphoto/"+ result.shoppingimg);
 
 			if (result.enable == 1) {
 				$("#enable1").html("是");
@@ -481,32 +476,30 @@
 			if (!confirm("您确定要删除该留言信息记录吗？")) {
 				return false;
 			} else {
-				$
-						.ajax({
-							url : "${pageContext.request.contextPath }/exp/deleteExpress.action?id="
-									+ id,
-							type : "delete",
-							success : function(result) {
-								alert("删除成功！");
-								window.location.href = "${pageContext.request.contextPath }/exp/queryAllExpress.action";
-							}
+				$.ajax({
+				url : "${pageContext.request.contextPath }/exp/deleteExpress.action?id="+id,
+				type : "delete",
+				success : function(result) {
+					alert("删除成功！");
+					window.location.href = "${pageContext.request.contextPath }/exp/queryAllExpress.action";
+				}
 
-						});
+			});
+						
 			}
 		}
 
 		/*点击修改*/
 		function btn3(id) {
-			$
-					.ajax({
-						url : "${pageContext.request.contextPath }/exp/queryExpByIdForDetail.action?id="
-								+ id,
-						type : "GET",
-						success : function(result) {
-							console.log(result);
-							build_table1(result);
-						}
-					});
+			$.ajax({
+				url : "${pageContext.request.contextPath }/exp/queryExpByIdForDetail.action?id="+id,
+			type : "GET",
+			success : function(result) {
+				console.log(result);
+				build_table1(result);
+			}
+		});
+					
 		}
 
 		function build_table1(result) {
@@ -514,12 +507,8 @@
 			$("#shoppingcode1").attr("value", result.shoppingcode);
 			$("#shoppingname1").attr("value", result.shoppingname);
 			$("#shoppingdesc1").attr("value", result.shoppingdesc);
-			$("input[name=enable][value=" + result.enable + "]").attr(
-					"checked", true);
-			$("#img1").attr(
-					"src",
-					"${pageContext.request.contextPath }/shoppingphoto/"
-							+ result.shoppingimg);
+			$("input[name=enable][value=" + result.enable + "]").attr("checked", true);
+			$("#img1").attr("src","${pageContext.request.contextPath }/shoppingphoto/"+ result.shoppingimg);
 		}
 
 		/*显示图片*/
@@ -529,7 +518,7 @@
 		}
 
 		function showPic1() {
-			var pic = $("#file").get(0).files[0];
+			var pic = $("#file1").get(0).files[0];
 			$("#img1").prop("src", window.URL.createObjectURL(pic));
 		}
 

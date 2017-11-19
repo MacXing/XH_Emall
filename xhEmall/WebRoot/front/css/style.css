@@ -136,17 +136,17 @@ table.c_tab tr th{
 	width:520px; height:65px; overflow:hidden; float:left; display:inline; margin-left:134px; margin-top:50px;
 }
 .s_ipt{
-	width:408px; height:36px; line-height:36px\9; overflow:hidden; color:#555555; font-size:14px; font-family:"Microsoft YaHei"; float:left; padding:0 10px; border:2px solid #ff4e00; border-right:0;
+	width:408px; height:36px; line-height:36px\9; overflow:hidden; color:#555555; font-size:14px; font-family:"Microsoft YaHei"; float:left; padding:0 10px; border:1px solid #ff4e00; border-right:0;
 }
 .s_btn{
-	width:90px; height:40px; line-height:40px\9; background-color:#ff4e00; color:#FFF; font-size:16px; font-family:"Microsoft YaHei"; text-align:center; float:left; border:0; cursor:pointer;
+	width:70px; height:36px; line-height:40px\9; background-color:#ff4e00; color:#FFF; font-size:14px; font-family:"Microsoft YaHei"; text-align:center; float:left; border:0; cursor:pointer;
 }
 .search a{
 	margin-right:12px; display:inline-block;
 }
 
 .i_car{
-	width:141px; height:38px; line-height:38px; background:url(../images/car.png) no-repeat 10px center; background-color:#f6f6f6; float:right; margin-top:50px; border:1px solid #d9d9d9; position:relative;
+	width:141px; height:38px; line-height:38px; background:url(../images/car.png) no-repeat 10px center; background-color:#FFEC8B; float:right; margin-top:50px; border:1px solid #d9d9d9; position:relative;
 }
 .car_t{
 	width:95px; height:38px; overflow:hidden; background:url(../images/d_arrow.png) no-repeat right center; font-size:14px; margin-left:38px; cursor:pointer;
@@ -1467,7 +1467,7 @@ ul.brand li .name span{
 	height:64px; line-height:32px; overflow:hidden; font-family:"宋体"; margin-top:25px; margin-bottom:20px;
 }
 .des_price b{
-	color:#ff3200; font-size:25px; font-family:"Microsoft YaHei";
+	color:#ff3200; font-size:18px; font-family:"Microsoft YaHei";
 }
 .des_price span{
 	font-size:14px; font-family:"Microsoft YaHei";
@@ -1867,7 +1867,7 @@ ul.p_sell li .times{
 
 /*---------------用户中心---------------*/
 .m_top_bg{
-	width:100%; height:140px; background-color:#ff4e00;
+	width:100%; height:140px; background-color:#ffffff;
 }
 .m_logo{
 	width:150px; height:58px; overflow:hidden; float:left; margin-top:38px;
@@ -1876,10 +1876,10 @@ ul.p_sell li .times{
 	width:392px; height:40px; overflow:hidden; background-color:#FFF; float:left; display:inline; margin-left:450px; margin-top:49px;
 }
 .m_ipt{
-	width:295px; height:40px; line-height:40px\9; overflow:hidden; color:#555555; font-size:14px; font-family:"Microsoft YaHei"; float:left; padding:0 10px; border:0;
+	width:295px; height:36px; line-height:40px\9; overflow:hidden; color:#000000; font-size:14px; font-family:"Microsoft YaHei"; float:left; padding:0 10px; border:1;
 }
 .m_btn{
-	width:70px; height:40px; line-height:40px\9; background-color:#f6f6f6; color:#555555; font-size:14px; font-family:"Microsoft YaHei"; text-align:center; float:right; border:0; cursor:pointer;
+	width:70px; height:39px; line-height:40px\9; background-color:#FFEC8B; color:#121212; font-size:14px; font-family:"Microsoft YaHei"; text-align:center; float:right; border:1px solid #d9d9d9; cursor:pointer;
 }
 .m_content{
 	width:1210px; overflow:hidden; margin-top:20px;

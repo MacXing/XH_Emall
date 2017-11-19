@@ -40,8 +40,8 @@
 				</span>
 				<span class="fr">
 					|&nbsp;
-					<a href="#">
-						手机版&nbsp;<img src="front/images/s_tel.png" align="absmiddle" />
+					<a href="home/home.action">
+						首页&nbsp;<img src="front/images/home.png" align="absmiddle" />
 					</a>
 				</span>
 			</span>
@@ -52,7 +52,7 @@
 	<div class="log_bg">
 		<div class="top">
 			<div class="logo">
-				<a href="Index.html">
+				<a href="home/home.action">
 					<img src="front/images/logo.png" />
 				</a>
 			</div>
@@ -186,7 +186,6 @@
 					"userpassword" : userpassword
 				},
 				success : function(result){
-					console.log(result);
 					if(result.status == 0){
 						layer.close(ii);
 						layer.msg(result.msg);

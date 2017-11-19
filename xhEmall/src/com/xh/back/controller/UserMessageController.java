@@ -37,7 +37,7 @@ public class UserMessageController {
 	@Qualifier("userMessage")
 	private UserMessageService userMessage;
 	
-	//查询所有等级会员
+	//查询所有留言会员
 	@RequestMapping("queryUsermessageController.action")
 	public String queryUsermessageController(Model model){
         List<Xhmessage> message=userMessage.queryUserMessage();
@@ -55,7 +55,7 @@ public class UserMessageController {
 		return message;
 	}
 	
-	//查询等级列表的所有信息
+	//查询留言列表的所有信息
 	@RequestMapping("queryAllMessage.action")
 	public String queryAllMessage(Model model){
 	    List<Xhmessage> messageList=userMessage.queryAllMessagelist();

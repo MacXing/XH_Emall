@@ -82,7 +82,7 @@ public class XhUserServiceImpl implements XhUserService {
         if (resultCount == 0) {
             return ServerResponse.createByErrorMassage("注册失败");
         }
-        return ServerResponse.createBySuccessMessage("注册成功");
+        return ServerResponse.createByErrorMassage("注册成功");
 		
 	}
 	

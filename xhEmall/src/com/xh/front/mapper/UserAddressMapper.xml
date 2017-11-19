@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.front.mapper.UserAddressMapper">
+
+    <resultMap type="userAddress" id="queryAllUserAddressByUserMap">
+         <result column="addID" property="addId" />
+         <result column="addName" property="addName" />
+         <result column="addUserName" property="addUserName" />
+         <result column="addCountry" property="addCountry" />
+         <result column="addProvice" property="addProvice" />
+         <result column="addCity" property="addCity" />
+         <result column="addDistrict" property="addDistrict" />
+         <result column="addAddress" property="addAddress" />
+         <result column="addCode" property="addCode" />
+         <result column="addPhone" property="addPhone" />
+         <result column="isDefault" property="isDefault" />
+         <association property="user" javaType="xhusers">
+            <result column="userID" property="userid"/>
+         </association>
+    </resultMap>
+	
+	<select id="queryAllUserAddressByUser" resultMap="queryAllUserAddressByUserMap" parameterType="int">
+	      SELECT ua.addID,ua.addName,ua.addUserName,ua.addCountry,ua.addProvice,ua.addCity,ua.addDistrict,ua.userID,
+                 ua.addAddress,ua.addCode,ua.addPhone,ua.isDefault
+           FROM  xhUserAddress ua
+           JOIN  xhUsers u
+           ON    ua.userID=u.userID
+           WHERE ua.userID=#{userid} AND isDefault=1
+	</select>
+	
+</mapper>	

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.front.mapper.FrontUserMapper">
+	
+	<resultMap id="queryUserByIdMap" type="com.xh.front.bean.Xhusers">
+	    <id column="userID" jdbcType="INTEGER" property="userid" />
+		<result column="gradeID" jdbcType="VARCHAR" property="gradeid" />
+		<result column="userName" jdbcType="VARCHAR" property="username" />
+		<result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
+		<result column="userSex" jdbcType="INTEGER" property="usersex" />
+		<result column="userBirthday" jdbcType="DATE" property="userbirthday" />
+		<result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+		<result column="userEmail" jdbcType="VARCHAR" property="useremail" />
+		<result column="userAddress" jdbcType="VARCHAR" property="useraddress" />
+		<result column="userLoginTime" jdbcType="DATE" property="userlogintime" />
+		<result column="userlasttime" jdbcType="DATE" property="userlasttime" />			
+		<result column="userLastIp" jdbcType="VARCHAR" property="userlastip" />
+		<result column="userVisitCount" jdbcType="INTEGER" property="uservisitcount" />
+		<result column="userHomePhone" jdbcType="VARCHAR" property="userhomephone" />
+		<result column="userPhoto" jdbcType="VARCHAR" property="userphoto" />
+		<result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
+		<result column="userIntegral" jdbcType="DOUBLE" property="userintegral" /> 
+	    <association property="xhgrade" javaType="com.xh.back.bean.Xhgrade">
+	    	  <id column="gardeID" jdbcType="INTEGER" property="gradeid" />
+			  <result column="gradeName" jdbcType="VARCHAR" property="gradename" />
+			  <result column="gradeCount" jdbcType="VARCHAR" property="gradecount" />  	     
+	    </association>  
+	  </resultMap>
+
+    <!-- 根据用户ID查询用户 -->
+	<select id="queryUserByPrimaryKey" parameterType="int" resultMap="queryUserByIdMap">
+	SELECT u.userID,g.gradeID,u.userName,u.userPassword,
+	u.userSex,u.userBirthday,u.userPhone,u.userEmail,u.userAddress,
+	u.userLoginTime,u.userlasttime,u.userLastIp,u.userVisitCount,
+	u.userHomePhone,u.userPhoto,u.userMoney,u.userIntegral,g.gradeName,g.gradeCount
+	FROM xhUsers u JOIN xhGrade g ON u.gradeID=g.gradeID
+	where u.userID=#{userid}
+	</select>
+	
+	<!-- 根据用户ID修改用户信息 -->
+	<update id="updateByPrimaryKeySelective" parameterType="xhusers">
+    update xhUsers
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        userSex = #{usersex,jdbcType=INTEGER},
+      </if>
+      <if test="userbirthday != null">
+        userBirthday = #{userbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null">
+        userPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null">
+        userEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddress != null">
+        userAddress = #{useraddress,jdbcType=VARCHAR},
+      </if>     
+      <if test="userlogintime != null">
+        userLoginTime = #{userlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="userlasttime != null">
+        userLastTime = #{userlasttime,jdbcType=VARCHAR},
+      </if>
+      <if test="userlastip != null">
+        userLastIp = #{userlastip,jdbcType=VARCHAR},
+      </if>
+      <if test="uservisitcount != null">
+        userVisitCount = #{uservisitcount,jdbcType=INTEGER},
+      </if>           
+      <if test="userhomephone != null">
+        userHomePhone = #{userhomephone,jdbcType=VARCHAR},
+      </if>
+      <if test="userintegral != null">
+        userIntegral = #{userintegral,jdbcType=INTEGER},
+      </if>
+      <if test="usermoney != null">
+        userMoney = #{usermoney,jdbcType=DOUBLE},
+      </if>
+      <if test="userphoto != null">
+        userPhoto = #{userphoto,jdbcType=VARCHAR},
+      </if>      
+    </set>
+    where userID = #{userid,jdbcType=INTEGER}
+   </update>
+	
+	<!-- 用户留言 -->
+	<resultMap id="queryUserMessageByIdMap" type="com.xh.back.bean.Xhmessage">
+	    <id column="msgID" jdbcType="INTEGER" property="msgid" />
+	    <!-- <result column="userID" jdbcType="INTEGER" property="userid" /> -->
+ 	    <result column="msgTxt" jdbcType="VARCHAR" property="msgtxt" />
+	    <result column="msgInitTime" jdbcType="VARCHAR" property="msginittime" /> 
+	    <association property="users" javaType="com.xh.front.bean.Xhusers">
+	    	<id column="userID" jdbcType="INTEGER" property="userid" />
+			<result column="gradeID" jdbcType="VARCHAR" property="gradeid" />
+			<result column="userName" jdbcType="VARCHAR" property="username" />
+			<result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
+			<result column="userSex" jdbcType="INTEGER" property="usersex" />
+			<result column="userBirthday" jdbcType="DATE" property="userbirthday" />
+			<result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+			<result column="userEmail" jdbcType="VARCHAR" property="useremail" />
+			<result column="userAddress" jdbcType="VARCHAR" property="useraddress" />
+			<result column="userLoginTime" jdbcType="DATE" property="userlogintime" />
+			<result column="userlasttime" jdbcType="DATE" property="userlasttime" />			
+			<result column="userLastIp" jdbcType="VARCHAR" property="userlastip" />
+			<result column="userVisitCount" jdbcType="INTEGER" property="uservisitcount" />
+			<result column="userHomePhone" jdbcType="VARCHAR" property="userhomephone" />
+			<result column="userPhoto" jdbcType="VARCHAR" property="userphoto" />
+			<result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
+			<result column="userIntegral" jdbcType="DOUBLE" property="userintegral" />     
+	    </association>  
+	  </resultMap>
+	  
+	<!-- 根据用户ID查询用户留言  -->
+	<select id="querymsgByPrimaryKey" resultMap="queryUserMessageByIdMap" parameterType="int">
+    SELECT u.userID,m.msgID,u.userName,m.msgInitTime,m.msgTxt,u.userphone
+	FROM xhMessage m JOIN xhUsers u ON m.userID=u.userID
+	where m.userID=#{userid,jdbcType=INTEGER}
+    </select>
+	
+	<!--根据用户ID清空留言信息-->
+	<update id="cleanMessageByPrimaryKey" parameterType="int">
+    update xhMessage set msgTxt =null,msgInitTime=null 
+    where msgID = #{msgid,jdbcType=INTEGER}
+    </update>
+   
+    <update id="updateMessageByPrimaryKey" parameterType="xhmessage">
+     update xhMessage set msgTxt =#{msgtxt,jdbcType=VARCHAR},msgInitTime=#{msginittime}  
+     where msgID = #{msgid,jdbcType=INTEGER}
+  	</update>
+  	
+  	<!--根据用户ID查询留言列表-->
+    <select id="queryMsgByPrimarykeyForUpdate" resultMap="queryUserMessageByIdMap" parameterType="int">
+    	select u.userID,m.msgID,u.userName,m.msgInitTime,m.msgTxt,u.userphone 
+    	from xhMessage m JOIN xhUsers u ON m.userID=u.userID
+    	where m.msgID=#{msgid,jdbcType=INTEGER}
+    </select>
+    
+    <!--增加留言列表-->
+	<!-- <insert id="addMessage" parameterType="xhmessage">
+    insert into xhMessage (
+    	userId,
+    	msgInitTime,
+    	msgTxt
+      )
+    values (#{userid}, #{msginittime}, #{msgtxt})
+  </insert> -->
+  
+   <insert id="addMessage" parameterType="xhmessage">
+   	insert into xhMessage
+   	<trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="msginittime != null">
+        msgInitTime,
+      </if>
+      <if test="msgtxt != null">
+        msgTxt,
+      </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="msginittime != null">
+        #{msginittime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtxt != null">
+        #{msgtxt,jdbcType=VARCHAR},
+      </if>
+      </trim>
+   </insert>
+  
+  <!-- 删除留言 -->
+   <delete id="deleteMessageByPrimaryKey" parameterType="int">
+    delete from xhMessage 
+    where msgID=#{msgid,jdbcType=INTEGER}
+  	</delete>
+  
+</mapper>

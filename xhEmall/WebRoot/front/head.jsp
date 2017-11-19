@@ -157,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 <div class="top">
-    <div class="logo"><a href="Index.html"><img src="front/images/logo.png" /></a></div>
+    <div class="logo"><a href="home/home.action"><img src="front/images/logo.png" /></a></div>
     <div class="search">
     	<form action="${pageContext.request.contextPath}/ProductList/queryAllProductByFind.action" method="post">
         	<input type="text" name="pname" value="" id="keyword" class="s_ipt" />

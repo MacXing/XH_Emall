@@ -1,22 +1,23 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <base href="<%=basePath%>">
 
-<title>账户安全</title>
+<title>我的订单</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="front/css/style.css" />
 
@@ -225,8 +226,8 @@
 					</div>
 				</span>
 				<span class="fl">|&nbsp;关注我们：</span>
-           		<span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
-           		<span class="fr">|&nbsp;<a href="home/home.action">首页&nbsp;<img src="front/images/home.png" align="absmiddle" /></a></span>
+            	<span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
+            	<span class="fr">|&nbsp;<a href="home/home.action">首页&nbsp;<img src="front/images/home.png" align="absmiddle" /></a></span>
 			</span>
 		</div>
 	</div>
@@ -261,7 +262,7 @@
 					<!--Begin 购物车未登录 Begin-->
 					<div class="un_login">
 						还未登录！
-						<a href="front/Login.jsp" style="color:#ff4e00;">马上登录</a>
+						<a href="Login.html" style="color:#ff4e00;">马上登录</a>
 						查看购物车！
 					</div>
 					<!--End 购物车未登录 End-->
@@ -329,84 +330,64 @@
 					<div class="left_m_t t_bg1">订单中心</div>
 					<ul>
 						<li>
-							<a href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
+							<a href="Member_Order.html" class="now">我的订单</a>
 						</li>
 						<li>
-							<a href="Member_Address.html">收货地址</a>
+							<a href="order/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
 						</li>
 					</ul>
 				</div>
 				<div class="left_m">
 					<div class="left_m_t t_bg2">会员中心</div>
 					<ul>          
-                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">用户信息</a></li>
-                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${current_user.userid }">修改信息</a></li>
-                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${current_user.userid }">我的留言</a></li>
-                    <li><a href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a></li>
-                   </ul>
+	                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">用户信息</a></li>
+	                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${current_user.userid }">修改信息</a></li>
+	                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${current_user.userid }">我的留言</a></li>
+	                    <li><a href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a></li>
+                    </ul>
 				</div>
 				<div class="left_m">
 					<div class="left_m_t t_bg3">账户中心</div>
 					<ul>
 						<li>
-							<a href="Member_Safe.html" class="now">账户安全</a>
+							<a href="front/Member_Safe.jsp">账户安全</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="m_right">
 				<p></p>
-				<div class="mem_tit">账户安全</div>
-				<div class="m_des">
-					<table border="0" style="width:880px;" cellspacing="0" cellpadding="0">
-						<tr height="45">
-							<td width="80" align="right">原手机 &nbsp; &nbsp;</td>
+				<div class="mem_tit">我的订单</div>
+				<table border="0" class="order_tab" style="width:930px; text-align:center; margin-bottom:30px;"
+					cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="20%">订单号</td>
+						<td width="25%">下单时间</td>
+						<td width="15%">订单总金额</td>
+						<td width="25%">订单状态</td>
+						<td width="15%">操作</td>
+					</tr>
+					<c:forEach items="${ogList }" var="order" varStatus="status">
+						<tr>
 							<td>
-								<input type="text" value="" class="add_ipt" style="width:180px;" id="phoneold"/>
-								&nbsp; <font color="#ff4e00">*</font>
+								<input type="hidden" value="${order.ogID }"/>
+								<font color="#ff4e00">${order.orderNumber }</font>
 							</td>
-						</tr>
-						<tr height="45">
-							<td align="right">新手机 &nbsp; &nbsp;</td>
+							<td><fmt:formatDate value="${order.orderInfo.ordertime }" type="both"/></td>
+							<td>${order.orderInfo.goodamount * order.product.psale}￥</td>
 							<td>
-								<input type="text" value="" class="add_ipt" style="width:180px;" id="phonenew"/>
-								&nbsp; <font color="#ff4e00">*</font>
+								<c:if test="${order.orderInfo.orderstatus == 0}">未确认&nbsp;</c:if>
+								<c:if test="${order.orderInfo.orderstatus == 1}">已确认&nbsp;</c:if>
+								<c:if test="${order.orderInfo.paystatus  == 0}">未支付&nbsp;</c:if>
+								<c:if test="${order.orderInfo.paystatus  == 1}">已支付&nbsp;</c:if>
+								<c:if test="${order.orderInfo.shoppingstatus == 0}">未发货&nbsp;</c:if>
+								<c:if test="${order.orderInfo.shoppingstatus == 1}">已发货&nbsp;</c:if>
+								<c:if test="${order.orderInfo.shoppingstatus == -1}">已安排未发货&nbsp;</c:if>
 							</td>
+							<td>取消订单</td>
 						</tr>
-						<tr height="50">
-							<td>&nbsp;</td>
-							<td>
-								<input type="submit" value="确认修改" class="btn_tj" id="phonemodify"/>
-							</td>
-						</tr>
-					</table>
-				</div>
-				
-				<div class="m_des">
-					<table border="0" style="width:880px;" cellspacing="0" cellpadding="0">
-						<tr height="45">
-							<td width="80" align="right">原密码 &nbsp; &nbsp;</td>
-							<td>
-								<input type="password" value="" class="add_ipt" style="width:180px;" id="pwdold"/>
-								&nbsp; <font color="#ff4e00">*</font>
-							</td>
-						</tr>
-						<tr height="45">
-							<td align="right">新密码 &nbsp; &nbsp;</td>
-							<td>
-								<input type="password" value="" class="add_ipt" style="width:180px;" id="pwdnew"/>
-								&nbsp; <font color="#ff4e00">*</font>
-							</td>
-						</tr>
-						<tr height="50">
-							<td>&nbsp;</td>
-							<td>
-								<input type="submit" value="确认修改" class="btn_tj" id="pwdmodify"/>
-							</td>
-						</tr>
-					</table>
-				</div>
-				
+					</c:forEach>
+				</table>
 			</div>
 		</div>
 		<!--End 用户中心 End-->
@@ -562,59 +543,18 @@
 		<div class="btmbg">
 			<div class="btm">
 				备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights Reserved.
-				复制必究 , Technical Support: Dgg Group <br /> <img src="front/images/b_1.gif" width="98"
-					height="33" /><img src="front/images/b_2.gif" width="98" height="33" /><img
-					src="front/images/b_3.gif" width="98" height="33" /><img src="front/images/b_4.gif" width="98"
-					height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img
+				复制必究 , Technical Support: Dgg Group <br /> <img src="front/images/b_1.gif" width="98" height="33" /><img
+					src="front/images/b_2.gif" width="98" height="33" /><img src="front/images/b_3.gif" width="98" height="33" /><img
+					src="front/images/b_4.gif" width="98" height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img
 					src="front/images/b_6.gif" width="98" height="33" />
 			</div>
 		</div>
 		<!--End Footer End -->
 	</div>
-
 	<script type="text/javascript" src="resource/js/jquery.min.js"></script>
 	<script type="text/javascript" src="resource/layer/layer.js"></script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
-
-	<script>
-		$("#pwdmodify").click(function (){
-			var pwdold = $("#pwdold").val();
-			var pwdnew = $("#pwdnew").val();
-			var ii = layer.load();
-			$.ajax({
-				url : "user/restPassword.action",
-				data : {
-					"passwordNew" : pwdnew,
-					"passwordOld" : pwdold
-				},
-				type : "POST",
-				success : function(result){
-					console.log(result);
-					layer.close(ii);
-					layer.msg(result.msg);
-				}
-			});
-		});
-		$("#phonemodify").click(function (){
-			var phoneold = $("#phoneold").val();
-			var phonenew = $("#phonenew").val();
-			var ii = layer.load();
-			$.ajax({
-				url : "user/restPhone.action",
-				data : {
-					"userphoneNew" : phonenew,
-					"userphoneOld" : phoneold
-				},
-				type : "POST",
-				success : function(result){
-					console.log(result);
-					layer.close(ii);
-					layer.msg(result.msg);
-				}
-			});
-		});
-	</script>
 </body>
-
 </html>
+
 

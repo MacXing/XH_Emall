@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.front.mapper.UserCommentMapper">
+<!--Comment信息-->
+	<resultMap type="xhcomment" id="queryAllCommentMap">
+		<id column="commentId" property="commentid"/>
+		<result column="userId" property="userid"/>
+		<result column="pId" property="pid"/>
+		<result column="commentTime" property="commenttime"/>
+		<result column="commentTxt" property="commenttxt"/>
+		<result column="commentService" property="commentservice"/>
+		<result column="commentShopping" property="commentshopping"/>
+		<result column="commentShopping" property="commentshopping"/>
+		<result column="commentGoods" property="commentgoods"/>
+		<result column="commentImg" property="commentimg"/>
+		<association property="users" javaType="xhusers">
+			<id column="userId" property="userid"/>
+			<result column="userName" property="username"/>
+		</association>
+		<association property="product" javaType="xhproduct">
+			<id column="pId" property="pid"/>
+			<result column="pName" property="pname"/>
+		</association>
+	</resultMap>
+
+	<!-- 查询用户评论 -->
+	<select id="queryAllComment" resultMap="queryAllCommentMap">
+		SELECT u.userID,u.userName, 
+		p.pID,p.pName, 
+		c.commentId,c.commentTime,c.commentTxt,
+		c.commentService, c.commentGoods,c.commentShopping,c.commentImg 
+		FROM xhUsers u 
+		JOIN xhComment c 
+		ON u.userID = c .userId
+		JOIN xhProduct p 
+		ON c.pId = p.pID 
+	</select>
+	
+	<!-- 添加评论 -->
+	<insert id="insertComment" parameterType="xhcomment">
+		INSERT INTO xhComment(userId,pId,commentTime,commentTxt,
+		commentService,commentShopping,commentGoods,commentImg)
+		VALUES(#{userid},
+		<if test="pid != null">
+		#{pid},
+		</if>
+		#{commenttime},
+		<if test="commenttxt != null">
+		#{commenttxt},
+		</if>
+		#{commentservice},#{commentshopping},#{commentgoods},#{commentimg})
+	</insert>
+	
+	<!-- <insert id="insertComment" parameterType="xhcomment">
+   	insert into xhComment
+   	<trim prefix="(" suffix=")" suffixOverrides=",">
+        userId,
+        pId,
+        commentTime,
+        commentTxt,
+        commentService,
+        commentShopping,
+        commentGoods,
+        commentImg
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="commenttime != null">
+        #{commenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="commenttxt != null">
+        #{commenttxt,jdbcType=INTEGER},
+      </if>
+      <if test="commentservice != null">
+        #{commentservice,jdbcType=VARCHAR},
+      </if>
+      <if test="commentshopping != null">
+        #{commentshopping,jdbcType=VARCHAR},
+      </if>
+      <if test="commentgoods != null">
+        #{commentgoods,jdbcType=INTEGER},
+      </if>
+        #{commentImg,jdbcType=VARCHAR}
+      </trim>
+   </insert> -->
+	
+	<!-- 删除评论 -->
+	<delete id="deleteCommentById" parameterType="int">
+		DELETE FROM xhComment
+		WHERE commentId = #{id}
+	</delete>
+	
+	<!-- 修改评论 -->
+	<update id="updateCommentByPrimaryKey" parameterType="xhcomment">
+     update xhComment set
+     commentService=#{commentservice,jdbcType=INTEGER},
+     commentShopping=#{commentshopping,jdbcType=INTEGER},
+     commentGoods=#{commentgoods,jdbcType=INTEGER},
+     <if test="commentimg!=null">
+     commentImg=#{commentimg,jdbcType=VARCHAR},
+     </if>
+     commentTxt=#{commenttxt,jdbcType=VARCHAR},commentTime=#{commenttime}  
+     where commentId = #{commentid,jdbcType=INTEGER}
+  	</update>
+	
+	<!--根据用户ID清空留言信息-->
+	<update id="cleanCommentByPrimaryKey" parameterType="int">
+    update xhComment set commentTxt =null,commentTime=null 
+    where commentId = #{commentid,jdbcType=INTEGER}
+    </update>
+	
+	<!-- 根据用户ID查询评论 -->
+	<select id="queryCommentById" parameterType="int" resultMap="queryAllCommentMap">
+		SELECT u.userID,u.userName, 
+		p.pID,p.pName, 
+		c.commentId,c.commentTime,c.commentTxt,
+		c.commentService, c.commentGoods,c.commentShopping,c.commentImg 
+		FROM xhUsers u 
+		JOIN xhComment c 
+		ON u.userID = c .userId
+		JOIN xhProduct p 
+		ON c.pId = p.pID
+		WHERE u.userID=#{userid,jdbcType=INTEGER}
+	</select>
+	
+	<select id="queryCommentByIdForUpdate" parameterType="int" resultMap="queryAllCommentMap">
+		SELECT u.userID,u.userName, 
+		p.pID,p.pName, 
+		c.commentId,c.commentTime,c.commentTxt,
+		c.commentService, c.commentGoods,c.commentShopping,c.commentImg 
+		FROM xhUsers u 
+		JOIN xhComment c 
+		ON u.userID = c .userId
+		JOIN xhProduct p 
+		ON c.pId = p.pID
+		WHERE c.commentId=#{commentid,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 检查商品ID是否存在 -->
+  	<select id="checkProductId" parameterType="int" resultType="int"> 
+		select count(1) from xhProduct where pID = #{pid}
+	</select>
+	
+</mapper>

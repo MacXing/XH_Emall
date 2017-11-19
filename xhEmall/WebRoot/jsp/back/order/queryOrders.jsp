@@ -563,10 +563,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		});
 		}			 
-										
-
-									});
-						});
+		});
+	});
 	</script>
    
    
@@ -612,10 +610,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 					});
 			 }
-										
-
-									});
-						});
+			});
+});
 	</script>
    
     
@@ -647,7 +643,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      				$.ajax({
          	     		type:"GET",
          	     		url:"${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="+$("#provinceId").val(),    		
-         	     		success:function(result){    			
+         	     		success:function(result){
+         	     			$("#cityId > option[value != 0]").remove();
          	     			$.each(result.extend.citylist,function(index,item){
          	     				 var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
          	     				 option.appendTo("#cityId");    	     				
@@ -657,7 +654,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	     				$.ajax({
              	     	     		type:"GET",
              	     	     		url:"${pageContext.request.contextPath}/order/getAreaByCityId.action?id="+$("#cityId").val(),    		
-             	     	     		success:function(result){    			
+             	     	     		success:function(result){ 
+             	     	     			$("#areaId > option[value != 0]").remove();
              	     	     			$.each(result.extend.arealist,function(index,item){
              	     	     				 var option=$("<option value='"+item.areaid+"'></option>").append(item.area);
              	     	     				 option.appendTo("#areaId");
@@ -688,6 +686,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	     		success:function(result){    			
          	     			$.each(result.extend.citylist,function(index,item){
          	     				 //var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
+         	     				 $("#cityId1 > option[value != 0]").remove();
          	     				 var option = $("<option></option>").attr("value",item.cityid).append(item.city);
          	     				 option.appendTo("#cityId1");    	     				
          	     			});
@@ -697,6 +696,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              	     	     		type:"GET",
              	     	     		url:"${pageContext.request.contextPath}/order/getAreaByCityId.action?id="+$("#cityId1").val(),    		
              	     	     		success:function(result){    			
+             	     	     			$("#areaId1 > option[value != 0]").remove();
              	     	     			$.each(result.extend.arealist,function(index,item){
              	     	     				 var option=$("<option value='"+item.areaid+"'></option>").append(item.area);
              	     	     				 option.appendTo("#areaId1");

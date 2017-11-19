@@ -20,6 +20,7 @@
 	<bean id="userGrade" class="com.xh.back.serviceImpl.UserGradeServiceImpl"/>
 	<bean id="userMessage" class="com.xh.back.serviceImpl.UserMessageServiceImpl"/>	
 	<bean id="xhUserService" class="com.xh.front.serviceImpl.XhUserServiceImpl"/>
+	<bean id="frontUserService" class="com.xh.front.serviceImpl.FrontUserServiceImpl"/> 
 	<bean id="orderService" class="com.xh.back.serviceImpl.OrderServiceImpl"/>
 	<bean id="orderGoodsService" class="com.xh.back.serviceImpl.OrderGoodsServiceImpl"/>
 	<bean id="expressService" class="com.xh.back.serviceImpl.ExpressServiceImpl"/>
@@ -42,5 +43,7 @@
 	<bean id="productDetailsService" class="com.xh.front.serviceImpl.ProductDetailsServiceImpl"/>
 	<bean id="productListService" class="com.xh.front.serviceImpl.ProductListServiceImpl"></bean>
 	<bean id="navbarService" class="com.xh.front.serviceImpl.NavbarServiceImpl"/>
+    <bean class="com.xh.front.serviceImpl.UserAddressServiceImpl" id="userAddressService"/>
+	<bean id="userCommentService" class="com.xh.front.serviceImpl.UserCommentServiceImpl"/>
 </beans>
 	

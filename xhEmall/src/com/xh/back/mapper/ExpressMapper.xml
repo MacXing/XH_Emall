@@ -32,7 +32,9 @@
     shoppingName=#{shoppingname}, 
     shoppingDesc=#{shoppingdesc},
     enable=#{enable},
-    shoppingImg=#{shoppingimg}
+    <if test="shoppingimg!=null">
+    shoppingImg=#{shoppingimg,jdbcType=VARCHAR}
+    </if>
     where shoppingID = #{shoppingid,jdbcType=INTEGER}
    </update>
  
