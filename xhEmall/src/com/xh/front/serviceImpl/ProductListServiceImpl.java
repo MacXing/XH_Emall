@@ -34,6 +34,16 @@ public class ProductListServiceImpl implements ProductListService {
 		return productListMapper.queryAllProductByFind(pname);
 	}
 
+	@Override
+	public int queryCount(String pname) {		
+		return productListMapper.queryCount(pname);
+	}
+
+	@Override
+	public List<Xhproduct> queryProductOrderByPsaleDesc(String pname) {		
+		return productListMapper.queryProductOrderByPsaleDesc(pname);
+	}
+
 	
 	
 }

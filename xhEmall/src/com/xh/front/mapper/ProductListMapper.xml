@@ -9,5 +9,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from xhProduct
 		where pName like "%"#{pname}"%"
 	</select>
+	
+	<select id="queryCount" parameterType="string" resultType="int">
+		select count(*)
+		from xhProduct
+		where pName like "%"#{pname}"%"	
+	</select>
+	
+	<select id="queryProductOrderByPsaleDesc" parameterType="string" resultType="xhproduct">
+		select pID,pName,pSale,pImg
+		from xhProduct
+		where pName like "%"#{pname}"%"
+		order by pSale desc
+	</select>
 			
 </mapper>	

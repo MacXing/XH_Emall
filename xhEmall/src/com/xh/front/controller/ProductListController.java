@@ -37,23 +37,7 @@ import com.xh.front.service.XhUserService;
 public class ProductListController {
 	@Autowired
 	@Qualifier("productListService")
-	private ProductListService productListService;	
-			
-	/*@RequestMapping("queryImagesByPid.action")	
-	public String queryImagesByPid(Model model,int pid,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
-			@RequestParam(value="pageSize",defaultValue="3")Integer pageSize){
-		List<ProductImage> productImages = productDetailsService.queryImagesByPid(pid);
-		Xhproduct xhproduct = productService.selectProductById(pid);
-		
-		PageHelper.startPage(pageNum, pageSize);
-		List<Xhcomment> xhcomments = productDetailsService.queryCommentByPid(pid);
-		PageInfo pageInfo = new PageInfo(xhcomments,5);
-		
-		model.addAttribute("productImages", productImages);
-		model.addAttribute("xhproduct", xhproduct);
-		model.addAttribute("pageInfo", pageInfo);
-		return "/front/product.jsp";			
-	}*/
+	private ProductListService productListService;				
 	
 	@RequestMapping("queryAllProductByFind.action")
 	public String queryAllProductByFind(Model model,String pname,
@@ -62,14 +46,37 @@ public class ProductListController {
 		
 		pname = URLDecoder.decode(pname,"UTF-8");
 		
+		int count = productListService.queryCount(pname);
+		
 		PageHelper.startPage(pageNum, pageSize);
 		List<Xhproduct> xhproducts = productListService.queryAllProductByFind(pname);
 		PageInfo pageInfo = new PageInfo(xhproducts,5);
 		
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("keyword", pname);
+
+		model.addAttribute("count", count);
+		return "/front/FindProductList.jsp";
+	}
+	
+	@RequestMapping("queryProductOrderByPsaleDesc.action")
+	public String queryProductOrderByPsaleDesc(Model model,String pname,
+			@RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="10")Integer pageSize) throws UnsupportedEncodingException{
 		
-		return "/front/brandlist.jsp";
+		pname = URLDecoder.decode(pname,"UTF-8");
+		
+		int count = productListService.queryCount(pname);
+		
+		PageHelper.startPage(pageNum, pageSize);
+		List<Xhproduct> xhproducts = productListService.queryProductOrderByPsaleDesc(pname);
+		PageInfo pageInfo = new PageInfo(xhproducts,5);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("keyword", pname);
+		model.addAttribute("count", count);
+		return "/front/ProductPsaleDesc.jsp";
+
 	}
 	
 	

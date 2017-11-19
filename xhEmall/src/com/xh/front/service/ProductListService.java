@@ -8,4 +8,8 @@ import com.xh.back.bean.Xhproduct;
 
 public interface ProductListService {
 	List<Xhproduct> queryAllProductByFind(String pname);
+	
+	int queryCount(String pname);
+	
+	List<Xhproduct> queryProductOrderByPsaleDesc(String pname);
 }

@@ -45,11 +45,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>  
+
 <jsp:include page="/front/head.jsp" flush="true"/>
+
 <div class="i_bg">
+
 	<div class="postion">
     	
     </div>    
+
     <div class="content">    	                    
         <div id="tsShopContainer">
             <div id="tsImgS"><a href="${pageContext.request.contextPath}${productImages[0].url }" title="Images" class="MagicZoom" id="MagicZoom">
@@ -115,11 +119,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <span class="fl"><a onclick="ShowDiv_1('MyDiv1','fade1')"><img src="front/images/j_car.png" /></a></span>
             </div>            
         </div>    
-        
+        <!-- 
         <div class="s_brand">
         	<div class="s_brand_img"><img src="front/images/sbrand.jpg" width="188" height="132" /></div>
             <div class="s_brand_c"><a href="#">进入品牌专区</a></div>
-        </div>    
+        </div> -->    
         
         
     </div>
@@ -380,7 +384,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="#" class="b_sure">去购物车结算</a><a href="#" class="b_buy">继续购物</a></td>
+                    <td><a href="#" class="b_sure">去购物车结算</a><a class="b_buy refresh">继续购物</a></td>
                   </tr>
                 </table>
                     
@@ -475,15 +479,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--End Footer End -->    
 </div>
 
-<script>
-	Page({
-		num:7,					//页码数
-		startnum:6,				//指定页码
-		elem:$('#page2'),		//指定的元素
-		callback:function(n){	//回调函数
-			console.log(n);
-		}
-	});
+<script type="text/javascript">
+		$(".refresh").on("click",function(){
+			self.location.reload();
+		});
 </script>
 
 </body>
