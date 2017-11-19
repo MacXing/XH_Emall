@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.xh.back.bean.Xhorderinfo;
 import com.xh.front.bean.UserAddress;
 
 public interface FrontOrderMapper {
@@ -31,5 +32,11 @@ public interface FrontOrderMapper {
 	
 	//根据ID查询地址
 	public UserAddress queryAddInfoById(int addID);
+	
+	//根据ID查询默认地址
+	public UserAddress queryDefaultAddInfoById(int userID);
+	
+	//添加订单
+	public int addOrder(Xhorderinfo orderInfo);
 	
 }

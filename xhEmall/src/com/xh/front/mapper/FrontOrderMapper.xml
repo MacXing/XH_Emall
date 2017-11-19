@@ -44,6 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by isDefault desc
 	</select>
 	
+	<select id="queryDefaultAddInfoById" parameterType="int" resultType="UserAddress">
+		select <include refid="Base_Column_List"/> from xhUserAddress
+		where userID = #{userid } and isDefault = 1
+	</select>
+	
 	<select id="queryAddInfoById" parameterType="int" resultType="UserAddress">
 		select <include refid="Base_Column_List"/> from xhUserAddress
 		where addID = #{addID }
@@ -72,7 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateDefaultFormerById" parameterType="map">
 		update xhUserAddress set
 			isDefault = 0
-		where userID = #{userID } and isDefault = 1
+		where userID = #{userID }
 	</update>
 	
+	<insert id="addOrder" parameterType="Xhorderinfo" ></insert>
 </mapper>	

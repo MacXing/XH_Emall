@@ -110,37 +110,28 @@
 
 				<div class="two_t">
 					<span class="fr">
-						<a href="#">修改</a>
+						<a href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">修改</a>
 					</span>
 					收货人信息
 				</div>
 				<table border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
 					<tr>
-						<td class="p_td" width="160">收货人姓名</td>
-						<td width="395">${ua.addUserName}</td>
-						<td class="p_td" width="160">电子邮件</td>
-						<td width="395">${ua.addCode}</td>
+						<td class="p_td">收货人姓名：</td>
+						<td>${ua.addUserName }</td>
+						<td class="p_td">联系方式：</td>
+						<td>${ua.addPhone }</td>
 					</tr>
 					<tr>
-						<td class="p_td">详细信息</td>
-						<td>${ua.addName}</td>
-						<td class="p_td">邮政编码</td>
-						<td>${ua.addCode}</td>
+						<td class="p_td">配送区域：</td>
+						<td>${ua.addCountry}${ua.addProvice }${ua.addCity }${ua.addDistrict }</td>
+						<td class="p_td">邮政编码：</td>
+						<td>${ua.addCode }</td>
 					</tr>
 					<tr>
-						<td class="p_td">电话</td>
-						<td></td>
-						<td class="p_td">手机</td>
-						<td>${ua.addPhone}</td>
-					</tr>
-					<tr>
-						<td class="p_td">标志建筑</td>
-						<td></td>
-						<td class="p_td">最佳送货时间</td>
-						<td></td>
+						<td class="p_td">详细地址：</td>
+						<td>${ua.addAddress }</td>
 					</tr>
 				</table>
-
 
 				<div class="two_t">配送方式</div>
 				<table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">

@@ -8,8 +8,8 @@ import org.springframework.util.CollectionUtils;
 
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
+import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.mapper.OrderGoodsMapper;
-import com.xh.back.mapper.OrderMapper;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.mapper.FrontOrderMapper;
 import com.xh.front.service.FrontOrderService;
@@ -23,10 +23,6 @@ public class FrontOrderServiceImpl implements FrontOrderService {
 	@Autowired
 	@Qualifier("frontOrderMapper")
 	private FrontOrderMapper frontOrderMapper;
-	
-	@Autowired
-	@Qualifier("orderMapper")
-	private OrderMapper orderMapper;
 	
 	@Override
 	public ServerResponse<List<OrderGoods>> queryOrderInfo(Integer userid) {
@@ -93,6 +89,15 @@ public class FrontOrderServiceImpl implements FrontOrderService {
 			return ServerResponse.createBySuccess(userAddress);
 		}
 		return ServerResponse.createByErrorMassage("没有找到相关信息");
+	}
+
+	@Override
+	public ServerResponse<String> addOrder(Xhorderinfo orderInfo) {
+		int resultCount = frontOrderMapper.addOrder(orderInfo);
+		if(resultCount > 0){
+			return ServerResponse.createBySuccess();
+		}
+		return ServerResponse.createByErrorMassage("添加失败");
 	}
 	
 }
