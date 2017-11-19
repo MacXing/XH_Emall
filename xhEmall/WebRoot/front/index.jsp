@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="sou">
     	<!--Begin 所在收货地区 Begin-->
     	<span class="s_city_b">
-        	<span class="fl">送货至：</span>
+        	<!-- <span class="fl">送货至：</span>
             <span class="s_city">
             	<span>四川</span>
                 <div class="s_city_bg">
@@ -111,20 +111,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </table>
                     </div>
                 </div>
-            </span>
-        </span>
+            </span>-->
+        </span> 
         <!--End 所在收货地区 End-->
 		<span class="fl">
 			<c:if test="${current_user == null }">
 				你好，请
 				<a href="front/Login.jsp">登录</a>
 				&nbsp;
-				<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+				<a href="${pageContext.request.contextPath }/front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
 			</c:if>
 			<c:if test="${current_user != null}">
 				欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 				&nbsp;|&nbsp;
-				<a class="logout" herf="logout.action">退出登录</a>
+				<a class="logout" herf="">退出登录</a>
 			</c:if>
 			&nbsp;|&nbsp;
 			<a href="#">我的订单</a>
@@ -158,12 +158,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li>
 								<a href="#">客户服务</a>
 							</li>
-							<li>
-								<a href="#">客户服务</a>
-							</li>
-							<li>
-								<a href="#">客户服务</a>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -174,12 +168,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="s_city_t"></div>
 					<div class="ss_list_c">
 						<ul>
+						<c:forEach items="${CP}" var="item">
 							<li>
-								<a href="#">网站导航</a>
+								<a href="${pageContext.request.contextPath}/home/queryAllProductsByCatid.action?catid=${item.catid}">${item.catname }</a>
 							</li>
-							<li>
-								<a href="#">网站导航</a>
-							</li>
+						</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -308,7 +301,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         })();
         </script>
         <!--End Banner End-->
-        <div class="inews">
+         <div class="inews">
         	<div class="news_t">
             	<span class="fr"><a href="#">更多 ></a></span>新闻资讯
             </div>
@@ -349,7 +342,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     <!--Begin 热门商品 Begin-->
-    <div class="content mar_10">
+   <!--  <div class="content mar_10">
     	<div class="h_l_img">
         	<div class="img"><img src="front/images/l_img.jpg" width="188" height="188" /></div>
             <div class="pri_bg">
@@ -439,7 +432,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
         </div>
-    </div>  
+    </div>   -->
 	    <div class="content mar_20">
 	    <c:forEach items="${brands }" var="item" begin="0" end="21">
 	    	<a href="${pageContext.request.contextPath}/home/queryProductsByBrand.action?brandid=${item.brandid}"><img src="${pageContext.request.contextPath}${item.image }" width="100" height="70" /></a>
@@ -475,23 +468,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="fresh_mid">
         	<ul>
-        		<c:forEach items="${item.categorys[0].products}" var="item3" begin="0" end="5">
+        		<c:forEach items="${item.categorys}" var="item3" >
+        		<c:forEach items="${item3.products }" var="item4" begin="0" end="2">
             	<li>
-                	<div class="name"><a href="${pageContext.request.contextPath }/ProductDetails/queryImagesByPid.action?pid=${item3.pid }">${item3.pname }</a></div>
+                	<div class="name"><a href="${pageContext.request.contextPath }/ProductDetails/queryImagesByPid.action?pid=${item4.pid }">${item4.pname }</a></div>
                     <div class="price">
-                    	<font>￥<span>${item3.psale }</span></font> &nbsp;
+                    	<font>￥<span>${item4.psale }</span></font> &nbsp;
                     </div>
-                    <div class="img"><a href="${pageContext.request.contextPath }/ProductDetails/queryImagesByPid.action?pid=${item3.pid }"><img src="${pageContext.request.contextPath }${item3.pimg}" width="185" height="155" /></a></div>
-                </li>               
+                    <div class="img"><a href="${pageContext.request.contextPath }/ProductDetails/queryImagesByPid.action?pid=${item4.pid }"><img src="${pageContext.request.contextPath }${item4.pimg}" width="185" height="155" /></a></div>
+                </li>
+                </c:forEach>               
                 </c:forEach>  
             </ul>
         </div>
-        <div class="fresh_right">
+        <!-- <div class="fresh_right">
         	<ul>
             	<li><a href="#"><img src="front/images/food_b1.jpg" width="260" height="220" /></a></li>
                 <li><a href="#"><img src="front/images/food_b2.jpg" width="260" height="220" /></a></li>
             </ul>
-        </div>
+        </div> -->
     </div>
     </c:forEach>    
     <!--End 食品饮料 End-->

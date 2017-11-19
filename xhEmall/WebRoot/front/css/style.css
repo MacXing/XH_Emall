@@ -730,7 +730,7 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 }
 
 .fresh_mid{
-	width:729px; height:441px; overflow:hidden; background-color:#FFF; float:left;
+	width:989px; height:441px; overflow:hidden; background-color:#FFF; float:left;
 }
 .fresh_mid ul li{
 	width:242px; height:220px; overflow:hidden; float:left; border-left:1px solid #eaeaea; border-bottom:1px solid #eaeaea;
@@ -757,12 +757,12 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 	-moz-transform:scale(1.1,1.1); -webkit-transform:scale(1.1,1.1); -o-transform:scale(1.1,1.1); -ms-transform:scale(1.1,1.1); transform:scale(1.1,1.1);
 }
 
-.fresh_right{
+/* .fresh_right{
 	width:260px; height:441px; overflow:hidden; background-color:#FFF; float:right;
 }
 .fresh_right ul li{
 	width:260px; height:220px; overflow:hidden; border-bottom:1px solid #eaeaea;
-}
+} */
 
 
 
