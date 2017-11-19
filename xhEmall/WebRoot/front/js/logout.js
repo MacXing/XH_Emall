@@ -6,7 +6,7 @@ $(".logout").click(function() {
 		url : "user/logout.action",
 		success : function(result) {
 			if (result.status == 0) {
-				window.location.href = "front/Index.jsp";
+				window.location.href = "front/index.jsp";
 			} else {
 				layer.msg('退出失败');
 			}
