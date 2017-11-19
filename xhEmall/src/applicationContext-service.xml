@@ -45,5 +45,6 @@
 	<bean id="navbarService" class="com.xh.front.serviceImpl.NavbarServiceImpl"/>
     <bean class="com.xh.front.serviceImpl.UserAddressServiceImpl" id="userAddressService"/>
 	<bean id="userCommentService" class="com.xh.front.serviceImpl.UserCommentServiceImpl"/>
+	<bean id="userCollectService" class="com.xh.front.serviceImpl.UserCollectionServiceImpl"/>
 </beans>
 	

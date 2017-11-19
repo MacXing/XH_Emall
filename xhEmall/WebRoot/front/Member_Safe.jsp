@@ -162,7 +162,7 @@
 					<c:if test="${current_user != null}">
 						欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 						&nbsp;|&nbsp;
-						<a class="logout" href="home/home.action">退出登录</a>
+						<a class="logout">退出登录</a>
 					</c:if>
 					
 					&nbsp;|&nbsp;
@@ -614,6 +614,7 @@
 			});
 		});
 	</script>
+	<script type="text/javascript" src="front/js/logout.js"></script>
 </body>
 
 </html>

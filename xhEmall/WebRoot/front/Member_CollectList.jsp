@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -8,19 +9,75 @@
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <base href="<%=basePath%>">
 
-<title>收货地址</title>
+<title>我的收藏</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="front/css/style.css" />
+
+<script src="resource/js/jquery.min.js?v=2.1.4"></script>
+
+<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="resource/js/content.min.js?v=1.0.0"></script>
+<script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="resource/js/plugins/validate/messages_zh.min.js"></script>
+<script src="resource/js/demo/form-validate-demo.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script type="text/javascript" src="resource/js/validate.js"></script>
+
+<style type="text/css">
+.pages1 {
+	overflow: hidden;
+	color: #888888;
+	padding: 20px 10px;
+	text-align: right;
+	font-size: 6px;
+	font-family: "宋体";
+	margin-top: 20px;
+}
+
+.pages1 a {
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	color: #666666;
+	font-size: 16px;
+	text-align: center;
+	display: inline-block;
+	padding: 0 12px;
+	margin: 0 4px;
+	border: 1px solid #cccccc;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.pages1 a:hover,.pages1 a.cur {
+	color: #FFF;
+	background-color: #ff4e00;
+	border: 1px solid #ff4e00;
+}
+
+.pages1 a.p_pre:hover {
+	background-color: #eaeaea;
+	color: #555555;
+	border: 1px solid #cccccc;
+}
+</style>
+
 </head>
+
 <body>
 	<!--Begin Header Begin-->
 	<div class="soubg">
@@ -366,6 +423,10 @@
 							<a
 								href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a>
 						</li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id=${current_user.userid }">我的收藏</a>
+						</li>
 					</ul>
 				</div>
 				<div class="left_m">
@@ -379,61 +440,68 @@
 			</div>
 			<div class="m_right">
 				<p></p>
-				<div class="mem_tit">
-					<span>收货地址</span>
-					<div style="float:right;" id="addAddressbtn">
-						<button>添加地址</button>
-					</div>
+				<div class="mem_tit">我的收藏</div>
+				<!-- <div class="mem_tit">
+					<input type="button" value="我要评论" onclick="addcmt()" class="btn_tj" />
+				</div> -->
+				<table border="0" class="order_tab" style="width:930px; text-align:left; margin-bottom:30px;"
+					cellspacing="0" cellpadding="0">
+					<c:forEach items="${collect }" varStatus="status" var="collect">
+						<tr>
+							<td>
+								收藏编号：<font color="#ff4e00">${collect.collectid}</font>&nbsp;
+								用户编号：<font color="#ff4e00">${collect.users.userid }</font>&nbsp;
+								用户姓名：<font color="#ff4e00">${collect.users.username }</font>&nbsp;  				
+							</td>
+						</tr>
+						<tr>
+							<td>
+								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp;
+								<textarea class="add_txt">${collect.product.pname }</textarea>
+								</font> <img id="collectImg" width="90" height="90" src="collectImg/${collect.product.pimg }" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								收藏时间:<font color="#ff4e00"><fmt:formatDate value="${collect.collecttime }"
+										pattern="yyyy-MM-dd HH:mm:ss" /></font>&nbsp;
+								<input type="button" onclick="btn1(${collect.collectid})" style="color:#fff" value="删除"
+									class="btn_tj">
+							</td>
+						</tr>
+					</c:forEach>
+
+				</table>
+				<div class="pages1">
+					<c:if test="${pageInfo.hasPreviousPage==true }">
+						<a
+							href="${pageContext.request.contextPath }/userComment/queryCommentById.action?pageNum=${pageInfo.pageNum-1}&id=${current_user.userid}">
+							<font style="font-size: 1px">上一页</font>
+						</a>
+					</c:if>
+					<c:if test="${pageInfo.hasPreviousPage==false }">
+						<a>
+							<font style="font-size: 1px">上一页</font>
+						</a>
+					</c:if>
+					<c:forEach items="${pageInfo.navigatepageNums }" var="n">
+						<a
+							href="${pageContext.request.contextPath }/userComment/queryCommentById.action?pageNum=${n}&id=${current_user.userid}">
+							<font style="font-size: 1px">${n}</font>
+						</a>
+					</c:forEach>
+					<c:if test="${pageInfo.hasNextPage==true }">
+						<a
+							href="${pageContext.request.contextPath }/userComment/queryCommentById.action?pageNum=${pageInfo.pageNum+1}&id=${current_user.userid}">
+							<font style="font-size: 1px">下一页</font>
+						</a>
+					</c:if>
+					<c:if test="${pageInfo.hasNextPage==false }">
+						<a>
+							<font style="font-size: 1px">下一页</font>
+						</a>
+					</c:if>
 				</div>
-				<c:forEach items="${addList }" var="address">
-					<div class="address">
-						<div>
-							<%-- <button class="deleteAdd" value="${address.addID }">
-							删除						
-							</button> --%>
-							<input type="button" value="删除" class="btn_tj deleteAdd" />
-						</div>
-						<table border="0" class="add_t" align="center" style="width:98%; margin:10px auto;"
-							cellspacing="0" cellpadding="0">
-							<tr>
-								<td colspan="2" style="font-size:14px; color:#ff4e00;">${address.addUserName }</td>
-								<input type="hidden" value="${address.addID }" id="addID" />
-							</tr>
-							<tr>
-								<td align="right" width="80">收货人姓名：</td>
-								<td>${address.addUserName }</td>
-							</tr>
-							<tr>
-								<td align="right">配送区域：</td>
-								<td>${address.addCountry}${address.addProvice }${address.addCity }${address.addDistrict }</td>
-							</tr>
-							<tr>
-								<td align="right">详细地址：</td>
-								<td>${address.addAddress }</td>
-							</tr>
-							<tr>
-								<td align="right">联系方式：</td>
-								<td>${address.addPhone }</td>
-							</tr>
-							<tr>
-								<td align="right">邮政编码：</td>
-								<td>${address.addCode }</td>
-							</tr>
-						</table>
-						<p align="right">
-							<c:if test="${address.isDefault == 0 }">
-								<button class="isdefault" style="color:#ff4e00;" value="${address.addID }">设为默认</button>
-								&nbsp; &nbsp; &nbsp; &nbsp;
-							</c:if>
-							<c:if test="${address.isDefault == 1 }">
-								<button style="color:#ff4e00;">默认地址</button>
-								&nbsp; &nbsp; &nbsp; &nbsp;
-							</c:if>
-							<button style="color:#ff4e00; " value="${address.addID }" class="modifybtn">编辑</button>
-							&nbsp; &nbsp; &nbsp; &nbsp;
-						</p>
-					</div>
-				</c:forEach>
 			</div>
 		</div>
 		<!--End 用户中心 End-->
@@ -583,7 +651,7 @@
 				<div class="b_er_c">
 					<img src="front/images/er.gif" width="118" height="118" />
 				</div>
-				<img src="front/images/ss.png" />
+				<img src="front/imagesss.png" />
 			</div>
 		</div>
 		<div class="btmbg">
@@ -596,379 +664,42 @@
 					src="front/images/b_6.gif" width="98" height="33" />
 			</div>
 		</div>
+		<!--End Footer End -->
 	</div>
-	<script type="text/javascript" src="front/js/menu.js"></script>
-	<script type="text/javascript" src="front/js/select.js"></script>
-	<script type="text/javascript" src="resource/js/jquery.min.js"></script>
-	<script type="text/javascript" src="resource/layer/layer.js"></script>
-	<script type="text/javascript" src="front/js/logout.js"></script>
 
-	<script>
-		$(".modifybtn")
-				.on(
-						'click',
-						function() {
-							var addID = $(this).val();
-							var ii = layer.load();
-							$
-									.ajax({
-										url : "order/queryAddInfoById.action?addID="
-												+ addID,
-										success : function(result) {
-											if (result.status == 0) {
-												$("#addUserName")
-														.attr(
-																"value",
-																result.data.addUserName);
-												$("#addAddress").attr("value",
-														result.data.addAddress);
-												$("#addCode").attr("value",
-														result.data.addCode);
-												$("#addPhone").attr("value",
-														result.data.addPhone);
-												var userID = result.data.userID;
-												layer.close(ii);
-												layer
-														.open({
-															type : 1,
-															btn : [ '关闭', '更新' ],
-															btn1 : function() {
-																layer
-																		.closeAll();
-															},
-															btn2 : function() {
-																var oo = layer
-																		.load();
-																var addUserName = $(
-																		"#addUserName")
-																		.val();
-																var addCode = $(
-																		"#addCode")
-																		.val();
-																var addPhone = $(
-																		"#addPhone")
-																		.val();
-																var addAddress = $(
-																		"#addAddress")
-																		.val();
-																var addDistrict = $(
-																		"#areaId")
-																		.find(
-																				"option:selected")
-																		.text();
-																var addProvice = $(
-																		"#provinceId")
-																		.find(
-																				"option:selected")
-																		.text();
-																var addCity = $(
-																		"#cityId")
-																		.find(
-																				"option:selected")
-																		.text();
+	<script type="text/javascript">
 
-																$
-																		.ajax({
-																			url : "order/updateAddressById.action",
-																			type : "POST",
-																			data : {
-																				"addUserName" : addUserName,
-																				"addAddress" : addAddress,
-																				"addCode" : addCode,
-																				"addPhone" : addPhone,
-																				"addDistrict" : addDistrict,
-																				"addProvice" : addProvice,
-																				"addCity" : addCity,
-																				"addID" : addID,
-																				"userID" : userID
-																			},
-																			success : function(
-																					result) {
-																				if (result.status == 0) {
-																					layer
-																							.closeAll();
-																					layer
-																							.confirm(
-																									result.msg,
-																									{
-																										btn : [ '确定' ]
-																									},
-																									function() {
-																										self.location
-																												.reload();
-																									});
-																				} else {
-																					layer
-																							.close(oo);
-																					layer
-																							.confirm(
-																									result.msg,
-																									{
-																										btn : [ '确定' ]
-																									},
-																									function() {
-																										self.location
-																												.reload();
-																									});
-																				}
-																			}
-																		});
-															},
-															area : [ 'auto',
-																	'340px' ],
-															shadeClose : true, //点击遮罩关闭
-															content : $('#modify')
-														});
-												//self.location.reload();
-											} else {
-												layer.close(ii);
-												layer.msg(result.msg);
-											}
-										}
-									});
-						});
-		$(".deleteAdd").click(function() {
-			var addID = $("#addID").val();
-			var ii = layer.load();
+		/*点击添加购物车*/
+		function addcmt() {
+			window.location.href = "front/Member_Cmtadd.jsp";
+		}
 
-			$.ajax({
-				url : "order/deleteAddressById.action?addID=" + addID,
-				success : function(result) {
-					if (result.status == 0) {
-						layer.close(ii);
-						self.location.reload();
-					} else {
-						layer.close(ii);
-						layer.msg(result.msg);
-					}
-				}
-			});
-		});
-		$(".isdefault").click(function() {
-			var addID = $(this).val();
-			var userID = ${current_user.userid };
-			//var userID = $(this).parent().parent().find("input[type='checkbox']").val();
-			var ii = layer.load();
-			$.ajax({
-				url : "order/updateDefaultById.action",
-				type : "POST",
-				data : {
-					"addID" : addID,
-					"userID" : userID
-				},
-				success : function(result) {
-					if (result.status == 0) {
-						layer.close(ii);
-						layer.confirm(result.msg, {
-							btn : [ '确定' ]
-						}, function() {
-							self.location.reload();
-						});
-					} else {
-						layer.close(ii);
-						layer.confirm(result.msg, {
-							btn : [ '确定' ]
-						}, function() {
-							self.location.reload();
-						});
-					}
-				}
-			});
-		});
-		$
-				.ajax({
-					type : "GET",
-					url : "order/getProvincelist.action",
+		/* 点击删除*/
+		function btn1(id) {
+			if (!confirm("您确定要删除您的收藏记录吗？")) {
+				return false;
+			} else {
+				$.ajax({
+					url : "${pageContext.request.contextPath }/userCollect/deleteCollect.action?id="+id,
+					type : "delete",
 					success : function(result) {
-						$
-								.each(
-										result.extend.provincelist,
-										function(index, item) {
-											var option = $(
-													"<option value='"+item.provinceid+"'></option>")
-													.append(item.province);
-											option.appendTo("#provinceId");
-										});
-						//获取城市 
-						$("#provinceId")
-								.change(
-										function() {
-											$
-													.ajax({
-														type : "GET",
-														url : "${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="
-																+ $(
-																		"#provinceId")
-																		.val(),
-														success : function(
-																result) {
-															$(
-																	"#cityId > option[value != 0]")
-																	.remove();
-															$
-																	.each(
-																			result.extend.citylist,
-																			function(
-																					index,
-																					item) {
-																				//选中所有紧接着没有checked属性的input元素后的p元素，赋予颜色
-																				//$("input:not(:checked) + p").css("background-color", "#CD00CD");
-																				var option = $(
-																						"<option value='"+item.cityid+"'></option>")
-																						.append(
-																								item.city);
-																				option
-																						.appendTo("#cityId");
-																			});
-															//获取地区
-															$("#cityId")
-																	.change(
-																			function() {
-																				$
-																						.ajax({
-																							type : "GET",
-																							url : "${pageContext.request.contextPath}/order/getAreaByCityId.action?id="
-																									+ $(
-																											"#cityId")
-																											.val(),
-																							success : function(
-																									result) {
-																								$(
-																										"#areaId > option[value != 0]")
-																										.remove();
-																								$
-																										.each(
-																												result.extend.arealist,
-																												function(
-																														index,
-																														item) {
-																													var option = $(
-																															"<option value='"+item.areaid+"'></option>")
-																															.append(
-																																	item.area);
-																													option
-																															.appendTo("#areaId");
-																												});
-																							}
-																						});
-																			});
-														}
-													});
-										});
+						if (result.code == 100) {
+							alert("删除成功！");
+							window.location.href = "${pageContext.request.contextPath }/userComment/queryCommentById.action?id="
+									+ ${current_user.userid};
+						} else {
+							alert("删除失败！");
+							window.location.href = "${pageContext.request.contextPath }/userComment/queryCommentById.action?id="
+									+ ${current_user.userid};
+						}
 					}
 				});
-		$("#addAddressbtn").click(
-				function() {
-					layer.open({
-						type : 1,
-						btn : [ '关闭', '添加' ],
-						btn1 : function() {
-							layer.closeAll();
-						},
-						btn2 : function() {
-							var a = layer.load();
-							var addUserName = $("#addUserName").val();
-							var addCode = $("#addCode").val();
-							var addPhone = $("#addPhone").val();
-							var addAddress = $("#addAddress").val();
-							var addDistrict = $("#areaId").find(
-									"option:selected").text();
-							var addProvice = $("#provinceId").find(
-									"option:selected").text();
-							var addCity = $("#cityId").find("option:selected")
-									.text();
-
-							$.ajax({
-								url : "order/addAddress.action",
-								type : "POST",
-								data : {
-									"addUserName" : addUserName,
-									"addAddress" : addAddress,
-									"addCode" : addCode,
-									"addPhone" : addPhone,
-									"addDistrict" : addDistrict,
-									"addProvice" : addProvice,
-									"addCity" : addCity,
-									"userID" : ${current_user.userid}
-								},
-								success : function(result) {
-									if (result.status == 0) {
-										layer.close(a);
-										layer.confirm(result.msg, {
-											btn : [ '确定' ]
-										}, function() {
-											self.location.reload();
-										});
-									} else {
-										layer.close(a);
-										layer.confirm(result.msg, {
-											btn : [ '确定' ]
-										}, function() {
-											self.location.reload();
-										});
-									}
-								}
-							});
-						},
-						area : [ 'auto', '340px' ],
-						shadeClose : true, //点击遮罩关闭
-						content : $('#modify')
-					});
-				});
+			}
+		}
 	</script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
-</body>
-<div id="modify">
-	<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
-		<tr>
-			<td width="135" align="right">配送地区</td>
-			<td colspan="3" style="font-family:'宋体';">
-				<select class="jj" name="country" style="background-color:#f6f6f6;">
-					<option>中国</option>
-				</select>
-				<select class="jj" name="province" id="provinceId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				<select class="jj" name="city" id="cityId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				<select class="jj" name="area" id="areaId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">收货人姓名</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addUserName" />
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">详细地址</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addAddress" />
-				（必填）
-			</td>
 
-		</tr>
-		<tr>
-			<td align="right">邮政编码</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addCode" />
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">手机</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addPhone" />
-				（必填）
-			</td>
-		</tr>
-	</table>
-</div>
+</body>
 
 </html>
-
+</html>
