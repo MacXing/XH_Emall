@@ -39,16 +39,16 @@ public class XhUserServiceImpl implements XhUserService {
 	}
 	
 	@Override
-	public ServerResponse<Xhusers> login(String username, String password){
+	public ServerResponse<Xhusers> login(String userphone, String password){
 		
-		int resultCount = xhUserMapper.checkUserName(username);
+		int resultCount = xhUserMapper.checkUserPhone(userphone);
         if (resultCount == 0) {
-            return ServerResponse.createByErrorMassage("用户名不存在");
+            return ServerResponse.createByErrorMassage("帐号不存在");
         }
 
         //todo 密码登录
         String md5password = MD5Util.MD5EncodeUtf8(password);
-        Xhusers user = xhUserMapper.selectLogin(username, md5password);
+        Xhusers user = xhUserMapper.selectLogin(userphone, md5password);
         if (user == null) {
             return ServerResponse.createByErrorMassage("密码错误");
         }
@@ -59,6 +59,7 @@ public class XhUserServiceImpl implements XhUserService {
 	@Override
 	@SuppressWarnings("unchecked")
 	public ServerResponse<String> register(Xhusers user){
+		@SuppressWarnings("rawtypes")
 		ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
 		if(!validResponse.isSuccess()){
 			return validResponse;
@@ -81,7 +82,7 @@ public class XhUserServiceImpl implements XhUserService {
         if (resultCount == 0) {
             return ServerResponse.createByErrorMassage("注册失败");
         }
-        return ServerResponse.createByErrorMassage("注册成功");
+        return ServerResponse.createBySuccessMessage("注册成功");
 		
 	}
 	
@@ -97,13 +98,13 @@ public class XhUserServiceImpl implements XhUserService {
 			if(Const.USERPHONE.equals(type)){
 				int resultCount = xhUserMapper.checkUserPhone(str);
 				if(resultCount > 0){
-					return ServerResponse.createBySuccessMessage("电话号码被注册");
+					return ServerResponse.createByErrorMassage("电话号码被注册");
 				}
 			}
 			if(Const.EMAIL.equals(type)){
 				int resultCount = xhUserMapper.checkUserEmail(str);
 				if(resultCount > 0){
-					return ServerResponse.createBySuccessMessage("邮箱被注册");
+					return ServerResponse.createByErrorMassage("邮箱被注册");
 				}
 			}
 		} else {
@@ -113,13 +114,13 @@ public class XhUserServiceImpl implements XhUserService {
 	}
 
 	@Override
-	public ServerResponse<String> selectGetQuestion(String username) {
-		ServerResponse validResponse = this.checkValid(username, Const.USERNAME);
+	public ServerResponse<String> selectGetQuestion(String userphone) {
+		ServerResponse validResponse = this.checkValid(userphone, Const.USERPHONE);
 		if(validResponse.isSuccess()){
 			// 用户不存在
 			return ServerResponse.createByErrorMassage("用户名不存在");
 		}
-		String question = xhUserMapper.selectQuestionByUsername(username);
+		String question = xhUserMapper.selectQuestionByUserphone(userphone);
 		if(StringUtils.isNoneBlank(question)){
 			return ServerResponse.createBySuccess(question);
 		}
@@ -127,34 +128,35 @@ public class XhUserServiceImpl implements XhUserService {
 	}
 
 	@Override
-	public ServerResponse<String> checkAnswer(String username,
+	public ServerResponse<String> checkAnswer(String userphone,
 			String question, String answer) {
-		int resultCount = xhUserMapper.checkAnswer(username, question, answer);
+		int resultCount = xhUserMapper.checkAnswer(userphone, question, answer);
+		System.out.println(resultCount);
 		// 说明问题、答案都属于这个用户，并且是正确的
 		if(resultCount > 0 ){
 			String forgetToken = UUID.randomUUID().toString();
-			TokenCache.setKey(TokenCache.TOKEN_PREFIX + username, forgetToken);
+			TokenCache.setKey(TokenCache.TOKEN_PREFIX + userphone, forgetToken);
 			return ServerResponse.createBySuccessMessage(forgetToken);
 		}
 		return ServerResponse.createByErrorMassage("问题的答案错误");
 	} 
 
-	public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken){
+	public ServerResponse<String> forgetRestPassword(String userphone, String passwordNew, String forgetToken){
 		if(StringUtils.isBlank(forgetToken)){
 			return ServerResponse.createByErrorMassage("参数错误，需要重新传递");
 		}
-		ServerResponse validResponse = this.checkValid(username, Const.USERNAME);
+		ServerResponse validResponse = this.checkValid(userphone, Const.USERPHONE);
 		if(validResponse.isSuccess()){
 			// 用户不存在
-			return ServerResponse.createByErrorMassage("用户名不存在");
+			return ServerResponse.createByErrorMassage("帐号不存在");
 		}
-		String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
+		String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + userphone);
 		if(StringUtils.isBlank(token)){
 			return ServerResponse.createByErrorMassage("token无效或过期");
 		}
 		if(StringUtils.equals(forgetToken, token)){
 			String md5Password = MD5Util.MD5EncodeUtf8(passwordNew);
-			int rowCount = xhUserMapper.updataPasswordByUsername(username, md5Password);
+			int rowCount = xhUserMapper.updataPasswordByUserphone(userphone, md5Password);
 			if(rowCount > 0){
 				return ServerResponse.createBySuccessMessage("修改密码成功");
 			}
@@ -162,5 +164,33 @@ public class XhUserServiceImpl implements XhUserService {
 			return ServerResponse.createByErrorMassage("token错误，请重新获取重置密码的token");
 		}
 		return ServerResponse.createByErrorMassage("修改密码失败");
+	}
+
+	@Override
+	public ServerResponse<String> restPassword(String passwordNew, String passwordOld, int userid) {
+		String md5Password = MD5Util.MD5EncodeUtf8(passwordOld);
+		int resultCount = xhUserMapper.checkUserPassword(userid, md5Password);
+		if(resultCount <= 0){
+			return ServerResponse.createByErrorMassage("原密码错误");
+		}
+		md5Password = MD5Util.MD5EncodeUtf8(passwordNew);
+		resultCount = xhUserMapper.updateUserPasswordById(userid, md5Password);
+		if(resultCount <= 0){
+			return ServerResponse.createByErrorMassage("修改失败");
+		}
+		return ServerResponse.createBySuccessMessage("修改成功");
+	}
+
+	@Override
+	public ServerResponse<String> restPhone(String userphoneOld, String userphoneNew, int userid) {
+		int resultCount = xhUserMapper.checkUserPhoneById(userid, userphoneOld);
+		if(resultCount <= 0){
+			return ServerResponse.createByErrorMassage("原电话号码错误");
+		}
+		resultCount = xhUserMapper.updateUserPhoneById(userid, userphoneNew);
+		if(resultCount <= 0){
+			return ServerResponse.createByErrorMassage("号码更新失败");
+		}
+		return ServerResponse.createBySuccessMessage("号码更新成功");
 	}
 }

@@ -31,4 +31,8 @@ public interface OrderGoodsMapper {
 	
 	//检查商品号是否存在
 	public int checkProductId(int pid);
+	
+	//根据ID查找用户订单
+	public List<OrderGoods> queryAllOrderGoodsByUserId(Integer userid);
+
 }

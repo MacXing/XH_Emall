@@ -32,20 +32,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkUserPhone" resultType="int" parameterType="string">
-		select count(1) from xhUsers where userphone = #{userphone}
+		select count(1) from xhUsers where userphone = #{userPhone}
 	</select>
 	
-	<select id="selectQuestionByUsername" parameterType="string" resultType="string">
-		select question from xhUsers where username = #{username}
+	<select id="selectQuestionByUserphone" parameterType="string" resultType="string">
+		select question from xhUsers where userphone = #{userphone}
 	</select>
 	
 	<select id="checkAnswer" parameterType="map" resultType="int">
-		select count(1) from xhUsers where username = #{username} and question = #{question } and answer = #{answer }
+		select count(1) from xhUsers where userphone = #{userphone} and question = #{question } and answer = #{answer }
 	</select>
 	
 	<select id="selectLogin" resultType="xhusers" parameterType="map">
 		select <include refid="Base_Column_List"/> 
-		from xhUsers where userName = #{username} and userPassword = #{password}
+		from xhUsers where userPhone = #{userphone} and userPassword = #{password}
 	</select>
 	
 	<insert id="insert" parameterType="xhusers">
@@ -80,9 +80,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</trim>
 	</insert>
 	
-	<update id="updataPasswordByUsername" parameterType="map">
+	<update id="updataPasswordByUserphone" parameterType="map">
 		update xhUsers set userpassword = #{passwordNew }, updatetime = now()
-		where username = #{username }
+		where userphone = #{userphone }
 	</update>
+	
+	<update id="updateUserPasswordById" parameterType="map">
+		update xhUsers set userpassword = #{passwordNew }, updatetime = now()
+		where userid = #{userid }
+	</update>
+	
+	<update id="updateUserPhoneById" parameterType="map">
+		update xhUsers set userphone = #{userphonenew }, updatetime = now()
+		where userid = #{userid }
+	</update>
+	
+	<select id="checkUserPassword" resultType="int" parameterType="map">
+		select count(1) from xhUsers where userid = #{userid} and userPassword = #{password}
+	</select>
+	
+	<select id="checkUserPhoneById" resultType="int" parameterType="map">
+		select count(1) from xhUsers where userid = #{userid} and userphone = #{userphone}
+	</select>
 	
 </mapper>	

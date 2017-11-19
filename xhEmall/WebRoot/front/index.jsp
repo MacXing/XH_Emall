@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="front/js/hban.js"></script>
     <script type="text/javascript" src="front/js/tban.js"></script>   
 	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>
+	<script type="text/javascript" src="front/js/logout.js"></script>
 
 </head>
   
@@ -113,51 +114,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </span>
         </span>
         <!--End 所在收货地区 End-->
-        <span class="fr">
-        	<span class="fl">你好，请<a href="Login.html">登录</a>&nbsp; <a href="Regist.html" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|</span>
-        	<span class="ss">
-            	<div class="ss_list">
-                	<a href="#">收藏夹</a>
-                    <div class="ss_list_bg">
-                    	<div class="s_city_t"></div>
-                        <div class="ss_list_c">
-                        	<ul>
-                            	<li><a href="#">我的收藏夹</a></li>
-                                <li><a href="#">我的收藏夹</a></li>
-                            </ul>
-                        </div>
-                    </div>     
-                </div>
-                <div class="ss_list">
-                	<a href="#">客户服务</a>
-                    <div class="ss_list_bg">
-                    	<div class="s_city_t"></div>
-                        <div class="ss_list_c">
-                        	<ul>
-                            	<li><a href="#">客户服务</a></li>
-                                <li><a href="#">客户服务</a></li>
-                                <li><a href="#">客户服务</a></li>
-                            </ul>
-                        </div>
-                    </div>    
-                </div>
-                <div class="ss_list">
-                	<a href="#">网站导航</a>
-                    <div class="ss_list_bg">
-                    	<div class="s_city_t"></div>
-                        <div class="ss_list_c">
-                        	<ul>
-                            	<li><a href="#">网站导航</a></li>
-                                <li><a href="#">网站导航</a></li>
-                            </ul>
-                        </div>
-                    </div>    
-                </div>
-            </span>
-            <span class="fl">|&nbsp;关注我们：</span>
-            <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
-            <span class="fr">|&nbsp;<a href="#">手机版&nbsp;<img src="front/images/s_tel.png" align="absmiddle" /></a></span>
-        </span>
+		<span class="fl">
+			<c:if test="${current_user == null }">
+				你好，请
+				<a href="front/Login.jsp">登录</a>
+				&nbsp;
+				<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+			</c:if>
+			<c:if test="${current_user != null}">
+				欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
+				&nbsp;|&nbsp;
+				<a class="logout" herf="logout.action">退出登录</a>
+			</c:if>
+			&nbsp;|&nbsp;
+			<a href="#">我的订单</a>
+			&nbsp;|
+			<a href="#">我的购物车</a>
+			&nbsp;|
+		</span>
+		<span class="ss">
+			<div class="ss_list">
+				<a href="#">收藏夹</a>
+				<div class="ss_list_bg">
+					<div class="s_city_t"></div>
+					<div class="ss_list_c">
+						<ul>
+							<li>
+								<a href="#">我的收藏夹</a>
+							</li>
+							<li>
+								<a href="#">我的收藏夹</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="ss_list">
+				<a href="#">客户服务</a>
+				<div class="ss_list_bg">
+					<div class="s_city_t"></div>
+					<div class="ss_list_c">
+						<ul>
+							<li>
+								<a href="#">客户服务</a>
+							</li>
+							<li>
+								<a href="#">客户服务</a>
+							</li>
+							<li>
+								<a href="#">客户服务</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="ss_list">
+				<a href="#">网站导航</a>
+				<div class="ss_list_bg">
+					<div class="s_city_t"></div>
+					<div class="ss_list_c">
+						<ul>
+							<li>
+								<a href="#">网站导航</a>
+							</li>
+							<li>
+								<a href="#">网站导航</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</span>
     </div>
 </div>
 <div class="top">

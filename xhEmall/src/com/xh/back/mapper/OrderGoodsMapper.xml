@@ -7,6 +7,7 @@
 		<id column="ogID" property="ogID"/>
 		<result column="orderID" property="orderID"/>
 		<result column="pID" property="pID"/>
+		<result column="orderNumber" property="orderNumber"/>
 		<association property="product" javaType="com.xh.back.bean.Xhproduct">
 			<id column="pID" property="pid"/>
 			<result column="pName" property="pname"/>
@@ -16,6 +17,10 @@
 		<association property="orderInfo" javaType="com.xh.back.bean.Xhorderinfo">
 			<id column="orderID" property="orderid"/>
 			<result column="goodAmount" property="goodamount"/>
+			<result column="orderTime" property="ordertime"/>
+			<result column="orderStatus" property="orderstatus"/>
+			<result column="shoppingStatus" property="shoppingstatus"/>
+			<result column="payStatus" property="paystatus"/>
 		</association>
 	</resultMap>
 	
@@ -23,6 +28,13 @@
 		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.goodAmount
 		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
 		where og.pID = p.pID and og.orderID = oi.orderID
+	</select>
+	
+	<select id="queryAllOrderGoodsByUserId" parameterType="int" resultMap="OrderGoodsResultMap">
+		select og.ogID, og.pID, og.orderID,  og.orderNumber, p.pName, p.pPrice, p.pSale, oi.goodAmount,
+				oi.orderTime, oi.orderStatus, oi.shoppingStatus, oi.payStatus
+		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
+		where og.pID = p.pID and og.orderID = oi.orderID and oi.userID = #{userid }
 	</select>
 	
 	<select id="queryOrderGoodById" resultMap="OrderGoodsResultMap" parameterType="int">
@@ -58,5 +70,5 @@
 		update xhOrderGoods set pID = #{pID}, orderID = #{orderID}
 		where ogID = #{ogID}
 	</update>
-
+	
 </mapper>

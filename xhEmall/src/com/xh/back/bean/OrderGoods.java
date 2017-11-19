@@ -26,6 +26,16 @@ public class OrderGoods implements Serializable {
     private Xhproduct product;
     
     private Xhorderinfo orderInfo;
+    
+    private long orderNumber;
+
+	public long getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(long orderNumber) {
+		this.orderNumber = orderNumber;
+	}
 
 	public Xhproduct getProduct() {
 		return product;

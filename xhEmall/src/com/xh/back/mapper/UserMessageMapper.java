@@ -1,10 +1,8 @@
 package com.xh.back.mapper;
 
 import java.util.List;
-
-import com.xh.back.bean.Xhgrade;
 import com.xh.back.bean.Xhmessage;
-import com.xh.front.bean.Xhusers;
+
 
 public interface UserMessageMapper {
 	/**

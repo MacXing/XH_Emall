@@ -5,8 +5,8 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     
-       <property name="securityManager" ref="securityManager"/>
-   		<property name="loginUrl" value="/jsp/back/loginbackstage.jsp"/>
+        <property name="securityManager" ref="securityManager"/>
+   		<property name="loginUrl" value="/home/home.action"/>
         <!-- <property name="successUrl" value="/jsp/back/index.jsp"/> -->
         <property name="unauthorizedUrl" value="/jsp/back/404.jsp"/>
         
@@ -23,7 +23,7 @@
               	/admin/login.action=anon
               	/logout.action=logout           	
                 <!-- /** = user -->
-                /**=<!-- authc -->anon
+                /**=anon
             </value>
    		 </property>
     </bean>

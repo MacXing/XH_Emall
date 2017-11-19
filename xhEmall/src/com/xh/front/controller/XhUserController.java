@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.other.currency.Const;
+import com.other.currency.ResponseCode;
 import com.other.currency.ServerResponse;
 import com.other.getip.GetIp;
 import com.xh.front.bean.Xhusers;
@@ -58,13 +59,18 @@ public class XhUserController {
 		}
 		return null;		
 	}
+	
+	
 	// 登录
 	@RequestMapping(value = "login.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<Xhusers> login(String username, String userpassword, HttpSession session){
-		ServerResponse<Xhusers> response = xhUserService.login(username, userpassword);
+	public ServerResponse<Xhusers> login(String userphone, String userpassword, HttpSession session){
+		ServerResponse<Xhusers> response = xhUserService.login(userphone, userpassword);
+		//Subject subject = SecurityUtils.getSubject();
 		if(response.isSuccess()){
+			//subject.getSession().setAttribute(Const.CURRENT_USER, response.getData());
 			session.setAttribute(Const.CURRENT_USER, response.getData());
+			System.out.println(session.getAttribute(Const.CURRENT_USER));
 		}
 		return response;
 	}
@@ -105,21 +111,43 @@ public class XhUserController {
 	// 获取问题
 	@RequestMapping(value = "forgetGetQuestion.action", method = RequestMethod.GET)
     @ResponseBody
-    public ServerResponse<String> forgetGetQuestion(String username){
-        return xhUserService.selectGetQuestion(username);
+    public ServerResponse<String> forgetGetQuestion(String userphone){
+        return xhUserService.selectGetQuestion(userphone);
     }
 	
 	// 校验问题和答案
 	@RequestMapping(value = "forgetCheckAnswer.action", method = RequestMethod.POST)
     @ResponseBody
-	public ServerResponse<String> forgetCheckAnswer(String username, String question, String answer){
-        return xhUserService.checkAnswer(username, question, answer);
+	public ServerResponse<String> forgetCheckAnswer(String userphone, String question, String answer){
+        return xhUserService.checkAnswer(userphone, question, answer);
     }
 	
 	// 更改密码
 	@RequestMapping(value = "forgetRestPassword.action", method = RequestMethod.POST)
     @ResponseBody
-	public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken){
-		return xhUserService.forgetRestPassword(username, passwordNew, forgetToken);
+	public ServerResponse<String> forgetRestPassword(String userphone, String passwordNew, String forgetToken){
+		return xhUserService.forgetRestPassword(userphone, passwordNew, forgetToken);
+	}
+	
+	// 登录状态修改密码
+	@RequestMapping(value = "restPassword.action", method = RequestMethod.POST)
+    @ResponseBody
+	public ServerResponse<String> restPassword(String passwordNew, String passwordOld, HttpSession session){
+		Xhusers user = (Xhusers)session.getAttribute(Const.CURRENT_USER);
+		if(user == null){
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+		}
+		return xhUserService.restPassword(passwordNew, passwordOld, user.getUserid());
+	}
+	
+	// 登录状态修改手机号码
+	@RequestMapping(value = "restPhone.action", method = RequestMethod.POST)
+    @ResponseBody
+	public ServerResponse<String> restPhone(String userphoneOld, String userphoneNew, HttpSession session){
+		Xhusers user = (Xhusers)session.getAttribute(Const.CURRENT_USER);
+		if(user == null){
+			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
+		}
+		return xhUserService.restPhone(userphoneOld, userphoneNew, user.getUserid());
 	}
 }

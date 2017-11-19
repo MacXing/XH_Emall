@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.front.mapper.FrontOrderMapper">
+	<sql id="Base_Column_List">
+		addID, userID, addName, addUserName, addCountry, addProvice, addCity,
+		addDistrict, addAddress, addCode, addPhone, isDefault
+	</sql>
+	
+	<insert id="addAddress" parameterType="UserAddress">
+		insert into xhUserAddress
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="addID != null">addID,</if>
+			<if test="userID != null">userID,</if>
+			<if test="addName != null">addName,</if>
+			<if test="addUserName != null">addUserName,</if>
+			<if test="addCountry != null">addCountry,</if>
+			<if test="addProvice != null">addProvice,</if>
+			<if test="addCity != null">addCity,</if>
+			<if test="addDistrict != null">addDistrict,</if>
+			<if test="addAddress != null">addAddress,</if>
+			<if test="addCode != null">addCode,</if>
+			<if test="addPhone != null">addPhone,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="addID != null">#{addID },</if>
+			<if test="userID != null">#{userID },</if>
+			<if test="addName != null">#{addName },</if>
+			<if test="addUserName != null">#{addUserName },</if>
+			<if test="addCountry != null">#{addCountry },</if>
+			<if test="addProvice != null">#{addProvice },</if>
+			<if test="addCity != null">#{addCity },</if>
+			<if test="addDistrict != null">#{addDistrict },</if>
+			<if test="addAddress != null">#{addAddress },</if>
+			<if test="addCode != null">#{addCode },</if>
+			<if test="addPhone != null">#{addPhone }</if>
+		</trim>
+	</insert>
+	
+	<select id="queryAddressById" parameterType="int" resultType="UserAddress">
+		select <include refid="Base_Column_List"/> from xhUserAddress
+		where userID = #{userid }
+		order by isDefault desc
+	</select>
+	
+	<select id="queryAddInfoById" parameterType="int" resultType="UserAddress">
+		select <include refid="Base_Column_List"/> from xhUserAddress
+		where addID = #{addID }
+	</select>
+	
+	<delete id="deleteAddressById" parameterType="int">
+		delete from xhUserAddress
+		where addID = #{addID }
+	</delete>
+	
+	<update id="updateAddressById" parameterType="UserAddress">
+		update xhUserAddress set
+			addID = #{addID }, 
+			addUserName = #{addUserName }, 
+			addProvice = #{addProvice }, addCity = #{addCity }, addDistrict = #{addDistrict }, 
+			addAddress = #{addAddress }, addCode = #{addCode }, addPhone = #{addPhone }
+		where addID = #{addID }
+	</update>
+	
+	<update id="updateDefaultById" parameterType="map">
+		update xhUserAddress set
+			isDefault = 1
+		where addID = #{addID } and userID = #{userID }
+	</update>
+	
+	<update id="updateDefaultFormerById" parameterType="map">
+		update xhUserAddress set
+			isDefault = 0
+		where userID = #{userID } and isDefault = 1
+	</update>
+	
+</mapper>	
