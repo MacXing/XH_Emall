@@ -154,22 +154,22 @@
 			<span class="fr">
 				<span class="fl">
 					<c:if test="${current_user == null }">
-						你好，请
-						<a href="front/Login.jsp">登录</a>
-						&nbsp;
-						<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+					你好，请
+					<a href="front/Login.jsp">登录</a>
+					&nbsp;
+					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
 					</c:if>
 					<c:if test="${current_user != null}">
-						欢迎您，<a
+					欢迎您，<a
 							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
-						&nbsp;|&nbsp;
-						<a id="logout" href="home/home.action">退出登录</a>
+					&nbsp;|&nbsp;
+					<a class="logout">退出登录</a>
 					</c:if>
 
 					&nbsp;|&nbsp;
 					<a href="#">我的订单</a>
 					&nbsp;|
-					<a href="#">我的购物车</a>
+					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
 					&nbsp;|
 				</span>
 				<span class="ss">
@@ -226,8 +226,16 @@
 					</div>
 				</span>
 				<span class="fl">|&nbsp;关注我们：</span>
-                <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
-                <span class="fr">|&nbsp;<a href="home/home.action">首页&nbsp;<img src="front/images/home.png" align="absmiddle" /></a></span>
+				<span class="s_sh">
+					<a href="#" class="sh1">新浪</a>
+					<a href="#" class="sh2">微信</a>
+				</span>
+				<span class="fr">
+					|&nbsp;
+					<a href="home/home.action">
+						首页&nbsp;<img src="front/images/home.png" align="absmiddle" />
+					</a>
+				</span>
 			</span>
 		</div>
 	</div>
@@ -329,23 +337,43 @@
 				<div class="left_m">
 					<div class="left_m_t t_bg1">订单中心</div>
 					<ul>
-						<li><a href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a></li>
-                        <li><a href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a></li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
+						</li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
+						</li>
 					</ul>
 				</div>
 				<div class="left_m">
 					<div class="left_m_t t_bg2">会员中心</div>
 					<ul>
-                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">用户信息</a></li>
-                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${current_user.userid }">修改信息</a></li>
-                    <li><a href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${current_user.userid }">我的留言</a></li>
-                    <li><a href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a></li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">用户信息</a>
+						</li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${current_user.userid }">修改信息</a>
+						</li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${current_user.userid }">我的留言</a>
+						</li>
+						<li>
+							<a
+								href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a>
+						</li>
 					</ul>
 				</div>
 				<div class="left_m">
 					<div class="left_m_t t_bg3">账户中心</div>
 					<ul>
-						<li><a href="front/Member_Safe.jsp">账户安全</a></li>					
+						<li>
+							<a href="front/Member_Safe.jsp">账户安全</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -354,9 +382,7 @@
 				<div class="mem_tit">
 					<span>收货地址</span>
 					<div style="float:right;" id="addAddressbtn">
-						<button>
-							添加地址
-						</button>
+						<button>添加地址</button>
 					</div>
 				</div>
 				<c:forEach items="${addList }" var="address">
@@ -364,7 +390,7 @@
 						<div>
 							<%-- <button class="deleteAdd" value="${address.addID }">
 							删除						
-							</button> --%>						
+							</button> --%>
 							<input type="button" value="删除" class="btn_tj deleteAdd" />
 						</div>
 						<table border="0" class="add_t" align="center" style="width:98%; margin:10px auto;"
@@ -578,76 +604,133 @@
 	<script type="text/javascript" src="front/js/logout.js"></script>
 
 	<script>
-	  	$(".modifybtn").on('click', function(){
-	  		var addID = $(this).val();
-			var ii = layer.load();
-			$.ajax({
-				url : "order/queryAddInfoById.action?addID=" + addID,
-				success : function(result) {
-					if (result.status == 0) {
-						$("#addUserName").attr("value", result.data.addUserName);
-						$("#addAddress").attr("value", result.data.addAddress);
-						$("#addCode").attr("value", result.data.addCode);
-						$("#addPhone").attr("value", result.data.addPhone);
-						var userID = result.data.userID;
-						layer.close(ii);
-						layer.open({
-						      type: 1,
-						      btn: ['关闭', '更新'],
-						      btn1: function(){
-						    	  layer.closeAll();
-						      },
-						      btn2: function(){
-						    	  var oo = layer.load();
-						    	  var addUserName = $("#addUserName").val();
-						    	  var addCode = $("#addCode").val();
-						    	  var addPhone = $("#addPhone").val();
-						    	  var addAddress = $("#addAddress").val();
-						    	  var addDistrict = $("#areaId").find("option:selected").text();
-						    	  var addProvice = $("#provinceId").find("option:selected").text();
-						    	  var addCity = $("#cityId").find("option:selected").text();
-						    	  
-						    	  $.ajax({
-										url : "order/updateAddressById.action",
-										type: "POST",
-										data: {
-											"addUserName" : addUserName,
-											"addAddress" : addAddress,
-											"addCode" : addCode,
-											"addPhone" : addPhone,
-											"addDistrict" : addDistrict,
-											"addProvice" : addProvice,
-											"addCity" : addCity,
-											"addID" : addID,
-											"userID" : userID
-										},
+		$(".modifybtn")
+				.on(
+						'click',
+						function() {
+							var addID = $(this).val();
+							var ii = layer.load();
+							$
+									.ajax({
+										url : "order/queryAddInfoById.action?addID="
+												+ addID,
 										success : function(result) {
 											if (result.status == 0) {
-												layer.closeAll();
-												layer.confirm(result.msg, {btn: ['确定']}, function(){self.location.reload();});
+												$("#addUserName")
+														.attr(
+																"value",
+																result.data.addUserName);
+												$("#addAddress").attr("value",
+														result.data.addAddress);
+												$("#addCode").attr("value",
+														result.data.addCode);
+												$("#addPhone").attr("value",
+														result.data.addPhone);
+												var userID = result.data.userID;
+												layer.close(ii);
+												layer
+														.open({
+															type : 1,
+															btn : [ '关闭', '更新' ],
+															btn1 : function() {
+																layer
+																		.closeAll();
+															},
+															btn2 : function() {
+																var oo = layer
+																		.load();
+																var addUserName = $(
+																		"#addUserName")
+																		.val();
+																var addCode = $(
+																		"#addCode")
+																		.val();
+																var addPhone = $(
+																		"#addPhone")
+																		.val();
+																var addAddress = $(
+																		"#addAddress")
+																		.val();
+																var addDistrict = $(
+																		"#areaId")
+																		.find(
+																				"option:selected")
+																		.text();
+																var addProvice = $(
+																		"#provinceId")
+																		.find(
+																				"option:selected")
+																		.text();
+																var addCity = $(
+																		"#cityId")
+																		.find(
+																				"option:selected")
+																		.text();
+
+																$
+																		.ajax({
+																			url : "order/updateAddressById.action",
+																			type : "POST",
+																			data : {
+																				"addUserName" : addUserName,
+																				"addAddress" : addAddress,
+																				"addCode" : addCode,
+																				"addPhone" : addPhone,
+																				"addDistrict" : addDistrict,
+																				"addProvice" : addProvice,
+																				"addCity" : addCity,
+																				"addID" : addID,
+																				"userID" : userID
+																			},
+																			success : function(
+																					result) {
+																				if (result.status == 0) {
+																					layer
+																							.closeAll();
+																					layer
+																							.confirm(
+																									result.msg,
+																									{
+																										btn : [ '确定' ]
+																									},
+																									function() {
+																										self.location
+																												.reload();
+																									});
+																				} else {
+																					layer
+																							.close(oo);
+																					layer
+																							.confirm(
+																									result.msg,
+																									{
+																										btn : [ '确定' ]
+																									},
+																									function() {
+																										self.location
+																												.reload();
+																									});
+																				}
+																			}
+																		});
+															},
+															area : [ 'auto',
+																	'340px' ],
+															shadeClose : true, //点击遮罩关闭
+															content : $('#modify')
+														});
+												//self.location.reload();
 											} else {
-												layer.close(oo);
-												layer.confirm(result.msg, {btn: ['确定']}, function(){self.location.reload();});
+												layer.close(ii);
+												layer.msg(result.msg);
 											}
 										}
 									});
-						      },
-						      area: ['auto', '340px'],
-						      shadeClose: true, //点击遮罩关闭
-						      content: $('#modify')
-						    });
-						//self.location.reload();
-					} else {
-						layer.close(ii);
-						layer.msg(result.msg);
-					}
-				}
-			});
-	  	});
-		$(".deleteAdd").click(function (){
+						});
+		$(".deleteAdd").click(function() {
 			var addID = $("#addID").val();
 			var ii = layer.load();
-			
+
 			$.ajax({
 				url : "order/deleteAddressById.action?addID=" + addID,
 				success : function(result) {
@@ -676,101 +759,164 @@
 				success : function(result) {
 					if (result.status == 0) {
 						layer.close(ii);
-						layer.confirm(result.msg, {btn: ['确定']}, function(){self.location.reload();});
+						layer.confirm(result.msg, {
+							btn : [ '确定' ]
+						}, function() {
+							self.location.reload();
+						});
 					} else {
 						layer.close(ii);
-						layer.confirm(result.msg, {btn: ['确定']}, function(){self.location.reload();});
+						layer.confirm(result.msg, {
+							btn : [ '确定' ]
+						}, function() {
+							self.location.reload();
+						});
 					}
 				}
 			});
 		});
-		$.ajax({
-     		type:"GET",
-     		url:"order/getProvincelist.action",
-     		success:function(result){    			
-     			$.each(result.extend.provincelist,function(index,item){
-     				 var option=$("<option value='"+item.provinceid+"'></option>").append(item.province);
-     				 option.appendTo("#provinceId");     				 
-     			});
-     			//获取城市 
-     			$("#provinceId").change(function(){
-     				$.ajax({
-     		     		type:"GET",
-     		     		url:"${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="+$("#provinceId").val(),    		
-     		     		success:function(result){
-     		     			$("#cityId > option[value != 0]").remove();
-     		     			$.each(result.extend.citylist,function(index,item){
-     		     				 //选中所有紧接着没有checked属性的input元素后的p元素，赋予颜色
-     							 //$("input:not(:checked) + p").css("background-color", "#CD00CD");
-     		     				 var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
-     		     				 option.appendTo("#cityId");    	     				
-     		     			});
-     		     			//获取地区
-     		     			 $("#cityId").change(function(){
-     		     				$.ajax({
-     		     		     		type:"GET",
-     		     		     		url:"${pageContext.request.contextPath}/order/getAreaByCityId.action?id="+$("#cityId").val(),    		
-     		     		     		success:function(result){ 
-     		     		     			$("#areaId > option[value != 0]").remove();
-     		     		     			$.each(result.extend.arealist,function(index,item){
-     		     		     				 var option=$("<option value='"+item.areaid+"'></option>").append(item.area);
-     		     		     				 option.appendTo("#areaId");
-     		     		     			});    	     	     		
-     		     		     		}
-     		     		     	});
-     		     			});
-     		     		}
-     		     	});
-     			});
-     		}
-     	});
-		$("#addAddressbtn").click(function (){
-			layer.open({
-			    type: 1,
-			    btn: ['关闭', '添加'],
-			    btn1: function(){
-			 	    layer.closeAll();
-			    },
-			    btn2: function(){
-			 	    var a = layer.load();
-			 	    var addUserName = $("#addUserName").val();
-			 	    var addCode = $("#addCode").val();
-			 	    var addPhone = $("#addPhone").val();
-			 	    var addAddress = $("#addAddress").val();
-			 	    var addDistrict = $("#areaId").find("option:selected").text();
-			 	    var addProvice = $("#provinceId").find("option:selected").text();
-			 	    var addCity = $("#cityId").find("option:selected").text();
-
-					$.ajax({
-						url : "order/addAddress.action",
-						type: "POST",
-						data: {
-							"addUserName" : addUserName,
-							"addAddress" : addAddress,
-							"addCode" : addCode,
-							"addPhone" : addPhone,
-							"addDistrict" : addDistrict,
-							"addProvice" : addProvice,
-							"addCity" : addCity,
-							"userID" : ${current_user.userid}
+		$
+				.ajax({
+					type : "GET",
+					url : "order/getProvincelist.action",
+					success : function(result) {
+						$
+								.each(
+										result.extend.provincelist,
+										function(index, item) {
+											var option = $(
+													"<option value='"+item.provinceid+"'></option>")
+													.append(item.province);
+											option.appendTo("#provinceId");
+										});
+						//获取城市 
+						$("#provinceId")
+								.change(
+										function() {
+											$
+													.ajax({
+														type : "GET",
+														url : "${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="
+																+ $(
+																		"#provinceId")
+																		.val(),
+														success : function(
+																result) {
+															$(
+																	"#cityId > option[value != 0]")
+																	.remove();
+															$
+																	.each(
+																			result.extend.citylist,
+																			function(
+																					index,
+																					item) {
+																				//选中所有紧接着没有checked属性的input元素后的p元素，赋予颜色
+																				//$("input:not(:checked) + p").css("background-color", "#CD00CD");
+																				var option = $(
+																						"<option value='"+item.cityid+"'></option>")
+																						.append(
+																								item.city);
+																				option
+																						.appendTo("#cityId");
+																			});
+															//获取地区
+															$("#cityId")
+																	.change(
+																			function() {
+																				$
+																						.ajax({
+																							type : "GET",
+																							url : "${pageContext.request.contextPath}/order/getAreaByCityId.action?id="
+																									+ $(
+																											"#cityId")
+																											.val(),
+																							success : function(
+																									result) {
+																								$(
+																										"#areaId > option[value != 0]")
+																										.remove();
+																								$
+																										.each(
+																												result.extend.arealist,
+																												function(
+																														index,
+																														item) {
+																													var option = $(
+																															"<option value='"+item.areaid+"'></option>")
+																															.append(
+																																	item.area);
+																													option
+																															.appendTo("#areaId");
+																												});
+																							}
+																						});
+																			});
+														}
+													});
+										});
+					}
+				});
+		$("#addAddressbtn").click(
+				function() {
+					layer.open({
+						type : 1,
+						btn : [ '关闭', '添加' ],
+						btn1 : function() {
+							layer.closeAll();
 						},
-						success : function(result) {
-							if (result.status == 0) {
-								layer.close(a);
-								layer.confirm(result.msg, {btn: ['确定']}, function(){self.location.reload();});
-							} else {
-								layer.close(a);
-								layer.confirm(result.msg, {btn: ['确定']}, function(){self.location.reload();});
-							}
-						}
+						btn2 : function() {
+							var a = layer.load();
+							var addUserName = $("#addUserName").val();
+							var addCode = $("#addCode").val();
+							var addPhone = $("#addPhone").val();
+							var addAddress = $("#addAddress").val();
+							var addDistrict = $("#areaId").find(
+									"option:selected").text();
+							var addProvice = $("#provinceId").find(
+									"option:selected").text();
+							var addCity = $("#cityId").find("option:selected")
+									.text();
+
+							$.ajax({
+								url : "order/addAddress.action",
+								type : "POST",
+								data : {
+									"addUserName" : addUserName,
+									"addAddress" : addAddress,
+									"addCode" : addCode,
+									"addPhone" : addPhone,
+									"addDistrict" : addDistrict,
+									"addProvice" : addProvice,
+									"addCity" : addCity,
+									"userID" : ${current_user.userid}
+								},
+								success : function(result) {
+									if (result.status == 0) {
+										layer.close(a);
+										layer.confirm(result.msg, {
+											btn : [ '确定' ]
+										}, function() {
+											self.location.reload();
+										});
+									} else {
+										layer.close(a);
+										layer.confirm(result.msg, {
+											btn : [ '确定' ]
+										}, function() {
+											self.location.reload();
+										});
+									}
+								}
+							});
+						},
+						area : [ 'auto', '340px' ],
+						shadeClose : true, //点击遮罩关闭
+						content : $('#modify')
 					});
-				},
-				area: ['auto', '340px'],
-				shadeClose: true, //点击遮罩关闭
-				content: $('#modify')
-			});
-		});
+				});
 	</script>
+	<script type="text/javascript" src="front/js/logout.js"></script>
 </body>
 <div id="modify">
 	<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
@@ -795,17 +941,17 @@
 		<tr>
 			<td align="right">收货人姓名</td>
 			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addUserName"/>
+				<input type="text" class="add_ipt" id="addUserName" />
 				（必填）
 			</td>
 		</tr>
 		<tr>
 			<td align="right">详细地址</td>
 			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addAddress"/>
+				<input type="text" class="add_ipt" id="addAddress" />
 				（必填）
 			</td>
-			
+
 		</tr>
 		<tr>
 			<td align="right">邮政编码</td>
@@ -823,5 +969,6 @@
 		</tr>
 	</table>
 </div>
+
 </html>
 

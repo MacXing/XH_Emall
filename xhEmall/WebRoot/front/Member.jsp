@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </span>
         </span>
         <!--End 所在收货地区 End-->
-       <span class="fr">
+		<span class="fr">
 			<span class="fl">
 				<c:if test="${current_user == null }">
 					你好，请
@@ -127,13 +127,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
 				</c:if>
 				<c:if test="${current_user != null}">
-					欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?userid=${current_user.userid }">${current_user.userphone }</a>
+					欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
-					<a id="logout" href="home/home.action">退出登录</a>
+					<a class="logout">退出登录</a>
 				</c:if>
 				
 				&nbsp;|&nbsp;
-				<a href="${pageContext.request.contextPath }/order/queryOrderInfo.action?id=${current_user.userid }">我的订单</a>
+				<a href="#">我的订单</a>
+				&nbsp;|
+				<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
 				&nbsp;|
 			</span>
 			<span class="ss">
@@ -190,8 +192,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</span>
 			<span class="fl">|&nbsp;关注我们：</span>
-            <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
-            <span class="fr">|&nbsp;<a href="home/home.action">首页&nbsp;<img src="front/images/home.png" align="absmiddle" /></a></span>
+       		<span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
+       		<span class="fr">|&nbsp;<a href="home/home.action">首页&nbsp;<img src="front/images/home.png" align="absmiddle" /></a></span>
 		</span>
     </div>
 </div>
@@ -500,7 +502,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			} 
 	
 </script>
-
+<script type="text/javascript" src="front/js/logout.js"></script>
 <!--[if IE 6]>
 <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
 <![endif]-->

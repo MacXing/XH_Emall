@@ -25,11 +25,77 @@
 		<div class="sou">
 			<span class="fr">
 				<span class="fl">
+					<c:if test="${current_user == null }">
 					你好，请
 					<a href="front/Login.jsp">登录</a>
 					&nbsp;
-					<a href="front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
-					&nbsp;
+					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+					</c:if>
+					<c:if test="${current_user != null}">
+					欢迎您，<a
+							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
+					&nbsp;|&nbsp;
+					<a class="logout">退出登录</a>
+					</c:if>
+
+					&nbsp;|&nbsp;
+					<a href="#">我的订单</a>
+					&nbsp;|
+					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					&nbsp;|
+				</span>
+				<span class="ss">
+					<div class="ss_list">
+						<a href="#">收藏夹</a>
+						<div class="ss_list_bg">
+							<div class="s_city_t"></div>
+							<div class="ss_list_c">
+								<ul>
+									<li>
+										<a href="#">我的收藏夹</a>
+									</li>
+									<li>
+										<a href="#">我的收藏夹</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="ss_list">
+						<a href="#">客户服务</a>
+						<div class="ss_list_bg">
+							<div class="s_city_t"></div>
+							<div class="ss_list_c">
+								<ul>
+									<li>
+										<a href="#">客户服务</a>
+									</li>
+									<li>
+										<a href="#">客户服务</a>
+									</li>
+									<li>
+										<a href="#">客户服务</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="ss_list">
+						<a href="#">网站导航</a>
+						<div class="ss_list_bg">
+							<div class="s_city_t"></div>
+							<div class="ss_list_c">
+								<ul>
+									<li>
+										<a href="#">网站导航</a>
+									</li>
+									<li>
+										<a href="#">网站导航</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</span>
 				<span class="fl">|&nbsp;关注我们：</span>
 				<span class="s_sh">
@@ -60,51 +126,51 @@
 				<img src="front/images/l_img.png" width="611" height="425" />
 			</div>
 			<div class="log_c">
-					<table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0"
-						cellpadding="0">
-						<tr height="50" valign="top">
-							<td width="55">&nbsp;</td>
-							<td>
-								<span class="fl" style="font-size:24px;">登录</span>
-								<span class="fr">
-									还没有商城账号，
-									<a href="front/Regist.jsp" style="color:#ff4e00;">立即注册</a>
-								</span>
-							</td>
-						</tr>
-						<tr height="70">
-							<td>帐号</td>
-							<td>
-								<input type="text" value="" class="l_user" id="userphone" placeholder="手机号"/>
-							</td>
-						</tr>
-						<tr height="70">
-							<td>密&nbsp; &nbsp; 码</td>
-							<td>
-								<input type="password" value="" class="l_pwd" id="password" placeholder="用户密码"/>
-							</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td style="font-size:12px; padding-top:20px;">
-								<span style="font-family:'宋体';" class="fl">
-									<label class="r_rad">
-										<input type="checkbox" />
-									</label>
-									<label class="r_txt">请保存我这次的登录信息</label>
-								</span>
-								<span class="fr">
-									<a href="front/Forget_Login.jsp" style="color:#ff4e00;">忘记密码</a>
-								</span>
-							</td>
-						</tr>
-						<tr height="60">
-							<td>&nbsp;</td>
-							<td>
-								<button class="log_btn" id="login_btn">登录</button>
-							</td>
-						</tr>
-					</table>
+				<table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0"
+					cellpadding="0">
+					<tr height="50" valign="top">
+						<td width="55">&nbsp;</td>
+						<td>
+							<span class="fl" style="font-size:24px;">登录</span>
+							<span class="fr">
+								还没有商城账号，
+								<a href="front/Regist.jsp" style="color:#ff4e00;">立即注册</a>
+							</span>
+						</td>
+					</tr>
+					<tr height="70">
+						<td>帐号</td>
+						<td>
+							<input type="text" value="" class="l_user" id="userphone" placeholder="手机号" />
+						</td>
+					</tr>
+					<tr height="70">
+						<td>密&nbsp; &nbsp; 码</td>
+						<td>
+							<input type="password" value="" class="l_pwd" id="password" placeholder="用户密码" />
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td style="font-size:12px; padding-top:20px;">
+							<span style="font-family:'宋体';" class="fl">
+								<label class="r_rad">
+									<input type="checkbox" />
+								</label>
+								<label class="r_txt">请保存我这次的登录信息</label>
+							</span>
+							<span class="fr">
+								<a href="front/Forget_Login.jsp" style="color:#ff4e00;">忘记密码</a>
+							</span>
+						</td>
+					</tr>
+					<tr height="60">
+						<td>&nbsp;</td>
+						<td>
+							<button class="log_btn" id="login_btn">登录</button>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -123,9 +189,9 @@
 	<!--End Footer End -->
 	<script type="text/javascript" src="resource/js/jquery.min.js"></script>
 	<script type="text/javascript" src="resource/layer/layer.js"></script>
-	
+	<script type="text/javascript" src="front/js/logout.js"></script>
 	<script>
-		$("#login_btn").click(function (){
+		$("#login_btn").click(function() {
 			var userphone = $("#userphone").val();
 			var userpassword = $("#password").val();
 			var ii = layer.load();
@@ -136,11 +202,11 @@
 					"userphone" : userphone,
 					"userpassword" : userpassword
 				},
-				success : function(result){
+				success : function(result) {
 					console.log(result);
-					if(result.status == 0){
+					if (result.status == 0) {
 						layer.close(ii);
-						layer.msg(result.msg); 
+						layer.msg(result.msg);
 						window.location.href = "home/home.action";
 					} else {
 						layer.close(ii);
@@ -149,7 +215,6 @@
 				}
 			});
 		});
-		
 	</script>
 
 </body>
