@@ -61,7 +61,24 @@ public class XhTrolleyController {
 		}
 		return "forward:/front/BuyCar.jsp";
 	}
-
+	
+	// 查询通过用户
+		@RequestMapping("findByUserJS.action")
+		@ResponseBody
+		public Msg findByUserJS(Model model, HttpSession session) {
+			/* // 1. 得到uid8 */
+			Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
+			Integer uid = user.getUserid();
+			if(uid > 0){
+				List<Xhtrolley> trolleyItems = xhTrolleyService.queryTrolleyByUser(uid);
+				model.addAttribute("trolleyItems", trolleyItems);
+				return Msg.success().add("msg", "成功");
+			}
+			return Msg.fail();
+		}
+	
+	
+	
 	// 查询通过用户
 	/*
 	 * @RequestMapping("findByUser1.action") public String findByUser1(Model
@@ -113,14 +130,13 @@ public class XhTrolleyController {
 		
 		System.out.println(pid + "" + pnum);
 		Xhtrolley tro = new Xhtrolley();
-
+         
 		if (pid > 0 && pnum > 0) {
 			System.out.println(pid);
 			tro.setPid(pid);
 			tro.setUserid(uid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
-
 			return Msg.success().add("msg", "添加购物车成功！");
 		}
 
