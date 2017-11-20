@@ -122,7 +122,7 @@
 	<select id="querymsgByPrimaryKey" resultMap="queryUserMessageByIdMap" parameterType="int">
     SELECT u.userID,m.msgID,u.userName,m.msgInitTime,m.msgTxt,u.userphone
 	FROM xhMessage m JOIN xhUsers u ON m.userID=u.userID
-	where m.userID=#{userid,jdbcType=INTEGER}
+	where m.userID=#{userid,jdbcType=INTEGER}  and m.isdelete=0
     </select>
 	
 	<!--根据用户ID清空留言信息-->
@@ -136,7 +136,7 @@
      where msgID = #{msgid,jdbcType=INTEGER}
   	</update>
   	
-  	<!--根据用户ID查询留言列表-->
+  	<!--根据留言ID查询留言列表-->
     <select id="queryMsgByPrimarykeyForUpdate" resultMap="queryUserMessageByIdMap" parameterType="int">
     	select u.userID,m.msgID,u.userName,m.msgInitTime,m.msgTxt,u.userphone 
     	from xhMessage m JOIN xhUsers u ON m.userID=u.userID
@@ -180,9 +180,10 @@
    </insert>
   
   <!-- 删除留言 -->
-   <delete id="deleteMessageByPrimaryKey" parameterType="int">
-    delete from xhMessage 
+   <update id="deleteMessageByPrimaryKey" parameterType="int">
+    update xhMessage set
+    isdelete=1
     where msgID=#{msgid,jdbcType=INTEGER}
-  	</delete>
+  </update>
   
 </mapper>

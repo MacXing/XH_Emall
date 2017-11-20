@@ -91,10 +91,16 @@
    </insert> -->
 	
 	<!-- 删除评论 -->
-	<delete id="deleteCommentById" parameterType="int">
+	<!-- <delete id="deleteCommentById" parameterType="int">
 		DELETE FROM xhComment
 		WHERE commentId = #{id}
-	</delete>
+	</delete> -->
+	<update id="deleteCommentById" parameterType="int">
+		update xhComment set
+		isdelete=1
+		WHERE commentId = #{id}
+	</update>
+	
 	
 	<!-- 修改评论 -->
 	<update id="updateCommentByPrimaryKey" parameterType="xhcomment">
@@ -126,7 +132,7 @@
 		ON u.userID = c .userId
 		JOIN xhProduct p 
 		ON c.pId = p.pID
-		WHERE u.userID=#{userid,jdbcType=INTEGER}
+		WHERE u.userID=#{userid,jdbcType=INTEGER} and c.isdelete=0
 	</select>
 	
 	<select id="queryCommentByIdForUpdate" parameterType="int" resultMap="queryAllCommentMap">

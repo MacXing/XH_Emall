@@ -67,11 +67,11 @@ public class FrontOrderController {
 		return frontOrderService.queryAddInfoById(addID);
 	}
 	
-	@RequestMapping("queryAddInfoById.action")
+	/*@RequestMapping("queryAddInfoById.action")
 	@ResponseBody
 	public ServerResponse<String> addOrder(Xhorderinfo orderInfo){
 		return frontOrderService.addOrder(orderInfo);
-	}
+	}*/
 	
 /*	@RequestMapping("queryAddInfoById.action")
 	@ResponseBody
