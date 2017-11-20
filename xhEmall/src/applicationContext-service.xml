@@ -46,5 +46,6 @@
     <bean class="com.xh.front.serviceImpl.UserAddressServiceImpl" id="userAddressService"/>
 	<bean id="userCommentService" class="com.xh.front.serviceImpl.UserCommentServiceImpl"/>
 	<bean id="paySercice" class="com.xh.front.serviceImpl.PayServiceImpl"></bean>
+	<bean id="userCollectService" class="com.xh.front.serviceImpl.UserCollectionServiceImpl"/>
 </beans>
 	

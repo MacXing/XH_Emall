@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
+import com.xh.back.bean.Xhorderinfo;
 import com.xh.front.bean.UserAddress;
 
 public interface FrontOrderService {
@@ -28,4 +29,7 @@ public interface FrontOrderService {
 	
 	//根据ID查询地址
 	public ServerResponse<UserAddress> queryAddInfoById(int addID);
+	
+	//添加订单
+	public ServerResponse<String> addOrder(Xhorderinfo orderInfo);
 }
