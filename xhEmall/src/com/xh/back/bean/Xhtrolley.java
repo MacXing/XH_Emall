@@ -131,4 +131,16 @@ public class Xhtrolley {
     public void setAttribute6(String attribute6) {
         this.attribute6 = attribute6 == null ? null : attribute6.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Xhtrolley [xhproduct=" + xhproduct + ", xhusers=" + xhusers
+				+ ", troid=" + troid + ", pid=" + pid + ", userid=" + userid
+				+ ", tronum=" + tronum + ", attribute1=" + attribute1
+				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
+				+ ", attribute4=" + attribute4 + ", attribute5=" + attribute5
+				+ ", attribute6=" + attribute6 + "]";
+	}
+    
+    
 }

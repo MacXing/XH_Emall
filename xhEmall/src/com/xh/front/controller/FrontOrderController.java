@@ -11,17 +11,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
-import com.xh.back.bean.Xhorderinfo;
+import com.xh.back.bean.Xhtrolley;
+import com.xh.back.service.XhTrolleyService;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.service.FrontOrderService;
 
 @Controller
-@RequestMapping("order")
+@RequestMapping("frontOrder")
 public class FrontOrderController {
 	
 	@Autowired
 	@Qualifier("frontOrderService")
 	private FrontOrderService frontOrderService;
+	
+	@Autowired
+	@Qualifier("xhTrolleyService")
+	private XhTrolleyService xhTrolleyService;
 	
 	@RequestMapping("queryOrderInfo.action")
 	public String queryOrderInfo(int userid, Model model){
@@ -67,17 +72,12 @@ public class FrontOrderController {
 		return frontOrderService.queryAddInfoById(addID);
 	}
 	
-	/*@RequestMapping("queryAddInfoById.action")
+	@RequestMapping("addOrder.action")
 	@ResponseBody
-	public ServerResponse<String> addOrder(Xhorderinfo orderInfo){
-		return frontOrderService.addOrder(orderInfo);
-	}*/
-	
-/*	@RequestMapping("queryAddInfoById.action")
-	@ResponseBody
-	public ServerResponse<String> deleteOrder(int addID){
-		return frontOrderService.queryAddInfoById(addID);
-	}*/
-	
+	public ServerResponse<String> addOrder(int spid, UserAddress userAddress,Integer troid){
+		String troids = String.valueOf(troid);
+		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(troids);
+		return frontOrderService.addOrder(spid, userAddress, items);
+	}
 	
 }

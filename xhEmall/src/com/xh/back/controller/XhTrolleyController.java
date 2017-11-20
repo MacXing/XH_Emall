@@ -161,7 +161,7 @@ public class XhTrolleyController {
 		int uid = user.getUserid();
 		
 		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(id);
-		System.out.println(items);
+		//System.out.println(items);
 		model.addAttribute("items", items);
 		model.addAttribute("total", Double.parseDouble(total));
 		

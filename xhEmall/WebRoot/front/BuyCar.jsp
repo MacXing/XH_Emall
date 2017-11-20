@@ -471,74 +471,102 @@
     
     <!--Begin 第一步：查看购物车 Begin -->
     <div class="content mar_20">
-    <c:choose>
-    <c:when test="${empty trolleyItem}">
-        <table border="0" class="car_tab" align="center" style="width:1200px; margin-bottom:50px;" cellspacing="0" cellpadding="0" id="buycar">
-           <tr>
-              <td align="center">
-                <img src="front/images/empty.jpg"/>
-            </td>
-            
-           </tr>
-        </table> 
-    </c:when>
-    
-    <c:otherwise>
-    
-    	<table border="0" class="car_tab" style="width:1200px; margin-bottom:50px;" cellspacing="0" cellpadding="0" id="buycar">
-          <tr>
-          <td class="car_th" width="70px">
-          <input type="checkbox" id="selectAll" checked="checked" onclick="selectedAll(this)" name="chkAll"><label for="selectAll">全选</label></td>
-            <td class="car_th" width="490">商品名称</td>
-            <td class="car_th" width="140">属性</td>
-            <td class="car_th" width="150">购买数量</td>
-            <td class="car_th" width="130">售价</td>
-            <td class="car_th" width="130">小计</td>
-            <td class="car_th" width="140">返还积分</td>
-            <td class="car_th" width="150">操作</td>
-          </tr>
-        <c:forEach items="${trolleyItem}" var="items"> 
-          <tr>
-              <td> 
-              <input type="checkbox" class="delids" name="checkboxBtn" value="${items.troid}">
-              <input type="hidden" value="${items.troid}" id="inputroid"/>
-              </td>
-            <td>
-            	<div class="c_s_img"><img src="front/images/c_1.jpg" width="73" height="73" /></div>
-                 ${items.xhproduct.pname}
-             </td>
-            <td align="center"><span>单位：</span><span>${items.xhproduct.punit}</span></td>
-            <td align="center">
-            	<div class="c_num">
-            	<input type="button" value="" onclick="mul(${items.troid},${items.tronum})" class="car_btn_1" />
-                <input type="text"  value="${items.tronum}" name=""  class="car_ipt" />  
-                <input type="button" value="" onclick="add(${items.troid},${items.tronum})" class="car_btn_2"/>
-            </td>
-            <td align="center" ><span class="psale">${items.xhproduct.psale}</span></td>
-            <td align="center" style="color:#ff4e00;" class="sub" id="sub${items.troid }">${items.subTotal}</td>
-            <td align="center">${items.xhproduct.psale}<span>R</span></td>
-            <td align="center"><a onclick="ShowDiv('MyDiv','fade')">删除</a></td>
-          </tr> 
-         </c:forEach>  
-          <tr height="70">
-          	<td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
-                <span class="fr">商品总价：<label style="font-size:22px; color:#ff4e00;">￥</label><b style="font-size:22px; color:#ff4e00;" id="total"></b></span>
-               
-            </td>
-          </tr>
-          <tr valign="top" height="150">
-          	<td colspan="6" align="right">
-            	<a href="${pageContext.request.contextPath}/front/index.jsp"><img src="front/images/buy1.gif" /></a>&nbsp; &nbsp; <a href="javascript:void(0);" id="settlement" class="settlement" onclick="settlement()"><img src="front/images/buy2.gif" /></a>
-            </td>
-          </tr>
-        </table>
-        <form method="post" action="${pageContext.request.contextPath}/trolley/loadItemsFront.action" id="submitOrder">
-    	<input name="id" type="hidden" id="itemids">
-    	<input name="total" type="hidden" id="totals">
-    </form>
-        </c:otherwise>
-        </c:choose>
-    </div>
+			<c:choose>
+				<c:when test="${empty trolleyItem}">
+					<table border="0" class="car_tab" align="center" style="width:1200px; margin-bottom:50px;"
+						cellspacing="0" cellpadding="0" id="buycar">
+						<tr>
+							<td align="center">
+								<img src="front/images/empty.jpg" />
+							</td>
+
+						</tr>
+					</table>
+				</c:when>
+
+				<c:otherwise>
+
+					<table border="0" class="car_tab" style="width:1200px; margin-bottom:50px;" cellspacing="0"
+						cellpadding="0" id="buycar">
+						<tr>
+							<td class="car_th" width="70px">
+								<input type="checkbox" id="selectAll" checked="checked" onclick="selectedAll(this)"
+									name="chkAll">
+								<label for="selectAll">全选</label>
+							</td>
+							<td class="car_th" width="490">商品名称</td>
+							<td class="car_th" width="140">属性</td>
+							<td class="car_th" width="150">购买数量</td>
+							<td class="car_th" width="130">售价</td>
+							<td class="car_th" width="130">小计</td>
+							<td class="car_th" width="140">返还积分</td>
+							<td class="car_th" width="150">操作</td>
+						</tr>
+						<c:forEach items="${trolleyItem}" var="items">
+							<tr>
+								<td>
+									<input type="checkbox" class="delids" name="checkboxBtn" value="${items.troid}">
+									<input type="hidden" value="${items.troid}" id="inputroid" />
+								</td>
+								<td>
+									<div class="c_s_img">
+										<img src="front/images/c_1.jpg" width="73" height="73" />
+									</div>
+									${items.xhproduct.pname}
+								</td>
+								<td align="center">
+									<span>单位：</span>
+									<span>${items.xhproduct.punit}</span>
+								</td>
+								<td align="center">
+									<div class="c_num">
+										<input type="button" value="" onclick="mul(${items.troid},${items.tronum})"
+											class="car_btn_1" />
+										<input type="text" value="${items.tronum}" name="" class="car_ipt" />
+										<input type="button" value="" onclick="add(${items.troid},${items.tronum})"
+											class="car_btn_2" />
+								</td>
+								<td align="center">
+									<span class="psale">${items.xhproduct.psale}</span>
+								</td>
+								<td align="center" style="color:#ff4e00;" class="sub" id="sub${items.troid }">${items.subTotal}</td>
+								<td align="center">${items.xhproduct.psale}<span>R</span>
+								</td>
+								<td align="center">
+									<a onclick="ShowDiv('MyDiv','fade')">删除</a>
+								</td>
+							</tr>
+						</c:forEach>
+						<tr height="70">
+							<td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
+								<span class="fr">
+									商品总价：
+									<label style="font-size:22px; color:#ff4e00;">￥</label>
+									<b style="font-size:22px; color:#ff4e00;" id="total"></b>
+								</span>
+
+							</td>
+						</tr>
+						<tr valign="top" height="150">
+							<td colspan="6" align="right">
+								<a href="${pageContext.request.contextPath}/front/index.jsp">
+									<img src="front/images/buy1.gif" />
+								</a>
+								&nbsp; &nbsp;
+								<a href="javascript:void(0);" id="settlement" class="settlement" onclick="settlement()">
+									<img src="front/images/buy2.gif" />
+								</a>
+							</td>
+						</tr>
+					</table>
+					<form method="post" action="${pageContext.request.contextPath}/trolley/loadItemsFront.action"
+						id="submitOrder">
+						<input name="id" type="hidden" id="itemids">
+						<input name="total" type="hidden" id="totals">
+					</form>
+				</c:otherwise>
+			</c:choose>
+		</div>
     
 	<!--End 第一步：查看购物车 End--> 
     

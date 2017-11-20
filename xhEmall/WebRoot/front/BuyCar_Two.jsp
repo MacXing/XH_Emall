@@ -117,19 +117,22 @@
 				<table border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
 					<tr>
 						<td class="p_td">收货人姓名：</td>
-						<td>${ua.addUserName }</td>
+						<td id="addusername">${ua.addUserName }</td>
 						<td class="p_td">联系方式：</td>
-						<td>${ua.addPhone }</td>
+						<td id="addphone">${ua.addPhone }</td>
 					</tr>
 					<tr>
 						<td class="p_td">配送区域：</td>
-						<td>${ua.addCountry}${ua.addProvice }${ua.addCity }${ua.addDistrict }</td>
+						<td>
+							<span id="addcountry">${ua.addCountry}</span><span id="addprovince">${ua.addProvice }</span>
+							<span id="addcity">${ua.addCity }</span><span id="adddistrict">${ua.addDistrict }</span>
+						</td>
 						<td class="p_td">邮政编码：</td>
-						<td>${ua.addCode }</td>
+						<td id="addcode">${ua.addCode }</td>
 					</tr>
 					<tr>
 						<td class="p_td">详细地址：</td>
-						<td>${ua.addAddress }</td>
+						<td id="addaddress">${ua.addAddress }</td>
 					</tr>
 				</table>
 
@@ -144,6 +147,7 @@
 					<c:forEach items="${expresslist}" var="express">
 						<tr>
 							<td align="center">
+								<input type="hidden" value="${express.shoppingid}" id="shoppingid"/>
 								<input type="radio" name="ch" checked="checked" />
 							</td>
 							<td align="center" style="font-size:14px;">
@@ -171,9 +175,6 @@
 						<div class="ch_img"></div>
 					</li>
 				</ul>
-
-
-
 				<table border="0" style="width:900px; margin-top:20px;" cellspacing="0" cellpadding="0">
 					<tr>
 						<td align="right">
@@ -190,9 +191,9 @@
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<a href="front/BuyCar_Three.jsp">
-								<img src="front/images/btn_sure.gif" />
-							</a>
+							<button id="suborder">
+								确认订单
+							</button>
 						</td>
 					</tr>
 				</table>
@@ -370,10 +371,27 @@
 			$("#paytotal").text(paytotal);
 
 		});
-
-		function createOrder() {
-
-		}
+		$("#suborder").click(function (){
+			alert(123);
+			var shoppingid = $("#shoppingid").val();
+			$.ajax({
+				url: "order/addOrder.action",
+				type: "POST",
+				contentType:"application/json", 
+				data: {
+					"userAddress": ${ua },
+					"troid": ${items.troid },
+					"spid":shoppingid
+				},
+				success: function(result){
+					if(reult.status == 0){
+						layer.msg(result.msg);
+					} else {
+						layer.msg(result.msg);						
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

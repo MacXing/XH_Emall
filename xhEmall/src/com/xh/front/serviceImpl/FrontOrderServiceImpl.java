@@ -9,7 +9,9 @@ import org.springframework.util.CollectionUtils;
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
 import com.xh.back.bean.Xhorderinfo;
+import com.xh.back.bean.Xhtrolley;
 import com.xh.back.mapper.OrderGoodsMapper;
+import com.xh.back.mapper.XhTrolleyMapper;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.mapper.FrontOrderMapper;
 import com.xh.front.service.FrontOrderService;
@@ -23,6 +25,10 @@ public class FrontOrderServiceImpl implements FrontOrderService {
 	@Autowired
 	@Qualifier("frontOrderMapper")
 	private FrontOrderMapper frontOrderMapper;
+	
+	@Autowired
+	@Qualifier("xhTrolleyMapper")
+    private XhTrolleyMapper xhTrolleyMapper;
 	
 	@Override
 	public ServerResponse<List<OrderGoods>> queryOrderInfo(Integer userid) {
@@ -92,12 +98,29 @@ public class FrontOrderServiceImpl implements FrontOrderService {
 	}
 
 	@Override
-	public ServerResponse<String> addOrder(Xhorderinfo orderInfo) {
-		int resultCount = frontOrderMapper.addOrder(orderInfo);
+	public ServerResponse<String> addOrder(int spid, UserAddress userAddress,
+			List<Xhtrolley> items) {
+		Xhorderinfo orderInfo = new Xhorderinfo();
+		int resultCount = 0;
+		for(Xhtrolley t : items){
+			orderInfo.setShoppingid(spid);
+			orderInfo.setAddaddress(userAddress.getAddAddress());
+			orderInfo.setAddcity(userAddress.getAddCity());
+			orderInfo.setAddcode(userAddress.getAddCode());
+			orderInfo.setAdddistrict(userAddress.getAddDistrict());
+			orderInfo.setAddcountry(userAddress.getAddCountry());
+			orderInfo.setAddphone(userAddress.getAddPhone());
+			orderInfo.setAddusername(userAddress.getAddUserName());
+			orderInfo.setAddprovince(userAddress.getAddProvice());
+			orderInfo.setUserid(userAddress.getUserID());
+			orderInfo.setGoodamount(t.getTronum());
+			orderInfo.setPayfee(t.getTronum()*t.getXhproduct().getPsale());
+			resultCount = frontOrderMapper.addOrder(orderInfo);
+			orderGoodsMapper.addOrderGoodInfo(t.getPid(), orderInfo.getOrderid());
+		}
 		if(resultCount > 0){
 			return ServerResponse.createBySuccess();
 		}
 		return ServerResponse.createByErrorMassage("添加失败");
 	}
-	
 }
