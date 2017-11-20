@@ -75,7 +75,7 @@ public class Xhorderinfo {
 
 	private Date sendtime;
 
-    private String attribute2;
+    private double payPrice;
 
     private String attribute3;
 
@@ -304,16 +304,16 @@ public class Xhorderinfo {
 	public void setSendtime(Date sendtime) {
 		this.sendtime = sendtime;
 	}
+	
+    public double getPayPrice() {
+		return payPrice;
+	}
 
-	public String getAttribute2() {
-        return attribute2;
-    }
+	public void setPayPrice(double payPrice) {
+		this.payPrice = payPrice;
+	}
 
-    public void setAttribute2(String attribute2) {
-        this.attribute2 = attribute2 == null ? null : attribute2.trim();
-    }
-
-    public String getAttribute3() {
+	public String getAttribute3() {
         return attribute3;
     }
 
@@ -440,16 +440,18 @@ public class Xhorderinfo {
 				+ enable + ", shoppingimg=" + shoppingimg + ", goodamount="
 				+ goodamount + ", shoppingfee=" + shoppingfee + ", payfee="
 				+ payfee + ", paytime=" + paytime + ", shopping=" + shopping
-				+ ", users=" + users + ", sendtime=" + sendtime
-				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
-				+ ", attribute4=" + attribute4 + ", attribute5=" + attribute5
-				+ ", attribute6=" + attribute6 + ", attribute7=" + attribute7
-				+ ", attribute8=" + attribute8 + ", attribute9=" + attribute9
-				+ ", attribute10=" + attribute10 + ", attribute11="
-				+ attribute11 + ", attribute12=" + attribute12
-				+ ", attribute13=" + attribute13 + ", attribute14="
-				+ attribute14 + ", attribute15=" + attribute15
-				+ ", attribute16=" + attribute16 + "]"+"\n";
+				+ ", users=" + users + ", sendtime=" + sendtime + ", payPrice="
+				+ payPrice + ", attribute3=" + attribute3 + ", attribute4="
+				+ attribute4 + ", attribute5=" + attribute5 + ", attribute6="
+				+ attribute6 + ", attribute7=" + attribute7 + ", attribute8="
+				+ attribute8 + ", attribute9=" + attribute9 + ", attribute10="
+				+ attribute10 + ", attribute11=" + attribute11
+				+ ", attribute12=" + attribute12 + ", attribute13="
+				+ attribute13 + ", attribute14=" + attribute14
+				+ ", attribute15=" + attribute15 + ", attribute16="
+				+ attribute16 + "]";
 	}
+
+	
     
 }
