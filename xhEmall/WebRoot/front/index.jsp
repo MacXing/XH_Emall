@@ -152,8 +152,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                
                 </c:forEach>
             </ul>
-            </c:if>
-            <c:if test="${current_user != null }">
             <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
             </c:if>
             <!--End 购物车已登录 End-->

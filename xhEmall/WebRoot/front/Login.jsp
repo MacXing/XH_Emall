@@ -40,8 +40,7 @@
 
 					&nbsp;|&nbsp;
 					<a href="#">我的订单</a>
-					&nbsp;|
-					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					<a href="#">我的购物车</a>
 					&nbsp;|
 				</span>
 				<span class="ss">
