@@ -1,19 +1,13 @@
 package com.java.back.test;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import com.xh.back.bean.Xhad;
 import com.xh.back.bean.XhqueryAd;
 import com.xh.back.serviceImpl.AdServiceImpl;
@@ -36,9 +30,8 @@ public class UtilAd {
 	
 	@Test
 	public void demo5(){
-		XhqueryAd xhqueryAd=new XhqueryAd();
-		xhqueryAd=adService.queryadById(2);
-		System.out.print(xhqueryAd);
+		Xhad ad=adService.queryadById(2);
+		System.out.print(ad);
 		
 	}
 	

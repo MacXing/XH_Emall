@@ -16,17 +16,13 @@ public interface AdService {
 	public List<XhqueryAd> queryStatueAllAds();
 	
 	//查看所有的广告信息列表
-	public List<XhqueryAd> queryAllAdsList();
-	
+	public List<Xhad> queryAllAdsList();
 	//--查看某条广告的信息  --
-	public XhqueryAd queryadById(int id);
-	
+	public Xhad queryadById(int id);
 	//--添加广告  --
-	public void insertAd(XhqueryAd xhqueryAd);
-	
+	public void insertAd(Xhad ad);
 	//--修改广告信息  --
 	public void updateAd(String ids);
-	
 	//--删除广告  --
 	public void deleteAd(int id);
 	

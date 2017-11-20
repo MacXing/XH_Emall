@@ -7,7 +7,6 @@
     
         <property name="securityManager" ref="securityManager"/>
    		<property name="loginUrl" value="/home/home.action"/>
-        <!-- <property name="successUrl" value="/jsp/back/index.jsp"/> -->
         <property name="unauthorizedUrl" value="/jsp/back/404.jsp"/>
         
        <!--  <property name="filters">
@@ -17,13 +16,36 @@
         </property>  -->
         <property name="filterChainDefinitions">
             <value>
+            	/front/css/**=anon
+            	/front/images/**=anon
+            	/front/js/**=anon
+            	/upload/**=anon
+            	/front/login.jsp=anon
+            	/front/Regist.jsp=anon
+            	/front/Login.jsp=anon
+            	/front/FindProductList.jsp=anon
+            	/front/Forget_Login.jsp=anon
+            	/front/index.jsp=anon
+            	/front/product.jsp=anon
+            	/front/productlist.jsp=anon
+            	/front/productlistByBrandid.jsp=anon
+            	/front/productlistByCatid.jsp=anon
+            	/front/ProductPsaleDesc.jsp=anon
+            	
+            	/user/login.action=anon
+            	/home/queryproductsByCategory.action=anon
+            	/home/queryAllProductsByCatid.action=anon
+            	/home/queryProductsByBrand.action=anon
+            	/ProductDetails/queryImagesByPid.action=anon
+            	/ProductList/queryAllProductByFind.action=anon
+            	/ProductList/queryProductOrderByPsaleDesc.action=anon
+            	/trolley/addTroItem.action=anon
+            	/home/head.action=anon
             	/jsp/back/loginbackstage.jsp=anon
-            	/front/**=anon
             	/resource/**=anon
               	/admin/login.action=anon
-              	/logout.action=logout           	
-                <!-- /** = user -->
-                /**=anon
+              	/logout.action=logout          	
+                /**=authc
             </value>
    		 </property>
     </bean>

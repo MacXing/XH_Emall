@@ -166,6 +166,5 @@ public class Xhad {
 				+ ", attribute3=" + attribute3 + "]";
 	}
 
-	
-    
+
 }

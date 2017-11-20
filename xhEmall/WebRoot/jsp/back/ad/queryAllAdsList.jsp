@@ -71,13 +71,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 	<th width="6%" class="text-center">ID</th>
                                     <th width="6%" class="text-center">位置</th>
                                		<th width="6%" class="text-center">图片</th>
-                                    <th width="6%" class="text-center">标题</th>
+                                    <th width="6%" class="text-center">名称</th>
                                     <th width="6%"class="text-center">描述</th>                           
-                                    <th width="6%"class="text-center">连接</th>                           
-                                    <th width="6%"class="text-center">开始时间</th>
-                                    <th width="6%"class="text-center">结束时间</th>
-                                    <th width="6%"class="text-center">点击数</th>
-                                    <th width="6%"class="text-center">状态</th>
+                                    <th width="6%"class="text-center">连接</th>                                           
                                     <th width="9%"class="text-center">操作</th>
                                 </tr>
                             </thead>
@@ -85,19 +81,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                              <c:forEach items="${allAdsList}" var="adsList">
 							    	<tr>
 							    		<td>${adsList.adid}</td>
-							    		<td>${adsList.position.positionName }</td>
+							    		<td>${adsList.positionid}</td>
 							    		<td>
-							    			<a class="fancybox" href="${pageContext.request.contextPath }/upload/${adsList.adimg}" title="">
-					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }/upload/${adsList.adimg}" />
+							    			<a class="fancybox" href="${pageContext.request.contextPath }${adsList.adlink}" title="">
+					                            <img style="width:100px;height:80px"; src="${pageContext.request.contextPath }${adsList.adlink}" />
 					                        </a>
 							    		</td>							    	
 							    		<td>${adsList.adname }</td>
 							    		<td>${adsList.adtxt}</td>
-							    		<td>${adsList.adlink}</td>
-							    		<td>${adsList.adstarttime}</td>
-							    		<td>${adsList.adendtime}</td>
-							    		<td>${adsList.adclick}</td>
-							    		<td>${adsList.adstatue}</td>
+							    		<td>${adsList.adlink}</td>					
 							    		
 							    		<td class="text-center">
 							    			
@@ -152,8 +144,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     /* 查看单个商品信息 */
     
-    
-    
    function btn1(id){
     	
 	   window.location.href="${pageContext.request.contextPath }/ad/queryadById.action?id="+id;
@@ -204,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 			   url:"${pageContext.request.contextPath }/ad/deleteAd.action?id="+id,
 	 			   type:"GET",
 	 			   success:function(result){
-	 					   if(result!=null){
+	 					   if(result.code==100){
 	 						   alert("删除成功！");
 	 						  window.location.href="${pageContext.request.contextPath }/ad/queryAllAdsList.action";
 	 					   }else{
