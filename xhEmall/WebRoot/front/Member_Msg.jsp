@@ -381,6 +381,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a
 								href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a>
 						</li>
+						<li><a href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id=${current_user.userid }">我的收藏</a></li>
 					</ul>
 				</div>
 				<div class="left_m">

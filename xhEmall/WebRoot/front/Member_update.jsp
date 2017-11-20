@@ -252,6 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${user.userid }">修改信息</a></li>
                     <li><a href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${user.userid }">我的留言</a></li>
                     <li><a href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a></li>
+                	<li><a href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id=${current_user.userid }">我的收藏</a></li>
                 </ul>
             </div>  
             <div class="left_m">
