@@ -1,10 +1,9 @@
 package com.xh.back.controller;
 
 import java.util.List;
-
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.other.currency.Const;
 import com.other.msg.Msg;
 import com.xh.back.bean.Xhshopping;
@@ -20,7 +18,6 @@ import com.xh.back.bean.Xhtrolley;
 import com.xh.back.service.ExpressService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
-import com.xh.front.serviceImpl.UserAddressServiceImpl;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.mapper.FrontOrderMapper;
 
@@ -52,18 +49,37 @@ public class XhTrolleyController {
 
 	// 查询通过用户
 	@RequestMapping("findByUser.action")
-	public String findByUser(Model model, HttpSession session) {
+	public String findByUser(Model model,HttpSession session,HttpServletRequest request) {
 		/* // 1. 得到uid8 */
 		Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
 		Integer uid = user.getUserid();
 		if(uid > 0){
 			List<Xhtrolley> trolleyItem = xhTrolleyService.queryTrolleyByUser(uid);
-			model.addAttribute("trolleyItem", trolleyItem);
+			ServletContext application = request.getServletContext();
+			application.setAttribute("trolleyItem", trolleyItem);
+			application.setAttribute("falg",1);
+			return "/home/home.action";
+		}
+		return "/front/404.jsp";
+	}
+	
+	// 查询通过用户
+		@RequestMapping("findByUserCart.action")
+		public String findByUserCart(Model model,HttpSession session,HttpServletRequest request) {
+			/* // 1. 得到uid8 */
+			Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
+			Integer uid = user.getUserid();
+			if(uid > 0){
+				List<Xhtrolley> trolleyItem = xhTrolleyService.queryTrolleyByUser(uid);
+				ServletContext application = request.getServletContext();
+				application.removeAttribute("trolleyItem");
+				application.setAttribute("trolleyItem", trolleyItem);
+				/*model.addAttribute("trolleyItem", trolleyItem);*/
+				return "forward:/front/BuyCar.jsp";
+			}
 			return "forward:/front/BuyCar.jsp";
 		}
-		return "forward:/front/BuyCar.jsp";
-	}
-
+	
 	// 查询通过用户
 	/*
 	 * @RequestMapping("findByUser1.action") public String findByUser1(Model
@@ -109,9 +125,7 @@ public class XhTrolleyController {
 	// 前端
 
 	// 添加购物车条目
-	@RequestMapping("addTroItem.action")
-	@ResponseBody
-
+	
 	public Msg addTroItem(int pid,int pnum,int userid){
 	 
 			System.out.println(pid+""+pnum+""+userid);
@@ -124,11 +138,10 @@ public class XhTrolleyController {
 			tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
-
-			return Msg.success();
-
-		}		
-		return Msg.fail();
+			return Msg.success().add("msg", "添加购物车成功！");
+		}
+		return Msg.fail().add("msg", "添加失败，请联系管理员！");
+		
 	}
 
 	// 修改购物车商品的数量
@@ -168,10 +181,7 @@ public class XhTrolleyController {
 		System.out.println(items);
 		model.addAttribute("items", items);
 		model.addAttribute("total", Double.parseDouble(total));
-		
-		
-		UserAddress ua = frontOrderMapper.queryDefaultAddInfoById(uid);
-		
+		UserAddress ua = frontOrderMapper.queryDefaultAddInfoById(uid);		
 		model.addAttribute("ua", ua);
 		List<Xhshopping> expresslist = expressService.queryAllExpress();
 		model.addAttribute("expresslist", expresslist);

@@ -41,13 +41,15 @@
          showTotal();
       });
     </script>
-  </head>  
+  </head>
+ 
 <body>
 
 <!--Begin Header Begin-->
 <jsp:include page="/front/head.jsp"/>
 <!--End Menu End-->
  
+
 <div class="i_bg">  
     <div class="content mar_20">
     	<img src="front/images/img1.jpg" />        
@@ -88,7 +90,7 @@
               <input type="hidden" value="${items.troid}" id="inputroid"/>
               </td>
             <td>
-            	<div class="c_s_img"><img src="front/images/c_1.jpg" width="73" height="73" /></div>
+            	<div class="c_s_img"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="73" height="73" /></div>
                  ${items.xhproduct.pname}
              </td>
             <td align="center"><span>单位：</span><span>${items.xhproduct.punit}</span></td>
@@ -249,7 +251,7 @@
 		success:function(result){ 
 		showTotal();      
        	if(result.code==100){
-       		window.location.href="${pageContext.request.contextPath}/trolley/findByUser.action";
+       		window.location.href="${pageContext.request.contextPath}/trolley/findByUserCart.action";
        	}
        }
 	});
@@ -264,7 +266,7 @@
        success:function(result){ 
        showTotal();       
        	if(result.code==100){
-       		window.location.href="${pageContext.request.contextPath}/trolley/findByUser.action";
+       		window.location.href="${pageContext.request.contextPath}/trolley/findByUserCart.action";
        		
        	}
        }
@@ -280,7 +282,7 @@ function delete_cart(){
        success:function(result){
        alert(result.code);      
        	if(result.code==100){
-       		window.location.href="${pageContext.request.contextPath}/trolley/findByUser.action";
+       		window.location.href="${pageContext.request.contextPath}/trolley/findByUserCart.action";
        	}
        }
     });

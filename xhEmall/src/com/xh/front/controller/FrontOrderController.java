@@ -1,4 +1,4 @@
-package com.xh.front.controller;
+/*package com.xh.front.controller;
 
 import java.util.List;
 
@@ -73,11 +73,12 @@ public class FrontOrderController {
 		return frontOrderService.addOrder(orderInfo);
 	}*/
 	
-/*	@RequestMapping("queryAddInfoById.action")
+	/*@RequestMapping("queryAddInfoById.action")
 	@ResponseBody
 	public ServerResponse<String> deleteOrder(int addID){
 		return frontOrderService.queryAddInfoById(addID);
-	}*/
+	}
 	
 	
 }
+*/
