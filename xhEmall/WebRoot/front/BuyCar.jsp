@@ -90,7 +90,7 @@
               <input type="hidden" value="${items.troid}" id="inputroid"/>
               </td>
             <td>
-            	<div class="c_s_img"><img src="${items.xhproduct.pimg}" width="73" height="73" /></div>
+            	<div class="c_s_img"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="73" height="73" /></div>
                  ${items.xhproduct.pname}
              </td>
             <td align="center"><span>单位：</span><span>${items.xhproduct.punit}</span></td>

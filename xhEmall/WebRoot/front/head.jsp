@@ -152,7 +152,7 @@
             <ul class="cars" id="cart">
             <c:forEach items="${trolleyItem}" var="items">
             	<li id="pli">
-                	<div class="img"><a href="#"><img src="front/images/car1.jpg" width="58" height="58" /></a></div>
+                	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
                     <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
                     <div class="price"><font color="#ff4e00"><span>￥</span>${items.xhproduct.psale}</font><span>X</span>${items.tronum}</div>
                 </li>

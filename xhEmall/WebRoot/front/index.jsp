@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <c:forEach items="${trolleyItem}" var="items">
             	<li>
             		<input type="hidden" id="falg" value="${falg}">
-                	<div class="img"><a href="#"><img src="${items.xhproduct.pimg}" width="58" height="58" /></a></div>
+                	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
                     <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
                     <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
                 </li>
