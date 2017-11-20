@@ -497,7 +497,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function(){
 		
 			 var userid=$("#loginuser").val();
-		
+
 			 if($("#falg").val()>0){
 			 	return;
 			 }
@@ -505,7 +505,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         if(userid>0){
 	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
 	         }
-	         				
+			
+			 if($("#falg").val()>0){
+			 	return;
+			 }
+			
+	         if(userid>0){
+	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
+	         };
+	         	
 		}); 
 		
 </script>
