@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.front.mapper.UserCollectMapper">
+
+	<resultMap id="queryCollectByIdMap" type="com.xh.front.bean.UserCollection">
+	    <id column="collectid" jdbcType="INTEGER" property="collectid" />
+	    <result column="userid" jdbcType="INTEGER" property="userid" />
+	    <result column="pid" jdbcType="INTEGER" property="pid" />
+ 	    <result column="collecttime" jdbcType="VARCHAR" property="collecttime" />
+	    <result column="deletetime" jdbcType="VARCHAR" property="deletetime" /> 
+	    <association property="users" javaType="com.xh.front.bean.Xhusers">
+	    	<id column="userID" jdbcType="INTEGER" property="userid" />
+			<result column="gradeID" jdbcType="VARCHAR" property="gradeid" />
+			<result column="userName" jdbcType="VARCHAR" property="username" />
+			<result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
+			<result column="userSex" jdbcType="INTEGER" property="usersex" />
+			<result column="userBirthday" jdbcType="DATE" property="userbirthday" />
+			<result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+			<result column="userEmail" jdbcType="VARCHAR" property="useremail" />
+			<result column="userAddress" jdbcType="VARCHAR" property="useraddress" />
+			<result column="userLoginTime" jdbcType="DATE" property="userlogintime" />
+			<result column="userlasttime" jdbcType="DATE" property="userlasttime" />			
+			<result column="userLastIp" jdbcType="VARCHAR" property="userlastip" />
+			<result column="userVisitCount" jdbcType="INTEGER" property="uservisitcount" />
+			<result column="userHomePhone" jdbcType="VARCHAR" property="userhomephone" />
+			<result column="userPhoto" jdbcType="VARCHAR" property="userphoto" />
+			<result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
+			<result column="userIntegral" jdbcType="DOUBLE" property="userintegral" />     
+	    </association>
+	    <association property="product" javaType="xhproduct">
+			<id column="pID" jdbcType="INTEGER" property="pid" />
+	 	    <result column="brandID" jdbcType="INTEGER" property="brandid" />
+		    <result column="pName" jdbcType="VARCHAR" property="pname" />
+		    <result column="pClick" jdbcType="INTEGER" property="pclick" />
+		    <result column="pDesc" jdbcType="VARCHAR" property="pdesc" />
+		    <result column="pPrice" jdbcType="DOUBLE" property="pprice" />
+		    <result column="pSale" jdbcType="DOUBLE" property="psale" />
+		    <result column="pImg" jdbcType="VARCHAR" property="pimg" />
+		    <result column="pImgDetail" jdbcType="VARCHAR" property="pimgdetail" />
+		    <result column="pAddtime" jdbcType="TIMESTAMP" property="paddtime" />
+		    <result column="pUpdatetime" jdbcType="TIMESTAMP" property="pupdatetime" />
+		    <result column="pSize" jdbcType="VARCHAR" property="psize" />
+		    <result column="pUnit" jdbcType="VARCHAR" property="punit" />
+		    <result column="pDiscount" jdbcType="DOUBLE" property="pdiscount" />
+		    <result column="pIntegral" jdbcType="INTEGER" property="pIntegral" />
+		</association> 
+	  </resultMap>
+	
+	
+	<!--根据订单ID查询用户收藏 --> 
+	<select id="queryCollectByPrimaryKey" resultMap="queryCollectByIdMap" parameterType="int">
+    SELECT c.collectid,c.userid,c.pid,c.collecttime,c.deletetime,
+    u.userID,u.userName,u.userPhone,
+    p.pID,p.pName,p.pSale,p.pImg
+	FROM collect c,xhUsers u,xhProduct p
+	where c.userid=u.userID and c.pid=p.pID and u.userid=#{userid,jdbcType=INTEGER}
+	and isdelete=0
+    </select>
+    
+    <!-- 根据收藏ID删除收藏信息 -->
+	<update id="deleteCollectByPrimaryKey" parameterType="int">
+    update collect set
+    deletetime=now(),
+    isdelete=1
+    where collectid=#{collectid,jdbcType=INTEGER}
+  	</update>
+  	
+  	<!-- 添加收藏-->
+	<insert id="addCollect" parameterType="userCollection">
+    insert into collect (
+    	userid,pid,collecttime,deletetime
+      )
+    values(#{userid},#{pid},#{collecttime},#{deletetime})
+  </insert>  
+</mapper>

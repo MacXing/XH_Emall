@@ -19,7 +19,9 @@ import com.xh.back.serviceImpl.AdminServiceImpl;
 import com.xh.back.serviceImpl.UserGradeServiceImpl;
 import com.xh.back.serviceImpl.UserMessageServiceImpl;
 import com.xh.back.serviceImpl.XhUserServiceImpl;
+import com.xh.front.bean.UserCollection;
 import com.xh.front.bean.Xhusers;
+import com.xh.front.serviceImpl.UserCollectionServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext.xml")
@@ -35,6 +37,10 @@ public class UtilUser {
 	@Autowired
 	@Qualifier("userGrade")
 	private UserGradeServiceImpl userGrade;
+	
+	@Autowired
+	@Qualifier("userCollectService")
+	private UserCollectionServiceImpl userCollectService;
 	
 	@Test
 	public void test(){//查询等级会员
@@ -85,5 +91,11 @@ public class UtilUser {
 	public void test8(){//检查等级存在与否
 		int result=userService.checkGrade(2);
 		System.out.println(result);
+	}
+	
+	@Test
+	public void test9(){//检查用户收藏
+		List<UserCollection> collects=userCollectService.queryAllCollect(116);
+		System.out.println(collects);
 	}
 }

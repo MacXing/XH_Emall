@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
+import com.xh.back.bean.Xhorderinfo;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.service.FrontOrderService;
 
@@ -65,4 +66,18 @@ public class FrontOrderController {
 	public ServerResponse<UserAddress> queryAddInfoById(int addID){
 		return frontOrderService.queryAddInfoById(addID);
 	}
+	
+	/*@RequestMapping("queryAddInfoById.action")
+	@ResponseBody
+	public ServerResponse<String> addOrder(Xhorderinfo orderInfo){
+		return frontOrderService.addOrder(orderInfo);
+	}*/
+	
+/*	@RequestMapping("queryAddInfoById.action")
+	@ResponseBody
+	public ServerResponse<String> deleteOrder(int addID){
+		return frontOrderService.queryAddInfoById(addID);
+	}*/
+	
+	
 }

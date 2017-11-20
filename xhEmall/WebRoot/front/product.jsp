@@ -95,16 +95,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="#"><img src="front/images/sh_5.gif" /></a>
                     </div>
                 </div>
-                <div class="d_care"><a onclick1="ShowDiv('MyDiv','fade')">关注商品</a></div>
+                <div class="d_care"><a onclick="addcollect()">收藏商品</a></div>
             </div>
             <div class="des_join">
             	<div class="j_nums">
             		<form  id="addform" >
+
 	            		<input type="hidden" name="userid"  id="userid" value="${current_user.userid }"/>
 	            		<input type="hidden" name="pid"  id="pid" value="${xhproduct.pid }"/>
 	                	<input type="text" value="1"  name="pnum" id="pnum" class="n_ipt" />
 	                    <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
                     	<input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
+
                     </form>   
                 </div>
                 <span class="fl"><a id="test" href="javascript:addItem()" onclick=""><img src="front/images/j_car.png" /></a></span>
@@ -298,12 +300,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td width="40"><img src="front/images/suc.png" /></td>
                     <td>
                     	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">您已成功收藏该商品</span><br />
-                    	<a href="#">查看我的关注 >></a>
+                    	
                     </td>
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="#" class="b_sure">确定</a></td>
+                    <td>	
+                    <a href="${pageContext.request.contextPath}/userCollect/queryAllCollect.action?id=${current_user.userid }">查看我的收藏 ></a>
+                    <a href="${pageContext.request.contextPath }/home/home.action" class="b_buy">继续购物</a>
+                    </td>
                   </tr>
                 </table>
                     
@@ -464,7 +469,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
     /*  function set_sure(){
        $("#buy_sure").submit();
+<<<<<<< HEAD
      } */
+
+     
+     //添加收藏
+    function addcollect(){
+    	var formData= new FormData($("#addcoll")[0]);
+        $.ajax({
+        	url:"${pageContext.request.contextPath}/userCollect/addCollect.action",
+        	type:"POST",
+        	data:formData, 
+		    contentType: false,
+		    processData: false, 
+        	success:function(result){
+        		if(result.code==100){
+					ShowDiv_1('MyDiv','fade');
+        		}else{
+        			alert(result.extend.msg);
+        		}
+        	}
+        });
+     }
+
     </script>
 </body>
 
