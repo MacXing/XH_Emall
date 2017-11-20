@@ -39,6 +39,7 @@
             	/ProductDetails/queryImagesByPid.action=anon
             	/ProductList/queryAllProductByFind.action=anon
             	/ProductList/queryProductOrderByPsaleDesc.action=anon
+            	/trolley/addTroItem.action=anon
             	
             	/jsp/back/loginbackstage.jsp=anon
             	/resource/**=anon

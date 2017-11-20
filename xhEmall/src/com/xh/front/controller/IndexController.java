@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xh.back.bean.Category_Product;
+import com.xh.back.bean.Xhad;
 import com.xh.back.bean.Xhbrand;
 import com.xh.back.bean.Xhcategory;
 import com.xh.back.bean.Xhproduct;
+import com.xh.back.serviceImpl.AdServiceImpl;
 import com.xh.back.serviceImpl.BrandServiceImpl;
 import com.xh.back.serviceImpl.CategoryServiceImpl;
 import com.xh.back.serviceImpl.ProductServiceImpl;
@@ -43,17 +45,23 @@ public class IndexController {
 	@Qualifier("productService")
 	private ProductServiceImpl productService;
 	
+	@Autowired
+	@Qualifier("adService")
+	private AdServiceImpl adService;
+	
 	@RequestMapping("home.action")
 	public String home(Model model){
 		List<Navbar> navbars = navbarService.queryAllNavbarIsshow();
 		List<Xhcategory> categorys = categoryService.categoryList();
 		List<Category_Product> CP = categoryService.queryAllCPForHome();
 		List<Xhbrand> brands = brandService.queryAllBrands();
-		
+		List<Xhad> ads = adService.queryAllAdsList();
+		System.out.println(ads);
 		model.addAttribute("navbars", navbars);
 		model.addAttribute("categoryList", categorys);
 		model.addAttribute("CP", CP);
 		model.addAttribute("brands", brands);
+		model.addAttribute("ads", ads);
 		
 		return "/front/index.jsp";
 	}

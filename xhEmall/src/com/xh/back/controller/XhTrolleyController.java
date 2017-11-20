@@ -1,14 +1,7 @@
 package com.xh.back.controller;
 
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.aspectj.apache.bcel.generic.ReturnaddressType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,14 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.other.msg.Msg;
 import com.xh.back.bean.Xhshopping;
 import com.xh.back.bean.Xhtrolley;
 import com.xh.back.service.ExpressService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
-import com.xh.front.bean.Xhusers;
 import com.xh.front.serviceImpl.UserAddressServiceImpl;
 
 @Controller
@@ -74,8 +65,7 @@ public class XhTrolleyController {
 		xhTrolleyService.addTrolley(xhtrolley);
 		return "/jsp/back/trolley/addtrolley.jsp";
 	}
-	
-	
+
 	//删除购物车
 	@RequestMapping("deleteTrolley.action")
 	public String deleteTrolley(int id){
@@ -107,22 +97,21 @@ public class XhTrolleyController {
 	//添加购物车条目
 	@RequestMapping("addTroItem.action")
 	@ResponseBody
-	public Msg addTroItem(int pid,int pnum){
+	public Msg addTroItem(int pid,int pnum,int userid){
 	 
-			System.out.println(pid+""+pnum);
+			System.out.println(pid+""+pnum+""+userid);
 			Xhtrolley tro=new Xhtrolley();
 			
 			if(pid>0&&pnum>0){	
 			System.out.println(pid);	
 			tro.setPid(pid);
-			tro.setUserid(1);
+			tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
-			
-			return Msg.success().add("msg", "添加购物车成功！");
+			return Msg.success();
 		}
 			
-		return Msg.fail().add("msg", "添加失败，请联系管理员！");
+		return Msg.fail();
 	}
 	
 	//修改购物车商品的数量

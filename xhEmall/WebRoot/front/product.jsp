@@ -100,20 +100,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="des_join">
             	<div class="j_nums">
             		<form  id="addform" >
-            		<input type="hidden" name="pid"  id="addpid" value="${xhproduct.pid }"/>
-                	<input type="text" value="1"  name="pnum" id="addnum" class="n_ipt" />
-                    <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
-                    <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
+	            		<input type="hidden" name="userid"  id="userid" value="${current_user.userid }"/>
+	            		<input type="hidden" name="pid"  id="pid" value="${xhproduct.pid }"/>
+	                	<input type="text" value="1"  name="pnum" id="pnum" class="n_ipt" />
+	                    <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
+                    	<input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
                     </form>   
                 </div>
                 <span class="fl"><a id="test" href="javascript:addItem()" onclick=""><img src="front/images/j_car.png" /></a></span>
             </div>            
         </div>           
-        <div class="s_brand">
-        	<div class="s_brand_img"><img src="front/images/sbrand.jpg" width="188" height="132" /></div>
-            <div class="s_brand_c"><a href="#">进入品牌专区</a></div>
-        </div>    
-        
         
     </div>
     <div class="content mar_20">
@@ -158,45 +154,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	</ul>
         </div>
         <div class="l_list">        	
-            <div class="des_border">
-            	<div class="des_tit">
-                	<ul>
-                    	<li class="current">推荐搭配</li>
-                    </ul>
-                </div>
-                <div class="team_list">
-                	<div class="img"><a href="#"><img src="front/images/mat_1.jpg" width="160" height="140" /></a></div>
-                	<div class="name"><a href="#">倩碧补水组合套装8折促销</a></div>
-                    <div class="price">
-                    	<div class="checkbox"><input type="checkbox" name="zuhe" checked="checked" /></div>
-                    	<font>￥<span>768.00</span></font> &nbsp; 18R
-                    </div>
-                </div>
-                <div class="team_icon"><img src="front/images/jia_b.gif" /></div>
-                <div class="team_list">
-                	<div class="img"><a href="#"><img src="front/images/mat_2.jpg" width="160" height="140" /></a></div>
-                	<div class="name"><a href="#">香奈儿邂逅清新淡香水50ml</a></div>
-                    <div class="price">
-                    	<div class="checkbox"><input type="checkbox" name="zuhe" /></div>
-                    	<font>￥<span>749.00</span></font> &nbsp; 18R
-                    </div>
-                </div>
-                <div class="team_icon"><img src="front/images/jia_b.gif" /></div>
-                <div class="team_list">
-                	<div class="img"><a href="#"><img src="front/images/mat_3.jpg" width="160" height="140" /></a></div>
-                	<div class="name"><a href="#">香奈儿邂逅清新淡香水50ml</a></div>
-                    <div class="price">
-                    	<div class="checkbox"><input type="checkbox" name="zuhe" checked="checked" /></div>
-                    	<font>￥<span>749.00</span></font> &nbsp; 18R
-                    </div>
-                </div>
-                <div class="team_icon"><img src="front/images/equl.gif" /></div>
-                <div class="team_sum">
-                	套餐价：￥<span>1517</span><br />
-                    <input type="text" value="1" class="sum_ipt" /><br />
-                    <a href="#"><img src="front/images/z_buy.gif" /></a> 
-                </div>                
-            </div>
+            
+       
             <div class="des_border">
                 <div class="des_t">商品属性</div>
                 <div class="des_con" id="p_attribute">
@@ -479,26 +438,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
  <script type="text/javascript">
      function addItem(){
-        var formData= new FormData($("#addform")[0]);
+    	 if(!$("#userid").val()>0){
+    		 alert("亲登录！");
+    		 return;
+    	 }
+        /* var formData= new FormData($("#addform")[0]); */
+        alert($("#userid").val());
+        alert($("#pid").val());
+        alert($("#pnum").val());
         $.ajax({
-        	url:"${pageContext.request.contextPath}/trolley/addTroItem.action",
+        	url:"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+$("#pid").val()+"&userid="+$("#userid").val()+"&pnum="+$("#pnum").val(),
         	type:"POST",
-        	data:formData, 
+        	/* data:formData, 
 		    contentType: false,
-		    processData: false, 
+		    processData: false, */ 
         	success:function(result){
         		if(result.code==100){
 					ShowDiv_1('MyDiv1','fade1');
         		}else{
-        			alert(result.extend.msg);
+        			alert("添加失败！");
         		}
         	}
         });
      }
      
-     function set_sure(){
+    /*  function set_sure(){
        $("#buy_sure").submit();
-     }
+     } */
     </script>
 </body>
 
