@@ -10,6 +10,8 @@ public class OrderGoods implements Serializable {
     private int orderID;
 
     private int pID;
+    
+    private double orderPrice;
 
     private String goodsName;
 
@@ -85,6 +87,14 @@ public class OrderGoods implements Serializable {
 
 	public void setpID(int pID) {
 		this.pID = pID;
+	}		
+
+	public double getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(double orderPrice) {
+		this.orderPrice = orderPrice;
 	}
 
 	public String getGoodsName() {
@@ -138,13 +148,18 @@ public class OrderGoods implements Serializable {
 	@Override
 	public String toString() {
 		return "OrderGoods [ogID=" + ogID + ", orderID=" + orderID + ", pID="
-				+ pID + ", goodsName=" + goodsName + ", goodsNumber="
-				+ goodsNumber + ", marketPrice=" + marketPrice
-				+ ", goodsPrice=" + goodsPrice + ", sendNumber=" + sendNumber
-				+ ", isReal=" + isReal + ", product=" + product
+				+ pID + ", orderPrice=" + orderPrice + ", goodsName="
+				+ goodsName + ", goodsNumber=" + goodsNumber + ", marketPrice="
+				+ marketPrice + ", goodsPrice=" + goodsPrice + ", sendNumber="
+				+ sendNumber + ", isReal=" + isReal + ", product=" + product
 				+ ", orderInfo=" + orderInfo + ", orderNumber=" + orderNumber
 				+ ", isDelete=" + isDelete + "]";
 	}
+
+	
+	
+
+	
 
 }
 
