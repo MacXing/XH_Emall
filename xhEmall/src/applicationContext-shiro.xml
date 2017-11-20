@@ -41,11 +41,12 @@
             	/ProductList/queryProductOrderByPsaleDesc.action=anon
             	/trolley/addTroItem.action=anon
             	/home/head.action=anon
+            	/Pay/viewOrder.action=anon
             	/jsp/back/loginbackstage.jsp=anon
             	/resource/**=anon
               	/admin/login.action=anon
               	/logout.action=logout          	
-                /**=authc
+                /**=anon
             </value>
    		 </property>
     </bean>

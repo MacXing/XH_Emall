@@ -58,7 +58,7 @@ public class PayController {
 			HttpServletResponse rep
 			/*@RequestParam(value="1",required=true)Integer orderid*/)
 					throws AlipayApiException, IOException{
-		Xhorderinfo xhorderinfo = paySercice.queryOrderById(15);
+		Xhorderinfo xhorderinfo = paySercice.queryOrderById(22);
 		System.out.println(xhorderinfo);
 		
 		AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
