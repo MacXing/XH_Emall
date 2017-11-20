@@ -20,8 +20,10 @@ import com.xh.back.bean.Xhtrolley;
 import com.xh.back.service.ExpressService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
+import com.xh.front.serviceImpl.UserAddressServiceImpl;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.mapper.FrontOrderMapper;
+
 
 @Controller
 @RequestMapping("trolley")
@@ -76,7 +78,9 @@ public class XhTrolleyController {
 		return "/jsp/back/trolley/addtrolley.jsp";
 	}
 
-	// 删除购物车
+
+	//删除购物车
+
 	@RequestMapping("deleteTrolley.action")
 	public String deleteTrolley(int id) {
 		xhTrolleyService.deleteTrolleyById(id);
@@ -107,24 +111,24 @@ public class XhTrolleyController {
 	// 添加购物车条目
 	@RequestMapping("addTroItem.action")
 	@ResponseBody
-	public Msg addTroItem(int pid, int pnum, HttpSession session) {
-		Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
-		Integer uid = user.getUserid();
-		
-		System.out.println(pid + "" + pnum);
-		Xhtrolley tro = new Xhtrolley();
 
-		if (pid > 0 && pnum > 0) {
-			System.out.println(pid);
+	public Msg addTroItem(int pid,int pnum,int userid){
+	 
+			System.out.println(pid+""+pnum+""+userid);
+			Xhtrolley tro=new Xhtrolley();
+			
+			if(pid>0&&pnum>0){	
+								
 			tro.setPid(pid);
-			tro.setUserid(uid);
+			tro.setUserid(userid);
+			tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
 
-			return Msg.success().add("msg", "添加购物车成功！");
-		}
+			return Msg.success();
 
-		return Msg.fail().add("msg", "添加失败，请联系管理员！");
+		}		
+		return Msg.fail();
 	}
 
 	// 修改购物车商品的数量
