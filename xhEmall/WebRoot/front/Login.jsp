@@ -120,11 +120,14 @@
 					<img src="front/images/logo.png" />
 				</a>
 			</div>
+			<div class="gw" >
+				<img src="front/images/gw.gif" width="350" height="100" />
+			</div>
 		</div>
 		<div class="login">
-			<div class="log_img">
-				<img src="front/images/l_img.png" width="611" height="425" />
-			</div>
+			 <div class="log_img">
+				<img src="front/images/login1.png" width="355" height="370" />
+			</div> 
 			<div class="log_c">
 				<table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0"
 					cellpadding="0">
