@@ -460,7 +460,7 @@
 						</tr>
 						<tr>						
 							<td>
-								<textarea class="add_txt">${collect.product.pname }</textarea>
+								<textarea class="add_txt" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${collect.product.pname }</textarea>
 								</font> <img id="collectImg" width="90" height="90" src="collectImg/${collect.product.pimg }" />
 							</td>
 						</tr>

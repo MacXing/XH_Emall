@@ -307,7 +307,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr valign="top" height="110">
                 <td align="right">评论内容 &nbsp; &nbsp;</td>
-                <td style="padding-top:5px;"><textarea class="add_txt" name="commenttxt" id="context">${comment.commenttxt }</textarea></td>            	
+                <td style="padding-top:5px;">
+                <textarea class="add_txt" name="commenttxt" id="context" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${comment.commenttxt }</textarea>
+                </td>            	
               </tr>                 
             </table>
             <center>

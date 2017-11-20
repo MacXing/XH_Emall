@@ -437,7 +437,7 @@
 							<td align="right">商品编号 &nbsp; &nbsp;</td>
 							<td>
 								<input type="text" name="pid" class="add_ipt" style="width:290px;" placeholder="请给出商品..."
-									id="checkproductbyid" />
+									id="checkproductbyid" onkeyup="this.value=this.value.replace(/\D/g, '')"/>
 								<div class="checkproduct" style="color:red;margin-top:auto"></div>
 							</td>
 						</tr>
@@ -445,21 +445,21 @@
 							<td align="right">服务星评 &nbsp; &nbsp;</td>
 							<td>
 								<input type="text" name="commentservice" class="add_ipt" style="width:290px;"
-									placeholder="请给出星评..." />
+									placeholder="请给出星评..." onkeyup="this.value=this.value.replace(/\D/g, '')"/>
 							</td>
 						</tr>
 						<tr height="45">
 							<td align="right">物流星评 &nbsp; &nbsp;</td>
 							<td>
 								<input type="text" name="commentshopping" class="add_ipt" style="width:290px;"
-									placeholder="请给出星评..." />
+									placeholder="请给出星评..." onkeyup="this.value=this.value.replace(/\D/g, '')"/>
 							</td>
 						</tr>
 						<tr height="45">
 							<td align="right">商品星评&nbsp; &nbsp;</td>
 							<td>
 								<input type="text" name="commentgoods" class="add_ipt" style="width:290px;"
-									placeholder="请给出星评..." />
+									placeholder="请给出星评..." onkeyup="this.value=this.value.replace(/\D/g, '')"/>
 							</td>
 						</tr>
 						<tr>
@@ -472,7 +472,7 @@
 						<tr valign="top" height="110">
 							<td align="right">评论内容 &nbsp; &nbsp;</td>
 							<td style="padding-top:5px;">
-								<textarea class="add_txt" name="commenttxt" placeholder="从这里唠吧..." id="context"></textarea>
+								<textarea class="add_txt" name="commenttxt" placeholder="从这里唠吧..." id="context" style="font-family:'楷体','楷体_GB2312';font-size: 16px"></textarea>
 							</td>
 						</tr>
 					</table>

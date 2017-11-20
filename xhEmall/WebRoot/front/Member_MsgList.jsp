@@ -453,7 +453,7 @@
 						</tr>
 						<tr>
 							<td>
-								<textarea class="add_txt">${message.msgtxt }</textarea>
+								<textarea class="add_txt" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${message.msgtxt }</textarea>
 								</font>
 							</td>
 						</tr>

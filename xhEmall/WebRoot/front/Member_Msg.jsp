@@ -435,7 +435,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr valign="top" height="110">
 							<td align="right">留言内容 &nbsp; &nbsp;</td>
 							<td style="padding-top:5px;">
-								<textarea class="add_txt" name="msgtxt">${msg.msgtxt }</textarea>
+								<textarea class="add_txt" name="msgtxt" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${msg.msgtxt }</textarea>
 							</td>
 						</tr>
 					</table>

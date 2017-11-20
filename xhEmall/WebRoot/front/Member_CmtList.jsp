@@ -455,7 +455,7 @@
 						</tr>
 						<tr>
 							<td>
-								<textarea class="add_txt">${comment.commenttxt }</textarea>
+								<textarea class="add_txt" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${comment.commenttxt }</textarea>
 								</font> <img id="commentImg" width="90" height="90" src="commentImg/${comment.commentimg }" />
 							</td>
 						</tr>

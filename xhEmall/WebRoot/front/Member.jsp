@@ -313,7 +313,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>用户姓名：</h5></td>
-                <td id="username">${user.username }</td>
+                <td id="username"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">${user.username }</font></td>
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>用户生日：</h5></td>
@@ -321,8 +321,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>用户性别：</h5></td>
-                <td><c:if test="${user.usersex==1}">男</c:if>
-				<c:if test="${user.usersex eq 0}">女</c:if></td>
+                <td><c:if test="${user.usersex==1}"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">男</font></c:if>
+				<c:if test="${user.usersex eq 0}"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">女</font></c:if></td>
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>电  话：</h5></td>
@@ -330,7 +330,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
                <tr>
                 <td class="td_l b_none"><h5>地   址：</h5></td>
-                <td id="useraddress">${user.useraddress }</td>
+                <td id="useraddress"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">${user.useraddress }</font></td>
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>家庭电话：</h5></td>

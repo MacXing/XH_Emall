@@ -349,7 +349,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td width="40%">家庭地址：
                 <span style="color:#555555;">
                  	<%-- <input type="text" id="useraddress" name="useraddress" value="${user.useraddress }"> --%>
-                	<textarea id="useraddress" rows="5" cols="50" name="useraddress" data-provide="markdown" style="resize: none; display: block;">${user.useraddress }</textarea>
+                	<textarea id="useraddress" rows="5" cols="50" name="useraddress" data-provide="markdown" style="resize: none; display: block;font-family:'楷体','楷体_GB2312';font-size: 16px">${user.useraddress }</textarea>
                 </span>
                 </td>
               </tr>
