@@ -2,21 +2,22 @@ package com.xh.front.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xh.back.bean.Category_Product;
+import com.xh.back.bean.Xhad;
 import com.xh.back.bean.Xhbrand;
 import com.xh.back.bean.Xhcategory;
 import com.xh.back.bean.Xhproduct;
+import com.xh.back.serviceImpl.AdServiceImpl;
 import com.xh.back.serviceImpl.BrandServiceImpl;
 import com.xh.back.serviceImpl.CategoryServiceImpl;
 import com.xh.back.serviceImpl.ProductServiceImpl;
@@ -43,18 +44,30 @@ public class IndexController {
 	@Qualifier("productService")
 	private ProductServiceImpl productService;
 	
+	@Autowired
+	@Qualifier("adService")
+	private AdServiceImpl adService;
+	
 	@RequestMapping("home.action")
-	public String home(Model model){
+	public String home(Model model,HttpServletRequest request){
 		List<Navbar> navbars = navbarService.queryAllNavbarIsshow();
 		List<Xhcategory> categorys = categoryService.categoryList();
 		List<Category_Product> CP = categoryService.queryAllCPForHome();
 		List<Xhbrand> brands = brandService.queryAllBrands();
+		List<Xhad> ads = adService.queryAllAdsList();
+		ServletContext application=request.getServletContext();
 		
-		model.addAttribute("navbars", navbars);
+		application.setAttribute("navbars", navbars);
+		application.setAttribute("categoryList", categorys);
+		application.setAttribute("CP", CP);
+		application.setAttribute("brands", brands);
+		application.setAttribute("ads", ads);
+		/*model.addAttribute("navbars", navbars);
 		model.addAttribute("categoryList", categorys);
 		model.addAttribute("CP", CP);
 		model.addAttribute("brands", brands);
-		
+		model.addAttribute("ads", ads);
+		*/
 		return "/front/index.jsp";
 	}
 	

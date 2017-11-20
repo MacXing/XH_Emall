@@ -28,10 +28,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/resource/js/content.min.js?v=1.0.0"></script>
 	<link href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-
     <!-- Data Tables -->
     <link href="${pageContext.request.contextPath}/resource/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
     <link href="${pageContext.request.contextPath}/resource/css/animate.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resource/css/style.min.css?v=4.0.0" rel="stylesheet">
     <base target="_blank">
@@ -56,65 +54,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form id="myform" method="post" action="${pageContext.request.contextPath}/ad/insertAd.action" class="form-horizontal" enctype="multipart/form-data">
+                        <form id="myform" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">广告位置：</label>
-                                <div class="col-md-3">
-                                    <select class="form-control" id="addposition" name="addposition">
-                                    
-                                    </select>
+                                <div class="col-md-3"> 
+                                    <input id="positionid" type="text" class="form-control" name="positionid">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">广告标题：</label>
+                                <label class="col-sm-2 control-label">广告名称：</label>
                                 <div class="col-md-3 ">
-                                 <input id="pprice" type="text" class="form-control" name="pprice">   
+                                 <input id="adname" type="text" class="form-control" name="adname">   
                                 </div>
                             </div>
                              <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">广告描述：</label>
-
                                 <div class="col-sm-10">
-                                    <input id="pdesc" type="text" class="form-control" name="pdesc"> <span class="help-block m-b-none">广告说明，50字内说明广告信息。</span>
-                                    
+                                    <input id="adtxt" type="text" class="form-control" name="adtxt"> <span class="help-block m-b-none">广告说明，50字内说明广告信息。</span>    
                                 </div>
                             </div>
                              <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">广告链接：</label>
-                                <div class="col-md-3">
-                                    <input id="psale" type="text" class="form-control" name="psale">
-                                </div>
-                            </div>
-                             <div class="hr-line-dashed"></div>
-                             
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">广告图片：</label>
                                 <div class="col-md-3">
                                     <div id="file-pretty">
 			                            <div class="form-group">
-			                                <input type="file" id="file" class="form-control" name="file" onchange="showPic()"/>
-			                               		
-									 		<img class="img-rounded" id="img" width="150" height="150"> 	
+			                                <input type="file" id="file" class="form-control" name="file" onchange="showPic()"/>	
+									 		<img class="img-rounded" id="image" width="150" height="150"> 	
 			                            </div>  
 		                            </div>
                                 </div>  
-                            </div>
-                            
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">广告创建日期：</label>
-                                   <div class="col-md-3" id="file-pretty">
-			                           <input id="pprice" type="text" class="form-control" name="pprice" value="">
-			                       </div>                                
-                            </div>
+                            </div>                  
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="button" id="btn_id">保存内容</button>
-                                    <!-- <button class="btn btn-white" id="return">返回</button> -->
+                                    <button class="btn btn-primary" type="button" id="btn_id">保存内容</button>                  
                                     <input type="button" class="btn" value="返回" onclick="javascript:history.go(-1);"/>
                                 </div>
                             </div>
@@ -131,27 +107,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#btn_id")
 				.click(
 						function() {
-
 							var val = new validate(
 									{
-
 										rules : {
-											pprice : "notEmpty",
-											pdesc : "notEmpty",
-											psale : "notEmpty",
+											positionid : "notEmpty",
+											adname : "notEmpty",
+											adtxt : "notEmpty",
 										
 										},
 										/*submitFun里面为检验成功后要执行的方法*/
 										submitFun : function addorder() {
 										 alert("验证成功");
-											}
-
-									});
+										 var form = $("#file").val().length;
+										 if(form==0){
+												alert("请插入图片");
+												return;
+										}else{
+											var formdata= new FormData($("#myform")[0]);
+											$.ajax({		
+												url:"${pageContext.request.contextPath }/ad/insertAd.action",
+												   type:"POST",
+												   data:formdata, 
+											       contentType: false,  
+											       processData: false, 
+												   success:function(result){ 
+													  if(result.code==100){						  	
+														  alert("增加成功！");
+								    						window.location.href="${pageContext.request.contextPath }/ad/queryAllAdsList.action";
+													   }else{
+														  alert("增加失败！");
+													   } 
+												   }
+											});																					
+										}												 
+									}
+								});
 						});
     </script>
     
      <script type="text/javascript">
-      $(function(){
+     /*  $(function(){
         $.ajax({
           url:"${pageContext.request.contextPath}/ad/queryAllAdsList.action",
           type:"GET",
@@ -163,7 +158,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            }
         });
       });
-      
+       */
+      function showPic(){
+ 		  var pic = $("#file").get(0).files[0];
+ 		  $("#image").prop("src",window.URL.createObjectURL(pic));
+ 		 }
     </script>
   </body>
 </html>

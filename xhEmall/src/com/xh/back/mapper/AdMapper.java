@@ -14,11 +14,11 @@ public interface AdMapper {
     
     public List<XhqueryAd> queryStatueAllAds();
     
-    public List<XhqueryAd> queryAllAdsList();
+    public List<Xhad> queryAllAdsList();
     
-    public XhqueryAd queryadById(int id);
+    public Xhad queryadById(int id);
     
-    public void insertAd(XhqueryAd xhqueryAd);
+    public void insertAd(Xhad ad);
     
     public void updateAd(@Param("idslist")List<String> idslist);
     

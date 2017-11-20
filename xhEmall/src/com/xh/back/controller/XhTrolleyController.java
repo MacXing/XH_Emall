@@ -2,6 +2,7 @@ package com.xh.back.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,8 +21,10 @@ import com.xh.back.bean.Xhtrolley;
 import com.xh.back.service.ExpressService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
+import com.xh.front.serviceImpl.UserAddressServiceImpl;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.mapper.FrontOrderMapper;
+
 
 @Controller
 @RequestMapping("trolley")
@@ -50,34 +53,36 @@ public class XhTrolleyController {
 
 	// 查询通过用户
 	@RequestMapping("findByUser.action")
-	public String findByUser(Model model, HttpSession session) {
+	public String findByUser(Model model,HttpSession session,HttpServletRequest request) {
 		/* // 1. 得到uid8 */
 		Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
 		Integer uid = user.getUserid();
 		if(uid > 0){
 			List<Xhtrolley> trolleyItem = xhTrolleyService.queryTrolleyByUser(uid);
-			model.addAttribute("trolleyItem", trolleyItem);
-			return "forward:/front/BuyCar.jsp";
+			ServletContext application = request.getServletContext();
+			application.setAttribute("trolleyItem", trolleyItem);
+			application.setAttribute("falg",1);
+			return "home/home.action";
 		}
-		return "forward:/front/BuyCar.jsp";
+		return "/front/404.jsp";
 	}
 	
 	// 查询通过用户
-		@RequestMapping("findByUserJS.action")
-		@ResponseBody
-		public Msg findByUserJS(Model model, HttpSession session) {
+		@RequestMapping("findByUserCart.action")
+		public String findByUserCart(Model model,HttpSession session,HttpServletRequest request) {
 			/* // 1. 得到uid8 */
 			Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
 			Integer uid = user.getUserid();
 			if(uid > 0){
-				List<Xhtrolley> trolleyItems = xhTrolleyService.queryTrolleyByUser(uid);
-				model.addAttribute("trolleyItems", trolleyItems);
-				return Msg.success().add("msg", "成功");
+				List<Xhtrolley> trolleyItem = xhTrolleyService.queryTrolleyByUser(uid);
+				ServletContext application = request.getServletContext();
+				application.removeAttribute("trolleyItem");
+				application.setAttribute("trolleyItem", trolleyItem);
+				/*model.addAttribute("trolleyItem", trolleyItem);*/
+				return "forward:/front/BuyCar.jsp";
 			}
-			return Msg.fail();
+			return "forward:/front/BuyCar.jsp";
 		}
-	
-	
 	
 	// 查询通过用户
 	/*
@@ -93,7 +98,9 @@ public class XhTrolleyController {
 		return "/jsp/back/trolley/addtrolley.jsp";
 	}
 
-	// 删除购物车
+
+	//删除购物车
+
 	@RequestMapping("deleteTrolley.action")
 	public String deleteTrolley(int id) {
 		xhTrolleyService.deleteTrolleyById(id);
@@ -122,25 +129,23 @@ public class XhTrolleyController {
 	// 前端
 
 	// 添加购物车条目
-	@RequestMapping("addTroItem.action")
-	@ResponseBody
-	public Msg addTroItem(int pid, int pnum, HttpSession session) {
-		Xhusers user = (Xhusers) session.getAttribute(Const.CURRENT_USER);
-		Integer uid = user.getUserid();
-		
-		System.out.println(pid + "" + pnum);
-		Xhtrolley tro = new Xhtrolley();
-         
-		if (pid > 0 && pnum > 0) {
-			System.out.println(pid);
+	
+	public Msg addTroItem(int pid,int pnum,int userid){
+	 
+			System.out.println(pid+""+pnum+""+userid);
+			Xhtrolley tro=new Xhtrolley();
+			
+			if(pid>0&&pnum>0){	
+								
 			tro.setPid(pid);
-			tro.setUserid(uid);
+			tro.setUserid(userid);
+			tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
 			return Msg.success().add("msg", "添加购物车成功！");
 		}
-
 		return Msg.fail().add("msg", "添加失败，请联系管理员！");
+		
 	}
 
 	// 修改购物车商品的数量
@@ -180,10 +185,7 @@ public class XhTrolleyController {
 		System.out.println(items);
 		model.addAttribute("items", items);
 		model.addAttribute("total", Double.parseDouble(total));
-		
-		
-		UserAddress ua = frontOrderMapper.queryDefaultAddInfoById(uid);
-		
+		UserAddress ua = frontOrderMapper.queryDefaultAddInfoById(uid);		
 		model.addAttribute("ua", ua);
 		List<Xhshopping> expresslist = expressService.queryAllExpress();
 		model.addAttribute("expresslist", expresslist);

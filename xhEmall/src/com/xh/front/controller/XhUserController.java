@@ -60,7 +60,6 @@ public class XhUserController {
 		return null;		
 	}
 	
-	
 	// 登录
 	@RequestMapping(value = "login.action", method = RequestMethod.POST)
 	@ResponseBody

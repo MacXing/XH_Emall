@@ -48,35 +48,16 @@
 	 </select>
 	 
 	 <!--查看所有广告信息列表  -->
-	 <select id="queryAllAdsList" resultMap="queryAllAdsMap">
-	    SELECT a.adID,a.adName,a.adTxt,a.positionID positionid,
-        a.adImg,a.adLink,a.adStartTime,a.adstatue,
-        a.adEndTime,a.adClick,a.adSort,
-        p.positionID,p.positionName,p.positionFlag,
-		p.positionWidth,p.positionHeight
-        FROM xhAd a 
-	    JOIN xhposition p 
-	    ON   a.positionID=p.positionID
+	 <select id="queryAllAdsList" resultType="xhad">
+	    SELECT adID,adName,positionID,adTxt,adLink,adSort 
+		FROM xhAd
 	 </select>
-	 
-	 
-
-	 
-	 
-	 
-	
-	 
+	  
 	 <!--查看某条广告的信息  -->
-	 <select id="queryadById" parameterType="int" resultMap="queryAllAdsMap">
-	   SELECT a.adID,a.adName,a.adTxt,a.positionID positionid,
-       a.adImg,a.adLink,a.adStartTime,
-       a.adEndTime,a.adClick,a.adSort,a.adstatue,
-	   p.positionID,p.positionName,p.positionFlag,
-	   p.positionWidth,p.positionHeight
-	   FROM xhAd a
-       JOIN xhposition p 
-	   ON   a.positionID=p.positionID
-	   WHERE a.adID=#{id}
+	 <select id="queryadById" parameterType="int" resultType="xhad">
+	   SELECT adID,adName,positionID,adTxt,adLink,adSort 
+	   FROM xhAd
+	   WHERE adID=#{id}
 	 </select>
 	 
 	 
@@ -92,7 +73,7 @@
 	    positionID=#{positionid},
 	    adStartTime=#{adstarttime},
 	    adEndTime=#{adendtime}
-	     WHERE adID in
+	    WHERE adID in
 	      <foreach collection="idslist" item="ids" open="(" close=")" separator=",">
 	         #{ids}
 	     </foreach>

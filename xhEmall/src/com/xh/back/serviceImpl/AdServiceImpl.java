@@ -1,12 +1,9 @@
 package com.xh.back.serviceImpl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
 import com.xh.back.bean.Xhad;
 import com.xh.back.bean.XhqueryAd;
 import com.xh.back.mapper.AdMapper;
@@ -27,20 +24,20 @@ public class AdServiceImpl implements AdService{
 		return adMapper.queryStatueAllAds();
 	}
 	@Override
-	public List<XhqueryAd> queryAllAdsList(){
+	public List<Xhad> queryAllAdsList(){
 		return adMapper.queryAllAdsList();
 	}
 
 	
 	@Override
-	public XhqueryAd queryadById(int id) {
+	public Xhad queryadById(int id) {
 		
 		return adMapper.queryadById(id);
 	}
 
 	@Override
-	public void insertAd(XhqueryAd xhqueryAd) {
-		adMapper.insertAd(xhqueryAd);
+	public void insertAd(Xhad ad) {
+		adMapper.insertAd(ad);
 		
 	}
 
