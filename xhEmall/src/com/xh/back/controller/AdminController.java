@@ -40,8 +40,7 @@ public class AdminController {
 	
 	@RequestMapping("login.action")
 
-	public String login(HttpServletRequest request,Xhadmin admin,String code) throws Exception{
-		
+	public String login(HttpServletRequest request,Xhadmin admin,String code) throws Exception{		
 		if(admin.getAdminname()==null||admin.getAdminname().equals("")||admin.getAdminpassword()==null
 				||admin.getAdminpassword().equals("")||code==null||code.equals("")){
 			

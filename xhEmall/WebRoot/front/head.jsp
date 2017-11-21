@@ -8,6 +8,11 @@
 			+ path + "/";
 %>
 
+<%
+	if(application.getAttribute("init")==null||application.getAttribute("init")==""){
+		response.sendRedirect(request.getContextPath()+"/home/home.action");
+	}
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -158,8 +163,8 @@
                 </li>
                 </c:forEach>
             </ul>
-            </c:if>
             <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
+           </c:if>
             <!--End 购物车已登录 End-->
         </div>
     </div>

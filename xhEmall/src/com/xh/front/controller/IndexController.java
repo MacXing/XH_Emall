@@ -62,12 +62,7 @@ public class IndexController {
 		application.setAttribute("CP", CP);
 		application.setAttribute("brands", brands);
 		application.setAttribute("ads", ads);
-		/*model.addAttribute("navbars", navbars);
-		model.addAttribute("categoryList", categorys);
-		model.addAttribute("CP", CP);
-		model.addAttribute("brands", brands);
-		model.addAttribute("ads", ads);
-		*/
+		application.setAttribute("init", 1);
 		return "/front/index.jsp";
 	}
 	

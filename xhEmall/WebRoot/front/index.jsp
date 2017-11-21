@@ -4,7 +4,11 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%
+	if(application.getAttribute("init")==null||application.getAttribute("init")==""){
+		response.sendRedirect(request.getContextPath()+"/home/home.action");
+	}
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -30,6 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="front/js/hban.js"></script>
     <script type="text/javascript" src="front/js/tban.js"></script>   
 	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>
+	<script type="text/javascript">
+	
+	</script>
 </head>
   
 <body>
@@ -232,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="pic1">
 		<ul id="slideName1" class="slide_box bxslider">
 		<c:forEach items="${navbars }" var="item">
-	      <li><img src="${pageContext.request.contextPath}${item.url }" width="1349" height="411" /></li>                   
+	      <li><img src="${pageContext.request.contextPath}${item.url }" width="100%" height="100%" /></li>                   
 	    </c:forEach>
 	  	</ul>  
     </div>          
@@ -495,7 +502,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 		$(document).ready(function(){
-		
+			
 			 var userid=$("#loginuser").val();
 
 			 if($("#falg").val()>0){
@@ -506,14 +513,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
 	         }
 			
-			 if($("#falg").val()>0){
-			 	return;
-			 }
-			
-	         if(userid>0){
-	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
-	         };
-	         	
 		}); 
 		
 </script>
