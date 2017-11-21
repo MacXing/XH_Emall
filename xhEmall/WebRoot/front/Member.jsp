@@ -23,18 +23,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<link rel="stylesheet" href="front/css/style.css" />
 
-	<script type="text/javascript" src="front/js/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="front/js/menu.js"></script>          
-	<script type="text/javascript" src="front/js/select.js"></script>
+	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
+
 	<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="resource/js/content.min.js?v=1.0.0"></script>
-    <script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="resource/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="resource/js/demo/form-validate-demo.min.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-    <script type="text/javascript" src="resource/js/validate.js"></script>
-    
-	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>
+	<script src="resource/js/content.min.js?v=1.0.0"></script>
+	<script src="resource/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="resource/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="resource/js/demo/form-validate-demo.min.js"></script>
+	<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+	<script type="text/javascript" src="resource/js/validate.js"></script>
 	
   </head>
   
@@ -316,7 +313,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>用户姓名：</h5></td>
-                <td id="username">${user.username }</td>
+                <td id="username"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">${user.username }</font></td>
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>用户生日：</h5></td>
@@ -324,8 +321,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>用户性别：</h5></td>
-                <td><c:if test="${user.usersex==1}">男</c:if>
-				<c:if test="${user.usersex eq 0}">女</c:if></td>
+                <td><c:if test="${user.usersex==1}"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">男</font></c:if>
+				<c:if test="${user.usersex eq 0}"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">女</font></c:if></td>
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>电  话：</h5></td>
@@ -333,7 +330,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
                <tr>
                 <td class="td_l b_none"><h5>地   址：</h5></td>
-                <td id="useraddress">${user.useraddress }</td>
+                <td id="useraddress"><font style="font-family:'楷体','楷体_GB2312';font-size: 16px">${user.useraddress }</font></td>
               </tr>
               <tr>
                 <td class="td_l b_none"><h5>家庭电话：</h5></td>
@@ -445,9 +442,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--End Footer End -->    
 </div>
 
-</body>
-
-
 <script type="text/javascript">
 		/* function btn1(){
 		var id=2;
@@ -503,7 +497,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			} 
 	
 </script>
+
 <script type="text/javascript" src="front/js/logout.js"></script>
+
+</body>
 <!--[if IE 6]>
 <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
 <![endif]-->

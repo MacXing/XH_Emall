@@ -383,6 +383,7 @@
 							<a
 								href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a>
 						</li>
+						<li><a href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id=${current_user.userid }">我的收藏</a></li>
 					</ul>
 				</div>
 				<div class="left_m">
@@ -435,7 +436,7 @@
 						<tr valign="top" height="110">
 							<td align="right">留言内容 &nbsp; &nbsp;</td>
 							<td style="padding-top:5px;">
-								<textarea class="add_txt" name="msgtxt"></textarea>
+								<textarea class="add_txt" name="msgtxt" style="font-family:'楷体','楷体_GB2312';font-size: 16px"></textarea>
 							</td>
 						</tr>
 					</table>

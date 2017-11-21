@@ -109,6 +109,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     </form>   
                 </div>
+                 <div class="j_nums">
+ +            		<form  id="addcoll" >
+ +            		<input type="hidden" name="userid"  id="adduserid" value="${current_user.userid }"/>
+ +                	<input type="hidden" name="pid"  id="addpid" value="${xhproduct.pid }"/>
+ +                  </form>   
+ +                </div>
                 <span class="fl"><a id="test" href="javascript:addItem()" onclick=""><img src="front/images/j_car.png" /></a></span>
             </div>            
         </div>           
@@ -476,6 +482,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      //添加收藏
     function addcollect(){
     	var formData= new FormData($("#addcoll")[0]);
+    	if(${current_user.userid==null}){
+    		alert("亲，未登录！");
+    		window.location.href="${pageContext.request.contextPath}/front/Login.jsp";
+    	}
         $.ajax({
         	url:"${pageContext.request.contextPath}/userCollect/addCollect.action",
         	type:"POST",

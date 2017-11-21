@@ -252,6 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${user.userid }">修改信息</a></li>
                     <li><a href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${user.userid }">我的留言</a></li>
                     <li><a href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a></li>
+                	<li><a href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id=${current_user.userid }">我的收藏</a></li>
                 </ul>
             </div>  
             <div class="left_m">
@@ -348,7 +349,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td width="40%">家庭地址：
                 <span style="color:#555555;">
                  	<%-- <input type="text" id="useraddress" name="useraddress" value="${user.useraddress }"> --%>
-                	<textarea id="useraddress" rows="5" cols="50" name="useraddress" data-provide="markdown" style="resize: none; display: block;">${user.useraddress }</textarea>
+                	<textarea id="useraddress" rows="5" cols="50" name="useraddress" data-provide="markdown" style="resize: none; display: block;font-family:'楷体','楷体_GB2312';font-size: 16px">${user.useraddress }</textarea>
                 </span>
                 </td>
               </tr>

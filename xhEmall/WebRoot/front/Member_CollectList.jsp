@@ -449,18 +449,18 @@
 					<c:forEach items="${collect }" varStatus="status" var="collect">
 						<tr>
 							<td>
-								<input type="hidden" value="${collect.product.pid }" id="pid"/>
 								收藏编号：<font color="#ff4e00">${collect.collectid}</font>&nbsp;
 								用户编号：<font color="#ff4e00">${collect.users.userid }</font>&nbsp;
 								用户姓名：<font color="#ff4e00">${collect.users.username }</font>&nbsp; 
-								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp; 
-								<input type="button" onclick="addCar()" style="color:#fff" value="加入购物车"
+								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp;
+								<%-- <input type="hidden" name="pid" value="${collect.product.pid }" id="pid"/>  --%>
+								<input type="button" onclick="addCar(${collect.product.pid })" style="color:#fff" value="加入购物车"
 									class="btn_tj">				
 							</td>
 						</tr>
 						<tr>						
 							<td>
-								<textarea class="add_txt">${collect.product.pname }</textarea>
+								<textarea class="add_txt" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${collect.product.pname }</textarea>
 								</font> <img id="collectImg" width="90" height="90" src="collectImg/${collect.product.pimg }" />
 							</td>
 						</tr>
@@ -673,15 +673,15 @@
 	<script type="text/javascript">
 
 		/*点击添加购物车*/
-		function addCar() {
-			var pid=$("#pid").val();
+		function addCar(pid) {
+			alert(pid);
 			$.ajax({
-				url :"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&pnum="+1,
+				url :"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&pnum="+1+"&userid="+${current_user.userid },
 				type : "post",
 				success : function(result) {
 					if (result.code == 100) {
 						alert("添加成功！");
-						window.location.href = "${pageContext.request.contextPath }/trolley/findByUser.action";
+						window.location.href = "${pageContext.request.contextPath }/trolley/findByUserCart.action";
 					} else {
 						alert("添加失败！");
 						window.location.href = "${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id="+${current_user.userid };
