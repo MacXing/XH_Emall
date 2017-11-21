@@ -7,5 +7,7 @@ import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.Xhproduct;
 
 public interface PayMapper {
-	Xhorderinfo queryOrderById(int orderid);	
+	Xhorderinfo queryOrderById(int orderid);
+	
+	void updatePayStatus(Xhorderinfo xhorderinfo);
 }

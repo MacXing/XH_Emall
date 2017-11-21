@@ -10,4 +10,6 @@ import com.xh.back.bean.Xhproduct;
 
 public interface PaySercice {
 	Xhorderinfo queryOrderById(int orderid);
+	
+	void updatePayStatus(Xhorderinfo xhorderinfo);
 }

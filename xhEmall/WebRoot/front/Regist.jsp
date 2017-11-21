@@ -37,6 +37,8 @@
 					欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
+					&nbsp;|&nbsp;
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
 				</c:if>
 				
 				&nbsp;|&nbsp;
@@ -113,10 +115,13 @@
 					<img src="front/images/logo.png" />
 				</a>
 			</div>
+			<div class="gw" >
+				<img src="front/images/gw.gif" width="350" height="100" />
+			</div>
 		</div>
 		<div class="regist">
 			<div class="log_img">
-				<img src="front/images/l_img.png" width="611" height="425" />
+				<img src="front/images/login1.png" width="355" height="370" />
 			</div>
 			<div class="reg_c">
 				<table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0"

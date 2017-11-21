@@ -36,13 +36,22 @@
 							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
-					</c:if>
-
 					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
+					</c:if>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的订单</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					</c:if>
 					&nbsp;|
-					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的购物车</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 					&nbsp;|
+					</c:if>
 				</span>
 				<span class="ss">
 					<div class="ss_list">
@@ -120,11 +129,14 @@
 					<img src="front/images/logo.png" />
 				</a>
 			</div>
+			<div class="gw" >
+				<img src="front/images/gw.gif" width="350" height="100" />
+			</div>
 		</div>
 		<div class="login">
-			<div class="log_img">
-				<img src="front/images/l_img.png" width="611" height="425" />
-			</div>
+			 <div class="log_img">
+				<img src="front/images/login1.png" width="355" height="370" />
+			</div> 
 			<div class="log_c">
 				<table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0"
 					cellpadding="0">

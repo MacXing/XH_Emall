@@ -126,13 +126,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
-				</c:if>
-				
-				&nbsp;|&nbsp;
-				<a href="#">我的订单</a>
-				&nbsp;|
-				<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
-				&nbsp;|
+					&nbsp;|&nbsp;
+					</c:if>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的订单</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					</c:if>
+					&nbsp;|
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的购物车</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
+					&nbsp;|
+					</c:if>
 			</span>
 			<span class="ss">
 				<div class="ss_list">
@@ -204,34 +213,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="fl"><a href="#">咖啡</a><a href="#">iphone 6S</a><a href="#">新鲜美食</a><a href="#">蛋糕</a><a href="#">日用品</a><a href="#">连衣裙</a></span>
         </div>
         <div class="i_car">
-            <div class="car_t">购物车 [ <span>3</span> ]</div>
-            <div class="car_bg">
-                <!--Begin 购物车未登录 Begin-->
-                <div class="un_login">还未登录！<a href="Login.html" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
-                <!--End 购物车未登录 End-->
-                <!--Begin 购物车已登录 Begin-->
-                <ul class="cars">
-                    <li>
-                        <div class="img"><a href="#"><img src="images/car1.jpg" width="58" height="58" /></a></div>
-                        <div class="name"><a href="#">法颂浪漫梦境50ML 香水女士持久清新淡香 送2ML小样3只</a></div>
-                        <div class="price"><font color="#ff4e00">￥399</font> X1</div>
-                    </li>
-                    <li>
-                        <div class="img"><a href="#"><img src="images/car2.jpg" width="58" height="58" /></a></div>
-                        <div class="name"><a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a></div>
-                        <div class="price"><font color="#ff4e00">￥399</font> X1</div>
-                    </li>
-                    <li>
-                        <div class="img"><a href="#"><img src="images/car2.jpg" width="58" height="58" /></a></div>
-                        <div class="name"><a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a></div>
-                        <div class="price"><font color="#ff4e00">￥399</font> X1</div>
-                    </li>
-                </ul>
-                <div class="price_sum">共计&nbsp; <font color="#ff4e00">￥</font><span>1058</span></div>
-                <div class="price_a"><a href="#">去购物车结算</a></div>
-                <!--End 购物车已登录 End-->
-            </div>
+    	<div class="car_t">购物车 </div>
+        <div class="car_bg">
+       		<!--Begin 购物车未登录 Begin-->
+       		<c:if test="${current_user == null }">
+        	<div class="un_login">还未登录！<a href="front/Login.jsp" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+        	</c:if>
+            <!--End 购物车未登录 End-->
+            <!--Begin 购物车已登录 Begin-->
+            <c:if test="${current_user!=null }">
+            <ul class="cars" id="cart">
+           
+            
+            <c:forEach items="${trolleyItem}" var="items">
+            	<li>
+            		<input type="hidden" id="falg" value="${falg}">
+                	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
+                    <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
+                    <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
+                </li>
+               
+                </c:forEach>
+            </ul>
+            <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
+            </c:if>
+            <!--End 购物车已登录 End-->
         </div>
+    </div>
     </div>
 </div>
 <!--End Header End--> 
@@ -243,8 +251,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="left_m">
             	<div class="left_m_t t_bg1">订单中心</div>
                 <ul>
-                	<li><a href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a></li>
-                    <li><a href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a></li>           
+                	<li><a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a></li>
+                    <li><a href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">收货地址</a></li>           
                 </ul>
             </div>
             <div class="left_m">
@@ -254,6 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForUpdate.action?id=${current_user.userid }">修改信息</a></li>
                     <li><a href="${pageContext.request.contextPath }/userCenter/queryUsermessageById.action?id=${current_user.userid }">我的留言</a></li>
                     <li><a href="${pageContext.request.contextPath }/userComment/queryCommentById.action?id=${current_user.userid }">我的评论</a></li>
+                	<li><a href="${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id=${current_user.userid }">我的收藏</a></li>
                 </ul>
             </div>  
             <div class="left_m">
@@ -306,7 +315,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </tr>
               <tr valign="top" height="110">
                 <td align="right">评论内容 &nbsp; &nbsp;</td>
-                <td style="padding-top:5px;"><textarea class="add_txt" name="commenttxt" id="context">${comment.commenttxt }</textarea></td>            	
+                <td style="padding-top:5px;">
+                <textarea class="add_txt" name="commenttxt" id="context" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${comment.commenttxt }</textarea>
+                </td>            	
               </tr>                 
             </table>
             <center>

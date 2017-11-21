@@ -58,7 +58,7 @@ public class PayController {
 			HttpServletResponse rep
 			/*@RequestParam(value="1",required=true)Integer orderid*/)
 					throws AlipayApiException, IOException{
-		Xhorderinfo xhorderinfo = paySercice.queryOrderById(15);
+		Xhorderinfo xhorderinfo = paySercice.queryOrderById(38);
 		System.out.println(xhorderinfo);
 		
 		AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
@@ -88,6 +88,83 @@ public class PayController {
         rep.getWriter().flush();
         rep.getWriter().close();
 	}
+	
+	@RequestMapping("notify_url.action")
+    public String notifyUrl(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException{
+        //获取支付宝POST过来反馈信息
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Map<String,String> params = new HashMap<String,String>();
+        Map requestParams = request.getParameterMap();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                            : valueStr + values[i] + ",";
+            }
+            //乱码解决，这段代码在出现乱码时使用。
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            params.put(name, valueStr);
+        }
+        //切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
+        //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
+        boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset,AlipayConfig.sign_type);
+        if(signVerified) {
+        	System.out.println("*********************************************");
+            //商户订单号
+            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            //支付宝交易号
+            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+            //付款金额
+            String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
+
+            request.setAttribute("out_trade_no", out_trade_no);
+            request.setAttribute("trade_no", trade_no);
+            request.setAttribute("total_amount", total_amount);
+
+            /*log.info("订单处理：系统订单号" + out_trade_no + "支付宝交易号：" + trade_no);*/
+            //系统处理根据支付宝回调更改订单状态或者其他关联表的数据
+            Integer orderid = new Integer(out_trade_no);
+            Xhorderinfo order = paySercice.queryOrderById(orderid);
+            
+            String price = Double.toString(order.getPayPrice());
+            
+            if(order == null){
+            	response.getWriter().write("fail");
+                return "/jsp/front/pay.jsp";
+            }else{
+                /*if(!price.equals(total_amount)){
+                    signVerified = false;
+                    request.setAttribute("signVerified", signVerified); 
+                    request.setAttribute("reason", "付款金额不对");
+                    return "notify_url";
+                }*/
+                if(order.getPaystatus() == 1){//判断当前订单是否已处理，避免重复处理
+                    /*log.info("系统订单："+ out_trade_no + "无需重复处理。");*/
+                	response.getWriter().write("repetition");
+                    return "/jsp/front/pay.jsp";
+                }else{
+                    order.setPaystatus(1);//修改订单状态为已支付
+                    System.out.println("-----------------------------------------------------------------------");
+                    System.out.println(order);
+                    paySercice.updatePayStatus(order);
+                    
+                    /*Date payedAt = new Date();*/
+                    /*order.setTransactionId(trade_no);*/
+                    /*order.setPayedAt(payedAt);*/
+                    /*payService.payOrder(order);*/
+                    /*log.info("系统订单："+ out_trade_no + "成功支付。");*/
+                }
+            }
+        }else{
+        	response.getWriter().write("fail");
+            return "/jsp/front/pay.jsp";
+        }       
+        
+        response.getWriter().write("success");
+        return "/jsp/front/pay.jsp";
+    }
 	
 	
 	

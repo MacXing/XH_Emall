@@ -185,13 +185,13 @@
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥</span>
+							<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">${total}￥</span>
 								<span style="font-size:22px; color:#ff4e00;" id="paytotal"></span></b>
 						</td>
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<input type="button" id="suborder">
+							<button id="suborder">
 								确认订单
 							</button>
 						</td>

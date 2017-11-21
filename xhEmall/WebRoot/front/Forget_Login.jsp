@@ -39,13 +39,22 @@
 							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
-					</c:if>
-
 					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
+					</c:if>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的订单</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					</c:if>
 					&nbsp;|
-					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的购物车</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 					&nbsp;|
+					</c:if>
 				</span>
 				<span class="ss">
 					<div class="ss_list">

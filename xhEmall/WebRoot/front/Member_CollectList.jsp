@@ -221,13 +221,22 @@
 							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
-					</c:if>
-
 					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
+					</c:if>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的订单</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					</c:if>
 					&nbsp;|
-					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的购物车</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 					&nbsp;|
+					</c:if>
 				</span>
 				<span class="ss">
 					<div class="ss_list">
@@ -318,71 +327,33 @@
 				</span>
 			</div>
 			<div class="i_car">
-				<div class="car_t">
-					购物车 [
-					<span>3</span>
-					]
-				</div>
-				<div class="car_bg">
-					<!--Begin 购物车未登录 Begin-->
-					<div class="un_login">
-						还未登录！
-						<a href="Login.html" style="color:#ff4e00;">马上登录</a>
-						查看购物车！
-					</div>
-					<!--End 购物车未登录 End-->
-					<!--Begin 购物车已登录 Begin-->
-					<ul class="cars">
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="front/images/car1.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">法颂浪漫梦境50ML 香水女士持久清新淡香 送2ML小样3只</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="front/images/car2.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="front/images/car2.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-					</ul>
-					<div class="price_sum">
-						共计&nbsp; <font color="#ff4e00">￥</font>
-						<span>1058</span>
-					</div>
-					<div class="price_a">
-						<a href="#">去购物车结算</a>
-					</div>
-					<!--End 购物车已登录 End-->
-				</div>
-			</div>
+    	<div class="car_t">购物车 </div>
+        <div class="car_bg">
+       		<!--Begin 购物车未登录 Begin-->
+       		<c:if test="${current_user == null }">
+        	<div class="un_login">还未登录！<a href="front/Login.jsp" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+        	</c:if>
+            <!--End 购物车未登录 End-->
+            <!--Begin 购物车已登录 Begin-->
+            <c:if test="${current_user!=null }">
+            <ul class="cars" id="cart">
+           
+            
+            <c:forEach items="${trolleyItem}" var="items">
+            	<li>
+            		<input type="hidden" id="falg" value="${falg}">
+                	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
+                    <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
+                    <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
+                </li>
+               
+                </c:forEach>
+            </ul>
+            <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
+            </c:if>
+            <!--End 购物车已登录 End-->
+        </div>
+    </div>
 		</div>
 	</div>
 	<!--End Header End-->
@@ -396,11 +367,11 @@
 					<ul>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
 						</li>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
 						</li>
 					</ul>
 				</div>
@@ -449,18 +420,18 @@
 					<c:forEach items="${collect }" varStatus="status" var="collect">
 						<tr>
 							<td>
-								<input type="hidden" value="${collect.product.pid }" id="pid"/>
 								收藏编号：<font color="#ff4e00">${collect.collectid}</font>&nbsp;
 								用户编号：<font color="#ff4e00">${collect.users.userid }</font>&nbsp;
 								用户姓名：<font color="#ff4e00">${collect.users.username }</font>&nbsp; 
-								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp; 
-								<input type="button" onclick="addCar()" style="color:#fff" value="加入购物车"
+								商品编号：<font color="#ff4e00">${collect.product.pid }</font>&nbsp;
+								<%-- <input type="hidden" name="pid" value="${collect.product.pid }" id="pid"/>  --%>
+								<input type="button" onclick="addCar(${collect.product.pid })" style="color:#fff" value="加入购物车"
 									class="btn_tj">				
 							</td>
 						</tr>
 						<tr>						
 							<td>
-								<textarea class="add_txt">${collect.product.pname }</textarea>
+								<textarea class="add_txt" style="font-family:'楷体','楷体_GB2312';font-size: 16px">${collect.product.pname }</textarea>
 								</font> <img id="collectImg" width="90" height="90" src="collectImg/${collect.product.pimg }" />
 							</td>
 						</tr>
@@ -673,15 +644,15 @@
 	<script type="text/javascript">
 
 		/*点击添加购物车*/
-		function addCar() {
-			var pid=$("#pid").val();
+		function addCar(pid) {
+			alert(pid);
 			$.ajax({
-				url :"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&pnum="+1,
+				url :"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&pnum="+1+"&userid="+${current_user.userid },
 				type : "post",
 				success : function(result) {
 					if (result.code == 100) {
 						alert("添加成功！");
-						window.location.href = "${pageContext.request.contextPath }/trolley/findByUser.action";
+						window.location.href = "${pageContext.request.contextPath }/trolley/findByUserCart.action";
 					} else {
 						alert("添加失败！");
 						window.location.href = "${pageContext.request.contextPath }/userCollect/queryAllCollect.action?id="+${current_user.userid };

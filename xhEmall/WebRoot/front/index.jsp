@@ -30,21 +30,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="front/js/hban.js"></script>
     <script type="text/javascript" src="front/js/tban.js"></script>   
 	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>
-	
-	
 </head>
   
 <body>
+
 <!--Begin Header Begin-->
 <div class="soubg">
 	<div class="sou">
     	<!--Begin 所在收货地区 Begin-->
     	<span class="s_city_b">
-        	
         </span> 
         <!--End 所在收货地区 End-->
 		<span class="fr">
 			<span class="fl">
+			   <input type="hidden" id="loginuser" name="user" value="${current_user.userid}"/>
 				<c:if test="${current_user == null }">
 					你好，请
 					<a href="front/Login.jsp">登录</a>
@@ -57,10 +56,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a class="logout">退出登录</a>
 				</c:if>
 				&nbsp;|&nbsp;
-				<a href="#">我的订单</a>
+				<c:if test="${current_user == null }">
+				<a href="front/Login.jsp">我的订单</a>
+				</c:if>
+				<c:if test="${current_user != null }">
+				<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+				</c:if>
 				&nbsp;|
-				<a href="#">我的购物车</a>
+				<c:if test="${current_user == null }">
+				<a href="front/Login.jsp">我的购物车</a>
+				</c:if>
+				<c:if test="${current_user != null }">
+				<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 				&nbsp;|
+				</c:if>
 			</span>
 			<span class="ss">
 				<div class="ss_list">
@@ -118,34 +127,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<input type="text" value="" class="s_ipt" />
             <input type="submit" value="搜索" class="s_btn" />
         </form>                      
-        
     </div>
     <div class="i_car">
-    	<div class="car_t">购物车 [ <span>3</span> ]</div>
+    	<div class="car_t">购物车 </div>
         <div class="car_bg">
        		<!--Begin 购物车未登录 Begin-->
-        	<div class="un_login">还未登录！<a href="Login.html" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+       		<c:if test="${current_user == null }">
+        	<div class="un_login">还未登录！<a href="front/Login.jsp" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+        	</c:if>
             <!--End 购物车未登录 End-->
             <!--Begin 购物车已登录 Begin-->
-            <ul class="cars">
+            <c:if test="${current_user!=null }">
+            <ul class="cars" id="cart">
+           
+            
+            <c:forEach items="${trolleyItem}" var="items">
             	<li>
-                	<div class="img"><a href="#"><img src="front/images/car1.jpg" width="58" height="58" /></a></div>
-                    <div class="name"><a href="#">法颂浪漫梦境50ML 香水女士持久清新淡香 送2ML小样3只</a></div>
-                    <div class="price"><font color="#ff4e00">￥399</font> X1</div>
+            		<input type="hidden" id="falg" value="${falg}">
+                	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
+                    <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
+                    <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
                 </li>
-                <li>
-                	<div class="img"><a href="#"><img src="front/images/car2.jpg" width="58" height="58" /></a></div>
-                    <div class="name"><a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a></div>
-                    <div class="price"><font color="#ff4e00">￥399</font> X1</div>
-                </li>
-                <li>
-                	<div class="img"><a href="#"><img src="front/images/car2.jpg" width="58" height="58" /></a></div>
-                    <div class="name"><a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a></div>
-                    <div class="price"><font color="#ff4e00">￥399</font> X1</div>
-                </li>
+               
+                </c:forEach>
             </ul>
-            <div class="price_sum">共计&nbsp; <font color="#ff4e00">￥</font><span>1058</span></div>
-            <div class="price_a"><a href="#">去购物车结算</a></div>
+            <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
+            </c:if>
             <!--End 购物车已登录 End-->
         </div>
     </div>
@@ -173,19 +180,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                         <div class="zj" style="top:${-i*40}px;" test="${i}">
                             <div class="zj_l">
+                            
+                             <c:forEach begin="0" end="2">
                              <c:set var="a" value="0"/>
                              <c:set var="b" value="5"/>
-                             <c:forEach begin="0" end="2">
                                 <div class="zj_l_c">
 	                                <c:forEach items="${categoryList }" var="item2">                                 
 	                                    <c:if test="${item2.parentid==item.catid&&item2.catgrade==2 }">
+	                                    	<c:set var="a" value="${a+1 }"/>
+	                                    	<c:if test="${a<12 }">
 	                                    	<a href="${pageContext.request.contextPath}/home/queryproductsByCategory.action?catid=${item2.catid}">${item2.catname }</a>
+	                                   		</c:if>
 	                                    </c:if>
 	                                </c:forEach>
 	                                <hr>                                                                                 
-                                </div>
-                                <c:set var="a" value="${b }"/>
-                                <c:set var="b" value="${b+11 }"/>  
+                                </div>           
                              </c:forEach>   
                             </div>
                            <div class="zj_r">                    
@@ -220,12 +229,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="i_bg bg_color">
 	<div class="i_ban_bg">
-	<ul class="bxslider">
-	<c:forEach items="${navbars }" var="item">
-      <li><img src="${pageContext.request.contextPath}${item.url }" width="1349" height="411" /></li>                   
-    </c:forEach>
-  	</ul>           
-       <script type="text/javascript">
+	<div id="pic1">
+		<ul id="slideName1" class="slide_box bxslider">
+		<c:forEach items="${navbars }" var="item">
+	      <li><img src="${pageContext.request.contextPath}${item.url }" width="1349" height="411" /></li>                   
+	    </c:forEach>
+	  	</ul>  
+    </div>          
+    <script type="text/javascript">     
         //var jq = jQuery.noConflict();
         (function(){
             $(".bxslider").bxSlider({
@@ -233,17 +244,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 prevSelector:jq(".bxslider .op_prev")[0],nextSelector:jq(".bxslider .op_next")[0]
             });
         })();
-        </script>
+        
+        $('#pic1 .focusBox li').click(function(){
+            index = $('#pic1 .focusBox li').index(this);
+            showPic(index);
+         }).eq(0).trigger('click');
+          
+         $('#pic1 .sildebar').css("width",sWidth * (len));
+        
+    </script>
         <!--End Banner End-->
     </div>
-   
-	<div class="content mar_20">
-	    
+	<div class="content mar_20">	    
 	</div>
 	    
     <!--Begin 食品饮料 Begin--> 
        
-    <c:forEach items="${CP }" var="item" varStatus="i">
+    <c:forEach items="${CP }" var="item" varStatus="i" begin="0" end="4">
     <div class="i_t mar_10">
     	<span class="floor_num">${i.index+1}F</span>
     	<span class="fl">${item.catname }</span>                              
@@ -476,24 +493,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--End Footer End -->    
 </div>
 <script type="text/javascript">
+
 		$(document).ready(function(){
-			$.ajax({
-				url:"${pageContext.request.contextPath}/home/home.action",
-				type:"GET",
-				success:function(result){
-					if(result.code==100){
-						console.log(result);
-						$.each(result.extend.navbars,function(index,item){
-							var ban ="<li><img src='"+"${pageContext.request.contextPath}"+item.url+"'width=\"740\"height= \"401\" /></li>";
-							$("#banner").append(ban);
-						});
-					}
-				}
-			});
+		
+			 var userid=$("#loginuser").val();
+
+			 if($("#falg").val()>0){
+			 	return;
+			 }
+			
+	         if(userid>0){
+	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
+	         }
+			
+			 if($("#falg").val()>0){
+			 	return;
+			 }
+			
+	         if(userid>0){
+	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
+	         };
+	         	
 		}); 
 		
 </script>
-	<script type="text/javascript" src="front/js/logout.js"></script>
+<script type="text/javascript" src="front/js/logout.js"></script>
 	 
   </body>
 </html>
