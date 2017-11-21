@@ -233,7 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="pic1">
 		<ul id="slideName1" class="slide_box bxslider">
 		<c:forEach items="${navbars }" var="item">
-	      <li><img src="${pageContext.request.contextPath}${item.url }" width="1349" height="411" /></li>                   
+	      <li><img src="${pageContext.request.contextPath}${item.url }" width="100%" height="100%" /></li>                   
 	    </c:forEach>
 	  	</ul>  
     </div>          

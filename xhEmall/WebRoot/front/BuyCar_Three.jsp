@@ -853,7 +853,7 @@
 					<tr>
 						<td>
 							<div class="btn_u" style="margin:0 auto; padding:0 20px; width:120px;">
-								<a href="#">立即使用支付宝支付</a>
+								<a href="${pageContext.request.contextPath}/Pay/viewOrder.action?orderid=${orderinfo.orderid }">立即使用支付宝支付</a>
 							</div>
 							<a href="#">首页</a>
 							&nbsp; &nbsp;
