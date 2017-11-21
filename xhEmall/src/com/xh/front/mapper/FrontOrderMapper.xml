@@ -43,10 +43,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="userid != null">userid,</if>
 			<if test="shoppingid != null">shoppingid,</if>
-			<if test="ordertime != null">ordertime,</if>
-			<if test="orderstatus != null">orderstatus,</if>
-			<if test="shoppingstatus != null">shoppingstatus,</if>
-			<if test="paystatus != null">paystatus,</if>
+			<if test="ordertime == null">ordertime,</if>
+			<if test="orderstatus == null">orderstatus,</if>
+			<if test="shoppingstatus == null">shoppingstatus,</if>
+			<if test="paystatus == null">paystatus,</if>
 			<if test="addusername != null">addusername,</if>
 			<if test="addcountry != null">addcountry,</if>
 			<if test="addprovince != null">addprovince,</if>
@@ -70,12 +70,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="userid != null">#{userid },</if>
 			<if test="shoppingid != null">#{shoppingid },</if>
-			<if test="ordertime != null">now(),</if>
-			<if test="orderstatus != null">0,</if>
-			<if test="shoppingstatus != null">0,</if>
-			<if test="paystatus != null">0,</if>
+			<if test="ordertime == null">now(),</if>
+			<if test="orderstatus == null">0,</if>
+			<if test="shoppingstatus == null">0,</if>
+			<if test="paystatus == null">0,</if>
 			<if test="addusername != null">#{addusername },</if>
-			<if test="addcountry != null">#addcountry },</if>
+			<if test="addcountry != null">#{addcountry },</if>
 			<if test="addprovince != null">#{addprovince },</if>
 			<if test="addcity != null">#{addcity },</if>
 			<if test="adddistrict != null">#{adddistrict },</if>
@@ -86,6 +86,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="payfee != null">#{payfee },</if>
 		</trim>
 	</insert>
+	
+	<update id="addShopping" parameterType="map">
+		update xhOrderInfo,xhShopping
+		set xhOrderInfo.shoppingCode = xhShopping.shoppingCode, 
+			xhOrderInfo.shoppingName = xhShopping.shoppingName, 
+			xhOrderInfo.shoppingDesc = xhShopping.shoppingDesc, 
+			xhOrderInfo.enable = xhShopping.enable, 
+			xhOrderInfo.shoppingImg =xhShopping.shoppingImg
+		
+		where xhOrderInfo.orderid = #{orderid} and xhOrderInfo.shoppingID = xhShopping.shoppingID
+	</update>
+	
+	<select id="queryOrderInfoById" parameterType="int" resultType="Xhorderinfo">
+		select orderID, shoppingName, payFee, payprice from xhOrderInfo where orderid = #{orderid }
+	</select>
 	
 	<select id="queryAddressById" parameterType="int" resultType="UserAddress">
 		select <include refid="Base_Column_List"/> from xhUserAddress

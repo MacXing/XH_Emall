@@ -20,7 +20,6 @@ import com.xh.back.bean.Xhtrolley;
 import com.xh.back.service.ExpressService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
-import com.xh.front.serviceImpl.UserAddressServiceImpl;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.mapper.FrontOrderMapper;
 
@@ -167,6 +166,7 @@ public class XhTrolleyController {
 		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(id);
 		//System.out.println(items);
 		model.addAttribute("items", items);
+		model.addAttribute("id", id);
 		model.addAttribute("total", Double.parseDouble(total));
 		
 		

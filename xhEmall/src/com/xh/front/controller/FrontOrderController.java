@@ -2,6 +2,9 @@ package com.xh.front.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,8 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
+import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.Xhtrolley;
-import com.xh.back.service.XhTrolleyService;
+import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.service.FrontOrderService;
 
@@ -26,7 +30,7 @@ public class FrontOrderController {
 	
 	@Autowired
 	@Qualifier("xhTrolleyService")
-	private XhTrolleyService xhTrolleyService;
+	private XhTrolleyServiceImpl xhTrolleyService;
 	
 	@RequestMapping("queryOrderInfo.action")
 	public String queryOrderInfo(int userid, Model model){
@@ -73,11 +77,14 @@ public class FrontOrderController {
 	}
 	
 	@RequestMapping("addOrder.action")
-	@ResponseBody
-	public ServerResponse<String> addOrder(int spid, UserAddress userAddress,Integer troid){
-		String troids = String.valueOf(troid);
-		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(troids);
-		return frontOrderService.addOrder(spid, userAddress, items);
+	public String addOrder(int spids, UserAddress userAddress,String id, HttpServletRequest req){
+		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(id);
+		ServerResponse sr = frontOrderService.addOrder(spids, userAddress, items);
+		Xhorderinfo orderinfo = (Xhorderinfo)sr.getData();
+		//model.addAttribute("orderinfo", orderinfo);
+		ServletContext app = req.getServletContext();
+		app.setAttribute("orderinfo", orderinfo);
+		return "forward:/front/BuyCar_Three.jsp";
 	}
 	
 }

@@ -135,7 +135,7 @@
 						<td id="addaddress">${ua.addAddress }</td>
 					</tr>
 				</table>
-
+							
 				<div class="two_t">配送方式</div>
 				<table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
 					<tr>
@@ -148,7 +148,7 @@
 						<tr>
 							<td align="center">
 								<input type="hidden" value="${express.shoppingid}" id="shoppingid"/>
-								<input type="radio" name="ch" checked="checked" />
+								<input type="radio" name="ch" checked="checked" value="${express.shoppingid}"/>
 							</td>
 							<td align="center" style="font-size:14px;">
 								<b>${express.shoppingname}</b>
@@ -191,7 +191,7 @@
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<button id="suborder">
+							<input type="button" id="suborder">
 								确认订单
 							</button>
 						</td>
@@ -363,7 +363,7 @@
 		</div>
 		<!--End Footer End -->
 	</div>
-
+	<script type="text/javascript" src="resource/layer/layer.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var totalfee = $("#totalfee").attr("value");
@@ -371,24 +371,35 @@
 			$("#paytotal").text(paytotal);
 
 		});
-		$("#suborder").click(function (){
-			alert(123);
-			var shoppingid = $("#shoppingid").val();
+		 $("#suborder").click(function (){
+			var shoppingid = $("input[type=radio][name=ch]:checked").val();
+			var addusername = $("#addusername").html();
+			var addphone = $("#addphone").html();
+			var addcountry = $("#addcountry").html();
+			var addprovince = $("#addprovince").html();
+			var addcity = $("#addcity").html();
+			var adddistrict = $("#adddistrict").html();
+			var addcode = $("#addcode").html();
+			var addaddress = $("#addaddress").html();
 			$.ajax({
-				url: "order/addOrder.action",
+				url: "frontOrder/addOrder.action",
 				type: "POST",
-				contentType:"application/json", 
+				//contentType:"application/json", 
 				data: {
-					"userAddress": ${ua },
-					"troid": ${items.troid },
-					"spid":shoppingid
+					"spids": shoppingid,
+					"userID" : ${current_user.userid},
+					"addUserName": addusername,
+					"addPhone": addphone,
+					"addCountry": addcountry,
+					"addProvice": addprovince,
+					"addCity": addcity,
+					"addDistrict": adddistrict,
+					"addCode": addcode,
+					"addAddress": addaddress,
+					"id": "${id}"
 				},
 				success: function(result){
-					if(reult.status == 0){
-						layer.msg(result.msg);
-					} else {
-						layer.msg(result.msg);						
-					}
+					window.location.href = "front/BuyCar_Three.jsp";					
 				}
 			});
 		});

@@ -98,28 +98,36 @@ public class FrontOrderServiceImpl implements FrontOrderService {
 	}
 
 	@Override
-	public ServerResponse<String> addOrder(int spid, UserAddress userAddress,
-			List<Xhtrolley> items) {
-		Xhorderinfo orderInfo = new Xhorderinfo();
+	public ServerResponse<Xhorderinfo> addOrder(int spid, UserAddress userAddress, List<Xhtrolley> items) {
+		
 		int resultCount = 0;
+		double payfee = 0;
+		Xhorderinfo orderInfo = new Xhorderinfo();
+		
 		for(Xhtrolley t : items){
-			orderInfo.setShoppingid(spid);
-			orderInfo.setAddaddress(userAddress.getAddAddress());
-			orderInfo.setAddcity(userAddress.getAddCity());
-			orderInfo.setAddcode(userAddress.getAddCode());
-			orderInfo.setAdddistrict(userAddress.getAddDistrict());
-			orderInfo.setAddcountry(userAddress.getAddCountry());
-			orderInfo.setAddphone(userAddress.getAddPhone());
-			orderInfo.setAddusername(userAddress.getAddUserName());
-			orderInfo.setAddprovince(userAddress.getAddProvice());
-			orderInfo.setUserid(userAddress.getUserID());
-			orderInfo.setGoodamount(t.getTronum());
-			orderInfo.setPayfee(t.getTronum()*t.getXhproduct().getPsale());
-			resultCount = frontOrderMapper.addOrder(orderInfo);
-			orderGoodsMapper.addOrderGoodInfo(t.getPid(), orderInfo.getOrderid());
+			payfee += t.getTronum()*t.getXhproduct().getPsale();
 		}
+		
+		orderInfo.setShoppingid(spid);
+		orderInfo.setAddaddress(userAddress.getAddAddress());
+		orderInfo.setAddcity(userAddress.getAddCity());
+		orderInfo.setAddcode(userAddress.getAddCode());
+		orderInfo.setAdddistrict(userAddress.getAddDistrict());
+		orderInfo.setAddcountry(userAddress.getAddCountry());
+		orderInfo.setAddphone(userAddress.getAddPhone());
+		orderInfo.setAddusername(userAddress.getAddUserName());
+		orderInfo.setAddprovince(userAddress.getAddProvice());
+		orderInfo.setUserid(userAddress.getUserID());
+		orderInfo.setPayfee(payfee);
+		resultCount = frontOrderMapper.addOrder(orderInfo);
+		
 		if(resultCount > 0){
-			return ServerResponse.createBySuccess();
+			for(Xhtrolley t : items){
+				orderGoodsMapper.addOrderGood(t.getXhproduct().getPid(), orderInfo.getOrderid(), t.getTronum());
+				frontOrderMapper.addShopping(orderInfo.getOrderid(), orderInfo.getShoppingcode());
+			}
+			Xhorderinfo frontorderInfo = frontOrderMapper.queryOrderInfoById(orderInfo.getOrderid());
+			return ServerResponse.createBySuccess(frontorderInfo);
 		}
 		return ServerResponse.createByErrorMassage("添加失败");
 	}

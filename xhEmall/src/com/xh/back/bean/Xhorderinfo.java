@@ -5,6 +5,7 @@ import java.util.Date;
 import com.xh.front.bean.Xhusers;
 
 public class Xhorderinfo {
+	
     private Integer orderid;
 
     private Integer userid;
