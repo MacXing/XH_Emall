@@ -348,11 +348,11 @@
 					<ul>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
 						</li>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
 						</li>
 					</ul>
 				</div>
@@ -606,6 +606,57 @@
 					src="front/images/b_6.gif" width="98" height="33" />
 			</div>
 		</div>
+		<div id="modify" id="hiddendiv">
+			<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="135" align="right">配送地区</td>
+					<td colspan="3" style="font-family:'宋体';">
+						<select class="jj" name="country" style="background-color:#f6f6f6;">
+							<option>中国</option>
+						</select>
+						<select class="jj" name="province" id="provinceId">
+							<option value="0" selected="selected">请选择...</option>
+						</select>
+						<select class="jj" name="city" id="cityId">
+							<option value="0" selected="selected">请选择...</option>
+						</select>
+						<select class="jj" name="area" id="areaId">
+							<option value="0" selected="selected">请选择...</option>
+						</select>
+						（必填）
+					</td>
+				</tr>
+				<tr>
+					<td align="right">收货人姓名</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addUserName" />
+						（必填）
+					</td>
+				</tr>
+				<tr>
+					<td align="right">详细地址</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addAddress" />
+						（必填）
+					</td>
+		
+				</tr>
+				<tr>
+					<td align="right">邮政编码</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addCode" />
+						（必填）
+					</td>
+				</tr>
+				<tr>
+					<td align="right">手机</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addPhone" />
+						（必填）
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<script type="text/javascript" src="front/js/menu.js"></script>
 	<script type="text/javascript" src="front/js/select.js"></script>
@@ -622,7 +673,7 @@
 							var ii = layer.load();
 							$
 									.ajax({
-										url : "order/queryAddInfoById.action?addID="
+										url : "frontOrder/queryAddInfoById.action?addID="
 												+ addID,
 										success : function(result) {
 											if (result.status == 0) {
@@ -679,7 +730,7 @@
 
 																$
 																		.ajax({
-																			url : "order/updateAddressById.action",
+																			url : "frontOrder/updateAddressById.action",
 																			type : "POST",
 																			data : {
 																				"addUserName" : addUserName,
@@ -742,7 +793,7 @@
 			var ii = layer.load();
 
 			$.ajax({
-				url : "order/deleteAddressById.action?addID=" + addID,
+				url : "frontOrder/deleteAddressById.action?addID=" + addID,
 				success : function(result) {
 					if (result.status == 0) {
 						layer.close(ii);
@@ -760,7 +811,7 @@
 			//var userID = $(this).parent().parent().find("input[type='checkbox']").val();
 			var ii = layer.load();
 			$.ajax({
-				url : "order/updateDefaultById.action",
+				url : "frontOrder/updateDefaultById.action",
 				type : "POST",
 				data : {
 					"addID" : addID,
@@ -788,7 +839,7 @@
 		$
 				.ajax({
 					type : "GET",
-					url : "order/getProvincelist.action",
+					url : "frontOrder/getProvincelist.action",
 					success : function(result) {
 						$
 								.each(
@@ -806,7 +857,7 @@
 											$
 													.ajax({
 														type : "GET",
-														url : "${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="
+														url : "${pageContext.request.contextPath}/frontOrder/getCityByProvinceId.action?id="
 																+ $(
 																		"#provinceId")
 																		.val(),
@@ -837,7 +888,7 @@
 																				$
 																						.ajax({
 																							type : "GET",
-																							url : "${pageContext.request.contextPath}/order/getAreaByCityId.action?id="
+																							url : "${pageContext.request.contextPath}/frontOrder/getAreaByCityId.action?id="
 																									+ $(
 																											"#cityId")
 																											.val(),
@@ -889,7 +940,7 @@
 									.text();
 
 							$.ajax({
-								url : "order/addAddress.action",
+								url : "frontOrder/addAddress.action",
 								type : "POST",
 								data : {
 									"addUserName" : addUserName,
@@ -925,60 +976,12 @@
 						content : $('#modify')
 					});
 				});
+		$(function (){
+			$("#hiddendiv").attr("hidden", hidden);
+		});
 	</script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
 </body>
-<div id="modify">
-	<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
-		<tr>
-			<td width="135" align="right">配送地区</td>
-			<td colspan="3" style="font-family:'宋体';">
-				<select class="jj" name="country" style="background-color:#f6f6f6;">
-					<option>中国</option>
-				</select>
-				<select class="jj" name="province" id="provinceId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				<select class="jj" name="city" id="cityId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				<select class="jj" name="area" id="areaId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">收货人姓名</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addUserName" />
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">详细地址</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addAddress" />
-				（必填）
-			</td>
-
-		</tr>
-		<tr>
-			<td align="right">邮政编码</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addCode" />
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">手机</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addPhone" />
-				（必填）
-			</td>
-		</tr>
-	</table>
-</div>
 
 </html>
 

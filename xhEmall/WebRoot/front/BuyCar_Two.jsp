@@ -110,7 +110,7 @@
 
 				<div class="two_t">
 					<span class="fr">
-						<a href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">修改</a>
+						<a href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">修改</a>
 					</span>
 					收货人信息
 				</div>
