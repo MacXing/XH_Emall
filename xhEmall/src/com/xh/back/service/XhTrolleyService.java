@@ -3,7 +3,6 @@ package com.xh.back.service;
 import java.util.List;
 
 import com.xh.back.bean.Xhtrolley;
-import com.xh.front.bean.Xhusers;
 
 public interface XhTrolleyService {
 	//查询购物车信息

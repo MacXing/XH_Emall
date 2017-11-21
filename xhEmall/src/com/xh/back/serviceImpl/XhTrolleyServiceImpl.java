@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.xh.back.bean.Xhtrolley;
 import com.xh.back.mapper.XhTrolleyMapper;
 import com.xh.back.service.XhTrolleyService;
-import com.xh.front.bean.Xhusers;
 
 public class XhTrolleyServiceImpl implements XhTrolleyService{
 	@Autowired
 	@Qualifier("xhTrolleyMapper")
-   private XhTrolleyMapper xhTrolleyMapper;
+    private XhTrolleyMapper xhTrolleyMapper;
 	//查询购物车信息 
 	@Override
 	public List<Xhtrolley> TrolleyItem() {

@@ -1,6 +1,9 @@
-/*package com.xh.front.controller;
+package com.xh.front.controller;
 
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,16 +15,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
 import com.xh.back.bean.Xhorderinfo;
+import com.xh.back.bean.Xhtrolley;
+import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.service.FrontOrderService;
 
 @Controller
-@RequestMapping("order")
+@RequestMapping("frontOrder")
 public class FrontOrderController {
 	
 	@Autowired
 	@Qualifier("frontOrderService")
 	private FrontOrderService frontOrderService;
+	
+	@Autowired
+	@Qualifier("xhTrolleyService")
+	private XhTrolleyServiceImpl xhTrolleyService;
 	
 	@RequestMapping("queryOrderInfo.action")
 	public String queryOrderInfo(int userid, Model model){
@@ -66,19 +75,17 @@ public class FrontOrderController {
 	public ServerResponse<UserAddress> queryAddInfoById(int addID){
 		return frontOrderService.queryAddInfoById(addID);
 	}
-	
-	/*@RequestMapping("queryAddInfoById.action")
-	@ResponseBody
-	public ServerResponse<String> addOrder(Xhorderinfo orderInfo){
-		return frontOrderService.addOrder(orderInfo);
-	}*/
-	
-	/*@RequestMapping("queryAddInfoById.action")
-	@ResponseBody
-	public ServerResponse<String> deleteOrder(int addID){
-		return frontOrderService.queryAddInfoById(addID);
+		
+	@RequestMapping("addOrder.action")
+	public String addOrder(int spids, UserAddress userAddress,String id, HttpServletRequest req){
+		List<Xhtrolley> items = xhTrolleyService.loadItemsFront(id);
+		ServerResponse sr = frontOrderService.addOrder(spids, userAddress, items);
+		Xhorderinfo orderinfo = (Xhorderinfo)sr.getData();
+		//model.addAttribute("orderinfo", orderinfo);
+		ServletContext app = req.getServletContext();
+		app.setAttribute("orderinfo", orderinfo);
+		return "forward:/front/BuyCar_Three.jsp";
 	}
-	
+
 	
 }
-*/

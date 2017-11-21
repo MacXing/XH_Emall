@@ -5,6 +5,7 @@ import java.util.Date;
 import com.xh.front.bean.Xhusers;
 
 public class Xhorderinfo {
+	
     private Integer orderid;
 
     private Integer userid;
@@ -33,7 +34,7 @@ public class Xhorderinfo {
 
     private String addcode;
 
-    private Integer addphone;
+    private String addphone;
 
     private String shoppingcode;
 
@@ -217,12 +218,12 @@ public class Xhorderinfo {
         this.addcode = addcode == null ? null : addcode.trim();
     }
 
-    public Integer getAddphone() {
+    public String getAddphone() {
         return addphone;
     }
 
-    public void setAddphone(Integer addphone) {
-        this.addphone = addphone;
+    public void setAddphone(String string) {
+        this.addphone = string;
     }
 
     public String getShoppingcode() {
