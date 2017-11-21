@@ -606,7 +606,7 @@
 					src="front/images/b_6.gif" width="98" height="33" />
 			</div>
 		</div>
-		<div id="modify" id="hiddendiv">
+		<div id="modify" class="hiddendiv">
 			<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="135" align="right">配送地区</td>
@@ -977,7 +977,7 @@
 					});
 				});
 		$(function (){
-			$("#hiddendiv").attr("hidden", hidden);
+			$(".hiddendiv").hide();
 		});
 	</script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
