@@ -337,7 +337,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="${pageContext.request.contextPath}/trolley/findByUser.action" class="b_sure">去购物车结算</a><a href="${pageContext.request.contextPath }/home/home.action" class="b_buy">继续购物</a></td>
+                    <td><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action" class="b_sure">去购物车结算</a><a href="${pageContext.request.contextPath }/home/home.action" class="b_buy">继续购物</a></td>
                   </tr>
                 </table>    
             </div>

@@ -5,9 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.xh.front.mapper.PayMapper">
 
 	<select id="queryOrderById" parameterType="int" resultType="xhorderinfo">
-		select orderID,payPrice,addUserName
+		select orderID,payPrice,addUserName,payStatus
 		from xhOrderInfo
 		where orderID = #{orderid}
 	</select>
+	
+	<update id="updatePayStatus" parameterType="xhorderinfo">
+		update xhOrderInfo
+		set payStatus = #{paystatus}
+		where orderID = #{orderid}
+	</update>
 			
 </mapper>	

@@ -125,10 +125,9 @@ public class XhTrolleyController {
 	// 前端
 
 	// 添加购物车条目
-	
+	@RequestMapping("addTroItem")
+	@ResponseBody
 	public Msg addTroItem(int pid,int pnum,int userid){
-	 
-			System.out.println(pid+""+pnum+""+userid);
 			Xhtrolley tro=new Xhtrolley();
 			
 			if(pid>0&&pnum>0){	
@@ -138,10 +137,9 @@ public class XhTrolleyController {
 			tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
-			return Msg.success().add("msg", "添加购物车成功！");
+			return Msg.success();
 		}
-		return Msg.fail().add("msg", "添加失败，请联系管理员！");
-		
+		return Msg.fail();	
 	}
 
 	// 修改购物车商品的数量

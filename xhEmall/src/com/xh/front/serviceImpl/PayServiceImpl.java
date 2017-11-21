@@ -38,6 +38,12 @@ public class PayServiceImpl implements PaySercice {
 		return payMapper.queryOrderById(orderid);
 	}
 
+	@Override
+	public void updatePayStatus(Xhorderinfo xhorderinfo) {
+		payMapper.updatePayStatus(xhorderinfo);
+		
+	}
+
 
 	
 	

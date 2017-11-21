@@ -260,7 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    
     <!--Begin 食品饮料 Begin--> 
        
-    <c:forEach items="${CP }" var="item" varStatus="i">
+    <c:forEach items="${CP }" var="item" varStatus="i" begin="0" end="4">
     <div class="i_t mar_10">
     	<span class="floor_num">${i.index+1}F</span>
     	<span class="fl">${item.catname }</span>                              
