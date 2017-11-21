@@ -24,8 +24,7 @@
 
 <script type="text/javascript" src="front/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="front/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript"
-	src="front/js/jquery-1.11.1.min_044d0927.js"></script>
+<script type="text/javascript" src="front/js/jquery-1.11.1.min_044d0927.js"></script>
 <script type="text/javascript" src="front/js/menu.js"></script>
 
 <script type="text/javascript" src="front/js/n_nav.js"></script>
@@ -60,24 +59,27 @@
 		<div class="content mar_20">
 			<c:choose>
 				<c:when test="${empty trolleyItem}">
-					<table border="0" class="car_tab" align="center"
-						style="width:1200px; margin-bottom:50px;" cellspacing="0"
-						cellpadding="0" id="buycar">
+					<table border="0" class="car_tab" align="center" style="width:1200px; margin-bottom:50px;"
+						cellspacing="0" cellpadding="0" id="buycar">
 						<tr>
-							<td align="center"><img src="front/images/empty.jpg" /></td>
+							<td align="center">
+								<img src="front/images/empty.jpg" />
+							</td>
 
 						</tr>
 					</table>
 				</c:when>
 
 				<c:otherwise>
-					<table border="0" class="car_tab"
-						style="width:1200px; margin-bottom:50px;" cellspacing="0"
+
+					<table border="0" class="car_tab" style="width:1200px; margin-bottom:50px;" cellspacing="0"
 						cellpadding="0" id="buycar">
 						<tr>
-							<td class="car_th" width="70px"><input type="checkbox"
-								id="selectAll" checked="checked" onclick="selectedAll(this)"
-								name="chkAll"><label for="selectAll">全选</label></td>
+							<td class="car_th" width="70px">
+								<input type="checkbox" id="selectAll" checked="checked" onclick="selectedAll(this)"
+									name="chkAll">
+								<label for="selectAll">全选</label>
+							</td>
 							<td class="car_th" width="490">商品名称</td>
 							<td class="car_th" width="140">属性</td>
 							<td class="car_th" width="150">购买数量</td>
@@ -88,55 +90,65 @@
 						</tr>
 						<c:forEach items="${trolleyItem}" var="items">
 							<tr>
-								<td><input type="checkbox" class="delids"
-									name="checkboxBtn" value="${items.troid}"> <input
-									type="hidden" value="${items.troid}" id="inputroid" /></td>
+								<td>
+									<input type="checkbox" class="delids" name="checkboxBtn" value="${items.troid}">
+									<input type="hidden" value="${items.troid}" id="inputroid" />
+								</td>
 								<td>
 									<div class="c_s_img">
-										<img
-											src="${pageContext.request.contextPath}${items.xhproduct.pimg}"
-											width="73" height="73" />
-									</div> ${items.xhproduct.pname}
+										<img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="73" height="73" />
+									</div>
+									${items.xhproduct.pname}
 								</td>
-								<td align="center"><span>单位：</span><span>${items.xhproduct.punit}</span></td>
+								<td align="center">
+									<span>单位：</span>
+									<span>${items.xhproduct.punit}</span>
+								</td>
 								<td align="center">
 									<div class="c_num">
-										<input type="button" value=""
-											onclick="mul(${items.troid},${items.tronum})"
-											class="car_btn_1" /> <input type="text"
-											value="${items.tronum}" name="" class="car_ipt" /> <input
-											type="button" value=""
-											onclick="add(${items.troid},${items.tronum})"
+										<input type="button" value="" onclick="mul(${items.troid},${items.tronum})"
+											class="car_btn_1" />
+										<input type="text" value="${items.tronum}" name="" class="car_ipt" />
+										<input type="button" value="" onclick="add(${items.troid},${items.tronum})"
 											class="car_btn_2" />
 								</td>
-								<td align="center"><span class="psale">${items.xhproduct.psale}</span></td>
-								<td align="center" style="color:#ff4e00;" class="sub"
-									id="sub${items.troid }">${items.subTotal}</td>
-								<td align="center">${items.xhproduct.psale}<span>R</span></td>
-								<td align="center"><a onclick="ShowDiv('MyDiv','fade')">删除</a></td>
+								<td align="center">
+									<span class="psale">${items.xhproduct.psale}</span>
+								</td>
+								<td align="center" style="color:#ff4e00;" class="sub" id="sub${items.troid }">${items.subTotal}</td>
+								<td align="center">${items.xhproduct.psale}<span>R</span>
+								</td>
+								<td align="center">
+									<a onclick="ShowDiv('MyDiv','fade')">删除</a>
+								</td>
 							</tr>
 						</c:forEach>
 						<tr height="70">
-							<td colspan="6"
-								style="font-family:'Microsoft YaHei'; border-bottom:0;"><span
-								class="fr">商品总价：<label
-									style="font-size:22px; color:#ff4e00;">￥</label><b
-									style="font-size:22px; color:#ff4e00;" id="total"></b></span></td>
+							<td colspan="6" style="font-family:'Microsoft YaHei'; border-bottom:0;">
+								<span class="fr">
+									商品总价：
+									<label style="font-size:22px; color:#ff4e00;">￥</label>
+									<b style="font-size:22px; color:#ff4e00;" id="total"></b>
+								</span>
+
+							</td>
 						</tr>
 						<tr valign="top" height="150">
-							<td colspan="6" align="right"><a
-								href="${pageContext.request.contextPath}/front/index.jsp"><img
-									src="front/images/buy1.gif" /></a>&nbsp; &nbsp; <a
-								href="javascript:void(0);" id="settlement" class="settlement"
-								onclick="settlement()"><img src="front/images/buy2.gif" /></a>
+							<td colspan="6" align="right">
+								<a href="${pageContext.request.contextPath}/front/index.jsp">
+									<img src="front/images/buy1.gif" />
+								</a>
+								&nbsp; &nbsp;
+								<a href="javascript:void(0);" id="settlement" class="settlement" onclick="settlement()">
+									<img src="front/images/buy2.gif" />
+								</a>
 							</td>
 						</tr>
 					</table>
-					<form method="post"
-						action="${pageContext.request.contextPath}/trolley/loadItemsFront.action"
+					<form method="post" action="${pageContext.request.contextPath}/trolley/loadItemsFront.action"
 						id="submitOrder">
-						<input name="id" type="hidden" id="itemids"> <input
-							name="total" type="hidden" id="totals">
+						<input name="id" type="hidden" id="itemids">
+						<input name="total" type="hidden" id="totals">
 					</form>
 				</c:otherwise>
 			</c:choose>
@@ -151,20 +163,21 @@
 	<div id="MyDiv" class="white_content">
 		<div class="white_d">
 			<div class="notice_t">
-				<span class="fr" style="margin-top:10px; cursor:pointer;"
-					onclick="CloseDiv('MyDiv','fade')"><img
-					src="front/images/close.gif" /></span>
+				<span class="fr" style="margin-top:10px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')">
+					<img src="front/images/close.gif" />
+				</span>
 			</div>
 			<div class="notice_c">
 
-				<table border="0" align="center" style="font-size:16px;"
-					cellspacing="0" cellpadding="0">
+				<table border="0" align="center" style="font-size:16px;" cellspacing="0" cellpadding="0">
 					<tr valign="top">
 						<td>您确定要把该商品移除购物车吗？</td>
 					</tr>
 					<tr height="50" valign="bottom">
-						<td><a onclick="delete_cart()" class="b_sure">确定</a><a
-							<%-- href="${pageContext.request.contextPath }/" --%> class="b_close">取消</a></td>
+						<td>
+							<a onclick="delete_cart()" class="b_sure">确定</a>
+							<a <%-- href="${pageContext.request.contextPath }/" --%> class="b_close">取消</a>
+						</td>
 					</tr>
 				</table>
 
@@ -178,39 +191,55 @@
 	<div class="b_btm_bg bg_color">
 		<div class="b_btm">
 			<table border="0"
-				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
-				cellspacing="0" cellpadding="0">
+				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0"
+				cellpadding="0">
 				<tr>
-					<td width="72"><img src="front/images/b1.png" width="62"
-						height="62" /></td>
-					<td><h2>正品保障</h2>正品行货 放心购买</td>
+					<td width="72">
+						<img src="front/images/b1.png" width="62" height="62" />
+					</td>
+					<td>
+						<h2>正品保障</h2>
+						正品行货 放心购买
+					</td>
 				</tr>
 			</table>
 			<table border="0"
-				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
-				cellspacing="0" cellpadding="0">
+				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0"
+				cellpadding="0">
 				<tr>
-					<td width="72"><img src="front/images/b2.png" width="62"
-						height="62" /></td>
-					<td><h2>满38包邮</h2>满38包邮 免运费</td>
+					<td width="72">
+						<img src="front/images/b2.png" width="62" height="62" />
+					</td>
+					<td>
+						<h2>满38包邮</h2>
+						满38包邮 免运费
+					</td>
 				</tr>
 			</table>
 			<table border="0"
-				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
-				cellspacing="0" cellpadding="0">
+				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0"
+				cellpadding="0">
 				<tr>
-					<td width="72"><img src="front/images/b3.png" width="62"
-						height="62" /></td>
-					<td><h2>天天低价</h2>天天低价 畅选无忧</td>
+					<td width="72">
+						<img src="front/images/b3.png" width="62" height="62" />
+					</td>
+					<td>
+						<h2>天天低价</h2>
+						天天低价 畅选无忧
+					</td>
 				</tr>
 			</table>
 			<table border="0"
-				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
-				cellspacing="0" cellpadding="0">
+				style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0"
+				cellpadding="0">
 				<tr>
-					<td width="72"><img src="front/images/b4.png" width="62"
-						height="62" /></td>
-					<td><h2>准时送达</h2>收货时间由你做主</td>
+					<td width="72">
+						<img src="front/images/b4.png" width="62" height="62" />
+					</td>
+					<td>
+						<h2>准时送达</h2>
+						收货时间由你做主
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -293,9 +322,11 @@
 			</dd>
 		</dl>
 		<div class="b_tel_bg">
-			<a href="#" class="b_sh1">新浪微博</a> <a href="#" class="b_sh2">腾讯微博</a>
+			<a href="#" class="b_sh1">新浪微博</a>
+			<a href="#" class="b_sh2">腾讯微博</a>
 			<p>
-				服务热线：<br /> <span>400-123-4567</span>
+				服务热线：<br />
+				<span>400-123-4567</span>
 			</p>
 		</div>
 		<div class="b_er">
@@ -307,13 +338,11 @@
 	</div>
 	<div class="btmbg">
 		<div class="btm">
-			备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018
-			尤洪商城网 All Rights Reserved. 复制必究 , Technical Support: Dgg Group <br />
-			<img src="front/images/b_1.gif" width="98" height="33" /><img
-				src="front/images/b_2.gif" width="98" height="33" /><img
-				src="front/images/b_3.gif" width="98" height="33" /><img
-				src="front/images/b_4.gif" width="98" height="33" /><img
-				src="front/images/b_5.gif" width="98" height="33" /><img
+			备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights Reserved.
+			复制必究 , Technical Support: Dgg Group <br /> <img src="front/images/b_1.gif" width="98"
+				height="33" /><img src="front/images/b_2.gif" width="98" height="33" /><img
+				src="front/images/b_3.gif" width="98" height="33" /><img src="front/images/b_4.gif" width="98"
+				height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img
 				src="front/images/b_6.gif" width="98" height="33" />
 		</div>
 	</div>
@@ -369,7 +398,7 @@
 								+ troid,
 						type : "GET",
 						success : function(result) {
-							alert(result.code);
+							//alert(result.code);
 							if (result.code == 100) {
 								window.location.href = "${pageContext.request.contextPath}/trolley/findByUserCart.action";
 							}

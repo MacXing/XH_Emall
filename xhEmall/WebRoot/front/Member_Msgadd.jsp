@@ -181,13 +181,22 @@
 							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
-					</c:if>
-
 					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
+					</c:if>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的订单</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					</c:if>
 					&nbsp;|
-					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的购物车</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 					&nbsp;|
+					</c:if>
 				</span>
 				<span class="ss">
 					<div class="ss_list">
@@ -278,71 +287,33 @@
 				</span>
 			</div>
 			<div class="i_car">
-				<div class="car_t">
-					购物车 [
-					<span>3</span>
-					]
-				</div>
-				<div class="car_bg">
-					<!--Begin 购物车未登录 Begin-->
-					<div class="un_login">
-						还未登录！
-						<a href="Login.html" style="color:#ff4e00;">马上登录</a>
-						查看购物车！
-					</div>
-					<!--End 购物车未登录 End-->
-					<!--Begin 购物车已登录 Begin-->
-					<ul class="cars">
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="images/car1.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">法颂浪漫梦境50ML 香水女士持久清新淡香 送2ML小样3只</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="images/car2.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="images/car2.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-					</ul>
-					<div class="price_sum">
-						共计&nbsp; <font color="#ff4e00">￥</font>
-						<span>1058</span>
-					</div>
-					<div class="price_a">
-						<a href="#">去购物车结算</a>
-					</div>
-					<!--End 购物车已登录 End-->
-				</div>
-			</div>
+    	<div class="car_t">购物车 </div>
+        <div class="car_bg">
+       		<!--Begin 购物车未登录 Begin-->
+       		<c:if test="${current_user == null }">
+        	<div class="un_login">还未登录！<a href="front/Login.jsp" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+        	</c:if>
+            <!--End 购物车未登录 End-->
+            <!--Begin 购物车已登录 Begin-->
+            <c:if test="${current_user!=null }">
+            <ul class="cars" id="cart">
+           
+            
+            <c:forEach items="${trolleyItem}" var="items">
+            	<li>
+            		<input type="hidden" id="falg" value="${falg}">
+                	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
+                    <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
+                    <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
+                </li>
+               
+                </c:forEach>
+            </ul>
+            <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
+            </c:if>
+            <!--End 购物车已登录 End-->
+        </div>
+    </div>
 		</div>
 	</div>
 	<!--End Header End-->
@@ -356,11 +327,11 @@
 					<ul>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
 						</li>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
 						</li>
 					</ul>
 				</div>

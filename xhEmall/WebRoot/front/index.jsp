@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="front/Login.jsp">我的订单</a>
 				</c:if>
 				<c:if test="${current_user != null }">
-				<a href="#">我的订单</a>
+				<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
 				</c:if>
 				&nbsp;|
 				<c:if test="${current_user == null }">
@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				method="post">
 				<input type="text" name="pname" value="" id="keyword" class="s_ipt" />
 				<button type="submit" class="s_btn">搜索</button>
-		</form>                      
+		</form>                     
     </div>
     <div class="i_car">
     	<div class="car_t">购物车 </div>
@@ -233,7 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="pic1">
 		<ul id="slideName1" class="slide_box bxslider">
 		<c:forEach items="${navbars }" var="item">
-	      <li><img src="${pageContext.request.contextPath}${item.url }" width="100%" height="100%" /></li>                   
+	      <li><img src="${pageContext.request.contextPath}${item.url }" width="1349" height="411" /></li>                   
 	    </c:forEach>
 	  	</ul>  
     </div>          

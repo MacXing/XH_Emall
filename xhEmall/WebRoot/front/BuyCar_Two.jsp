@@ -81,7 +81,7 @@
 						<tr id="ilist">
 							<td>
 								<div class="c_s_img">
-									<img src="front/images/c_1.jpg" width="73" height="73" />
+									<img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="73" height="73" />
 								</div>
 								${items.xhproduct.pname}
 							</td>
@@ -185,13 +185,13 @@
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥</span>
+							<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">${total}￥</span>
 								<span style="font-size:22px; color:#ff4e00;" id="paytotal"></span></b>
 						</td>
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<input type="button" id="suborder">
+							<button id="suborder">
 								确认订单
 							</button>
 						</td>

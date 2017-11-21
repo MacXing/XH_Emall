@@ -50,20 +50,19 @@
 			<span class="fr">
 				<span class="fl">
 					<c:if test="${current_user == null }">
-					你好，请
-					<a href="front/Login.jsp">登录</a>
-					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+						你好，请
+						<a href="front/Login.jsp">登录</a>
+						&nbsp;
+						<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
 					</c:if>
 					<c:if test="${current_user != null}">
-					欢迎您，<a
-							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
-					&nbsp;|&nbsp;
-					<a class="logout">退出登录</a>
+						欢迎您，<a
+								href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
+						&nbsp;|&nbsp;
+						<a class="logout">退出登录</a>
+						&nbsp;|&nbsp;
+						<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
 					</c:if>
-
-					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
 					&nbsp;|
 					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 					&nbsp;|

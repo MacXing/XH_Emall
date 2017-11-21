@@ -109,12 +109,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     </form>   
                 </div>
-                 <div class="j_nums">
- +            		<form  id="addcoll" >
- +            		<input type="hidden" name="userid"  id="adduserid" value="${current_user.userid }"/>
- +                	<input type="hidden" name="pid"  id="addpid" value="${xhproduct.pid }"/>
- +                  </form>   
- +                </div>
+                
+	             	<form  id="addcoll" >
+	            	<input type="hidden" name="userid"  id="adduserid" value="${current_user.userid }"/>
+	                <input type="hidden" name="pid"  id="addpid" value="${xhproduct.pid }"/>
+	                </form>   
+                
                 <span class="fl"><a id="test" href="javascript:addItem()" onclick=""><img src="front/images/j_car.png" /></a></span>
             </div>            
         </div>           
@@ -204,11 +204,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </table>
                     <br />
                     
-                    <p align="center">
-                    <img src="front/images/de2.jpg" width="746" height="425" /><br /><br />
-                    <img src="front/images/de3.jpg" width="750" height="417" /><br /><br />
-                    <img src="front/images/de4.jpg" width="750" height="409" /><br /><br />
-                    <img src="front/images/de5.jpg" width="750" height="409" />
+                    <p align="center">                   
+                    <c:forEach items="${productImages }" var="image">                  		
+                   		<img src="${pageContext.request.contextPath}${image.url }"/><br /><br />                   		
+                    </c:forEach>
 					</p>
                     
                 </div>
@@ -335,7 +334,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            		
                 <table border="0" align="center" style="margin-top:;" cellspacing="0" cellpadding="0">
                   <tr valign="top">
-                    <td width="40"><img src="images/suc.png" /></td>
+                    <td width="40"><img width="30px;" height="30px;" src="${pageContext.request.contextPath}${xhproduct.pimg}" /></td>
                     <td>
                     	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />
                     	
