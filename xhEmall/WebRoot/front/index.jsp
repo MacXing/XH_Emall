@@ -123,10 +123,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="top">
     <div class="logo"><a href="home/home.action"><img src="front/images/logo.png" /></a></div>
     <div class="search">
-    	<form>
-        	<input type="text" value="" class="s_ipt" />
-            <input type="submit" value="搜索" class="s_btn" />
-        </form>                      
+    	<form action="${pageContext.request.contextPath}/ProductList/queryAllProductByFind.action"
+				method="post">
+				<input type="text" name="pname" value="" id="keyword" class="s_ipt" />
+				<button type="submit" class="s_btn">搜索</button>
+		</form>                      
     </div>
     <div class="i_car">
     	<div class="car_t">购物车 </div>

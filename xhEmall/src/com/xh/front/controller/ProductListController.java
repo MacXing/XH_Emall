@@ -62,7 +62,7 @@ public class ProductListController {
 	@RequestMapping("queryProductOrderByPsaleDesc.action")
 	public String queryProductOrderByPsaleDesc(Model model,String pname,
 			@RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
-			@RequestParam(value="pageSize",defaultValue="10")Integer pageSize) throws UnsupportedEncodingException{
+			@RequestParam(value="pageSize",defaultValue="12")Integer pageSize) throws UnsupportedEncodingException{
 		
 		pname = URLDecoder.decode(pname,"UTF-8");
 		
