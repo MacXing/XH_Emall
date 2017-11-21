@@ -125,7 +125,8 @@ public class XhTrolleyController {
 	// 前端
 
 	// 添加购物车条目
-	
+	@RequestMapping("addTroItem.action")
+	@ResponseBody
 	public Msg addTroItem(int pid,int pnum,int userid){
 	 
 			System.out.println(pid+""+pnum+""+userid);
@@ -135,7 +136,7 @@ public class XhTrolleyController {
 								
 			tro.setPid(pid);
 			tro.setUserid(userid);
-			tro.setUserid(userid);
+			//tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
 			return Msg.success().add("msg", "添加购物车成功！");
