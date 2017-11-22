@@ -39,4 +39,10 @@ public interface FrontOrderMapper {
 	//添加订单
 	public int addOrder(Xhorderinfo orderInfo);
 	
+	//添加邮寄信息
+	public int addShopping(@Param("orderid")int orderid, @Param("shoppingid")String shoppingid);
+	
+	//查询订单信息
+	public Xhorderinfo queryOrderInfoById(int orderid);
+	
 }

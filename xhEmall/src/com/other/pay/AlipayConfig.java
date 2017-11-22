@@ -27,10 +27,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx/pT5kRhcKEsi0aabzyIixMuh/GmK6Lg+dNVXQXtTdHUJVF9ESbeWMUXllByZ9/OmqqpSzyBpeMjw9eZt9AqwKdBWPS5m0vjj0fbZjoFcqTk0jomJZ1efimusmk8/BpZD7LQ7JxddcK1sDVdEUi36xYt7y0I+3PjNg713AKWQi+Nq52QKSCCRXhYdmFKaFrFs8tlIMQrR5mukQUGHw52BACDFRGZSTi6YHMkBgvOaMwapvUZpZ1RT8FPu1HqVB1pg/34vw6ytF3Us3m3vdpPc9NJ3vRQdh6pgaO/KMS6gCBc1gmhMmPkzPidNHvFpfQ0cJ2vHQeYtK28Y7+a4IWgrQIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://mqxygy.natappfree.cc/xhEmall/Pay/notify_url.action";
+	public static String notify_url = "http://www.gzuzx.org/Pay/notify_url.action";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://mqxygy.natappfree.cc/xhEmall/home/home.action";
+	public static String return_url = "http://www.gzuzx.org/home/home.action";
 
 	// 签名方式
 	public static String sign_type = "RSA2";

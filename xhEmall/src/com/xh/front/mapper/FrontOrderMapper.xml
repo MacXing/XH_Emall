@@ -38,6 +38,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</trim>
 	</insert>
 	
+	<insert id="addOrder" parameterType="Xhorderinfo" useGeneratedKeys="true" keyProperty="orderid">
+		insert into xhOrderInfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">userid,</if>
+			<if test="shoppingid != null">shoppingid,</if>
+			<if test="ordertime == null">ordertime,</if>
+			<if test="orderstatus == null">orderstatus,</if>
+			<if test="shoppingstatus == null">shoppingstatus,</if>
+			<if test="paystatus == null">paystatus,</if>
+			<if test="addusername != null">addusername,</if>
+			<if test="addcountry != null">addcountry,</if>
+			<if test="addprovince != null">addprovince,</if>
+			<if test="addcity != null">addcity,</if>
+			<if test="adddistrict != null">adddistrict,</if>
+			<if test="addaddress != null">addaddress,</if>
+			<if test="addcode != null">addcode,</if>
+			<if test="addphone != null">addphone,</if>
+			<if test="goodamount != null">goodamount,</if>
+			<if test="payfee != null">payfee,</if>
+			
+			<!-- <if test="shoppingcode != null">shoppingcode,</if>
+			<if test="shoppingname != null">shoppingname,</if>
+			<if test="shoppingdesc != null">shoppingdesc,</if>
+			<if test="shoppingfee != null">shoppingfee,</if>
+			<if test="shopping != null">shopping,</if>
+			<if test="paytime != null">paytime,</if>
+			<if test="sendtime != null">sendtime,</if>
+			<if test="shoppingimg != null">shoppingimg,</if> -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">#{userid },</if>
+			<if test="shoppingid != null">#{shoppingid },</if>
+			<if test="ordertime == null">now(),</if>
+			<if test="orderstatus == null">0,</if>
+			<if test="shoppingstatus == null">0,</if>
+			<if test="paystatus == null">0,</if>
+			<if test="addusername != null">#{addusername },</if>
+			<if test="addcountry != null">#{addcountry },</if>
+			<if test="addprovince != null">#{addprovince },</if>
+			<if test="addcity != null">#{addcity },</if>
+			<if test="adddistrict != null">#{adddistrict },</if>
+			<if test="addaddress != null">#{addaddress },</if>
+			<if test="addcode != null">#{addcode },</if>
+			<if test="addphone != null">#{addphone },</if>
+			<if test="goodamount != null">#{goodamount },</if>
+			<if test="payfee != null">#{payfee },</if>
+		</trim>
+	</insert>
+	
+	<update id="addShopping" parameterType="map">
+		update xhOrderInfo,xhShopping
+		set xhOrderInfo.shoppingCode = xhShopping.shoppingCode, 
+			xhOrderInfo.shoppingName = xhShopping.shoppingName, 
+			xhOrderInfo.shoppingDesc = xhShopping.shoppingDesc, 
+			xhOrderInfo.enable = xhShopping.enable, 
+			xhOrderInfo.shoppingImg =xhShopping.shoppingImg
+		
+		where xhOrderInfo.orderid = #{orderid} and xhOrderInfo.shoppingID = xhShopping.shoppingID
+	</update>
+	
+	<select id="queryOrderInfoById" parameterType="int" resultType="Xhorderinfo">
+		select orderID, shoppingName, payFee, payprice from xhOrderInfo where orderid = #{orderid }
+	</select>
+	
 	<select id="queryAddressById" parameterType="int" resultType="UserAddress">
 		select <include refid="Base_Column_List"/> from xhUserAddress
 		where userID = #{userid }
@@ -80,5 +144,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userID = #{userID }
 	</update>
 	
-	<insert id="addOrder" parameterType="Xhorderinfo" ></insert>
 </mapper>	

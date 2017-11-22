@@ -115,10 +115,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="price">
                             <font>￥<span>${product.psale }</span></font>
                         </div>
+	            		<input type="hidden" name="userid"  id="userid" value="${current_user.userid }"/>
+	            		<input type="hidden" name="pid"  id="pid" value="${product.pid }"/>
+	            		<input type="hidden" name="pnum" id="pnum" value="1"/>
                         <div class="name"><a href="#">${product.pname }</a></div>
                         <div class="carbg">
                         	<a href="#" class="ss">收藏</a>
-                            <a href="#" class="j_car">加入购物车</a>
+                            <c:if test="${current_user!=null}">
+                            <a href="javascript:void();" onclick="addtro(${product.pid });" class="j_car">加入购物车</a>
+                            </c:if>
+                            <c:if test="${current_user==null}">
+                            <a href="front/Login.jsp" class="j_car">加入购物车</a>
+                            </c:if>
                         </div>
                     </li>
                 </c:forEach>
@@ -175,60 +183,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </table>
         </div>
     </div>
-    <div class="b_nav">
-    	<dl>                                                                                            
-        	<dt><a href="#">新手上路</a></dt>
-            <dd><a href="#">售后流程</a></dd>
-            <dd><a href="#">购物流程</a></dd>
-            <dd><a href="#">订购方式</a></dd>
-            <dd><a href="#">隐私声明</a></dd>
-            <dd><a href="#">推荐分享说明</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">配送与支付</a></dt>
-            <dd><a href="#">货到付款区域</a></dd>
-            <dd><a href="#">配送支付查询</a></dd>
-            <dd><a href="#">支付方式说明</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">会员中心</a></dt>
-            <dd><a href="#">资金管理</a></dd>
-            <dd><a href="#">我的收藏</a></dd>
-            <dd><a href="#">我的订单</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">服务保证</a></dt>
-            <dd><a href="#">退换货原则</a></dd>
-            <dd><a href="#">售后服务保证</a></dd>
-            <dd><a href="#">产品质量保证</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">联系我们</a></dt>
-            <dd><a href="#">网站故障报告</a></dd>
-            <dd><a href="#">购物咨询</a></dd>
-            <dd><a href="#">投诉与建议</a></dd>
-        </dl>
-        <div class="b_tel_bg">
-        	<a href="#" class="b_sh1">新浪微博</a>            
-        	<a href="#" class="b_sh2">腾讯微博</a>
-            <p>
-            服务热线：<br />
-            <span>400-123-4567</span>
-            </p>
-        </div>
-        <div class="b_er">
-            <div class="b_er_c"><img src="front/images/er.gif" width="118" height="118" /></div>
-            <img src="front/images/ss.png" />
-        </div>
-    </div>    
-    <div class="btmbg">
-		<div class="btm">
-        	备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2015-2018 尤洪商城网 All Rights Reserved. 复制必究 , Technical Support: Dgg Group <br />
-            <img src="front/images/b_1.gif" width="98" height="33" /><img src="front/images/b_2.gif" width="98" height="33" /><img src="front/images/b_3.gif" width="98" height="33" /><img src="front/images/b_4.gif" width="98" height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img src="front/images/b_6.gif" width="98" height="33" />
-        </div>    	
-    </div>
+	<jsp:include page="/front/foot.jsp"/>
     <!--End Footer End -->    
 </div>
+
+<script type="text/javascript">
+     function addtro(pid){
+     	 alert(pid);
+    	 if(!$("#userid").val()>0){
+    		 alert("亲登录！");
+    		 return;
+    	 }
+        alert($("#userid").val());
+        alert(pid);
+        $.ajax({
+        	url:"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&userid="+$("#userid").val()+"&pnum="+1,
+        	type:"POST",
+        	/* data:formData, 
+		    contentType: false,
+		    processData: false, */ 
+        	success:function(result){
+        		if(result.code==100){
+        			alert("添加成功！");
+        			location.reload([bForceGet]); 
+        		}else{
+        			alert("添加失败！");
+        		}
+        	}
+        });
+     }
+    
+    </script>
 </body>
 
 </html>

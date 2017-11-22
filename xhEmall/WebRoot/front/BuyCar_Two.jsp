@@ -81,7 +81,7 @@
 						<tr id="ilist">
 							<td>
 								<div class="c_s_img">
-									<img src="front/images/c_1.jpg" width="73" height="73" />
+									<img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="73" height="73" />
 								</div>
 								${items.xhproduct.pname}
 							</td>
@@ -110,29 +110,32 @@
 
 				<div class="two_t">
 					<span class="fr">
-						<a href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">修改</a>
+						<a href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">修改</a>
 					</span>
 					收货人信息
 				</div>
 				<table border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
 					<tr>
 						<td class="p_td">收货人姓名：</td>
-						<td>${ua.addUserName }</td>
+						<td id="addusername">${ua.addUserName }</td>
 						<td class="p_td">联系方式：</td>
-						<td>${ua.addPhone }</td>
+						<td id="addphone">${ua.addPhone }</td>
 					</tr>
 					<tr>
 						<td class="p_td">配送区域：</td>
-						<td>${ua.addCountry}${ua.addProvice }${ua.addCity }${ua.addDistrict }</td>
+						<td>
+							<span id="addcountry">${ua.addCountry}</span><span id="addprovince">${ua.addProvice }</span>
+							<span id="addcity">${ua.addCity }</span><span id="adddistrict">${ua.addDistrict }</span>
+						</td>
 						<td class="p_td">邮政编码：</td>
-						<td>${ua.addCode }</td>
+						<td id="addcode">${ua.addCode }</td>
 					</tr>
 					<tr>
 						<td class="p_td">详细地址：</td>
-						<td>${ua.addAddress }</td>
+						<td id="addaddress">${ua.addAddress }</td>
 					</tr>
 				</table>
-
+							
 				<div class="two_t">配送方式</div>
 				<table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
 					<tr>
@@ -144,7 +147,8 @@
 					<c:forEach items="${expresslist}" var="express">
 						<tr>
 							<td align="center">
-								<input type="radio" name="ch" checked="checked" />
+								<input type="hidden" value="${express.shoppingid}" id="shoppingid"/>
+								<input type="radio" name="ch" checked="checked" value="${express.shoppingid}"/>
 							</td>
 							<td align="center" style="font-size:14px;">
 								<b>${express.shoppingname}</b>
@@ -171,9 +175,6 @@
 						<div class="ch_img"></div>
 					</li>
 				</ul>
-
-
-
 				<table border="0" style="width:900px; margin-top:20px;" cellspacing="0" cellpadding="0">
 					<tr>
 						<td align="right">
@@ -184,15 +185,15 @@
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥</span>
+							<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">${total}￥</span>
 								<span style="font-size:22px; color:#ff4e00;" id="paytotal"></span></b>
 						</td>
 					</tr>
 					<tr height="70">
 						<td align="right">
-							<a href="front/BuyCar_Three.jsp">
-								<img src="front/images/btn_sure.gif" />
-							</a>
+							<button id="suborder">
+								确认订单
+							</button>
 						</td>
 					</tr>
 				</table>
@@ -258,111 +259,12 @@
 				</table>
 			</div>
 		</div>
-		<div class="b_nav">
-			<dl>
-				<dt>
-					<a href="#">新手上路</a>
-				</dt>
-				<dd>
-					<a href="#">售后流程</a>
-				</dd>
-				<dd>
-					<a href="#">购物流程</a>
-				</dd>
-				<dd>
-					<a href="#">订购方式</a>
-				</dd>
-				<dd>
-					<a href="#">隐私声明</a>
-				</dd>
-				<dd>
-					<a href="#">推荐分享说明</a>
-				</dd>
-			</dl>
-			<dl>
-				<dt>
-					<a href="#">配送与支付</a>
-				</dt>
-				<dd>
-					<a href="#">货到付款区域</a>
-				</dd>
-				<dd>
-					<a href="#">配送支付查询</a>
-				</dd>
-				<dd>
-					<a href="#">支付方式说明</a>
-				</dd>
-			</dl>
-			<dl>
-				<dt>
-					<a href="#">会员中心</a>
-				</dt>
-				<dd>
-					<a href="#">资金管理</a>
-				</dd>
-				<dd>
-					<a href="#">我的收藏</a>
-				</dd>
-				<dd>
-					<a href="#">我的订单</a>
-				</dd>
-			</dl>
-			<dl>
-				<dt>
-					<a href="#">服务保证</a>
-				</dt>
-				<dd>
-					<a href="#">退换货原则</a>
-				</dd>
-				<dd>
-					<a href="#">售后服务保证</a>
-				</dd>
-				<dd>
-					<a href="#">产品质量保证</a>
-				</dd>
-			</dl>
-			<dl>
-				<dt>
-					<a href="#">联系我们</a>
-				</dt>
-				<dd>
-					<a href="#">网站故障报告</a>
-				</dd>
-				<dd>
-					<a href="#">购物咨询</a>
-				</dd>
-				<dd>
-					<a href="#">投诉与建议</a>
-				</dd>
-			</dl>
-			<div class="b_tel_bg">
-				<a href="#" class="b_sh1">新浪微博</a>
-				<a href="#" class="b_sh2">腾讯微博</a>
-				<p>
-					服务热线：<br />
-					<span>400-123-4567</span>
-				</p>
-			</div>
-			<div class="b_er">
-				<div class="b_er_c">
-					<img src="front/images/er.gif" width="118" height="118" />
-				</div>
-				<img src="front/images/ss.png" />
-			</div>
-		</div>
-		<div class="btmbg">
-			<div class="btm">
-				备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights Reserved.
-				复制必究 , Technical Support: Dgg Group <br /> <img src="front/images/b_1.gif" width="98"
-					height="33" /><img src="front/images/b_2.gif" width="98" height="33" /><img
-					src="front/images/b_3.gif" width="98" height="33" /><img src="front/images/b_4.gif" width="98"
-					height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img
-					src="front/images/b_6.gif" width="98" height="33" />
-			</div>
-		</div>
+		
+		<jsp:include page="/front/foot.jsp"/>	
+		
 		<!--End Footer End -->
 	</div>
-
+	<script type="text/javascript" src="resource/layer/layer.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var totalfee = $("#totalfee").attr("value");
@@ -370,10 +272,38 @@
 			$("#paytotal").text(paytotal);
 
 		});
-
-		function createOrder() {
-
-		}
+		 $("#suborder").click(function (){
+			var shoppingid = $("input[type=radio][name=ch]:checked").val();
+			var addusername = $("#addusername").html();
+			var addphone = $("#addphone").html();
+			var addcountry = $("#addcountry").html();
+			var addprovince = $("#addprovince").html();
+			var addcity = $("#addcity").html();
+			var adddistrict = $("#adddistrict").html();
+			var addcode = $("#addcode").html();
+			var addaddress = $("#addaddress").html();
+			$.ajax({
+				url: "frontOrder/addOrder.action",
+				type: "POST",
+				//contentType:"application/json", 
+				data: {
+					"spids": shoppingid,
+					"userID" : ${current_user.userid},
+					"addUserName": addusername,
+					"addPhone": addphone,
+					"addCountry": addcountry,
+					"addProvice": addprovince,
+					"addCity": addcity,
+					"addDistrict": adddistrict,
+					"addCode": addcode,
+					"addAddress": addaddress,
+					"id": "${id}"
+				},
+				success: function(result){
+					window.location.href = "front/BuyCar_Three.jsp";					
+				}
+			});
+		});
 	</script>
 </body>
 </html>

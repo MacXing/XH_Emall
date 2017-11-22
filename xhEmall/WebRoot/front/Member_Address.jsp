@@ -23,311 +23,7 @@
 </head>
 <body>
 	<!--Begin Header Begin-->
-	<div class="soubg">
-		<div class="sou">
-			<!--Begin 所在收货地区 Begin-->
-			<span class="s_city_b">
-				<span class="fl">送货至：</span>
-				<span class="s_city">
-					<span>四川</span>
-					<div class="s_city_bg">
-						<div class="s_city_t"></div>
-						<div class="s_city_c">
-							<h2>请选择所在的收货地区</h2>
-							<table border="0" class="c_tab" style="width:235px; margin-top:10px;" cellspacing="0"
-								cellpadding="0">
-								<tr>
-									<th>A</th>
-									<td class="c_h">
-										<span>安徽</span>
-										<span>澳门</span>
-									</td>
-								</tr>
-								<tr>
-									<th>B</th>
-									<td class="c_h">
-										<span>北京</span>
-									</td>
-								</tr>
-								<tr>
-									<th>C</th>
-									<td class="c_h">
-										<span>重庆</span>
-									</td>
-								</tr>
-								<tr>
-									<th>F</th>
-									<td class="c_h">
-										<span>福建</span>
-									</td>
-								</tr>
-								<tr>
-									<th>G</th>
-									<td class="c_h">
-										<span>广东</span>
-										<span>广西</span>
-										<span>贵州</span>
-										<span>甘肃</span>
-									</td>
-								</tr>
-								<tr>
-									<th>H</th>
-									<td class="c_h">
-										<span>河北</span>
-										<span>河南</span>
-										<span>黑龙江</span>
-										<span>海南</span>
-										<span>湖北</span>
-										<span>湖南</span>
-									</td>
-								</tr>
-								<tr>
-									<th>J</th>
-									<td class="c_h">
-										<span>江苏</span>
-										<span>吉林</span>
-										<span>江西</span>
-									</td>
-								</tr>
-								<tr>
-									<th>L</th>
-									<td class="c_h">
-										<span>辽宁</span>
-									</td>
-								</tr>
-								<tr>
-									<th>N</th>
-									<td class="c_h">
-										<span>内蒙古</span>
-										<span>宁夏</span>
-									</td>
-								</tr>
-								<tr>
-									<th>Q</th>
-									<td class="c_h">
-										<span>青海</span>
-									</td>
-								</tr>
-								<tr>
-									<th>S</th>
-									<td class="c_h">
-										<span>上海</span>
-										<span>山东</span>
-										<span>山西</span>
-										<span class="c_check">四川</span>
-										<span>陕西</span>
-									</td>
-								</tr>
-								<tr>
-									<th>T</th>
-									<td class="c_h">
-										<span>台湾</span>
-										<span>天津</span>
-									</td>
-								</tr>
-								<tr>
-									<th>X</th>
-									<td class="c_h">
-										<span>西藏</span>
-										<span>香港</span>
-										<span>新疆</span>
-									</td>
-								</tr>
-								<tr>
-									<th>Y</th>
-									<td class="c_h">
-										<span>云南</span>
-									</td>
-								</tr>
-								<tr>
-									<th>Z</th>
-									<td class="c_h">
-										<span>浙江</span>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</span>
-			</span>
-			<!--End 所在收货地区 End-->
-			<span class="fr">
-				<span class="fl">
-					<c:if test="${current_user == null }">
-					你好，请
-					<a href="front/Login.jsp">登录</a>
-					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
-					</c:if>
-					<c:if test="${current_user != null}">
-					欢迎您，<a
-							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
-					&nbsp;|&nbsp;
-					<a class="logout">退出登录</a>
-					</c:if>
-
-					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
-					&nbsp;|
-					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
-					&nbsp;|
-				</span>
-				<span class="ss">
-					<div class="ss_list">
-						<a href="#">收藏夹</a>
-						<div class="ss_list_bg">
-							<div class="s_city_t"></div>
-							<div class="ss_list_c">
-								<ul>
-									<li>
-										<a href="#">我的收藏夹</a>
-									</li>
-									<li>
-										<a href="#">我的收藏夹</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="ss_list">
-						<a href="#">客户服务</a>
-						<div class="ss_list_bg">
-							<div class="s_city_t"></div>
-							<div class="ss_list_c">
-								<ul>
-									<li>
-										<a href="#">客户服务</a>
-									</li>
-									<li>
-										<a href="#">客户服务</a>
-									</li>
-									<li>
-										<a href="#">客户服务</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="ss_list">
-						<a href="#">网站导航</a>
-						<div class="ss_list_bg">
-							<div class="s_city_t"></div>
-							<div class="ss_list_c">
-								<ul>
-									<li>
-										<a href="#">网站导航</a>
-									</li>
-									<li>
-										<a href="#">网站导航</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</span>
-				<span class="fl">|&nbsp;关注我们：</span>
-				<span class="s_sh">
-					<a href="#" class="sh1">新浪</a>
-					<a href="#" class="sh2">微信</a>
-				</span>
-				<span class="fr">
-					|&nbsp;
-					<a href="home/home.action">
-						首页&nbsp;<img src="front/images/home.png" align="absmiddle" />
-					</a>
-				</span>
-			</span>
-		</div>
-	</div>
-	<div class="m_top_bg">
-		<div class="top">
-			<div class="m_logo">
-				<a href="home/home.action">
-					<img src="front/images/logo1.png" />
-				</a>
-			</div>
-			<div class="m_search">
-				<form>
-					<input type="text" value="" class="m_ipt" />
-					<input type="submit" value="搜索" class="m_btn" />
-				</form>
-				<span class="fl">
-					<a href="#">咖啡</a>
-					<a href="#">iphone 6S</a>
-					<a href="#">新鲜美食</a>
-					<a href="#">蛋糕</a>
-					<a href="#">日用品</a>
-					<a href="#">连衣裙</a>
-				</span>
-			</div>
-			<div class="i_car">
-				<div class="car_t">
-					购物车 [
-					<span>3</span>
-					]
-				</div>
-				<div class="car_bg">
-					<!--Begin 购物车未登录 Begin-->
-					<div class="un_login">
-						还未登录！
-						<a href="Login.html" style="color:#ff4e00;">马上登录</a>
-						查看购物车！
-					</div>
-					<!--End 购物车未登录 End-->
-					<!--Begin 购物车已登录 Begin-->
-					<ul class="cars">
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="front/images/car1.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">法颂浪漫梦境50ML 香水女士持久清新淡香 送2ML小样3只</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="front/images/car2.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-						<li>
-							<div class="img">
-								<a href="#">
-									<img src="front/images/car2.jpg" width="58" height="58" />
-								</a>
-							</div>
-							<div class="name">
-								<a href="#">香奈儿（Chanel）邂逅活力淡香水50ml</a>
-							</div>
-							<div class="price">
-								<font color="#ff4e00">￥399</font> X1
-							</div>
-						</li>
-					</ul>
-					<div class="price_sum">
-						共计&nbsp; <font color="#ff4e00">￥</font>
-						<span>1058</span>
-					</div>
-					<div class="price_a">
-						<a href="#">去购物车结算</a>
-					</div>
-					<!--End 购物车已登录 End-->
-				</div>
-			</div>
-		</div>
-	</div>
+	<%-- <jsp:include page="/front/head2.jsp" /> --%>
 	<!--End Header End-->
 	<div class="i_bg bg_color">
 		<!--Begin 用户中心 Begin -->
@@ -339,11 +35,11 @@
 					<ul>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid }">我的订单</a>
 						</li>
 						<li>
 							<a
-								href="${pageContext.request.contextPath }/order/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
+								href="${pageContext.request.contextPath }/frontOrder/queryAddressById.action?userid=${current_user.userid }">收货地址</a>
 						</li>
 					</ul>
 				</div>
@@ -597,6 +293,57 @@
 					src="front/images/b_6.gif" width="98" height="33" />
 			</div>
 		</div>
+		<div id="modify" class="hiddendiv">
+			<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="135" align="right">配送地区</td>
+					<td colspan="3" style="font-family:'宋体';">
+						<select class="jj" name="country" style="background-color:#f6f6f6;">
+							<option>中国</option>
+						</select>
+						<select class="jj" name="province" id="provinceId">
+							<option value="0" selected="selected">请选择...</option>
+						</select>
+						<select class="jj" name="city" id="cityId">
+							<option value="0" selected="selected">请选择...</option>
+						</select>
+						<select class="jj" name="area" id="areaId">
+							<option value="0" selected="selected">请选择...</option>
+						</select>
+						（必填）
+					</td>
+				</tr>
+				<tr>
+					<td align="right">收货人姓名</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addUserName" />
+						（必填）
+					</td>
+				</tr>
+				<tr>
+					<td align="right">详细地址</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addAddress" />
+						（必填）
+					</td>
+		
+				</tr>
+				<tr>
+					<td align="right">邮政编码</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addCode" />
+						（必填）
+					</td>
+				</tr>
+				<tr>
+					<td align="right">手机</td>
+					<td style="font-family:'宋体';">
+						<input type="text" class="add_ipt" id="addPhone" />
+						（必填）
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<script type="text/javascript" src="front/js/menu.js"></script>
 	<script type="text/javascript" src="front/js/select.js"></script>
@@ -613,7 +360,7 @@
 							var ii = layer.load();
 							$
 									.ajax({
-										url : "order/queryAddInfoById.action?addID="
+										url : "frontOrder/queryAddInfoById.action?addID="
 												+ addID,
 										success : function(result) {
 											if (result.status == 0) {
@@ -670,7 +417,7 @@
 
 																$
 																		.ajax({
-																			url : "order/updateAddressById.action",
+																			url : "frontOrder/updateAddressById.action",
 																			type : "POST",
 																			data : {
 																				"addUserName" : addUserName,
@@ -733,7 +480,7 @@
 			var ii = layer.load();
 
 			$.ajax({
-				url : "order/deleteAddressById.action?addID=" + addID,
+				url : "frontOrder/deleteAddressById.action?addID=" + addID,
 				success : function(result) {
 					if (result.status == 0) {
 						layer.close(ii);
@@ -751,7 +498,7 @@
 			//var userID = $(this).parent().parent().find("input[type='checkbox']").val();
 			var ii = layer.load();
 			$.ajax({
-				url : "order/updateDefaultById.action",
+				url : "frontOrder/updateDefaultById.action",
 				type : "POST",
 				data : {
 					"addID" : addID,
@@ -776,88 +523,51 @@
 				}
 			});
 		});
-		$
-				.ajax({
-					type : "GET",
-					url : "order/getProvincelist.action",
-					success : function(result) {
-						$
-								.each(
-										result.extend.provincelist,
-										function(index, item) {
-											var option = $(
-													"<option value='"+item.provinceid+"'></option>")
-													.append(item.province);
-											option.appendTo("#provinceId");
-										});
-						//获取城市 
-						$("#provinceId")
-								.change(
-										function() {
-											$
-													.ajax({
-														type : "GET",
-														url : "${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="
-																+ $(
-																		"#provinceId")
-																		.val(),
-														success : function(
-																result) {
-															$(
-																	"#cityId > option[value != 0]")
-																	.remove();
-															$
-																	.each(
-																			result.extend.citylist,
-																			function(
-																					index,
-																					item) {
-																				//选中所有紧接着没有checked属性的input元素后的p元素，赋予颜色
-																				//$("input:not(:checked) + p").css("background-color", "#CD00CD");
-																				var option = $(
-																						"<option value='"+item.cityid+"'></option>")
-																						.append(
-																								item.city);
-																				option
-																						.appendTo("#cityId");
-																			});
-															//获取地区
-															$("#cityId")
-																	.change(
-																			function() {
-																				$
-																						.ajax({
-																							type : "GET",
-																							url : "${pageContext.request.contextPath}/order/getAreaByCityId.action?id="
-																									+ $(
-																											"#cityId")
-																											.val(),
-																							success : function(
-																									result) {
-																								$(
-																										"#areaId > option[value != 0]")
-																										.remove();
-																								$
-																										.each(
-																												result.extend.arealist,
-																												function(
-																														index,
-																														item) {
-																													var option = $(
-																															"<option value='"+item.areaid+"'></option>")
-																															.append(
-																																	item.area);
-																													option
-																															.appendTo("#areaId");
-																												});
-																							}
-																						});
-																			});
-														}
-													});
-										});
-					}
-				});
+		
+		$.ajax({
+     		type:"GET",
+     		url:"${pageContext.request.contextPath}/order/getProvincelist.action",
+     		success:function(result){    			
+     			$.each(result.extend.provincelist,function(index,item){
+     				 //var option=$("<option value='"+item.provinceid+"'></option>").append(item.province);
+     				 var option = $("<option></option>").attr("value",item.provinceid).append(item.province);
+     				 option.appendTo("#provinceId");     				 
+     			});
+     			//获取城市 
+     			$("#provinceId").change(function(){
+     				$.ajax({
+         	     		type:"GET",
+         	     		url:"${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="+$("#provinceId").val(),    		
+         	     		success:function(result){
+         	     			$("#cityId > option[value != 0]").remove();
+         	     			$("#areaId > option[value != 0]").remove();
+         	     			$.each(result.extend.citylist,function(index,item){
+         	     				 //var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
+         	     				 //$("#cityId > option[value != 0]").remove();
+         	     				 var option = $("<option></option>").attr("value",item.cityid).append(item.city);
+         	     				 option.appendTo("#cityId");    	     				
+         	     			});
+         	     			 //获取地区
+         	     			 $("#cityId").change(function(){
+         	     				$.ajax({
+             	     	     		type:"GET",
+             	     	     		url:"${pageContext.request.contextPath}/order/getAreaByCityId.action?id="+$("#cityId").val(),    		
+             	     	     		success:function(result){
+             	     	     			$("#areaId > option[value != 0]").remove();
+             	     	     			//$("#areaId > option[value != 0]").remove();
+             	     	     			$.each(result.extend.arealist,function(index,item){
+             	     	     				 var option=$("<option value='"+item.areaid+"'></option>").append(item.area);
+             	     	     				 option.appendTo("#areaId");
+             	     	     			});    	     	     		
+             	     	     		}
+             	     	     	});
+         	     			 });	     				
+         	     		}
+         	     	});
+     			});				
+     		}
+     	});
+		
 		$("#addAddressbtn").click(
 				function() {
 					layer.open({
@@ -880,7 +590,7 @@
 									.text();
 
 							$.ajax({
-								url : "order/addAddress.action",
+								url : "frontOrder/addAddress.action",
 								type : "POST",
 								data : {
 									"addUserName" : addUserName,
@@ -916,60 +626,12 @@
 						content : $('#modify')
 					});
 				});
+		$(function (){
+			$(".hiddendiv").hide();
+		});
 	</script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
 </body>
-<div id="modify">
-	<table border="0" class="add_tab" style="width:930px;" cellspacing="0" cellpadding="0">
-		<tr>
-			<td width="135" align="right">配送地区</td>
-			<td colspan="3" style="font-family:'宋体';">
-				<select class="jj" name="country" style="background-color:#f6f6f6;">
-					<option>中国</option>
-				</select>
-				<select class="jj" name="province" id="provinceId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				<select class="jj" name="city" id="cityId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				<select class="jj" name="area" id="areaId">
-					<option value="0" selected="selected">请选择...</option>
-				</select>
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">收货人姓名</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addUserName" />
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">详细地址</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addAddress" />
-				（必填）
-			</td>
-
-		</tr>
-		<tr>
-			<td align="right">邮政编码</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addCode" />
-				（必填）
-			</td>
-		</tr>
-		<tr>
-			<td align="right">手机</td>
-			<td style="font-family:'宋体';">
-				<input type="text" class="add_ipt" id="addPhone" />
-				（必填）
-			</td>
-		</tr>
-	</table>
-</div>
 
 </html>
 

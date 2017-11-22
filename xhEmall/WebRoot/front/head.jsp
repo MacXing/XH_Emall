@@ -33,6 +33,15 @@
 <script type="text/javascript" src="front/js/milk_ban.js"></script>
 <script type="text/javascript" src="front/js/paper_ban.js"></script>
 <script type="text/javascript" src="front/js/baby_ban.js"></script>
+ <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?f4e715f390d66c3374cd99ec3db0dd58";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
  
  <script type="text/javascript">
     $(function(){
@@ -55,20 +64,19 @@
 			<span class="fr">
 				<span class="fl">
 					<c:if test="${current_user == null }">
-					你好，请
-					<a href="front/Login.jsp">登录</a>
-					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+						你好，请
+						<a href="front/Login.jsp">登录</a>
+						&nbsp;
+						<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
 					</c:if>
 					<c:if test="${current_user != null}">
-					欢迎您，<a
-							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
-					&nbsp;|&nbsp;
-					<a class="logout">退出登录</a>
+						欢迎您，<a
+								href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
+						&nbsp;|&nbsp;
+						<a class="logout">退出登录</a>
+						&nbsp;|&nbsp;
+						<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
 					</c:if>
-
-					&nbsp;|&nbsp;
-					<a href="#">我的订单</a>
 					&nbsp;|
 					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
 					&nbsp;|

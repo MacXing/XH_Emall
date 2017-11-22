@@ -54,11 +54,11 @@ public class PayController {
 	private PaySercice paySercice;				
 	
 	@RequestMapping("viewOrder.action")
-	public void viewOrder(Model model,HttpServletRequest req,
-			HttpServletResponse rep
-			/*@RequestParam(value="1",required=true)Integer orderid*/)
+	public void viewOrder(
+			HttpServletResponse rep,
+			Integer orderid)
 					throws AlipayApiException, IOException{
-		Xhorderinfo xhorderinfo = paySercice.queryOrderById(38);
+		Xhorderinfo xhorderinfo = paySercice.queryOrderById(orderid);
 		System.out.println(xhorderinfo);
 		
 		AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
@@ -69,7 +69,7 @@ public class PayController {
         
         String out_trade_no = xhorderinfo.getOrderid().toString();
         
-        String total_amount = ""+xhorderinfo.getPayPrice();
+        String total_amount = ""+xhorderinfo.getPayfee();
         
         String subject = xhorderinfo.getAddusername()+"的订单";
         
