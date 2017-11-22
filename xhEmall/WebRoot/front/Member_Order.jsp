@@ -21,6 +21,46 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="front/css/style.css" />
 
+<style type="text/css">
+.pages1 {
+	overflow: hidden;
+	color: #888888;
+	padding: 20px 10px;
+	text-align: right;
+	font-size: 6px;
+	font-family: "宋体";
+	margin-top: 20px;
+}
+
+.pages1 a {
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	color: #666666;
+	font-size: 16px;
+	text-align: center;
+	display: inline-block;
+	padding: 0 12px;
+	margin: 0 4px;
+	border: 1px solid #cccccc;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.pages1 a:hover,.pages1 a.cur {
+	color: #FFF;
+	background-color: #ff4e00;
+	border: 1px solid #ff4e00;
+}
+
+.pages1 a.p_pre:hover {
+	background-color: #eaeaea;
+	color: #555555;
+	border: 1px solid #cccccc;
+}
+</style>
+
 </head>
 <body>
 	<!--Begin Header Begin-->
@@ -342,11 +382,11 @@
 					<c:forEach items="${ogList }" var="order" varStatus="status">
 						<tr>
 							<td>
-								<input type="hidden" value="${order.ogID }"/>
+								<input type="hidden" value="${order.orderInfo.orderid }"/>
 								<font color="#ff4e00">${order.orderNumber }</font>
 							</td>
 							<td><fmt:formatDate value="${order.orderInfo.ordertime }" type="both"/></td>
-							<td>${order.orderInfo.goodamount * order.product.psale}￥</td>
+							<td>${order.orderInfo.payfee}￥</td>
 							<td>
 								<c:if test="${order.orderInfo.orderstatus == 0}">未确认&nbsp;</c:if>
 								<c:if test="${order.orderInfo.orderstatus == 1}">已确认&nbsp;</c:if>
@@ -360,6 +400,36 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<div class="pages1">
+					<c:if test="${pageInfo.hasPreviousPage==true }">
+						<a
+							href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?pageNum=${pageInfo.pageNum-1}&userid=${current_user.userid}">
+							<font style="font-size: 1px">上一页</font>
+						</a>
+					</c:if>
+					<c:if test="${pageInfo.hasPreviousPage==false }">
+						<a>
+							<font style="font-size: 1px">上一页</font>
+						</a>
+					</c:if>
+					<c:forEach items="${pageInfo.navigatepageNums }" var="n">
+						<a
+							href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?pageNum=${n}&userid=${current_user.userid}">
+							<font style="font-size: 1px">${n}</font>
+						</a>
+					</c:forEach>
+					<c:if test="${pageInfo.hasNextPage==true }">
+						<a
+							href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?pageNum=${pageInfo.pageNum+1}&userid=${current_user.userid}">
+							<font style="font-size: 1px">下一页</font>
+						</a>
+					</c:if>
+					<c:if test="${pageInfo.hasNextPage==false }">
+						<a>
+							<font style="font-size: 1px">下一页</font>
+						</a>
+					</c:if>
+				</div>
 			</div>
 		</div>
 		<!--End 用户中心 End-->

@@ -836,88 +836,51 @@
 				}
 			});
 		});
-		$
-				.ajax({
-					type : "GET",
-					url : "frontOrder/getProvincelist.action",
-					success : function(result) {
-						$
-								.each(
-										result.extend.provincelist,
-										function(index, item) {
-											var option = $(
-													"<option value='"+item.provinceid+"'></option>")
-													.append(item.province);
-											option.appendTo("#provinceId");
-										});
-						//获取城市 
-						$("#provinceId")
-								.change(
-										function() {
-											$
-													.ajax({
-														type : "GET",
-														url : "${pageContext.request.contextPath}/frontOrder/getCityByProvinceId.action?id="
-																+ $(
-																		"#provinceId")
-																		.val(),
-														success : function(
-																result) {
-															$(
-																	"#cityId > option[value != 0]")
-																	.remove();
-															$
-																	.each(
-																			result.extend.citylist,
-																			function(
-																					index,
-																					item) {
-																				//选中所有紧接着没有checked属性的input元素后的p元素，赋予颜色
-																				//$("input:not(:checked) + p").css("background-color", "#CD00CD");
-																				var option = $(
-																						"<option value='"+item.cityid+"'></option>")
-																						.append(
-																								item.city);
-																				option
-																						.appendTo("#cityId");
-																			});
-															//获取地区
-															$("#cityId")
-																	.change(
-																			function() {
-																				$
-																						.ajax({
-																							type : "GET",
-																							url : "${pageContext.request.contextPath}/frontOrder/getAreaByCityId.action?id="
-																									+ $(
-																											"#cityId")
-																											.val(),
-																							success : function(
-																									result) {
-																								$(
-																										"#areaId > option[value != 0]")
-																										.remove();
-																								$
-																										.each(
-																												result.extend.arealist,
-																												function(
-																														index,
-																														item) {
-																													var option = $(
-																															"<option value='"+item.areaid+"'></option>")
-																															.append(
-																																	item.area);
-																													option
-																															.appendTo("#areaId");
-																												});
-																							}
-																						});
-																			});
-														}
-													});
-										});
-					}
-				});
+		
+		$.ajax({
+     		type:"GET",
+     		url:"${pageContext.request.contextPath}/order/getProvincelist.action",
+     		success:function(result){    			
+     			$.each(result.extend.provincelist,function(index,item){
+     				 //var option=$("<option value='"+item.provinceid+"'></option>").append(item.province);
+     				 var option = $("<option></option>").attr("value",item.provinceid).append(item.province);
+     				 option.appendTo("#provinceId");     				 
+     			});
+     			//获取城市 
+     			$("#provinceId").change(function(){
+     				$.ajax({
+         	     		type:"GET",
+         	     		url:"${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="+$("#provinceId").val(),    		
+         	     		success:function(result){
+         	     			$("#cityId > option[value != 0]").remove();
+         	     			$("#areaId > option[value != 0]").remove();
+         	     			$.each(result.extend.citylist,function(index,item){
+         	     				 //var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
+         	     				 //$("#cityId > option[value != 0]").remove();
+         	     				 var option = $("<option></option>").attr("value",item.cityid).append(item.city);
+         	     				 option.appendTo("#cityId");    	     				
+         	     			});
+         	     			 //获取地区
+         	     			 $("#cityId").change(function(){
+         	     				$.ajax({
+             	     	     		type:"GET",
+             	     	     		url:"${pageContext.request.contextPath}/order/getAreaByCityId.action?id="+$("#cityId").val(),    		
+             	     	     		success:function(result){
+             	     	     			$("#areaId > option[value != 0]").remove();
+             	     	     			//$("#areaId > option[value != 0]").remove();
+             	     	     			$.each(result.extend.arealist,function(index,item){
+             	     	     				 var option=$("<option value='"+item.areaid+"'></option>").append(item.area);
+             	     	     				 option.appendTo("#areaId");
+             	     	     			});    	     	     		
+             	     	     		}
+             	     	     	});
+         	     			 });	     				
+         	     		}
+         	     	});
+     			});				
+     		}
+     	});
+		
 		$("#addAddressbtn").click(
 				function() {
 					layer.open({

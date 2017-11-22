@@ -16,7 +16,8 @@
 		</association>
 		<association property="orderInfo" javaType="com.xh.back.bean.Xhorderinfo">
 			<id column="orderID" property="orderid"/>
-			<result column="goodAmount" property="goodamount"/>
+			<result column="payFee" property="payfee"/>
+			<result column="orderID" property="orderid"/>
 			<result column="orderTime" property="ordertime"/>
 			<result column="orderStatus" property="orderstatus"/>
 			<result column="shoppingStatus" property="shoppingstatus"/>
@@ -25,20 +26,20 @@
 	</resultMap>
 	
 	<select id="queryAllOrderGoods" resultMap="OrderGoodsResultMap">
-		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.goodAmount
+		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.payFee, oi.orderid
 		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
 		where og.pID = p.pID and og.orderID = oi.orderID
 	</select>
 	
 	<select id="queryAllOrderGoodsByUserId" parameterType="int" resultMap="OrderGoodsResultMap">
-		select og.ogID, og.pID, og.orderID,  og.orderNumber, p.pName, p.pPrice, p.pSale, oi.goodAmount,
+		select og.ogID, og.pID, og.orderID,  og.orderNumber, p.pName, p.pPrice, p.pSale, oi.payFee, oi.orderid,
 				oi.orderTime, oi.orderStatus, oi.shoppingStatus, oi.payStatus
 		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
 		where og.pID = p.pID and og.orderID = oi.orderID and oi.userID = #{userid }
 	</select>
 	
 	<select id="queryOrderGoodById" resultMap="OrderGoodsResultMap" parameterType="int">
-		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.goodAmount
+		select og.ogID, og.pID, og.orderID, p.pName, p.pPrice, p.pSale, oi.payFee, oi.orderid
 		from xhOrderGoods og, xhOrderInfo oi, xhProduct p
 		where og.ogID = #{ogid } and og.pID = p.pID and og.orderID = oi.orderID
 	</select>
