@@ -383,7 +383,7 @@
 						<tr>
 							<td>
 								<input type="hidden" value="${order.orderInfo.orderid }"/>
-								<font color="#ff4e00">${order.orderNumber }</font>
+								<font color="#ff4e00">${order.orderInfo.orderid }</font>
 							</td>
 							<td><fmt:formatDate value="${order.orderInfo.ordertime }" type="both"/></td>
 							<td>${order.orderInfo.payfee}￥</td>
