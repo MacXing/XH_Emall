@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
 import com.xh.back.bean.Xhorderinfo;
@@ -33,9 +36,13 @@ public class FrontOrderController {
 	private XhTrolleyServiceImpl xhTrolleyService;
 	
 	@RequestMapping("queryOrderInfo.action")
-	public String queryOrderInfo(int userid, Model model){
+	public String queryOrderInfo(int userid, Model model, @RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="8")Integer pageSize){
+		PageHelper.startPage(pageNum, pageSize);
 		List<OrderGoods> ogList = frontOrderService.queryOrderInfo(userid).getData();
+		PageInfo pageInfo = new PageInfo(ogList,4);
 		model.addAttribute("ogList", ogList);
+		model.addAttribute("pageInfo", pageInfo);
 		return "/front/Member_Order.jsp";
 	}
 	

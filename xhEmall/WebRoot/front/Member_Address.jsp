@@ -85,10 +85,9 @@
 				<c:forEach items="${addList }" var="address">
 					<div class="address">
 						<div>
-							<%-- <button class="deleteAdd" value="${address.addID }">
+							<button class="btn_tj deleteAdd" value="${address.addID }">
 							删除						
-							</button> --%>
-							<input type="button" value="删除" class="btn_tj deleteAdd" />
+							</button>
 						</div>
 						<table border="0" class="add_t" align="center" style="width:98%; margin:10px auto;"
 							cellspacing="0" cellpadding="0">
