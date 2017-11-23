@@ -123,9 +123,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            		<input type="hidden" name="pnum" id="pnum" value="1"/>
 	            		</form>
                         <div class="name"><a href="#">${product.pname }</a></div>
-                        <div class="carbg">
-                            
-                        	<a href="#" class="ss">收藏</a>
+                         <form  id="addcoll" >
+	            	   <input type="hidden" name="userid"  id="adduserid" value="${current_user.userid }"/>
+	                   <input type="hidden" name="pid"  id="addpid" value="${product.pid }"/>
+	                   </form>
+                        <div class="carbg"> 
+                        	<c:if test="${current_user!=null}">
+                        	<a href="javascript:void();" onclick="addcollect()" class="ss">收藏</a>
+                        	</c:if>
+                        	<c:if test="${current_user==null}">
+                        	<a href="front/Login.jsp" class="ss">收藏</a>
+                        	</c:if>
                         	<c:if test="${current_user!=null}">
                         	<input type="hidden" name="pid"  id="pid" value="${product.pid }"/>
                             <a onclick="addtro(${product.pid });" class="j_car">加入购物车</a>
@@ -219,6 +227,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
      }
     
+     function addcollect(){
+      	var formData= new FormData($("#addcoll")[0]);
+      	if(${current_user.userid==null}){
+      		alert("亲，未登录！");
+      		window.location.href="${pageContext.request.contextPath}/front/Login.jsp";
+      	}
+          $.ajax({
+          	url:"${pageContext.request.contextPath}/userCollect/addCollect.action",
+          	type:"POST",
+          	data:formData, 
+  		    contentType: false,
+  		    processData: false, 
+          	success:function(result){
+          		if(result.code==100){
+          		alert("添加成功！");
+          		}else{
+          			alert(result.extend.msg);
+          		}
+          	}
+          });
+       }
     </script>
 </body>
 

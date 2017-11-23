@@ -43,7 +43,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver  {
 
 		try {
 			//转向到错误 页面
-			request.getRequestDispatcher("/jsp/back/404.jsp").forward(request, response);
+			request.getRequestDispatcher("/front/error.htm").forward(request, response);
 		} catch (ServletException e) {
 			
 			e.printStackTrace();
