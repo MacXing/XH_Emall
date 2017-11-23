@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -92,8 +93,12 @@ public class XhUserController {
 	// 注册
 	@RequestMapping(value = "register.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<String> register(Xhusers user){
-		return xhUserService.register(user);
+	public ServerResponse<String> register(Xhusers user, String message, HttpSession session){
+		String str = (String)session.getAttribute("mobile_code");
+		if(StringUtils.equals(message, str)){
+			return xhUserService.register(user);
+		}
+		return ServerResponse.createByErrorMassage("注册失败");
 	}
 	
 	// 获取登录用户信息

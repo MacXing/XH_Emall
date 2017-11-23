@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -18,6 +19,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="front/css/style.css" />
+<link type="text/css" rel="stylesheet" href="front/css/btn.css"  />
 
 <title>尤洪</title>
 </head>
@@ -27,25 +29,23 @@
 		<div class="sou">
 			<span class="fr">
 			<span class="fl">
-				<c:if test="${current_user == null }">
+				<c:if test="${current_user.userid == null }">
 					你好，请
-					<a href="front/Login.jsp">登录</a>
+					<a href="front/Login.jsp" style="color:#ff4e00;"">登录</a>
+					&nbsp;|&nbsp;
+					<a href="front/Regist.jsp">免费注册</a>
 					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
 				</c:if>
-				<c:if test="${current_user != null}">
+				<c:if test="${current_user.userid != null}">
 					欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
 					&nbsp;|&nbsp;
 					<a class="logout">退出登录</a>
 					&nbsp;|&nbsp;
 					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					&nbsp;|
+					<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
+					&nbsp;|
 				</c:if>
-				
-				&nbsp;|&nbsp;
-				<a href="#">我的订单</a>
-				&nbsp;|
-				<a href="${pageContext.request.contextPath }/trolley/findByUser.action">我的购物车</a>
-				&nbsp;|
 			</span>
 			<span class="ss">
 				<div class="ss_list">
@@ -193,8 +193,9 @@
 							<font color="#ff4e00">*</font>&nbsp;验证码 &nbsp;
 						</td>
 						<td>
-							<input type="text" value="" class="l_ipt" />
-							<a href="#" style="font-size:12px; font-family:'宋体';">换一张</a>
+							<input type="text" value="" class="l_ipt" placeholder="验证码" id="message"/>
+							<input type="button" class="layui-btn layui-btn-primary" value ="免费获取验证码" id="msgbtn" onclick="settime(this)"/>
+							<!-- <button class="layui-btn layui-btn-primary" id="msgbtn" onclick="javascriot:settime(this)">免费获取验证码</button> -->
 						</td>
 					</tr>
 					<tr>
@@ -238,6 +239,7 @@
 			//var username = $("#username").val();
 			var userphone = $("#userphone").val();
 			var userpassword = $("#userpassword").val();
+			var message = $("#message").val();
 			//var useremail = $("#useremail").val();
 			var ii = layer.load();
 			$.ajax({
@@ -245,7 +247,8 @@
 				type : "POST",
 				data : {
 					"userphone" : userphone,
-					"userpassword" : userpassword
+					"userpassword" : userpassword,
+					"message" : message
 				},
 				success : function(result){
 					if(result.status == 0){
@@ -275,8 +278,50 @@
 				}
 			});
 		});
+		//$("#msgbtn").click(function (){
+			//settime($("#msgbtn"));
+			/* var phone = $("#userphone").val();
+			$.ajax({
+				url : "user/message.action?phone=" + phone,
+				success : function(result){
+					if(result.code == 100){
+						settime($("#msgbtn"));
+					} else {
+						settime($("#msgbtn"));
+					}
+				}
+			}); */
+		//});
+		var countdown = 60;
+	    function settime(obj) {
+	    	var phone = $("#userphone").val();
+	    	$.ajax({
+	    		url: "user/message.action?phone=" + phone,
+	    		success: function (result){
+	    			if(result.code == 100){
+	    				if (countdown == 0) {
+	    		            obj.removeAttribute("disabled");
+	    		            obj.value = "免费获取验证码";
+	    		            countdown = 60;
+	    		            return;
+	    		        } else {
+	    		            obj.setAttribute("disabled", true);
+	    		            obj.value = "重新发送(" + countdown + ")";
+	    		            countdown--;
+	    		        }
+	    		        setTimeout(function() {
+	    		            settime(obj);
+	    		        }, 1000);
+	    			} else {
+	    				layer.msg("发送失败");
+	    			}
+	    		}
+	    	});
+	        
+	    }
 	</script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
+	<!-- <script type="text/javascript" src="layui/layui.all.js"></script> -->
 </body>
 </html>
 

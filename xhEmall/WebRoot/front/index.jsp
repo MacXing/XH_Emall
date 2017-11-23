@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					你好，请
 					<a href="front/Login.jsp">登录</a>
 					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+					<a href="front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
 				</c:if>
 				<c:if test="${current_user != null}">
 					欢迎您，<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
@@ -218,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>  
         <!--End 商品分类详情 End-->                                                     
     	<ul class="menu_r">
-    		<li><a href="Index.html">首页</a></li>
+    		<li><a href="front/index.jsp">首页</a></li>
     		<c:forEach items="${CP }" var="item">                                                                                                                                              
         	<li><a href="${ pageContext.request.contextPath}/home/queryAllProductsByCatid.action?catid=${item.catid}">${item.catname }</a></li>
             </c:forEach> 

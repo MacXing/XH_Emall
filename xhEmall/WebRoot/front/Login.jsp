@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -28,9 +29,10 @@
 					<c:if test="${current_user == null }">
 					你好，请
 					<a href="front/Login.jsp">登录</a>
-					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+					&nbsp;|
+					<a href="front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
 					</c:if>
+					&nbsp;|
 					<c:if test="${current_user != null}">
 					欢迎您，<a
 							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>

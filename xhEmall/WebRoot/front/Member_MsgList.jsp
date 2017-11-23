@@ -207,7 +207,7 @@
 					你好，请
 					<a href="front/Login.jsp">登录</a>
 					&nbsp;
-					<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+					<a href="front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
 					</c:if>
 					<c:if test="${current_user != null}">
 					欢迎您，<a
