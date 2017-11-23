@@ -236,7 +236,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>  
         <!--End 商品分类详情 End-->                                                     
     	<ul class="menu_r">
-    		<li><a href="Index.html">首页</a></li>
+    		<li><a href="front/index.jsp">首页</a></li>
     		<c:forEach items="${CP }" var="item">                                                                                                                                              
         	<li><a href="${ pageContext.request.contextPath}/home/queryAllProductsByCatid.action?catid=${item.catid}">${item.catname }</a></li>
             </c:forEach> 

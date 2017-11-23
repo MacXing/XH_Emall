@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -21,7 +22,111 @@
 </head>
 <body>
 	<!--Begin Header Begin-->
+<<<<<<< HEAD
 
+=======
+	<div class="soubg">
+		<div class="sou">
+			<span class="fr">
+				<span class="fl">
+					<c:if test="${current_user == null }">
+					你好，请
+					<a href="front/Login.jsp">登录</a>
+					&nbsp;|
+					<a href="front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
+					</c:if>
+					&nbsp;|
+					<c:if test="${current_user != null}">
+					欢迎您，<a
+							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
+					&nbsp;|&nbsp;
+					<a class="logout">退出登录</a>
+					&nbsp;|&nbsp;
+					</c:if>
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的订单</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
+					</c:if>
+					&nbsp;|
+					<c:if test="${current_user == null }">
+					<a href="front/Login.jsp">我的购物车</a>
+					</c:if>
+					<c:if test="${current_user != null }">
+					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
+					&nbsp;|
+					</c:if>
+				</span>
+				<span class="ss">
+					<div class="ss_list">
+						<a href="#">收藏夹</a>
+						<div class="ss_list_bg">
+							<div class="s_city_t"></div>
+							<div class="ss_list_c">
+								<ul>
+									<li>
+										<a href="#">我的收藏夹</a>
+									</li>
+									<li>
+										<a href="#">我的收藏夹</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="ss_list">
+						<a href="#">客户服务</a>
+						<div class="ss_list_bg">
+							<div class="s_city_t"></div>
+							<div class="ss_list_c">
+								<ul>
+									<li>
+										<a href="#">客户服务</a>
+									</li>
+									<li>
+										<a href="#">客户服务</a>
+									</li>
+									<li>
+										<a href="#">客户服务</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="ss_list">
+						<a href="#">网站导航</a>
+						<div class="ss_list_bg">
+							<div class="s_city_t"></div>
+							<div class="ss_list_c">
+								<ul>
+									<li>
+										<a href="#">网站导航</a>
+									</li>
+									<li>
+										<a href="#">网站导航</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</span>
+				<span class="fl">|&nbsp;关注我们：</span>
+				<span class="s_sh">
+					<a href="#" class="sh1">新浪</a>
+					<a href="#" class="sh2">微信</a>
+				</span>
+				<span class="fr">
+					|&nbsp;
+					<a href="home/home.action">
+						首页&nbsp;<img src="front/images/home.png" align="absmiddle" />
+					</a>
+				</span>
+			</span>
+		</div>
+	</div>
+	<!--End Header End-->
+>>>>>>> branch 'master' of https://github.com/MacXing/XH_Emall.git
 	<!--Begin Login Begin-->
 	<div class="log_bg">
 		<div class="top">
