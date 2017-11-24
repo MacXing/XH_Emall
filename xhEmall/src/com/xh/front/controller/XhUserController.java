@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,9 @@ import com.other.currency.Const;
 import com.other.currency.ResponseCode;
 import com.other.currency.ServerResponse;
 import com.other.getip.GetIp;
+import com.other.msg.Msg;
+import com.other.util.sendsms;
+import com.xh.back.bean.Message;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.service.XhUserService;
 
@@ -93,9 +95,9 @@ public class XhUserController {
 	// 注册
 	@RequestMapping(value = "register.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<String> register(Xhusers user, String message, HttpSession session){
-		String str = (String)session.getAttribute("mobile_code");
-		if(StringUtils.equals(message, str)){
+	public ServerResponse<String> register(Xhusers user, int message, HttpSession session){
+		int msg = (int) session.getAttribute("mobile_code");
+		if(message == msg){
 			return xhUserService.register(user);
 		}
 		return ServerResponse.createByErrorMassage("注册失败");
@@ -153,5 +155,17 @@ public class XhUserController {
 			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
 		}
 		return xhUserService.restPhone(userphoneOld, userphoneNew, user.getUserid());
+	}
+	
+	@RequestMapping("message.action")
+	@ResponseBody
+	public Msg modifyphone(String phone,HttpServletRequest request){
+		sendsms sendsms = new sendsms();
+		Message message = sendsms.sendMsg(phone);
+		if("2".equals(message.getCode())){
+			request.getSession().setAttribute("mobile_code", message.getMobile_code());
+			return Msg.success();
+		}
+		return Msg.fail();
 	}
 }

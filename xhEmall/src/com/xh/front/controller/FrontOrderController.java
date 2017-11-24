@@ -19,6 +19,7 @@ import com.other.currency.ServerResponse;
 import com.xh.back.bean.OrderGoods;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.Xhtrolley;
+import com.xh.back.service.OrderGoodsService;
 import com.xh.back.serviceImpl.XhTrolleyServiceImpl;
 import com.xh.front.bean.UserAddress;
 import com.xh.front.service.FrontOrderService;
@@ -35,13 +36,17 @@ public class FrontOrderController {
 	@Qualifier("xhTrolleyService")
 	private XhTrolleyServiceImpl xhTrolleyService;
 	
+	@Autowired
+	@Qualifier("orderGoodsService")
+	private OrderGoodsService orderGoodsService;
+	
 	@RequestMapping("queryOrderInfo.action")
 	public String queryOrderInfo(int userid, Model model, @RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="8")Integer pageSize){
 		PageHelper.startPage(pageNum, pageSize);
-		List<OrderGoods> ogList = frontOrderService.queryOrderInfo(userid).getData();
-		PageInfo pageInfo = new PageInfo(ogList,4);
-		model.addAttribute("ogList", ogList);
+		List<Xhorderinfo> oiList = frontOrderService.queryOrderInfo(userid).getData();
+		PageInfo pageInfo = new PageInfo(oiList,4);
+		model.addAttribute("oiList", oiList);
 		model.addAttribute("pageInfo", pageInfo);
 		return "/front/Member_Order.jsp";
 	}
@@ -91,8 +96,21 @@ public class FrontOrderController {
 		//model.addAttribute("orderinfo", orderinfo);
 		ServletContext app = req.getServletContext();
 		app.setAttribute("orderinfo", orderinfo);
+		req.getSession().setAttribute("id", id);
+		
 		return "forward:/front/BuyCar_Three.jsp";
 	}
 	
+	@RequestMapping("queryOrderDetail.action")
+	public String queryOrderDetail(Integer orderid, Model model, @RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="6")Integer pageSize){
+		PageHelper.startPage(pageNum, pageSize);
+		List<OrderGoods> ogList = orderGoodsService.queryOrderGoodByOGId(orderid).getData();
+		PageInfo pageInfo = new PageInfo(ogList,4);
+		model.addAttribute("orderid", orderid);
+		model.addAttribute("ogList", ogList);
+		model.addAttribute("pageInfo", pageInfo);
+		return "/front/Member_Order_Detail.jsp";
+	}
 }
 

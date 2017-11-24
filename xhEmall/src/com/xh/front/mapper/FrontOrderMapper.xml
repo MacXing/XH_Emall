@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="userid != null">#{userid },</if>
 			<if test="shoppingid != null">#{shoppingid },</if>
 			<if test="ordertime == null">now(),</if>
-			<if test="orderstatus == null">0,</if>
+			<if test="orderstatus == null">1,</if>
 			<if test="shoppingstatus == null">0,</if>
 			<if test="paystatus == null">0,</if>
 			<if test="addusername != null">#{addusername },</if>
@@ -99,7 +99,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="queryOrderInfoById" parameterType="int" resultType="Xhorderinfo">
-		select orderID, shoppingName, payFee, payprice from xhOrderInfo where orderid = #{orderid }
+		select orderid, shoppingName, payFee, payprice, ordertime, orderstatus,
+			shoppingstatus, paystatus
+		  from xhOrderInfo where orderid = #{orderid }
+	</select>
+	
+	<select id="queryOrderInfo" parameterType="int" resultType="Xhorderinfo">
+		select orderid, shoppingName, payFee, payprice, ordertime, orderstatus,
+			shoppingstatus, paystatus
+		from xhOrderInfo where userid = #{userid }
 	</select>
 	
 	<select id="queryAddressById" parameterType="int" resultType="UserAddress">

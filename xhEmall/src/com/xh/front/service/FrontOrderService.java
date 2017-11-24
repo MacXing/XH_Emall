@@ -3,7 +3,6 @@ package com.xh.front.service;
 import java.util.List;
 
 import com.other.currency.ServerResponse;
-import com.xh.back.bean.OrderGoods;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.Xhtrolley;
 import com.xh.front.bean.UserAddress;
@@ -11,7 +10,7 @@ import com.xh.front.bean.UserAddress;
 public interface FrontOrderService {
 	
 	//根据用户ID查询用户订单信息
-	public ServerResponse<List<OrderGoods>> queryOrderInfo(Integer userid);
+	public ServerResponse<List<Xhorderinfo>> queryOrderInfo(Integer userid);
 	
 	//根据用户ID查询用户收货地址
 	public ServerResponse<List<UserAddress>> queryAddressById(int userid);

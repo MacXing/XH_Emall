@@ -128,5 +128,14 @@ public class OrderGoodsServiceImpl implements OrderGoodsService {
 		}
 		return ServerResponse.createByErrorMassage("商品号不存在");
 	}
+
+	@Override
+	public ServerResponse<List<OrderGoods>> queryOrderGoodByOGId(int orderid) {
+		List<OrderGoods> ogdList = orderGoodsMapper.queryOrderGoodByOGId(orderid);
+		if(ogdList != null){
+			return ServerResponse.createBySuccess(ogdList);
+		}
+		return ServerResponse.createByErrorMassage("查询结果为空");
+	}
 	
 }

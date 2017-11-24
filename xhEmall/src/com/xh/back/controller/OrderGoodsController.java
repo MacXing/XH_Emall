@@ -33,6 +33,15 @@ public class OrderGoodsController {
 		return "forward:/jsp/back/orderGoods/queryOrderGood.jsp";
 	}
 	
+	@RequestMapping(value = "queryOrderGoodByOGId.action")
+	public String queryOrderGoodByOGId(int orderid, Model model){
+		List<OrderGoods> ogdList = orderGoodsService.queryOrderGoodByOGId(orderid).getData();
+		if(ogdList != null){
+			model.addAttribute("ogdList", ogdList);
+		}
+		return "forward:/front/Member_Order_Detail.jsp";
+	}
+	
 	@RequestMapping(value = "deleteOrderGoodById.action")
 	@ResponseBody
 	public ServerResponse<String> deleteOrderGoodById(int ogid){

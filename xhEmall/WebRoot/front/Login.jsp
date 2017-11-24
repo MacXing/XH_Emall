@@ -190,16 +190,7 @@
 	</div>
 	<!--End Login End-->
 	<!--Begin Footer Begin-->
-	<div class="btmbg">
-		<div class="btm">
-			备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights Reserved.
-			复制必究 , Technical Support: Dgg Group <br /> <img src="front/images/b_1.gif" width="98"
-				height="33" /><img src="front/images/b_2.gif" width="98" height="33" /><img
-				src="front/images/b_3.gif" width="98" height="33" /><img src="front/images/b_4.gif" width="98"
-				height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img
-				src="front/images/b_6.gif" width="98" height="33" />
-		</div>
-	</div>
+	<jsp:include page="/front/foot.jsp"/>
 	<!--End Footer End -->
 	<script type="text/javascript" src="resource/js/jquery.min.js"></script>
 	<script type="text/javascript" src="resource/layer/layer.js"></script>

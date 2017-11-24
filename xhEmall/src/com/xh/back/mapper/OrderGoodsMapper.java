@@ -37,5 +37,8 @@ public interface OrderGoodsMapper {
 	
 	//添加货物订单
 	public int addOrderGood(@Param("pid")int pid, @Param("orderid")int orderid, @Param("pnum")int pnum);
+	
+	//查询订单详情
+	public List<OrderGoods> queryOrderGoodByOGId(int orderid);
 
 }

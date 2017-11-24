@@ -10,6 +10,9 @@ public interface OrderGoodsService {
 	// 查询所有货物订单信息
 	ServerResponse<List<OrderGoods>> queryAllOrderGoods();
 	
+	// 查询所有货物订单信息
+	ServerResponse<List<OrderGoods>> queryOrderGoodByOGId(int orderid);
+	
 	//根据ID查询货物订单
 	ServerResponse<OrderGoods> queryOrderGoodById(int ogid);
 	

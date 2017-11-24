@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.CollectionUtils;
 
 import com.other.currency.ServerResponse;
-import com.xh.back.bean.OrderGoods;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.Xhtrolley;
 import com.xh.back.mapper.OrderGoodsMapper;
@@ -31,12 +30,12 @@ public class FrontOrderServiceImpl implements FrontOrderService {
     private XhTrolleyMapper xhTrolleyMapper;
 	
 	@Override
-	public ServerResponse<List<OrderGoods>> queryOrderInfo(Integer userid) {
-		List<OrderGoods> ogList = orderGoodsMapper.queryAllOrderGoodsByUserId(userid);
-		if(CollectionUtils.isEmpty(ogList)){
+	public ServerResponse<List<Xhorderinfo>> queryOrderInfo(Integer userid) {
+		List<Xhorderinfo> oiList = frontOrderMapper.queryOrderInfo(userid);
+		if(CollectionUtils.isEmpty(oiList)){
 			return ServerResponse.createByErrorMassage("没有相关信息");
 		}
-		return ServerResponse.createBySuccess(ogList);
+		return ServerResponse.createBySuccess(oiList);
 	}
 
 	@Override

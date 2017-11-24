@@ -25,7 +25,17 @@ public class OrderGoods implements Serializable {
 
     private int isReal;
     
-    private Xhproduct product;
+    private int pNum;
+    
+    public int getpNum() {
+		return pNum;
+	}
+
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
+	}
+
+	private Xhproduct product;
     
     private Xhorderinfo orderInfo;
     

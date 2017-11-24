@@ -12,9 +12,9 @@
 
 <title>注册</title>
 
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -221,15 +221,7 @@
 	</div>
 	<!--End Login End-->
 	<!--Begin Footer Begin-->
-	<div class="btmbg">
-		<div class="btm">
-			备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights Reserved.
-			复制必究 , Technical Support: Dgg Group <br /> <img src="front/images/b_1.gif" width="98" height="33" /><img
-				src="front/images/b_2.gif" width="98" height="33" /><img src="front/images/b_3.gif" width="98" height="33" /><img
-				src="front/images/b_4.gif" width="98" height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img
-				src="front/images/b_6.gif" width="98" height="33" />
-		</div>
-	</div>
+	<jsp:include page="/front/foot.jsp"/>
 	<!--End Footer End -->
 	<script type="text/javascript" src="resource/js/jquery.min.js"></script>
 	<script type="text/javascript" src="resource/layer/layer.js"></script>
@@ -254,7 +246,7 @@
 					if(result.status == 0){
 						layer.close(ii);
 						layer.msg(result.msg);
-						window.location.href = "front/Login.jsp";
+						window.location.href = "${pageContext.request.contextPath}/front/Login.jsp";
 					} else {
 						layer.close(ii);
 						layer.msg(result.msg);
@@ -299,25 +291,28 @@
 	    		url: "user/message.action?phone=" + phone,
 	    		success: function (result){
 	    			if(result.code == 100){
-	    				if (countdown == 0) {
-	    		            obj.removeAttribute("disabled");
-	    		            obj.value = "免费获取验证码";
-	    		            countdown = 60;
-	    		            return;
-	    		        } else {
-	    		            obj.setAttribute("disabled", true);
-	    		            obj.value = "重新发送(" + countdown + ")";
-	    		            countdown--;
-	    		        }
-	    		        setTimeout(function() {
-	    		            settime(obj);
-	    		        }, 1000);
+	    				begin(obj);
 	    			} else {
 	    				layer.msg("发送失败");
 	    			}
 	    		}
 	    	});
 	        
+	    }
+	    function begin(obj) {
+	    	if (countdown == 0) {
+	            obj.removeAttribute("disabled");
+	            obj.value = "免费获取验证码";
+	            countdown = 60;
+	            return;
+	        } else {
+	            obj.setAttribute("disabled", true);
+	            obj.value = "重新发送(" + countdown + ")";
+	            countdown--;
+	        }
+	        setTimeout(function() {
+	        	begin(obj);
+	        }, 1000);
 	    }
 	</script>
 	<script type="text/javascript" src="front/js/logout.js"></script>

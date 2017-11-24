@@ -17,9 +17,18 @@ public class Xhtrolley {
 
     private Integer tronum;
 
-    private String attribute1;
+    private Integer payState;
+    
 
-    private String attribute2;
+    public Integer getPayState() {
+		return payState;
+	}
+
+	public void setPayState(Integer payState) {
+		this.payState = payState;
+	}
+
+	private String attribute2;
 
     private String attribute3;
 
@@ -84,14 +93,6 @@ public class Xhtrolley {
         this.tronum = tronum;
     }
 
-    public String getAttribute1() {
-        return attribute1;
-    }
-
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1 == null ? null : attribute1.trim();
-    }
-
     public String getAttribute2() {
         return attribute2;
     }
@@ -132,15 +133,5 @@ public class Xhtrolley {
         this.attribute6 = attribute6 == null ? null : attribute6.trim();
     }
 
-	@Override
-	public String toString() {
-		return "Xhtrolley [xhproduct=" + xhproduct + ", xhusers=" + xhusers
-				+ ", troid=" + troid + ", pid=" + pid + ", userid=" + userid
-				+ ", tronum=" + tronum + ", attribute1=" + attribute1
-				+ ", attribute2=" + attribute2 + ", attribute3=" + attribute3
-				+ ", attribute4=" + attribute4 + ", attribute5=" + attribute5
-				+ ", attribute6=" + attribute6 + "]";
-	}
-    
     
 }

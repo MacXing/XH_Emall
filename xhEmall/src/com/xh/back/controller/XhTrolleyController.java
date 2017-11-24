@@ -59,9 +59,19 @@ public class XhTrolleyController {
 		if(uid > 0){
 			List<Xhtrolley> trolleyItem = xhTrolleyService.queryTrolleyByUser(uid);
 			ServletContext application = request.getServletContext();
-			application.setAttribute("trolleyItem", trolleyItem);
-			application.setAttribute("falg",1);
-			return "/home/home.action";
+			if(trolleyItem!=null&&trolleyItem.size()>0){
+				
+				application.removeAttribute("trolleyItem");
+				application.setAttribute("trolleyItem", trolleyItem);				
+				application.setAttribute("falg",1);
+				
+				return "/home/home.action";				
+			}else{
+				
+				application.setAttribute("falg",1);
+				return "/home/home.action";	
+			}
+
 		}
 		return "/front/404.jsp";
 	}
@@ -77,7 +87,6 @@ public class XhTrolleyController {
 				ServletContext application = request.getServletContext();
 				application.removeAttribute("trolleyItem");
 				application.setAttribute("trolleyItem", trolleyItem);
-				/*model.addAttribute("trolleyItem", trolleyItem);*/
 				return "forward:/front/BuyCar.jsp";
 			}
 			return "forward:/front/BuyCar.jsp";
@@ -127,24 +136,24 @@ public class XhTrolleyController {
 
 	// 前端
 
-	// 添加购物车条目
-
-
 	@RequestMapping("addTroItem.action")
 	@ResponseBody
-	public Msg addTroItem(int pid,int pnum,int userid){
+	public Msg addTroItem(int pid,int pnum,int userid,HttpServletRequest request){
 			Xhtrolley tro=new Xhtrolley();
-			
-			if(pid>0&&pnum>0){	
-								
+			System.out.println(pid+pnum+userid);
+			if(pid>0&&pnum>0){		
 			tro.setPid(pid);
 			tro.setUserid(userid);
-			//tro.setUserid(userid);
 			tro.setTronum(pnum);
 			xhTrolleyService.addTroItem(tro);
+			List<Xhtrolley> trolleyItem = xhTrolleyService.queryTrolleyByUser(userid);
+			ServletContext application = request.getServletContext();
+			application.removeAttribute("trolleyItem");
+			application.setAttribute("trolleyItem", trolleyItem);
 			return Msg.success();
+
 		}
-		return Msg.fail();	
+		   return Msg.fail();	
 	}
 
 	// 修改购物车商品的数量

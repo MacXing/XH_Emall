@@ -4,7 +4,11 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%
+	if(application.getAttribute("init")==null||application.getAttribute("init")==""){
+		response.sendRedirect(request.getContextPath()+"/home/home.action");
+	}
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -30,6 +34,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="front/js/hban.js"></script>
     <script type="text/javascript" src="front/js/tban.js"></script>   
 	<script type="text/javascript" src="front/js/lrscroll_1.js"></script>
+	<script type="text/javascript">
+	
+	</script>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?f4e715f390d66c3374cd99ec3db0dd58";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+</script>
+	
 </head>
   
 <body>
@@ -145,6 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <c:forEach items="${trolleyItem}" var="items">
             	<li>
             		<input type="hidden" id="falg" value="${falg}">
+            		<input type="hidden" id="tro" value="${trolleyItem}">
                 	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
                     <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
                     <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
@@ -233,7 +251,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="pic1">
 		<ul id="slideName1" class="slide_box bxslider">
 		<c:forEach items="${navbars }" var="item">
-	      <li><img src="${pageContext.request.contextPath}${item.url }" width="1349" height="411" /></li>                   
+	      <li><img src="${pageContext.request.contextPath}${item.url }" width="100%" height="500px" /></li>                   
 	    </c:forEach>
 	  	</ul>  
     </div>          
@@ -439,82 +457,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </table>
         </div>
     </div>
-    <div class="b_nav">
-    	<dl>                                                                                            
-        	<dt><a href="#">新手上路</a></dt>
-            <dd><a href="#">售后流程</a></dd>
-            <dd><a href="#">购物流程</a></dd>
-            <dd><a href="#">订购方式</a></dd>
-            <dd><a href="#">隐私声明</a></dd>
-            <dd><a href="#">推荐分享说明</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">配送与支付</a></dt>
-            <dd><a href="#">货到付款区域</a></dd>
-            <dd><a href="#">配送支付查询</a></dd>
-            <dd><a href="#">支付方式说明</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">会员中心</a></dt>
-            <dd><a href="#">资金管理</a></dd>
-            <dd><a href="#">我的收藏</a></dd>
-            <dd><a href="#">我的订单</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">服务保证</a></dt>
-            <dd><a href="#">退换货原则</a></dd>
-            <dd><a href="#">售后服务保证</a></dd>
-            <dd><a href="#">产品质量保证</a></dd>
-        </dl>
-        <dl>
-        	<dt><a href="#">联系我们</a></dt>
-            <dd><a href="#">网站故障报告</a></dd>
-            <dd><a href="#">购物咨询</a></dd>
-            <dd><a href="#">投诉与建议</a></dd>
-        </dl>
-        <div class="b_tel_bg">
-        	<a href="#" class="b_sh1">新浪微博</a>            
-        	<a href="#" class="b_sh2">腾讯微博</a>
-            <p>
-            服务热线：<br />
-            <span>400-123-4567</span>
-            </p>
-        </div>
-        <div class="b_er">
-            <div class="b_er_c"><img src="front/images/er.gif" width="118" height="118" /></div>
-            <img src="front/images/ss.png" />
-        </div>
-    </div>    
-    <div class="btmbg">
-		<div class="btm">
-        	备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2015-2018 尤洪商城网 All Rights Reserved. 复制必究 , Technical Support: Dgg Group <br />
-            <img src="front/images/b_1.gif" width="98" height="33" /><img src="front/images/b_2.gif" width="98" height="33" /><img src="front/images/b_3.gif" width="98" height="33" /><img src="front/images/b_4.gif" width="98" height="33" /><img src="front/images/b_5.gif" width="98" height="33" /><img src="front/images/b_6.gif" width="98" height="33" />
-        </div>    	
+   	<jsp:include page="/front/foot.jsp"/>
     </div>
     <!--End Footer End -->    
 </div>
 <script type="text/javascript">
 
 		$(document).ready(function(){
-		
+			
 			 var userid=$("#loginuser").val();
-
+			 
 			 if($("#falg").val()>0){
 			 	return;
 			 }
 			
+			 var tro = $("#tro").val();
 	         if(userid>0){
-	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
+	        	 if(tro!=null){
+	        		 window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";
+	        	 }else{
+	        		 return;
+	        	 }
+	                   
 	         }
 			
-			 if($("#falg").val()>0){
-			 	return;
-			 }
-			
-	         if(userid>0){
-	             window.location.href="${pageContext.request.contextPath }/trolley/findByUser.action";       
-	         };
-	         	
 		}); 
 		
 </script>

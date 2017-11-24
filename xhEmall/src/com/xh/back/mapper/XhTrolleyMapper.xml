@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--查询购物车信息  -->
 <mapper namespace="com.xh.back.mapper.XhTrolleyMapper">
-
   <resultMap type="Xhtrolley" id="TrolleyItemMap">
          <result column="tid" property="troid"/>
          <result column="tnum" property="tronum"/>
@@ -36,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        on t.userID=u.userID
        join xhProduct p
        on   t.pID=p.pID
-       WHERE u.userID=#{id}
+       WHERE t.payState=0 AND u.userID=#{id}
 	</select>
 	
 	<!-- 查询购物车信息 -->
@@ -128,4 +127,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="addTroItem" parameterType="xhtrolley">
        insert into xhTrolley(userID,pID,troNum) values(#{userid},#{pid},#{tronum})
     </insert>
+    
 </mapper>	

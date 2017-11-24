@@ -8,6 +8,11 @@
 			+ path + "/";
 %>
 
+<%
+	if(application.getAttribute("init")==null||application.getAttribute("init")==""){
+		response.sendRedirect(request.getContextPath()+"/home/home.action");
+	}
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -28,6 +33,15 @@
 <script type="text/javascript" src="front/js/milk_ban.js"></script>
 <script type="text/javascript" src="front/js/paper_ban.js"></script>
 <script type="text/javascript" src="front/js/baby_ban.js"></script>
+ <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?f4e715f390d66c3374cd99ec3db0dd58";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+</script>
  
  <script type="text/javascript">
     $(function(){
@@ -157,8 +171,8 @@
                 </li>
                 </c:forEach>
             </ul>
-            </c:if>
             <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
+           </c:if>
             <!--End 购物车已登录 End-->
         </div>
     </div>
