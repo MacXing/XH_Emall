@@ -50,6 +50,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	<a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </a>
+                            <a  id="flash">
+                                <i class="fa fa-refresh"></i>
+                            </a>
                             <ul class="dropdown-menu dropdown-user">
                                 <li><a data-toggle="modal" data-target="#myModal" id="addorderforposition">添加订单</a>                                
                                 </li>
@@ -909,6 +912,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		window.print(); 
     	}      
     }  
+</script>
+
+<script type="text/javascript">
+	$("#flash").on("click",function(){
+		window.location.reload();
+	});
 </script>
 
 </body>

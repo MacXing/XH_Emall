@@ -168,4 +168,16 @@
   	select count(*) from xhShopping where shoppingID=#{shoppingid,jdbcType=INTEGER}
   </select>
   
+  <select id="queryAllOrderNotShop" resultType="xhorderinfo">
+  	SELECT orderID,userID,shoppingID, orderStatus,payStatus
+	FROM xhOrderInfo
+	WHERE shoppingStatus=0 AND payStatus=1
+  </select>
+  
+  <update id="updateOrderShop" parameterType="int">
+  	UPDATE xhOrderInfo
+	SET shoppingStatus =1
+	WHERE orderID=#{id}
+  </update>
+  
 </mapper>

@@ -2,14 +2,11 @@ package com.xh.back.service;
 
 
 import java.util.List;
-
 import com.xh.back.bean.OrderArea;
 import com.xh.back.bean.OrderCity;
 import com.xh.back.bean.OrderProvince;
 import com.xh.back.bean.Xhorderinfo;
-import com.xh.back.bean.Xhproduct;
-import com.xh.front.bean.Xhusers;
-import com.xh.front.bean.XhusersBean;
+
 
 public interface OrderService {
 	/**
@@ -34,4 +31,8 @@ public interface OrderService {
 	
 	public int checkUser(int id);
 	public int checkExpress(int id);
+	
+	public List<Xhorderinfo> queryAllOrderNotShop();
+	
+	public void updateOrderShop(int id);
 }

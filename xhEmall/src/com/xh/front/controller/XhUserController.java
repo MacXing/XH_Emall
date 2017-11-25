@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -95,9 +96,9 @@ public class XhUserController {
 	// 注册
 	@RequestMapping(value = "register.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<String> register(Xhusers user, int message, HttpSession session){
-		int msg = (int) session.getAttribute("mobile_code");
-		if(message == msg){
+	public ServerResponse<String> register(Xhusers user, Integer message, HttpSession session){
+		int msg = (Integer)session.getAttribute("mobile_code");
+		if(msg == message ){
 			return xhUserService.register(user);
 		}
 		return ServerResponse.createByErrorMassage("注册失败");

@@ -41,6 +41,21 @@
 <body>
 	<!--Begin Menu Begin-->
 	<jsp:include page="/front/head2.jsp"/>
+	<script type="text/javascript">
+	   _hmt.push(['_trackOrder', {
+           "orderId": "[ORDER_ID]",
+           "orderTotal": [ORDER_TOTAL],
+           "item": [
+               {
+                   "skuId": "[SKU_ID]",
+                   "skuName": "[SKU_NAME]",
+                   "category": "[CATEGORY]",
+                   "Price": [PRICE],
+                   "Quantity": [QUANTITY]
+               }
+           ]}
+       ]);
+	</script>
 	<!--End Menu End-->
 	<div class="i_bg">
 		<div class="content mar_20">

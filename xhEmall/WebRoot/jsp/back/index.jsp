@@ -295,6 +295,12 @@
 								<i class="glyphicon glyphicon-duplicate"></i>
 								<span class="glyphicon-class">货物订单 </span>							
 							</a>
+						</li>
+						<li>
+							<a href="order/queryAllOrderNotShop.action" class="J_menuItem">
+								<i class="glyphicon glyphicon-file"></i>
+								<span class="glyphicon-class">未发货订单</span>								
+							</a>					
 						</li>						
 					</ul>
 				</li>

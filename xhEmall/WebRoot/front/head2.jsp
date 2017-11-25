@@ -35,14 +35,16 @@
 <script type="text/javascript" src="front/js/paper_ban.js"></script>
 <script type="text/javascript" src="front/js/baby_ban.js"></script>
 <script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?f4e715f390d66c3374cd99ec3db0dd58";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a7dc93e4ba6534c4c3a6a05c33c7d6a8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 </script>
+
+
 
 </head>  
   <body>
@@ -116,17 +118,7 @@
 						</div>
 					</div>
 				</span>
-				<span class="fl">|&nbsp;关注我们：</span>
-				<span class="s_sh">
-					<a href="#" class="sh1">新浪</a>
-					<a href="#" class="sh2">微信</a>
-				</span>
-				<span class="fr">
-					|&nbsp;
-					<a href="home/home.action">
-						首页&nbsp;<img src="front/images/home.png" align="absmiddle" />
-					</a>
-				</span>
+				
 			</span>
 		</div>
 	</div>

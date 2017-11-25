@@ -18,111 +18,22 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="front/css/style.css" />
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a7dc93e4ba6534c4c3a6a05c33c7d6a8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 
 </head>
 <body>
 	<!--Begin Header Begin-->
-	<div class="soubg">
-		<div class="sou">
-			<span class="fr">
-				<span class="fl">
-					<c:if test="${current_user == null }">
-					你好，请
-					<a href="front/Login.jsp">登录</a>
-					&nbsp;|
-					<a href="front/Regist.jsp" style="color:#ff4e00;">免费注册</a>
-					</c:if>
-					&nbsp;|
-					<c:if test="${current_user != null}">
-					欢迎您，<a
-							href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">${current_user.userphone }</a>
-					&nbsp;|&nbsp;
-					<a class="logout">退出登录</a>
-					&nbsp;|&nbsp;
-					</c:if>
-					<c:if test="${current_user == null }">
-					<a href="front/Login.jsp">我的订单</a>
-					</c:if>
-					<c:if test="${current_user != null }">
-					<a href="${pageContext.request.contextPath }/frontOrder/queryOrderInfo.action?userid=${current_user.userid}">我的订单</a>
-					</c:if>
-					&nbsp;|
-					<c:if test="${current_user == null }">
-					<a href="front/Login.jsp">我的购物车</a>
-					</c:if>
-					<c:if test="${current_user != null }">
-					<a href="${pageContext.request.contextPath }/trolley/findByUserCart.action">我的购物车</a>
-					&nbsp;|
-					</c:if>
-				</span>
-				<span class="ss">
-					<div class="ss_list">
-						<a href="#">收藏夹</a>
-						<div class="ss_list_bg">
-							<div class="s_city_t"></div>
-							<div class="ss_list_c">
-								<ul>
-									<li>
-										<a href="#">我的收藏夹</a>
-									</li>
-									<li>
-										<a href="#">我的收藏夹</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="ss_list">
-						<a href="#">客户服务</a>
-						<div class="ss_list_bg">
-							<div class="s_city_t"></div>
-							<div class="ss_list_c">
-								<ul>
-									<li>
-										<a href="#">客户服务</a>
-									</li>
-									<li>
-										<a href="#">客户服务</a>
-									</li>
-									<li>
-										<a href="#">客户服务</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="ss_list">
-						<a href="#">网站导航</a>
-						<div class="ss_list_bg">
-							<div class="s_city_t"></div>
-							<div class="ss_list_c">
-								<ul>
-									<li>
-										<a href="#">网站导航</a>
-									</li>
-									<li>
-										<a href="#">网站导航</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</span>
-				<span class="fl">|&nbsp;关注我们：</span>
-				<span class="s_sh">
-					<a href="#" class="sh1">新浪</a>
-					<a href="#" class="sh2">微信</a>
-				</span>
-				<span class="fr">
-					|&nbsp;
-					<a href="home/home.action">
-						首页&nbsp;<img src="front/images/home.png" align="absmiddle" />
-					</a>
-				</span>
-			</span>
-		</div>
-	</div>
+	
 	<!--End Header End-->
+
 	<!--Begin Login Begin-->
 	<div class="log_bg">
 		<div class="top">
