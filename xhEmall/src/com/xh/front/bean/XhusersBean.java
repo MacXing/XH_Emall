@@ -29,13 +29,7 @@ public class XhusersBean extends Xhusers{
 				+ ", getUservisitcount()=" + getUservisitcount()
 				+ ", getUserhomephone()=" + getUserhomephone()
 				+ ", getUserphoto()=" + getUserphoto() + ", getUsermoney()="
-				+ getUsermoney() + ", getAttribute1()="
-				+ ", getAttribute2()=" + getAttribute2() + ", getAttribute3()="
-				+ getAttribute3() + ", getAttribute4()=" + getAttribute4()
-				+ ", getAttribute5()=" + getAttribute5() + ", getAttribute6()="
-				+ getAttribute6() + ", toString()=" + super.toString()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ "]";
+				+ getUsermoney() + "]";
 	}
 	
 	

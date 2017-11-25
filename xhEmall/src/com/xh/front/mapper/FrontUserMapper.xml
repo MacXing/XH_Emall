@@ -20,7 +20,8 @@
 		<result column="userHomePhone" jdbcType="VARCHAR" property="userhomephone" />
 		<result column="userPhoto" jdbcType="VARCHAR" property="userphoto" />
 		<result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
-		<result column="userIntegral" jdbcType="DOUBLE" property="userintegral" /> 
+		<result column="userIntegral" jdbcType="DOUBLE" property="userintegral" />
+		<result column="province" jdbcType="VARCHAR" property="province" />  
 	    <association property="xhgrade" javaType="com.xh.back.bean.Xhgrade">
 	    	  <id column="gardeID" jdbcType="INTEGER" property="gradeid" />
 			  <result column="gradeName" jdbcType="VARCHAR" property="gradename" />
@@ -33,7 +34,7 @@
 	SELECT u.userID,g.gradeID,u.userName,u.userPassword,
 	u.userSex,u.userBirthday,u.userPhone,u.userEmail,u.userAddress,
 	u.userLoginTime,u.userlasttime,u.userLastIp,u.userVisitCount,
-	u.userHomePhone,u.userPhoto,u.userMoney,u.userIntegral,g.gradeName,g.gradeCount
+	u.userHomePhone,u.userPhoto,u.userMoney,u.userIntegral,g.gradeName,g.gradeCount,u.province
 	FROM xhUsers u JOIN xhGrade g ON u.gradeID=g.gradeID
 	where u.userID=#{userid}
 	</select>
@@ -86,7 +87,10 @@
       </if>
       <if test="userphoto != null">
         userPhoto = #{userphoto,jdbcType=VARCHAR},
-      </if>      
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>     
     </set>
     where userID = #{userid,jdbcType=INTEGER}
    </update>
@@ -185,5 +189,10 @@
     isdelete=1
     where msgID=#{msgid,jdbcType=INTEGER}
   </update>
+  
+  <!-- 根据省市县所属id查询对应的名称 -->
+  <select id="getProvinceName" resultType="String" parameterType="java.lang.String">
+  	select province from provinces where provinceid=#{id,jdbcType=VARCHAR}
+  </select>
   
 </mapper>

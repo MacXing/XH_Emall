@@ -3,7 +3,6 @@ package com.xh.front.service;
 
 import java.util.List;
 
-import com.other.currency.ServerResponse;
 import com.xh.back.bean.Xhmessage;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.bean.XhusersBean;
@@ -19,4 +18,6 @@ public interface FrontUserService {
 	public Xhmessage queryMsgByPrimarykey(int id);
 	public void addMessage(Xhmessage message);
 	public void deleteMessageByPrimaryKey(int id);
+	
+	public String getProvinceName(String id);
 }

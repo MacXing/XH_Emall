@@ -49,7 +49,7 @@ public class Xhusers {
 		this.xhgrade = xhgrade;
 	}
 
-	private String attribute2;
+	private String province;
 
     private String attribute3;
 
@@ -195,15 +195,15 @@ public class Xhusers {
 		this.userintegral = userintegral;
 	}
 
-	public String getAttribute2() {
-        return attribute2;
-    }
+    public String getProvince() {
+		return province;
+	}
 
-    public void setAttribute2(String attribute2) {
-        this.attribute2 = attribute2 == null ? null : attribute2.trim();
-    }
+	public void setProvince(String province) {
+		this.province = province;
+	}
 
-    public String getAttribute3() {
+	public String getAttribute3() {
         return attribute3;
     }
 

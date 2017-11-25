@@ -14,24 +14,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.other.currency.Const;
-import com.other.currency.ServerResponse;
 import com.other.getImage.FileUtil;
-import com.other.getip.GetIp;
 import com.other.msg.Msg;
 import com.xh.back.bean.Xhmessage;
 import com.xh.front.bean.Xhusers;
 import com.xh.front.bean.XhusersBean;
 import com.xh.front.service.FrontUserService;
-import com.xh.front.service.XhUserService;
 
 @Controller
 @RequestMapping("userCenter")
@@ -59,6 +53,7 @@ public class FrontUserController {
 	@RequestMapping("updateUser.action")
 	@ResponseBody
 	public Msg updateUser(XhusersBean user,HttpServletRequest request){	
+		String provinceid=request.getParameter("province");
 		String userbirthday=request.getParameter("userbirthday");		
 		int sex=Integer.parseInt(request.getParameter("usersex"));
 		System.out.println(user);
@@ -68,6 +63,7 @@ public class FrontUserController {
 				user.setUserbirthday(new Date());
 			}
 			user.setUsersex(sex);
+			user.setProvince(frontUserService.getProvinceName(provinceid));
 			frontUserService.modifyUserById(user);
 		}else{
 			return Msg.fail();
