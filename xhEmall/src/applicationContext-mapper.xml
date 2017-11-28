@@ -20,7 +20,7 @@
 		<property name="user" value="root"/>
 		<property name="password" value="root"/>
 	</bean>
-	
+
 	<!-- mybatis的运行过程
 		 sqlSessionFactory sqlSession  Mapper接口实现类
 		
@@ -32,6 +32,9 @@
 		<property name="configLocation" value="classpath:SqlMapConfig.xml"/>
 	</bean>
 	
+<!-- 	<bean id="myAppender" class="com.other.log4j.MyAppender"> 
+		<property name="dataSource" ref="dataSource"/>
+	</bean>  -->
 	<!-- Mapper接口的实现类的创建
 		org.mybatis.spring.mapper.MapperScannerConfigurer 专门用来扫描制定的包路径下的
 		mapper接口，自动的生成对应接口的mapper实现类

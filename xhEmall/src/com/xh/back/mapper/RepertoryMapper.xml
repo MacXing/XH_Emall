@@ -3,29 +3,29 @@
 
 <mapper namespace="com.xh.back.mapper.RepertoryMapper">	
 
-	<resultMap type="xhrepertory" id="queryStockMap">
-		<id column="repID" property="repid"/>
-		<result column="repName" property="repname"/>
-		<result column="repAddress" property="repaddress"/>
-		<collection property="xhstocks" ofType="xhstock">
-			<!-- <id column="stoID" property="stoid"/> -->
-			<result column="stoNumber" property="stonumber"/>
-			<association property="xhproduct" javaType="xhproduct">
-				<id column="pID" property="pid" />
-				<result column="pName" property="pname" />
-				<result column="pDesc" property="pdesc" />
-				<association property="brand" javaType="xhbrand">
-					<!-- <id column="brandID" property="brandid" /> -->
-					<result column="brandName" property="brandname" />
-				</association>
+	<resultMap type="xhstock" id="queryStockMap">
+		<id column="stoID" property="stoid"/>
+		<result column="stoNumber" property="stonumber"/>		
+		<association property="xhrepertory" javaType="xhrepertory">
+			<id column="repID" property="repid"/>
+			<result column="repName" property="repname"/>
+			<result column="repAddress" property="repaddress"/>
+		</association>
+		<association property="xhproduct" javaType="xhproduct">
+			<id column="pID" property="pid" />
+			<result column="pName" property="pname" />
+			<result column="pDesc" property="pdesc" />
+			<association property="brand" javaType="xhbrand">
+				<!-- <id column="brandID" property="brandid" /> -->
+				<result column="brandName" property="brandname" />
 			</association>
-		</collection>
+		</association>		
 	</resultMap>
 	
 	<select id="queryStock" resultMap="queryStockMap">
-		select r.repID,r.repName,r.repAddress,p.pID,p.pName,b.brandName,p.pDesc,s.stoNumber
-		from xhRepertory r 
-		join xhStock s on r.repID=s.repID 
+		select s.stoID,r.repID,r.repName,r.repAddress,p.pID,p.pName,b.brandName,p.pDesc,s.stoNumber
+		from xhStock s
+		join xhRepertory r on r.repID=s.repID 
 		join xhProduct p on s.pID=p.pID
 		join xhBrand b on p.brandID=b.brandID
 	</select>		
@@ -182,6 +182,15 @@
 		join xhRepertory r2 on o.repID2 = r2.repID
 		join xhProduct p on o.pID = p.pID
 		join xhBrand b on p.brandID = b.brandID
+	</select>
+	
+	<select id="queryStockForData" resultMap="queryStockMap">
+		select s.stoID,r.repID,r.repName,p.pID,p.pName,b.brandName,s.stoNumber
+		from xhStock s
+		join xhRepertory r on r.repID=s.repID 
+		join xhProduct p on s.pID=p.pID
+		join xhBrand b on p.brandID=b.brandID
+		where s.pID = 41
 	</select>
     
 </mapper>

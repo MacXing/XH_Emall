@@ -22,7 +22,7 @@ public interface RepertoryService {
 	
 	public void deleteRepertory(Integer repid);
 	
-	public List<Xhrepertory> queryStock();
+	public List<Xhstock> queryStock();
 	
 	public List<Xhproduct> queryAllProduct();
 	
@@ -43,4 +43,6 @@ public interface RepertoryService {
 	public List<Xhinput> queryAllInput();
 	
 	public List<Xhoutput> queryAllOutput();
+	
+	public List<Xhstock> queryStockForData();
 }

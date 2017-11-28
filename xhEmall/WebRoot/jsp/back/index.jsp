@@ -214,7 +214,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a class="J_menuItem" href="graph_echarts.html">流量分析</a>
+							<a class="J_menuItem" href="jsp/back/report/tongji.jsp">流量分析</a>
 						</li>
 						<li>
 							<a class="J_menuItem" href="graph_flot.html">客户统计</a>

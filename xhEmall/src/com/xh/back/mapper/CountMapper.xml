@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.CountMapper">	
+
+	<select id="incomeCount" resultType="int">
+		select SUM(payFee) incomeCount
+		from xhOrderInfo
+		where payStatus = 1 and month(orderTime) =
+		(
+			select month(NOW()) 
+		)
+	</select>
+	
+	<select id="incomeCountDay" resultType="int">
+		SELECT
+		IFNULL((select SUM(payFee) incomeCount
+		from xhOrderInfo
+		where payStatus = 1 and date(orderTime) =
+		(
+			select date(NOW()) 
+		)),0) incomeCount
+	</select>
+	
+	<select id="orderCount" resultType="count">
+		SELECT d.orderday xhday,IFNULL(oi.ordercount,0) ordercount,IFNULL(oi2.orderpaycount,0) orderpaycount
+		FROM xhday d
+		LEFT JOIN(
+			SELECT COUNT(orderID) ordercount,day(orderTime) orderday
+			FROM xhOrderInfo
+			WHERE month(orderTime) =
+			(
+				select month(NOW())
+			)
+			GROUP BY DATE(orderTime)
+		) oi
+		on d.orderday = oi.orderday
+		LEFT JOIN(
+					SELECT COUNT(orderID) orderpaycount,day(orderTime) orderday
+					FROM xhOrderInfo
+					WHERE payStatus = 1 and month(orderTime) =
+					(
+						select month(NOW())
+					)
+					GROUP BY DATE(orderTime)
+				) oi2
+		on d.orderday = oi2.orderday
+	</select>	
+	
+	<select id="orderCountNum" resultType="int">
+		SELECT COUNT(orderID) orderc
+		FROM xhOrderInfo
+		WHERE payStatus = 1 and year(orderTime) = 
+		(
+			SELECT year(NOW())
+		)
+	</select>
+    
+</mapper>

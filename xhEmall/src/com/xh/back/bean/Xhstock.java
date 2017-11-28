@@ -15,6 +15,8 @@ public class Xhstock {
     
     private Xhproduct xhproduct;
     
+    private Xhrepertory xhrepertory;
+    
    // private Xhrepertory xhrepertory;
 
     public Integer getStoid() {
@@ -56,12 +58,24 @@ public class Xhstock {
 	public void setXhproduct(Xhproduct xhproduct) {
 		this.xhproduct = xhproduct;
 	}
+	
+
+	public Xhrepertory getXhrepertory() {
+		return xhrepertory;
+	}
+
+	public void setXhrepertory(Xhrepertory xhrepertory) {
+		this.xhrepertory = xhrepertory;
+	}
 
 	@Override
 	public String toString() {
 		return "Xhstock [stoid=" + stoid + ", pid=" + pid + ", repid=" + repid
-				+ ", stonumber=" + stonumber + ", xhproduct=" + xhproduct + "]";
+				+ ", stonumber=" + stonumber + ", xhproduct=" + xhproduct
+				+ ", xhrepertory=" + xhrepertory + "]";
 	}
+
+	
 	
     
     

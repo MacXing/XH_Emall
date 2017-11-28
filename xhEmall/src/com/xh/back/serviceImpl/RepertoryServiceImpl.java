@@ -49,7 +49,7 @@ public class RepertoryServiceImpl implements RepertoryService {
 	}
 
 	@Override
-	public List<Xhrepertory> queryStock() {
+	public List<Xhstock> queryStock() {
 		return repertoryMapper.queryStock();
 	}
 
@@ -101,6 +101,11 @@ public class RepertoryServiceImpl implements RepertoryService {
 	@Override
 	public List<Xhoutput> queryAllOutput() {
 		return repertoryMapper.queryAllOutput();
+	}
+
+	@Override
+	public List<Xhstock> queryStockForData() {
+		return repertoryMapper.queryStockForData();
 	}
 
 	

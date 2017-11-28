@@ -75,12 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${xhrepertories }" var="repertory">
-                    <c:forEach items="${repertory.xhstocks }" var="stocks">
+                    <c:forEach items="${xhstocks }" var="stocks">                   
 				        <tr>
-					        <td>${repertory.repid }</td>
-					        <td>${repertory.repname }</td>
-					        <td>${repertory.repaddress }</td>					                	
+					        <td>${stocks.xhrepertory.repid }</td>
+					        <td>${stocks.xhrepertory.repname }</td>
+					        <td>${stocks.xhrepertory.repaddress }</td>					                	
 					        <td>${stocks.xhproduct.pid }</td>
 					        <td>${stocks.xhproduct.pname }</td>
 					        <td>${stocks.xhproduct.brand.brandname }</td>
@@ -92,8 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					        <i class="glyphicon glyphicon-search"></i>
                             </button>
                             </td>					                		                	
-				        </tr> 
-			        </c:forEach>               	
+				        </tr> 			                      	
 			        </c:forEach>
                 </tbody>                            
             </table>
