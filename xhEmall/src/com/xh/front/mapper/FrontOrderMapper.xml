@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="queryOrderInfo" parameterType="int" resultType="Xhorderinfo">
 		select orderid, shoppingName, payFee, payprice, ordertime, orderstatus,
-			shoppingstatus, paystatus
+			shoppingstatus, paystatus, receipt
 		from xhOrderInfo where userid = #{userid }
 	</select>
 	
@@ -125,6 +125,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select <include refid="Base_Column_List"/> from xhUserAddress
 		where addID = #{addID }
 	</select>
+	
+	<update id="receiptOrder" parameterType="int">
+		update xhOrderInfo set receipt = 1
+		where orderid = #{orderid}
+	</update>
 	
 	<delete id="deleteAddressById" parameterType="int">
 		delete from xhUserAddress

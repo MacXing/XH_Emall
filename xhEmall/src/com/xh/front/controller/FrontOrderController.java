@@ -102,15 +102,29 @@ public class FrontOrderController {
 	}
 	
 	@RequestMapping("queryOrderDetail.action")
-	public String queryOrderDetail(Integer orderid, Model model, @RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
+	public String queryOrderDetail(Integer orderid, int receipt, Model model, @RequestParam(value="pageNum",defaultValue="1")Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="6")Integer pageSize){
 		PageHelper.startPage(pageNum, pageSize);
 		List<OrderGoods> ogList = orderGoodsService.queryOrderGoodByOGId(orderid).getData();
 		PageInfo pageInfo = new PageInfo(ogList,4);
+		model.addAttribute("receipt", receipt);
 		model.addAttribute("orderid", orderid);
 		model.addAttribute("ogList", ogList);
 		model.addAttribute("pageInfo", pageInfo);
 		return "/front/Member_Order_Detail.jsp";
+	}
+	
+	
+	@RequestMapping("receiptOrder.action")
+	@ResponseBody
+	public ServerResponse<String> receiptOrder(int orderid){
+		return frontOrderService.receiptOrder(orderid);
+	}
+	
+	@RequestMapping("cmtadd.action")
+	public String cmtadd(int pid, Model model){
+		model.addAttribute("pid", pid);
+		return "/front/Member_Cmtadd.jsp";
 	}
 }
 

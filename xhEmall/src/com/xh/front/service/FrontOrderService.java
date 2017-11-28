@@ -32,4 +32,7 @@ public interface FrontOrderService {
 	
 	//添加订单
 	public ServerResponse<Xhorderinfo> addOrder(int spid, UserAddress userAddress, List<Xhtrolley> items);
+	
+	//确认收货
+	public ServerResponse<String> receiptOrder(int orderid);
 }

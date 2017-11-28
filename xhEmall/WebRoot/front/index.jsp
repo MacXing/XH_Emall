@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<link href="//csdnimg.cn/public/favicon.ico" rel="icon">
 	<meta http-equiv="description" content="This is my page">
 	<link type="text/css" rel="stylesheet" href="front/css/style.css" />
 	<script type="text/javascript" src="front/js/jquery-1.11.1.min_044d0927.js"></script>

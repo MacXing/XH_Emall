@@ -48,4 +48,7 @@ public interface FrontOrderMapper {
 	//查询订单信息
 	public List<Xhorderinfo> queryOrderInfo(int userid);
 	
+	//确认收货
+	public int receiptOrder(int orderid);
+	
 }

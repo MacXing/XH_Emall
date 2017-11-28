@@ -20,6 +20,7 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="front/css/style.css" />
+<link type="text/css" rel="stylesheet" href="front/css/btn.css"  />
 
 <style type="text/css">
 .pages1 {
@@ -116,6 +117,11 @@
 							<td class="car_th" width="2%">购买数量</td>
 							<td class="car_th" width="2%">小计</td>
 							<td class="car_th" width="2%">返还积分</td>
+							<c:if test="${receipt == 1}">
+								<td class="car_th" width="2%">
+									<a href="${pageContext.request.contextPath}/frontOrder/cmtadd.action?pid=${items.product.pid}">立即评论</a>&nbsp;
+								</td>
+							</c:if>
 						</tr>
 						<c:forEach items="${ogList}" var="items">
 							<tr id="ilist">
@@ -136,9 +142,21 @@
 								<td align="center">
 									<span>${items.pNum*items.product.psale / 10 }R</span>
 								</td>
+								<c:if test="${receipt == 1}">
+									<td>
+										<a href="${pageContext.request.contextPath}/frontOrder/cmtadd.action?pid=${items.product.pid}">立即评论</a>&nbsp;
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</table>
+					<c:if test="${receipt == 0}">
+						<div style="float:right; padding:50px;">
+							<button class="layui-btn layui-btn-primary" id="receiptbtn">
+								确认收货
+							</button>
+						</div>
+					</c:if>
 				</div>
 				<div class="pages1">
 					<c:if test="${pageInfo.hasPreviousPage==true }">
@@ -236,6 +254,24 @@
 	<script type="text/javascript" src="resource/js/jquery.min.js"></script>
 	<script type="text/javascript" src="resource/layer/layer.js"></script>
 	<script type="text/javascript" src="front/js/logout.js"></script>
+	<script>
+		$("#receiptbtn").click(function (){
+			var ii = layer.load();
+			$.ajax({
+				url: "frontOrder/receiptOrder.action?orderid=" + ${orderid},
+				success: function (result){
+					if(result.status == 0){
+						layer.close(ii);
+						layer.msg(result.msg);
+						self.location.reload();
+					} else {
+						layer.close(ii);
+						layer.msg(result.msg);
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>
 

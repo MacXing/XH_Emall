@@ -78,7 +78,7 @@ public class Xhorderinfo {
 
     private double payPrice;
 
-    private String attribute3;
+    private  int receipt;
 
     private String attribute4;
 
@@ -314,14 +314,6 @@ public class Xhorderinfo {
 		this.payPrice = payPrice;
 	}
 
-	public String getAttribute3() {
-        return attribute3;
-    }
-
-    public void setAttribute3(String attribute3) {
-        this.attribute3 = attribute3 == null ? null : attribute3.trim();
-    }
-
     public String getAttribute4() {
         return attribute4;
     }
@@ -442,7 +434,7 @@ public class Xhorderinfo {
 				+ goodamount + ", shoppingfee=" + shoppingfee + ", payfee="
 				+ payfee + ", paytime=" + paytime + ", shopping=" + shopping
 				+ ", users=" + users + ", sendtime=" + sendtime + ", payPrice="
-				+ payPrice + ", attribute3=" + attribute3 + ", attribute4="
+				+ payPrice + ", receipt=" + receipt + ", attribute4="
 				+ attribute4 + ", attribute5=" + attribute5 + ", attribute6="
 				+ attribute6 + ", attribute7=" + attribute7 + ", attribute8="
 				+ attribute8 + ", attribute9=" + attribute9 + ", attribute10="
@@ -451,6 +443,14 @@ public class Xhorderinfo {
 				+ attribute13 + ", attribute14=" + attribute14
 				+ ", attribute15=" + attribute15 + ", attribute16="
 				+ attribute16 + "]";
+	}
+
+	public int getReceipt() {
+		return receipt;
+	}
+
+	public void setReceipt(int receipt) {
+		this.receipt = receipt;
 	}
 
 	
