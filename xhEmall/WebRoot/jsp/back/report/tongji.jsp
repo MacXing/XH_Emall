@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>趋势图</h5>
+                        <h5>浏览量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6">
                <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>趋势图</h5>
+                        <h5>访问量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -137,24 +137,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
         </div>
+        
+        
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>散点图</h5>
+                        <h5>地域分布</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
+                        </div>
+                    </div>
+                    <div class="ibox-content">                  
+                        <div class="echarts" id="map"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row" sytle="height:500px;">
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>地域分布</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -168,27 +182,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>K线图</h5>
+                        <h5>地域分布</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-k-chart"></div>
+                        <div class="echarts" id="map"></div>
                     </div>
                 </div>
             </div>
@@ -548,7 +553,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 data: [],
 	             itemStyle: {
 	                normal: {
-	                    color: '#1c84c6',
+	                    color: '#D2691E',
 	                    areaStyle:{
 	                    	type:'default'
 	                    }
@@ -666,9 +671,158 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         }
 	});
     </script>
-     
+     <!-- 
+     	map
+      -->
    	<script type="text/javascript">
-   		
+   	var eChart = echarts.init(document.getElementById('map'));
+   	
+	eChart.showLoading();
+	//ajax请求数据
+	var area=[];    //类别数组（实际用来盛放X轴坐标值）
+    var arrayPV = new Array();
+    var arrayZB = new Array();
+	
+	$.ajax({
+		type: "get",
+		async: true, //异步执行
+		url: "${pageContext.request.contextPath }/report/area.action",
+/* 		data:{}, */
+		dataType: "json", //返回数据形式为json
+		success: function (result) {
+			console.log(result);
+			$.each(result.body.data[0].result.item[0],function(index,item){
+				area.push(item);
+			});
+			for(var i =0;i<result.body.data[0].result.item[1].length;i++){
+				arrayPV[i]={
+					name:'浏览量',
+					value:result.body.data[0].result.item[1][i]
+				};
+			}
+			for(var i =0;i<result.body.data[0].result.item[1].length;i++){
+				arrayZB[i]={
+					name:'浏览量',
+					value:result.body.data[0].result.item[1][i]
+				};
+			}
+
+		},
+		error: function (errorMsg) {
+			alert("请求失败!");
+		}
+		});
+
+	
+	
+	eChart.setOption({
+		 
+		     tooltip: {
+		         trigger: 'item',
+		         formatter: "{a} <br/>{b} : {c}万吨" 
+		     },
+
+		     dataRange: {
+		         min: 0,
+		         max: 4000,
+		         x: 'left',
+		         y: 'bottom',
+		       
+		         text: ['高', '低'], // 文本，默认为数值文本
+		         calculable: false,
+
+		         splitNumber: 0,
+
+
+		         color: ['orangered', 'gold','yellow', 'green', 'lightgreen', 'lightgrey']
+		     },
+		     toolbox: {
+		         show: true,
+		         orient: 'vertical',
+		         x: 'right',
+		         y: 'center',
+		         feature: {
+		             mark: {
+		                 show: true
+		             },
+		             dataView: {
+		                 show: true,
+		                 readOnly: false
+		             },
+		             dataZoom: {
+		                 show: true
+		             },
+		             restore: {
+		                 show: true
+		             },
+		             saveAsImage: {
+		                 show: true
+		             }
+		         }
+		     },
+		     roamController: {
+		         show: true,
+		         x: 'right',
+		         mapTypeControl: {
+		             'china': true
+		         }
+		     },
+		     series: [{
+		         name: 'value',
+		         type: 'map',
+		         mapType: 'china',
+		         roam: true,
+		         itemStyle: {
+		             normal: {
+		                 label: {
+		                     show: true
+		                 }
+		             },
+		             emphasis: {
+		                 label: {
+		                     show: true
+		                 }
+		             }
+		         },
+		         data: [
+		    {name: '黑龙江', value: 3544.1},
+		    {name: '吉林', value: 2805.7},
+		    {name: '内蒙古', value: 2250.8},
+		    {name: '山东', value: 2050.9},
+		    {name: '河南', value: 1853.7},
+		    {name: '河北', value: 1670.4},
+		    {name: '辽宁', value: 1403.5},
+		    {name: '山西', value: 862.7},
+		    {name: '四川', value: 765.7},
+		    {name: '云南', value: 747.3},
+		    {name: '新疆', value: 705.1},
+		    {name: '甘肃', value: 577.2},
+		    {name: '陕西', value: 543.1},
+		    {name: '安徽', value: 496.3},
+		    {name: '湖北', value: 332.9},
+		    {name: '贵州', value: 324.1},
+		    {name: '广西', value: 280.7},
+		    {name: '重庆', value: 259.7},
+		    {name: '江苏', value: 252.2},
+		    {name: '宁夏', value: 226.9},
+		    {name: '湖南', value: 188.8},
+		    {name: '天津', value: 107.3},
+		    {name: '广东', value: 77.9},
+		    {name: '北京', value: 49.4},
+		    {name: '浙江', value: 31.1},
+		    {name: '福建', value: 21.5},
+		    {name: '青海', value: 18.6},
+		    {name: '江西', value: 12.8},
+		    {name: '上海', value: 2.1},
+		    {name: '西藏', value: 0.8},
+		    {name: '海南', value: '-'}
+		]
+		         
+		     }, ]
+		     
+	});
+	eChart.hideLoading();
+	
   		
    	</script>
     

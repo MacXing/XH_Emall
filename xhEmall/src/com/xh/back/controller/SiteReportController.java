@@ -20,6 +20,7 @@ import com.other.seclogin_test.BaiduTJUtil;
 public class SiteReportController {
 	private Date date=new Date();
 	private Date yesterday = new Date(date.getTime() - 86400000L);
+	
 	@RequestMapping("overview.action")
 	@ResponseBody
 	public JSONObject overview(){
@@ -47,7 +48,7 @@ public class SiteReportController {
 	@RequestMapping("area.action")
 	@ResponseBody
 	public JSONObject area(){		
-		JSONObject json = BaiduTJUtil.getData("11452953", "visit/district/a", "20171120","20171126", "pv_count,visitor_count","day");
+		JSONObject json = BaiduTJUtil.getData("11452953", "overview/getDistrictRpt",new SimpleDateFormat("yyyyMMdd").format(date),new SimpleDateFormat("yyyyMMdd").format(date), "pv_count","");
 		return json;
 	}
 	
