@@ -79,7 +79,13 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+	<!--Begin Header Begin-->
+
+>>>>>>> branch 'master' of https://github.com/MacXing/XH_Emall.git
 	<jsp:include page="/front/head2.jsp" />
+
 	<!--End Header End-->
 	<div class="i_bg bg_color">
 		<!--Begin 用户中心 Begin -->

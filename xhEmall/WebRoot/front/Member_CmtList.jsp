@@ -79,6 +79,7 @@
 </head>
 
 <body>
+	<!--Begin Header Begin-->
 	<jsp:include page="/front/head2.jsp" />
 	<!--End Header End-->
 	<div class="i_bg bg_color">

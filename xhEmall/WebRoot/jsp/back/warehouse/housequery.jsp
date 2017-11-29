@@ -57,11 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
                 <a class="close-link">
                     <i class="fa fa-times"></i>
-                </a>
-            </div>
-        </div>
-        <div class="ibox-content">
-            <table class="table table-striped table-bordered table-hover dataTables-example text-center">
+                </a><table class="table table-striped table-bordered table-hover dataTables-example text-center">
                 <thead>
                     <tr>
                         <th class="text-center">仓库编号</th>
@@ -80,12 +76,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	<td>${repertory.repaddress }</td>
 	                	<td>${repertory.repadmin }</td>
 	                	<td>${repertory.repphone }</td>
-	                	<td><button class="btn btn-success btn-circle" onclick="alter(${repertory.repid })"
-	                				type="button" data-toggle="modal" data-target="#alterintegral">
+	                	<td><button class="btn btn-success btn-circle" onclick="alter(${repertory.repid })" type="button" data-toggle="modal" data-target="#alterintegral">
                     		<i class="glyphicon glyphicon-pencil"></i>
                     		</button>
-                    		<button class="btn btn-danger btn-circle" onclick="deletebtn(${repertory.repid })"
-                    				type="button" id="delete">
+                    		<button class="btn btn-danger btn-circle" onclick="deletebtn(${repertory.repid })" type="button" id="delete">
                    			<i class="glyphicon glyphicon-trash"></i>
                    			</button>
                     	</td>
@@ -93,6 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </c:forEach>
                 </tbody>                         
             </table>
+            </div>
+        </div>
+        <div class="ibox-content">
+            
         </div>
         
         <!-- 修改信息模态框 -->

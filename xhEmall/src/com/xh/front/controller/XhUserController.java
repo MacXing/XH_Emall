@@ -6,6 +6,9 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ import com.xh.front.service.XhUserService;
 @Controller
 @RequestMapping("user")
 public class XhUserController {
+	
+	private Log logger = LogFactory.getLog(this.getClass()); 
+	
 	@Autowired
 	@Qualifier("xhUserService")
 	private XhUserService xhUserService;
@@ -67,6 +73,7 @@ public class XhUserController {
 	@RequestMapping(value = "login.action", method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<Xhusers> login(String userphone, String userpassword, HttpSession session){
+		
 		ServerResponse<Xhusers> response = xhUserService.login(userphone, userpassword);
 		//Subject subject = SecurityUtils.getSubject();
 		if(response.isSuccess()){
@@ -81,6 +88,7 @@ public class XhUserController {
 	@RequestMapping(value = "logout.action", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session){
+		
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
@@ -95,9 +103,10 @@ public class XhUserController {
 	// 注册
 	@RequestMapping(value = "register.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<String> register(Xhusers user, int message, HttpSession session){
-		int msg = (int) session.getAttribute("mobile_code");
-		if(message == msg){
+	public ServerResponse<String> register(Xhusers user, Integer message, HttpSession session){
+		
+		int msg = (Integer)session.getAttribute("mobile_code");
+		if(msg == message ){
 			return xhUserService.register(user);
 		}
 		return ServerResponse.createByErrorMassage("注册失败");

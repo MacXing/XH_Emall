@@ -2,20 +2,15 @@ package com.xh.back.serviceImpl;
 
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
 import com.xh.back.bean.OrderArea;
 import com.xh.back.bean.OrderCity;
 import com.xh.back.bean.OrderProvince;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.mapper.OrderMapper;
-import com.xh.back.mapper.UserMapper;
 import com.xh.back.service.OrderService;
-import com.xh.back.service.XhUserService;
-import com.xh.front.bean.Xhusers;
-import com.xh.front.bean.XhusersBean;
+
 
 
 public class OrderServiceImpl implements OrderService {
@@ -110,5 +105,17 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.checkExpress(id);
 	}
-	
+
+	@Override
+	public List<Xhorderinfo> queryAllOrderNotShop() {
+		
+		return orderMapper.queryAllOrderNotShop();
+	}
+
+	@Override
+	public void updateOrderShop(int id) {
+		
+		orderMapper.updateOrderShop(id);
+	}
+
 }

@@ -2,14 +2,19 @@ package com.xh.front.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xh.back.bean.Category_Product;
@@ -28,6 +33,8 @@ import com.xh.front.serviceImpl.NavbarServiceImpl;
 @RequestMapping("home")
 
 public class IndexController {
+	private Log logger = LogFactory.getLog(this.getClass()); 
+	
 	@Autowired
 	@Qualifier("navbarService")
 	private NavbarServiceImpl navbarService;
@@ -50,6 +57,7 @@ public class IndexController {
 	
 	@RequestMapping("home.action")
 	public String home(Model model,HttpServletRequest request){
+		
 		List<Navbar> navbars = navbarService.queryAllNavbarIsshow();
 		List<Xhcategory> categorys = categoryService.categoryList();
 		List<Category_Product> CP = categoryService.queryAllCPForHome();

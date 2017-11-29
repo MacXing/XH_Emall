@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xh.back.mapper.DataAnalysisMapper">
+
+	<resultMap id="queryDataByIdMap" type="com.xh.front.bean.Xhusers">
+	    <id column="userID" jdbcType="INTEGER" property="userid" />
+ 	    <result column="gradeID" jdbcType="INTEGER" property="gradeid" />
+	    <result column="userName" jdbcType="VARCHAR" property="username" />
+	  	<result column="userSex" jdbcType="VARCHAR" property="usersex" />
+	    <result column="userBirthday" jdbcType="DATE" property="userbirthday" />
+	    <result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+	    <result column="userMoney" jdbcType="DOUBLE" property="usermoney" />
+	    <result column="userIntegral" jdbcType="INTEGER" property="userintegral" />   
+	     <association property="xhgrade" javaType="com.xh.back.bean.Xhgrade">
+	    	<id column="gradeID" jdbcType="INTEGER" property="gradeid" />
+			<result column="gradeName" jdbcType="VARCHAR" property="gradename" />
+			<result column="gradeCount" jdbcType="VARCHAR" property="gradecount" />   
+	    </association>  
+	  </resultMap>
+	  
+	  <resultMap id="GradeMap" type="com.xh.back.bean.dataAnalysis.DataGrade">
+	  		<id column="gradeID" jdbcType="INTEGER" property="guid" />
+	 	    <result column="gradeName" jdbcType="VARCHAR" property="gradename" />
+		    <result column="gradeCount" jdbcType="INTEGER" property="gradecount" />
+		    <result column="province" jdbcType="VARCHAR" property="province" />
+		    <result column="userCount" jdbcType="INTEGER" property="usercount" />
+	  </resultMap>
+	
+    <!-- 统计所有等级用户 -->
+	<select id="queryGradeCount" resultMap="GradeMap">
+    SELECT g.gradeID,g.gradeName,COUNT(u.userID)  gradeCount
+	FROM xhUsers u JOIN xhGrade g ON u.gradeID=g.gradeID
+    GROUP BY g.gradeID
+    </select>
+    
+    <!-- 统计所有等级用户分布 -->
+	<select id="queryUserGradeCount" resultMap="GradeMap">
+    select u.userID,g.gradeName,u.province,COUNT(u.userID) userCount
+	from xhUsers u JOIN xhGrade g ON u.gradeID=g.gradeID
+	group by u.userID
+    </select>
+    
+    <select id="queryAllDataGrade" resultType="dataGrade">
+    	select * from dataGrade
+    </select>
+
+    <!--======================================================-->
+    <!-- 订单统计：-->
+     <resultMap id="provinceOrderMap" type="DataOrder">
+	  		<id column="orderID" jdbcType="INTEGER" property="doid" />
+	 	    <result column="addProvince" jdbcType="VARCHAR" property="province" />
+		    <result column="orderCount" jdbcType="INTEGER" property="orderCount" />
+	  </resultMap>
+    
+    <!--查询各省份 订单-->
+	<select id="queryProvinceOrder" resultMap="provinceOrderMap">
+    SELECT orderID,addProvince,COUNT(orderID) orderCount 
+	from xhOrderInfo
+	where payStatus=1
+	GROUP BY addProvince
+    </select>
+
+  <resultMap id="expressDataStatMap" type="DataOrder">
+  		<id column="shoppingID" jdbcType="INTEGER" property="shoppingid" />
+ 	    <result column="shoppingName" jdbcType="VARCHAR" property="shoppingname" />
+	    <result column="expCount" jdbcType="INTEGER" property="expcount" />
+  </resultMap>
+
+	<!--查询各邮寄方式所占比-->
+	<select id="queryExpressDataStat" resultMap="expressDataStatMap">
+    select shoppingID,shoppingName,COUNT(shoppingID) expCount 
+    from xhOrderInfo 
+    group by shoppingID
+    </select>
+
+</mapper>

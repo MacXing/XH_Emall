@@ -47,5 +47,7 @@
 	<bean id="userCommentService" class="com.xh.front.serviceImpl.UserCommentServiceImpl"/>
 	<bean id="paySercice" class="com.xh.front.serviceImpl.PayServiceImpl"></bean>
 	<bean id="userCollectService" class="com.xh.front.serviceImpl.UserCollectionServiceImpl"/>
+	<bean id="countService" class="com.xh.back.serviceImpl.CountServiceImpl"></bean>
+	<bean id="gradeCountService" class="com.xh.back.serviceImpl.DataAnalysisServiceImpl"/>
 </beans>
 	

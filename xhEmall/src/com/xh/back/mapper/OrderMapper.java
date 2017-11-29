@@ -35,4 +35,9 @@ public interface OrderMapper {
 	//添加和修改时，判断用户和邮寄方式是否存在
 	public int checkUser(int id);
 	public int checkExpress(int id);
+	
+	//
+	public List<Xhorderinfo> queryAllOrderNotShop();
+	
+	public void updateOrderShop(int id);
 }

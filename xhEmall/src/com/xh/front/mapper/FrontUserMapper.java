@@ -23,7 +23,4 @@ public interface FrontUserMapper {
 	public Xhmessage queryMsgByPrimarykeyForUpdate(int id);
 	public void addMessage(Xhmessage message);
 	public void deleteMessageByPrimaryKey(int id);
-	
-	//根据省份所属id查询省份名称
-	public String getProvinceName(String id);
 }

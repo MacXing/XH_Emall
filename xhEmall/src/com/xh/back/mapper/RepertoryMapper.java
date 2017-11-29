@@ -24,7 +24,7 @@ public interface RepertoryMapper {
 	
 	public void deleteRepertory(Integer repid);
 	
-	public List<Xhrepertory> queryStock();
+	public List<Xhstock> queryStock();
 	
 	public List<Xhproduct> queryAllProduct();
 	
@@ -45,5 +45,7 @@ public interface RepertoryMapper {
 	public List<Xhinput> queryAllInput();
 	
 	public List<Xhoutput> queryAllOutput();
+	
+	public List<Xhstock> queryStockForData();
 	
 }

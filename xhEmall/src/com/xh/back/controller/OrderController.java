@@ -1,41 +1,21 @@
 package com.xh.back.controller;
 
-
-import java.io.File;
-import java.io.IOException;
-import java.security.Provider.Service;
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.helpers.DateTimeDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.other.getImage.FileUtil;
-import com.other.getip.GetIp;
 import com.other.msg.Msg;
 import com.xh.back.bean.OrderArea;
 import com.xh.back.bean.OrderCity;
 import com.xh.back.bean.OrderProvince;
-import com.xh.back.bean.Xhbrand;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.service.OrderService;
-import com.xh.back.service.XhUserService;
-import com.xh.front.bean.Xhusers;
-import com.xh.front.bean.XhusersBean;
+
 
 @Controller
 @RequestMapping("order")
@@ -216,4 +196,21 @@ public class OrderController {
     	}
 		return Msg.fail1();
 	} 
+    //查看所有未发货的订单
+    @RequestMapping("queryAllOrderNotShop.action")
+    public String queryAllOrderNotShop(Model model){
+    	List<Xhorderinfo> orders = orderService.queryAllOrderNotShop();
+    	model.addAttribute("orders", orders);
+    	return "/jsp/back/order/queryAllOrderNotShop.jsp";
+    }
+    
+    @RequestMapping("updateShoppingStatus.action")
+    @ResponseBody
+    public Msg updateShoppingStatus(int id){
+    	if(id>0){
+    		orderService.updateOrderShop(id);
+    		return Msg.success();
+    	}
+    	return Msg.fail();
+    }
 }

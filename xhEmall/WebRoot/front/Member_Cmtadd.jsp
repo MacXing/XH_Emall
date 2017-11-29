@@ -40,6 +40,9 @@
 
 <body>
 	<jsp:include page="/front/head2.jsp" />
+
+	<!--Begin Header Begin-->
+	
 	<!--End Header End-->
 	<div class="i_bg bg_color">
 		<!--Begin 用户中心 Begin -->

@@ -214,7 +214,7 @@
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a class="J_menuItem" href="graph_echarts.html">流量分析</a>
+							<a class="J_menuItem" href="jsp/back/report/tongji.jsp">流量分析</a>
 						</li>
 						<li>
 							<a class="J_menuItem" href="graph_flot.html">客户统计</a>
@@ -295,6 +295,12 @@
 								<i class="glyphicon glyphicon-duplicate"></i>
 								<span class="glyphicon-class">货物订单 </span>							
 							</a>
+						</li>
+						<li>
+							<a href="order/queryAllOrderNotShop.action" class="J_menuItem">
+								<i class="glyphicon glyphicon-file"></i>
+								<span class="glyphicon-class">未发货订单</span>								
+							</a>					
 						</li>						
 					</ul>
 				</li>

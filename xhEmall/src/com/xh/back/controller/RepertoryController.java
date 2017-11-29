@@ -71,8 +71,8 @@ public class RepertoryController {
 	//查询库存
 	@RequestMapping("queryStock.action")
 	public String queryStock(Model model){
-		List<Xhrepertory> xhrepertories = repertoryService.queryStock();
-		model.addAttribute("xhrepertories", xhrepertories);
+		List<Xhstock> xhstocks = repertoryService.queryStock();
+		model.addAttribute("xhstocks", xhstocks);
 		return "/jsp/back/warehouse/stockquery.jsp";
 	}
 	
@@ -161,5 +161,11 @@ public class RepertoryController {
 		List<Xhoutput> xhoutputs = repertoryService.queryAllOutput();
 		model.addAttribute("xhoutputs", xhoutputs);
 		return "/jsp/back/warehouse/outputquery.jsp";
+	}
+	
+	@RequestMapping("queryStockForData.action")
+	@ResponseBody
+	public List<Xhstock> queryStockForData(){
+		return repertoryService.queryStockForData();
 	}
 }
