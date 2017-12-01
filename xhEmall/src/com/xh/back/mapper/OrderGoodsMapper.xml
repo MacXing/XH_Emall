@@ -18,6 +18,7 @@
 		</association>
 		<association property="orderInfo" javaType="com.xh.back.bean.Xhorderinfo">
 			<id column="orderID" property="orderid"/>
+			<result column="receipt" property="receipt"/>
 			<result column="payFee" property="payfee"/>
 			<result column="orderID" property="orderid"/>
 			<result column="orderTime" property="ordertime"/>
@@ -34,7 +35,7 @@
 	</select>
 	
 	<select id="queryOrderGoodByOGId" resultMap="OrderGoodsResultMap">
-		select og.ogID, og.pID, og.orderID, og.pNum, p.pName, p.pSale, p.pUnit, p.pImg, oi.payFee, oi.orderid
+		select og.ogID, og.pID, og.orderID, og.pNum, p.pName, p.pSale, p.pUnit, p.pImg, oi.payFee, oi.orderid, oi.receipt
 		from xhOrderGoods og, xhOrderInfo oi, xhProduct p 
 		where og.orderid = #{orderid} and p.pID = og.pID and oi.orderid = og.orderid
 	</select>

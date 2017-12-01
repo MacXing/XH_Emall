@@ -131,16 +131,18 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<span><a href="${pageContext.request.contextPath }/frontOrder/queryOrderDetail.action?orderid=${order.orderid }">查看</a></span>
-								&nbsp;
-								<span>取消订单</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span><a href="${pageContext.request.contextPath }/frontOrder/queryOrderDetail.action?orderid=${order.orderid }&receipt=${order.receipt}">查看</a></span>
+								&nbsp;&nbsp;
+								<c:if test="${order.receipt == 0}">
+									<span>取消订单</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</c:if>
 								<c:if test="${order.paystatus  == 0}">
 									<a href="${pageContext.request.contextPath}/Pay/viewOrder.action?orderid=${order.orderid }">立即支付&nbsp;</a>
 								</c:if>
-								<c:if test="${order.paystatus  == 1}">
+								<%-- <c:if test="${order.paystatus  == 1}">
 									<a href="${pageContext.request.contextPath}/front/Member_Cmtadd.jsp?">立即评论</a>&nbsp;
-								</c:if>
+								</c:if> --%>
 							</td>
 						</tr>
 					</c:forEach>

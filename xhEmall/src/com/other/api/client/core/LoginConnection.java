@@ -23,7 +23,8 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.security.Key;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
+
 
 /**
  * @author @author@ (@author-email@)

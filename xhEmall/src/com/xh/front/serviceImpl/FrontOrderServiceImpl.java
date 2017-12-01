@@ -130,4 +130,13 @@ public class FrontOrderServiceImpl implements FrontOrderService {
 		}
 		return ServerResponse.createByErrorMassage("添加失败");
 	}
+
+	@Override
+	public ServerResponse<String> receiptOrder(int orderid) {
+		int resultCount = frontOrderMapper.receiptOrder(orderid);
+		if(resultCount > 0){
+			return ServerResponse.createBySuccessMessage("收货成功");
+		}
+		return ServerResponse.createByErrorMassage("收货失败");
+	}
 }
