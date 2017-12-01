@@ -52,4 +52,13 @@ public class SiteReportController {
 		return json;
 	}
 	
+	@RequestMapping("page.action")
+	@ResponseBody
+	public JSONObject page(){		
+		JSONObject json = BaiduTJUtil.getData("11452953", "overview/getCommonTrackRpt ",new SimpleDateFormat("yyyyMMdd").format(date),new SimpleDateFormat("yyyyMMdd").format(date), "pv_count","");
+		return json;
+	}
+	
+	
+	
 }

@@ -84,9 +84,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
 		</div>
-    </div>
 
-    <div class="wrapper wrapper-content animated fadeInRight">
+
+   
         <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
@@ -137,13 +137,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
         </div>
-        
-        
-        <div class="row">
-            <div class="col-sm-12">
+     
+        <div class="row" >
+            <div class="col-sm-7">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>地域分布</h5>
+                        <h5>Top10受访页面</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -154,17 +153,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">                  
-                        <div class="echarts" id="map"></div>
+                         <table class="table">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>受访页面</th>
+                                    <th>PV</th>
+                                    <th>占比</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top">
+                              
+                            </tbody>
+                        </table>
+                        
                     </div>
                 </div>
             </div>
             
-        </div>
-        <div class="row" sytle="height:500px;">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>地域分布</h5>
+                        <h5>新老访客</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -174,15 +184,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </a>
                         </div>
                     </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-scatter-chart"></div>
+                    <div class="ibox-content">                  
+                         <table class="table">
+                            <thead>
+                                <tr>
+                                    <th><img src="/resource/img/visit-type-icon.png"></th>
+                                    <th>
+                                    	<font style="font-size:16px">新访客</font><br/>
+                                    	<font style="font-size:32px;color: #48cb6d" id="newParcent"></font>
+                                    </th>
+                                    <th>
+                                    	<font style="font-size:16px">老访客</font><br/>
+                                    	<font style="font-size:32px;color: #51a8f9" id="oldParcent"></font>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <span><br></span>
+                         	 <tbody>
+                                <tr>
+                                    <td>浏览量</td>
+                                    <td id="newPV"></td>
+                                    <td id="oldPV"></td>
+                               
+                                </tr>
+                                 <tr>
+                                    <td>访客数</td>
+                                    <td id="newUV"></td>
+                                    <td id="oldUV"></td>
+                                   
+                                </tr>
+                                 <tr>
+                                    <td>平均访问页数</td>
+                                    <td id="newPage"></td>
+                                    <td id="oldPage"></td>
+ 
+                                </tr>
+                                 <tr>
+                                    <td>平均访问时间</td>
+                                    <td id="newTime"></td>
+                                    <td id="oldTime"></td>
+                                </tr>   
+                            </tbody>
+                        </table>  
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>地域分布</h5>
+                        <h5>地域分析</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -193,208 +245,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="map"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>饼状图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-pie-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>雷达图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-radar-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>和弦图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-chord-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>仪表盘</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-gauge-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>漏斗图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-funnel-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>力导向布局图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-force-chart"></div>
+                        <div class="echarts" id="map" style="height:500px"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>中国地图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div style="height:600px" id="echarts-map-chart"></div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
+       
+     
     <script src="/resource/js/jquery.min.js?v=2.1.4"></script>
     <script src="/resource/js/bootstrap.min.js?v=3.3.5"></script>
     <script src="/resource/js/plugins/echarts/echarts.min.js"></script>
     <script src="/resource/js/content.min.js?v=1.0.0"></script>
+    <script src="/resource/js/echarts/china.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!-- 
     	今日概况
@@ -405,7 +269,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				url:"${pageContext.request.contextPath}/report/overview.action",
 				type:"GET",
 				success:function(result){
-					/* console.log(result); */
+					
 					$("#dayPV").html(result.body.data[0].result.items[1][1][0]);
 					$("#dayUV").html(result.body.data[0].result.items[1][1][1]);
 					$("#dayIP").html(result.body.data[0].result.items[1][1][2]);
@@ -427,7 +291,98 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 				}
 			});
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/report/page.action",
+				type:"GET",
+				success:function(result){
+					 console.log(result);
+			
+					if(result.body.data[0].result.visitType.newVisitor.ratio>0){
+						$("#newParcent").html(result.body.data[0].result.visitType.newVisitor.ratio+'%');
+					}else{
+						$("#newParcent").html("--");
+					}
+					
+					if(result.body.data[0].result.visitType.oldVisitor.ratio>0){
+						$("#oldParcent").html(result.body.data[0].result.visitType.oldVisitor.ratio+'%');
+					}else{
+						$("#oldParcent").html("--");
+					}
+					
+					
+					 if(result.body.data[0].result.visitType.newVisitor.pv_count>0){
+						 $("#newPV").html(result.body.data[0].result.visitType.newVisitor.pv_count);
+					 }else{
+						 $("#newPV").html("--"); 
+					 }
+					 
+					 if(result.body.data[0].result.visitType.oldVisitor.pv_count>0){
+						 $("#oldPV").html(result.body.data[0].result.visitType.oldVisitor.pv_count);
+					 }else{
+						 $("#oldPV").html("--"); 
+					 }
+					 
+					 if(result.body.data[0].result.visitType.newVisitor.visitor_count>0){
+						 $("#newUV").html(result.body.data[0].result.visitType.newVisitor.visitor_count);
+					 }else{
+						 $("#newUV").html("--"); 
+					 }
+					 
+					 if(result.body.data[0].result.visitType.oldVisitor.visitor_count>0){
+						 $("#oldUV").html(result.body.data[0].result.visitType.oldVisitor.visitor_count);
+					 }else{
+						 $("#oldUV").html("--"); 
+					 }
+					 
+					 if(result.body.data[0].result.visitType.newVisitor.bounce_ratio>0){
+						 $("#newPage").html(result.body.data[0].result.visitType.newVisitor.bounce_ratio+"%");
+						 
+					 }else{
+						 $("#newPage").html("--"); 
+						
+					 }
+					 
+					 if(result.body.data[0].result.visitType.oldVisitor.bounce_ratio>0){
+						 $("#oldPage").html(result.body.data[0].result.visitType.oldVisitor.bounce_ratio+"%");
+						 
+					 }else{
+						 $("#oldPage").html("--"); 
+						
+					 }
+					 
+					 if(result.body.data[0].result.visitType.newVisitor.avg_visit_time>0){
+						 $("#newTime").html(formatTime(result.body.data[0].result.visitType.newVisitor.avg_visit_time));
+						
+					 }else{
+						 $("#newTime").html("--"); 
+						
+					 }
+					 
+					 if(result.body.data[0].result.visitType.oldVisitor.avg_visit_time>0){
+						 $("#oldTime").html(formatTime(result.body.data[0].result.visitType.oldVisitor.avg_visit_time));
+						
+					 }else{
+						 $("#oldTime").html("--"); 
+						
+					 }
+					var con="";
+					$.each(result.body.data[0].result.visitPage.items,function(index,data){
+						var tr = "<tr>";
+						var td = "<td>"+data[0]+"</td>";
+						var td2 = "<td>"+data[1]+"</td>";
+						var td3 = "<td>"+data[2]+'%'+"</td>";
+                        var tr2="</tr>";
+              			var css = tr+td+td2+td3+tr2;
+              			
+                     	con=con+css;
+					});
+					$("#top").html(con);
+				}
+			});
 		});
+	    
+	  
 	    
 	    function formatTime(seconds) {
 	        return [
@@ -438,6 +393,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            .join(":")
 	            .replace(/\b(\d)\b/g, "0$1");
 	    }
+	    
+	    function fomatFloat(src,pos){   
+	        return Math.round(src*Math.pow(10, pos))/Math.pow(10, pos);   
+	     } 
     </script>
     <!-- 
     	趋势图
@@ -549,7 +508,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             series: [{
                 name: '今日UV',
                 type: 'line',
-               /*  smooth:true, */
+           
                 data: [],
 	             itemStyle: {
 	                normal: {
@@ -563,7 +522,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             {
                 name: '昨日UV',
                 type: 'line',
-               /*  smooth:true, */
+               
                 data: [],
 	             itemStyle: {
 	                normal: {
@@ -577,7 +536,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]
         });
         
-        myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+        myChart.showLoading();    	//数据加载完之前先显示一段简单的loading动画
         myChartUV.showLoading();
         
         var nums=[];    
@@ -589,10 +548,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		
         $.ajax({
         	type : "GET",
-        	async : true,//异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+        	async : true,    		//异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
         	url : "${pageContext.request.contextPath}/report/trend.action",
         	success : function(result){
-        		console.log(result);
+        		
         		var a= result.extend.data[0].body.data[0].result.items[1].length-1;
         		for(var i=23;i>=0;i--){
         			if( a>=0 && result.extend.data[0].body.data[0].result.items[1][a][0]>0){
@@ -664,7 +623,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
        		 },
         	 error:function(errorMsg) {
-            //请求失败时执行该函数
+            
 	         alert("图表请求数据失败!");
 	         	myChart.hideLoading();
 	         	myChartUV.hideLoading();
@@ -675,155 +634,114 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      	map
       -->
    	<script type="text/javascript">
-   	var eChart = echarts.init(document.getElementById('map'));
+
+
+	
+   	</script>
+   	<script type="text/javascript">
    	
-	eChart.showLoading();
-	//ajax请求数据
-	var area=[];    //类别数组（实际用来盛放X轴坐标值）
+   	var myChart2 = echarts.init(document.getElementById('map'));
+    myChart.showLoading(); 
+    
+
     var arrayPV = new Array();
     var arrayZB = new Array();
 	
 	$.ajax({
-		type: "get",
+		type:"get",
 		async: true, //异步执行
 		url: "${pageContext.request.contextPath }/report/area.action",
-/* 		data:{}, */
+ 		data:{}, 
 		dataType: "json", //返回数据形式为json
 		success: function (result) {
 			console.log(result);
-			$.each(result.body.data[0].result.item[0],function(index,item){
-				area.push(item);
-			});
-			for(var i =0;i<result.body.data[0].result.item[1].length;i++){
-				arrayPV[i]={
-					name:'浏览量',
-					value:result.body.data[0].result.item[1][i]
-				};
-			}
-			for(var i =0;i<result.body.data[0].result.item[1].length;i++){
+		
+			for(var i =0;i<result.body.data[0].result.items[0].length;i++){
+				
+				arrayPV.push({		
+					name:result.body.data[0].result.items[0][i],
+					value:result.body.data[0].result.items[1][i][0]
+				});
 				arrayZB[i]={
-					name:'浏览量',
-					value:result.body.data[0].result.item[1][i]
+						name:result.body.data[0].result.items[0][i],
+						value:result.body.data[0].result.items[1][i][1]
 				};
 			}
-
-		},
-		error: function (errorMsg) {
-			alert("请求失败!");
-		}
-		});
-
-	
-	
-	eChart.setOption({
-		 
-		     tooltip: {
-		         trigger: 'item',
-		         formatter: "{a} <br/>{b} : {c}万吨" 
-		     },
-
-		     dataRange: {
-		         min: 0,
-		         max: 4000,
-		         x: 'left',
-		         y: 'bottom',
-		       
-		         text: ['高', '低'], // 文本，默认为数值文本
-		         calculable: false,
-
-		         splitNumber: 0,
-
-
-		         color: ['orangered', 'gold','yellow', 'green', 'lightgreen', 'lightgrey']
-		     },
-		     toolbox: {
-		         show: true,
-		         orient: 'vertical',
-		         x: 'right',
-		         y: 'center',
-		         feature: {
-		             mark: {
-		                 show: true
-		             },
-		             dataView: {
-		                 show: true,
-		                 readOnly: false
-		             },
-		             dataZoom: {
-		                 show: true
-		             },
-		             restore: {
-		                 show: true
-		             },
-		             saveAsImage: {
-		                 show: true
-		             }
-		         }
-		     },
-		     roamController: {
-		         show: true,
-		         x: 'right',
-		         mapTypeControl: {
-		             'china': true
-		         }
-		     },
-		     series: [{
-		         name: 'value',
-		         type: 'map',
-		         mapType: 'china',
-		         roam: true,
-		         itemStyle: {
-		             normal: {
-		                 label: {
-		                     show: true
-		                 }
-		             },
-		             emphasis: {
-		                 label: {
-		                     show: true
-		                 }
-		             }
-		         },
-		         data: [
-		    {name: '黑龙江', value: 3544.1},
-		    {name: '吉林', value: 2805.7},
-		    {name: '内蒙古', value: 2250.8},
-		    {name: '山东', value: 2050.9},
-		    {name: '河南', value: 1853.7},
-		    {name: '河北', value: 1670.4},
-		    {name: '辽宁', value: 1403.5},
-		    {name: '山西', value: 862.7},
-		    {name: '四川', value: 765.7},
-		    {name: '云南', value: 747.3},
-		    {name: '新疆', value: 705.1},
-		    {name: '甘肃', value: 577.2},
-		    {name: '陕西', value: 543.1},
-		    {name: '安徽', value: 496.3},
-		    {name: '湖北', value: 332.9},
-		    {name: '贵州', value: 324.1},
-		    {name: '广西', value: 280.7},
-		    {name: '重庆', value: 259.7},
-		    {name: '江苏', value: 252.2},
-		    {name: '宁夏', value: 226.9},
-		    {name: '湖南', value: 188.8},
-		    {name: '天津', value: 107.3},
-		    {name: '广东', value: 77.9},
-		    {name: '北京', value: 49.4},
-		    {name: '浙江', value: 31.1},
-		    {name: '福建', value: 21.5},
-		    {name: '青海', value: 18.6},
-		    {name: '江西', value: 12.8},
-		    {name: '上海', value: 2.1},
-		    {name: '西藏', value: 0.8},
-		    {name: '海南', value: '-'}
-		]
-		         
-		     }, ]
-		     
-	});
-	eChart.hideLoading();
-	
+		}	
+		});		
   		
+   		option = {  				 
+   			tooltip: {
+   				 trigger: 'item',
+   				 formatter: '{b}<br/><hr/>{a}:{c} <br/> '
+   			},
+   				   
+   			visualMap: {
+   						min: 0,
+   				        max: 50,
+   				        left: 'left',
+   				        top: 'bottom',
+   				        text: ['高', '低'],
+   				        calculable: true,
+   				        inRange: {
+   				            color: ['rgb(230, 230, 230)','rgb(56, 135, 224)']
+   				        },
+   				    },
+   				    toolbox: {
+   				        show: true,
+   				        orient: 'vertical',
+   				        left: 'right',
+   				        top: 'center',
+   				        feature: {
+   				            mark: {
+   				                show: true
+   				            },
+   				            dataView: {
+   				                show: true,
+   				                readOnly: false
+   				            },
+   				            restore: {
+   				                show: true
+   				            },
+   				            saveAsImage: {
+   				                show: true
+   				            }
+   				        }
+   				    },
+   				   
+   				    series: [{
+   				            name: '浏览量pv',
+   				            type: 'map',
+   				            mapType: 'china',
+   				            roam: true,
+   				            label: {
+   				                normal: {
+   				                    show: false
+   				                },
+   				                emphasis: {
+   				                    show: true
+   				                }
+   				            },
+   				            data: arrayPV
+   				        }, {
+   				            name: '占比',
+   				            type: 'map',
+   				            mapType: 'china',
+   				            label: {
+   				                normal: {
+   				                    show: false
+   				                },
+   				                emphasis: {
+   				                    show: true
+   				                }
+   				            },
+   				            data: arrayZB
+   				        },
+
+   				    ]
+   				};
+   		alert(arrayPV);
+   	myChart2.setOption(option);
    	</script>
     
 </body>
