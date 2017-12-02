@@ -79,11 +79,7 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-=======
-	<!--Begin Header Begin-->
 
->>>>>>> branch 'master' of https://github.com/MacXing/XH_Emall.git
 	<jsp:include page="/front/head2.jsp" />
 
 	<!--End Header End-->
@@ -142,9 +138,7 @@
 			<div class="m_right">
 				<p></p>
 				<div class="mem_tit">我的收藏</div>
-				<!-- <div class="mem_tit">
-					<input type="button" value="我要评论" onclick="addcmt()" class="btn_tj" />
-				</div> -->
+				
 				<table border="0" class="order_tab" style="width:930px; text-align:left; margin-bottom:30px;"
 					cellspacing="0" cellpadding="0">
 					<c:forEach items="${collect }" varStatus="status" var="collect">

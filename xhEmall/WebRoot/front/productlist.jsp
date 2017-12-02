@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
     <div class="content mar_20">
-    	<div class="l_history">
+<!--     	<div class="l_history">
         	<div class="his_t">
             	<span class="fl">浏览历史</span>
                 <span class="fr"><a href="#">清空</a></span>
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </li>
         	</ul>
-        </div>
+        </div> -->
         <div class="l_list">
         	<div class="list_t">
             	<span class="fl list_or">

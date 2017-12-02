@@ -74,23 +74,24 @@
 					<tr>
 						<td
 							style="font-size:14px; font-family:'宋体'; padding:10px 0 20px 0; border-bottom:1px solid #b6b6b6;">
-							您选定的配送方式为: <font color="#ff4e00">${orderinfo.shoppingname }</font>； &nbsp; &nbsp;
-							您选定的支付方式为: <font color="#ff4e00">${orderinfo.payPrice }</font>；
+							您选定的配送方式为: <font color="#ff4e00">${orderinfo.shoppingname }</font>; &nbsp; &nbsp;
+							您选定的支付方式为: <font color="#ff4e00">
+							 <c:if test="${orderinfo.payPrice ==0}">
+							 	<h4>支付宝</h4>
+							 </c:if>
+							</font>;
 							&nbsp; &nbsp;您的应付款金额为: <font color="#ff4e00">￥${orderinfo.payfee }</font>
 						</td>
 					</tr>
 					<tr>
-						<td style="padding:20px 0 30px 0; font-family:'宋体';">
-							支付宝网站(www.alipay.com) 是国内先进的网上支付平台。<br /> 支付宝收款接口：在线即可开通，零预付，免年费，单笔阶梯费率，无流量限制。<br />
-							<a href="#" style="color:#ff4e00;">立即在线申请</a>
-						</td>
+						
 					</tr>
 					<tr>
 						<td>
 							<div class="btn_u" style="margin:0 auto; padding:0 20px; width:120px;">
 								<a href="${pageContext.request.contextPath}/Pay/viewOrder.action?orderid=${orderinfo.orderid }">立即使用支付宝支付</a>
 							</div>
-							<a href="#">首页</a>
+							<a href="/front/index.jsp">首页</a>
 							&nbsp; &nbsp;
 							<a href="#">用户中心</a>
 						</td>

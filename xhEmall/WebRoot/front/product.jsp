@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
     </div>
     <div class="content mar_20">
-    	<div class="l_history">
+ <!--    	<div class="l_history">
         	<div class="fav_t">用户还喜欢</div>
         	<ul>
             	<li>
@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </li>
         	</ul>
-        </div>
+        </div> -->
         <div class="l_list">        	
             
        

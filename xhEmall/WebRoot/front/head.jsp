@@ -144,27 +144,32 @@ var _hmt = _hmt || [];
 			</form>
 		</div>
 		
-		<div class="i_car">
-    	<div class="car_t">购物车 [<span id="carsize">${trolleyItem.size()}</span> ]</div>
+    <div class="i_car">
+    	<div class="car_t">购物车 </div>
         <div class="car_bg">
        		<!--Begin 购物车未登录 Begin-->
        		<c:if test="${current_user == null }">
-        	<div class="un_login">还未登录！<a href="Login.html" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
-            </c:if>
+        	<div class="un_login">还未登录！<a href="front/Login.jsp" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+        	</c:if>
             <!--End 购物车未登录 End-->
             <!--Begin 购物车已登录 Begin-->
-            <c:if test="${current_user != null }">
+            <c:if test="${current_user!=null }">
             <ul class="cars" id="cart">
+           
+            
             <c:forEach items="${trolleyItem}" var="items">
-            	<li id="pli">
+            	<li>
+            		<input type="hidden" id="falg" value="${falg}">
+            		<input type="hidden" id="tro" value="${trolleyItem}">
                 	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
                     <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
-                    <div class="price"><font color="#ff4e00"><span>￥</span>${items.xhproduct.psale}</font><span>X</span>${items.tronum}</div>
+                    <div class="price"><font color="#ff4e00">￥${items.xhproduct.psale}</font> X${items.tronum}</div>
                 </li>
+               
                 </c:forEach>
             </ul>
             <div class="price_a"><a href="${pageContext.request.contextPath}/trolley/findByUserCart.action">去购物车结算</a></div>
-           </c:if>
+            </c:if>
             <!--End 购物车已登录 End-->
         </div>
     </div>

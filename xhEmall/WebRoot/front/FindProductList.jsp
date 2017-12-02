@@ -38,11 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include page="/front/head.jsp" />
 <div class="i_bg">
 	<div class="postion">
-    	<span class="fl">全部 > 美妆个护 > 香水 > 香奈儿</span>
+    	
     </div>
     
     <div class="content mar_20">
-    	<div class="l_history">
+    	<!-- <div class="l_history">
         	<div class="his_t">
             	<span class="fl">浏览历史</span>
                 <span class="fr"><a href="#">清空</a></span>
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </li>
         	</ul>
-        </div>
+        </div> -->
         <div class="l_list">
         	<!-- <table border="0" style="width:100%; margin-bottom:30px; border:1px solid #eaeaea;" cellspacing="0" cellpadding="0">
               <tr valign="top">

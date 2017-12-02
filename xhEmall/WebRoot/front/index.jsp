@@ -329,7 +329,7 @@ var _hmt = _hmt || [];
    
    
     <!--Begin 猜你喜欢 Begin-->
-    <div class="i_t mar_10">
+    <!-- <div class="i_t mar_10">
     	<span class="fl">猜你喜欢</span>
     </div>    
     <div class="like">        	
@@ -425,11 +425,11 @@ var _hmt = _hmt || [];
                 <a class="l_next" href="javascript:void();">Next</a>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--End 猜你喜欢 End-->
     
     <!--Begin Footer Begin -->
-    <div class="b_btm_bg b_btm_c">
+     <div class="b_btm_bg b_btm_c">
         <div class="b_btm">
             <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
               <tr>
