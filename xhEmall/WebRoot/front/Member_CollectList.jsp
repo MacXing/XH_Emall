@@ -274,7 +274,7 @@
 
 		/*点击添加购物车*/
 		function addCar(pid) {
-			alert(pid);
+			
 			$.ajax({
 				url :"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&pnum="+1+"&userid="+${current_user.userid },
 				type : "post",

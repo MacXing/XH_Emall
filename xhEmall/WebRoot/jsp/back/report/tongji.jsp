@@ -230,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div> 
           </div>
-          <div class="row">
+         <!--  <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -249,7 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         </div>
        
@@ -367,16 +367,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 					 }
 					var con="";
-					$.each(result.body.data[0].result.visitPage.items,function(index,data){
+					for(var i=0 ;i<6;i++){
 						var tr = "<tr>";
-						var td = "<td>"+data[0]+"</td>";
-						var td2 = "<td>"+data[1]+"</td>";
-						var td3 = "<td>"+data[2]+'%'+"</td>";
+						var td = "<td>"+result.body.data[0].result.visitPage.items[i][0]+"</td>";
+						var td2 = "<td>"+result.body.data[0].result.visitPage.items[i][1]+"</td>";
+						var td3 = "<td>"+result.body.data[0].result.visitPage.items[i][2]+'%'+"</td>";
                         var tr2="</tr>";
               			var css = tr+td+td2+td3+tr2;
               			
                      	con=con+css;
-					});
+					}
+				
 					$("#top").html(con);
 				}
 			});
@@ -655,18 +656,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		dataType: "json", //返回数据形式为json
 		success: function (result) {
 			console.log(result);
-		
-			for(var i =0;i<result.body.data[0].result.items[0].length;i++){
-				
-				arrayPV.push({		
-					name:result.body.data[0].result.items[0][i],
-					value:result.body.data[0].result.items[1][i][0]
-				});
-				arrayZB[i]={
-						name:result.body.data[0].result.items[0][i],
-						value:result.body.data[0].result.items[1][i][1]
-				};
+			if(typeof(result.body.data[0].result.items[0].length)!="undefined"){
+				for(var i =0;i<result.body.data[0].result.items[0].length;i++){
+					
+					arrayPV.push([{name:result.body.data[0].result.items[0][i],value:result.body.data[0].result.items[1][i][0]}]);
+					arrayZB[i]={
+							name:result.body.data[0].result.items[0][i],
+							value:result.body.data[0].result.items[1][i][1]
+					};
+				}
 			}
+			
 		}	
 		});		
   		
@@ -740,7 +740,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    				    ]
    				};
-   		alert(arrayPV);
+   	alert(arrayPV);
    	myChart2.setOption(option);
    	</script>
     

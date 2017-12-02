@@ -19,20 +19,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
-	
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="resource/css/animate.min.css" rel="stylesheet">
+    <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+    
 	<script src="resource/js/echarts/echarts.js"></script>	
 	<script src="resource/js/echarts/china.js"></script>
 
   </head>
   
-  <body>
+  <body class="gray-bg">
   	<script src="resource/js/echarts/shine.js"></script>
-  	<div>
-  	<div style="width: 100%;height:400px;" id="ordermap"></div>
-  	<div style="width:600px;height:400px" id="echart"></div>
-  	</div>
+  	<script src="resource/js/echarts/infographic.js"></script>
+  	<script src="resource/js/echarts/dark.js"></script>
+  	<script src="resource/js/echarts/macarons.js"></script>
+  	<script src="resource/js/echarts/roma.js"></script>
+  	<script src="resource/js/echarts/vintage.js"></script>
+  	
+  	<div class="wrapper wrapper-content animated fadeInRight">       
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>中国地图</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="height:600px" id="ordermap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">          
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>快递占比环饼图</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="echart"></div>
+                    </div>
+                </div>
+            </div>     
+        </div>
+  	
+  	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
+	<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
   	
    	<script type="text/javascript">
    		 var oChart = echarts.init(document.getElementById('ordermap'),'shine');  		 
@@ -105,6 +157,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			//将返回的category和series对象赋值给options对象内的category和series
    			//alert(result);
             for(var i=0;i<result.length;i++){
+            	if(result[i].province=="内蒙古自治区"||result[i].province=="西藏自治区"){
+            		order.push({
+	                       name:result[i].province.replace('自治区',''),
+	                       value:result[i].orderCount
+	                   }); 
+	           	}
+	           	if(result[i].province=="宁夏回族自治区"){
+	           		order.push({
+	                       name:result[i].province.replace('回族自治区',''),
+	                       value:result[i].orderCount
+	                   });
+	           	}
+	           	if(result[i].province=="新疆维吾尔自治区"){
+	           		order.push({
+	                       name:result[i].province.replace('维吾尔自治区',''),
+	                       value:result[i].orderCount
+	                   });
+	           	}
+	           	if(result[i].province=="广西壮族自治区"){
+	           		order.push({
+	                       name:result[i].province.replace('壮族自治区',''),
+	                       value:result[i].orderCount
+	                   });
+	           	}
+	           	if(result[i].province=="香港特别行政区"||result[i].province=="澳门特别行政区"){
+	           		order.push({
+	                       name:result[i].province.replace('特别行政区',''),
+	                       value:result[i].orderCount
+	                   });
+	           	}
+	           	if(result[i].province=="重庆市"||result[i].province=="上海市"){
+	           		order.push({
+	                       name:result[i].province.replace('市',''),
+	                       value:result[i].orderCount
+	                   });
+	           	}
+	           	if(result[i].province=="天津市"||result[i].province=="北京市"){
+	           		order.push({
+	                       name:result[i].province.replace('市',''),
+	                       value:result[i].orderCount
+	                   });
+	           	}
          	   order.push({
                      name:result[i].province.replace('省',''),
                      value:result[i].orderCount

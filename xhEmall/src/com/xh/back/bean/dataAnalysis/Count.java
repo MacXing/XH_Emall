@@ -14,6 +14,10 @@ public class Count {
 	private int orderpaycount;
 	
 	private int orderCountNum;
+	
+	private String orderPercent;
+	
+	private int payStatus;
 
 	public double getIncomeCount() {
 		return incomeCount;
@@ -70,6 +74,24 @@ public class Count {
 	public void setOrderCountNum(int orderCountNum) {
 		this.orderCountNum = orderCountNum;
 	}
+
+	public String getOrderPercent() {
+		return orderPercent;
+	}
+
+	public void setOrderPercent(String orderPercent) {
+		this.orderPercent = orderPercent;
+	}
+
+	public int getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(int payStatus) {
+		this.payStatus = payStatus;
+	}
+	
+	
 	
 	
 	

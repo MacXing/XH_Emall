@@ -25,6 +25,7 @@ import com.other.msg.Msg;
 import com.xh.back.bean.Xhgrade;
 import com.xh.back.bean.dataAnalysis.DataGrade;
 import com.xh.back.bean.dataAnalysis.DataOrder;
+import com.xh.back.bean.dataAnalysis.DataProduct;
 import com.xh.back.service.DataAnalysisService;
 import com.xh.back.service.UserGradeService;
 import com.xh.front.bean.Xhusers;
@@ -67,5 +68,13 @@ public class DataAnalysisController {
 	public List<DataGrade> userCount(HttpSession session){
 		List<DataGrade> userCounts=gradeCountService.queryUserGradeCount();
 		return userCounts;
+	}
+	
+	//前一周商品销量排行
+	@RequestMapping("saleCount")
+	@ResponseBody
+	public List<DataProduct> saleCount(HttpSession session){
+		List<DataProduct> saleCounts=gradeCountService.queryPsaleDataStat();
+		return saleCounts;
 	}
 }

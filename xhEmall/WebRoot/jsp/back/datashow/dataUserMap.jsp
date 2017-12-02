@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -16,18 +16,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
-	
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href="resource/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="resource/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="resource/css/animate.min.css" rel="stylesheet">
+    <link href="resource/css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+    
 	<script src="resource/js/echarts/echarts.js"></script>	
 	<script src="resource/js/echarts/china.js"></script>
 
   </head>
   
-  <body>
+  <body class="gray-bg">
   	<script src="resource/js/echarts/shine.js"></script>
   	<script src="resource/js/echarts/infographic.js"></script>
   	<script src="resource/js/echarts/dark.js"></script>
@@ -35,10 +39,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script src="resource/js/echarts/roma.js"></script>
   	<script src="resource/js/echarts/vintage.js"></script>
   	
-  	<div>
-  	<div style="width: 100%;height:600px;" id="usermap"></div>
-  	<div style="width:600px;height:400px" id="echart"></div>
+  	<div class="wrapper wrapper-content animated fadeInRight">
+  	    <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>中国地图</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="width: 100%;height:600px" id="usermap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
   	</div>
+  	
+  	<script src="resource/js/jquery.min.js?v=2.1.4"></script>
+	<script src="resource/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="resource/js/content.min.js?v=1.0.0"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
   	
    	<script type="text/javascript">
    		 var uChart = echarts.init(document.getElementById('usermap'),'infographic');  		 

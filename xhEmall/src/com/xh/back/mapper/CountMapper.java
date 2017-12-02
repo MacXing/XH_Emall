@@ -23,4 +23,6 @@ public interface CountMapper {
 	public List<Count> orderCount();
 	
 	public int orderCountNum();
+	
+	public List<Count> orderCountForPie();
 }

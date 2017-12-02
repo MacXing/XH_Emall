@@ -47,4 +47,9 @@ public class CountServiceImpl implements CountService {
 		return countMapper.orderCountNum();
 	}
 
+	@Override
+	public List<Count> orderCountForPie() {
+		return countMapper.orderCountForPie();
+	}
+
 }

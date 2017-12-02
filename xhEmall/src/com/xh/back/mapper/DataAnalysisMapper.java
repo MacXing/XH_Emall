@@ -6,6 +6,7 @@ import com.xh.back.bean.Xhgrade;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.dataAnalysis.DataGrade;
 import com.xh.back.bean.dataAnalysis.DataOrder;
+import com.xh.back.bean.dataAnalysis.DataProduct;
 import com.xh.front.bean.Xhusers;
 
 public interface DataAnalysisMapper {
@@ -20,6 +21,9 @@ public interface DataAnalysisMapper {
 	//全国订单分布
 	public List<DataOrder> queryProvinceOrder();
 	
-	//各邮寄方式所占比
+	//各邮寄方式所占比 
 	public List<DataOrder> queryExpressDataStat();
+	
+	//商品销售排行
+	public List<DataProduct> queryPsaleDataStat();
  }

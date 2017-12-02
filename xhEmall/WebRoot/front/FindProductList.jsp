@@ -189,20 +189,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 
-<!-- <script>
-	$("#findbtn").click(function(){		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/ProductList/queryAllProductByFind.action",
-			type : "POST",
-			data : $("#findform").serialize(),
-			success:function(result){
-				alert(258);
-				window.location.href="${pageContext.request.contextPath}/front/brandlist.jsp";				
-			}
-		})
-	})
-</script> -->
-
 </body>
 
 

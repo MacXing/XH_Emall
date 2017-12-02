@@ -45,7 +45,7 @@
     	select * from dataGrade
     </select>
 
-    <!--======================================================-->
+<!--=======================================================-->
     <!-- 订单统计：-->
      <resultMap id="provinceOrderMap" type="DataOrder">
 	  		<id column="orderID" jdbcType="INTEGER" property="doid" />
@@ -69,9 +69,30 @@
 
 	<!--查询各邮寄方式所占比-->
 	<select id="queryExpressDataStat" resultMap="expressDataStatMap">
-    select shoppingID,shoppingName,COUNT(shoppingID) expCount 
-    from xhOrderInfo 
-    group by shoppingID
+    select o.shoppingID,s.shoppingName,COUNT(o.shoppingID) expCount 
+    from xhOrderInfo o JOIN xhShopping s ON o.shoppingID=s.shoppingID
+    group by o.shoppingID
     </select>
+
+<!--=======================================================-->
+    <!-- 商品销量排行 -->
+     <resultMap id="productDataStatMap" type="DataProduct">
+  		<id column="pID" jdbcType="INTEGER" property="pid" />
+ 	    <result column="pName" jdbcType="VARCHAR" property="pname" />
+	    <result column="saleCount" jdbcType="INTEGER" property="salecount" />
+	    <result column="orderTime" jdbcType="VARCHAR" property="ordertime" />
+	    <result column="pImg" jdbcType="VARCHAR" property="pimg" />
+	 </resultMap>
+    
+    <select id="queryPsaleDataStat" resultMap="productDataStatMap">
+    SELECT g.pID pID,p.pName pName,COUNT(g.pID) saleCount,
+	o.orderTime orderTime,p.pImg pImg 
+	from xhOrderGoods g,xhProduct p,xhOrderInfo o 
+	WHERE g.pID=p.pID and g.orderID=o.orderID
+	GROUP BY g.pID
+	having COUNT(g.pID)>=2 and 
+	o.orderTime >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+    </select>
+    
 
 </mapper>

@@ -263,7 +263,7 @@
 					if(result.status == 0){
 						layer.close(ii);
 						layer.msg(result.msg);
-						self.location.reload();
+						window.location.href = "frontOrder/queryOrderInfo.action?userid=" + ${current_user.userid};
 					} else {
 						layer.close(ii);
 						layer.msg(result.msg);

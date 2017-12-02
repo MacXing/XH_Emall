@@ -21,4 +21,6 @@ public interface CountService {
 	public List<Count> orderCount();
 	
 	public int orderCountNum();
+	
+	public List<Count> orderCountForPie();
 }

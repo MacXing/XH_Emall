@@ -5,7 +5,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -61,7 +60,7 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins" id="ordercountnum"></h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
+                        <div class="stat-percent font-bold text-info"><font id="orderp"></font>% <i class="fa fa-level-up"></i>
                         </div>
                         <small>新订单</small>
                     </div>
@@ -74,10 +73,10 @@
                         <h5>访客</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">106,120</h1>
-                        <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>新访客</small>
+                        <h1 class="no-margins" id="todayCumstor"></h1>
+                       <!--  <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
+                        </div> -->
+                        <small>今日访客</small>
                     </div>
                 </div>
             </div>
@@ -89,8 +88,8 @@
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins"><span id="incomeday"></span></h1>
-                        <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
-                        </div>
+                        <!-- <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
+                        </div> -->
                         <small>today</small>
                     </div>
                 </div>
@@ -109,35 +108,9 @@
                                     <!-- <div class="flot-chart-content" style="width: 800px;height:200px;" ></div> -->
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <ul class="stat-list">
-                                    <li>
-                                        <h2 class="no-margins">2,346</h2>
-                                        <small>订单总数</small>
-                                        <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i>
-                                        </div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 48%;" class="progress-bar"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h2 class="no-margins ">4,422</h2>
-                                        <small>最近一个月订单</small>
-                                        <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i>
-                                        </div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 60%;" class="progress-bar"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h2 class="no-margins ">9,180</h2>
-                                        <small>最近一个月销售额</small>
-                                        <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i>
-                                        </div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 22%;" class="progress-bar"></div>
-                                        </div>
-                                    </li>
+                            <div class="col-sm-3">                               
+                                <div class="flot-chart" id="piemain">
+                                </div>   
                             </div>
                         </div>
                     </div>
@@ -184,61 +157,38 @@
         function gd(year,month,day){return new Date(year,month-1,day).getTime()}var previousPoint=null,previousLabel=null;
         /* $.plot($("#flot-dashboard-chart"),dataset,options); */
         var mapData={"US":298,"SA":200,"DE":220,"FR":540,"CN":120,"AU":760,"BR":550,"IN":200,"GB":120,};$("#world-map").vectorMap({map:"world_mill_en",backgroundColor:"transparent",regionStyle:{initial:{fill:"#e4e4e4","fill-opacity":0.9,stroke:"none","stroke-width":0,"stroke-opacity":0}},series:{regions:[{values:mapData,scale:["#1ab394","#22d6b1"],normalizeFunction:"polynomial"}]},})
-        		
-		setInterval(update, 10000);
-		update();
-        });
-    </script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-    <script type="text/javascript">
-    	var d=new Date();
+        
+        var d=new Date();
 		var day=d.getDate();
 		var month=d.getMonth();
 		var year=d.getFullYear();
-    	
-    	function magic_income(value) {
-			var num = $("#income");
-		    num.animate({count: value}, {
-		        duration: 500,
-		        step: function() {
-		            num.text(String(parseInt(this.count)));
-				}
-			});
-		};
-		function magic_incomeday(value) {
-			var num = $("#incomeday");
-		    num.animate({count: value}, {
-		        duration: 500,
-		        step: function() {
-		            num.text(String(parseInt(this.count)));
-				}
-			});
-		};
-		function magic_ordercountnum(value) {
-			var num = $("#ordercountnum");
-		    num.animate({count: value}, {
-		        duration: 500,
-		        step: function() {
-		            num.text(String(parseInt(this.count)));
-				}
-			});
-		};
+        
+		$.ajax({
+	    	url:"${pageContext.request.contextPath}/indexCount/incomeCount.action",
+			type:"GET",
+			success:function(result){
+				console.log(result);
+				$("#income").html(result.incomeCount);
+				$("#incomeday").html(result.incomeCountDay);
+				$("#ordercountnum").html(result.orderCountNum);
+				$("#incomep").html(result.incomePercent);
+				$("#orderp").html(result.orderPercent);
+				$("#nday").html(month + "/" + day);
+			}
+	    });
 		
-		function update() {
-		    $.ajax({
-		    	url:"${pageContext.request.contextPath}/count/incomeCount.action",
-				type:"GET",
-				success:function(result){
-					magic_income(result.incomeCount);
-					magic_incomeday(result.incomeCountDay);
-					magic_ordercountnum(result.orderCountNum);
-					$("#incomep").html(result.incomePercent);
-					$("#nday").html(month + "/" + day);
+		$.ajax({
+			url:"${pageContext.request.contextPath}/report/overview.action",
+			type:"GET",
+			success:function(result){
+				console.log(result);
+				$("#todayCumstor").html(result.body.data[0].result.items[1][1][2]);
+				
 				}
-		    	/* magic_number(data.n); */
-		    });
-		};
+			});
+        });
     </script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     
     <script type="text/javascript">
    		 var myChart = echarts.init(document.getElementById('main'),'shine');
@@ -312,7 +262,7 @@
          $.ajax({
          	type : "post",
          	async : true,//异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-         	url : "${pageContext.request.contextPath}/count/orderCount.action",
+         	url : "${pageContext.request.contextPath}/indexCount/orderCount.action",
          	data : {},
          	dataType : "json",
          	success : function(result){
@@ -343,6 +293,92 @@
                             data: paynums
                         },
                         ]
+                    });
+         		}
+         		
+         	},
+         	error : function(errorMsg) {
+             //请求失败时执行该函数
+	         alert("图表请求数据失败!");
+	         myChart.hideLoading();
+	         }         	
+         });
+   	</script>
+   	
+   	<script type="text/javascript">
+   		 var myChartPie = echarts.init(document.getElementById('piemain'),'shine');
+   		 
+         // 显示标题，图例和空的坐标轴
+         myChartPie.setOption({
+         	title: {
+                 text: '付款比'
+             },
+         	textStyle: {
+		        color: '#000000'
+		    },		    
+         	tooltip: {
+             	
+             },            
+		    series : [
+		        {
+		            name: '访问来源',
+		            type: 'pie',
+		            radius: '60%',
+		            data:[],
+		            labelLine: {
+		                normal: {
+		                    lineStyle: {
+		                        color: '#000000'
+		                    }
+		                }
+		            },
+		        }
+		    ]
+		})
+         
+         myChartPie.showLoading();    //数据加载完之前先显示一段简单的loading动画
+         
+         var arrays = new Array();
+         
+         $.ajax({
+         	type : "post",
+         	async : true,//异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         	url : "${pageContext.request.contextPath}/indexCount/orderCountForPie.action",
+         	data : {},
+         	dataType : "json",
+         	success : function(result){
+         		if(result){
+         			for(var i = 0;i < result.length;i++){
+         				if(result[i].payStatus==1){
+         					arrays[i] = {
+	         					value:result[i].ordercount,
+	         					name:'已付款',
+	         					itemStyle: {
+							        normal: {
+							            color: '#A3E1D4'
+							        }
+							    }
+         					}
+         				}else{
+         					arrays[i] = {
+	         					value:result[i].ordercount,
+	         					name:'未付款',
+	         					itemStyle: {
+					                normal: {
+					                    color: '#1C84C6',                 
+					                } 
+				             	}
+         					}
+         				}        				
+         			}
+         			myChartPie.hideLoading();    //隐藏加载动画
+         			myChartPie.setOption({        //加载数据图表
+
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '访问来源',
+                            data: arrays
+                        }]
                     });
          		}
          		

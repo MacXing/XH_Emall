@@ -204,8 +204,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		 alert("亲登录！");
     		 return;
     	 }
-        alert($("#userid").val());
-        alert(pid);
+       /*  alert($("#userid").val());
+        alert(pid); */
         $.ajax({
         	url:"${pageContext.request.contextPath}/trolley/addTroItem.action?pid="+pid+"&userid="+$("#userid").val()+"&pnum="+1,
         	type:"POST",

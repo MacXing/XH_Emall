@@ -4,7 +4,7 @@
 <mapper namespace="com.xh.back.mapper.CountMapper">	
 
 	<select id="incomeCount" resultType="int">
-		select SUM(payFee) incomeCount
+		select IFNULL(SUM(payFee),0) incomeCount
 		from xhOrderInfo
 		where payStatus = 1 and month(orderTime) =
 		(
@@ -54,6 +54,12 @@
 		(
 			SELECT year(NOW())
 		)
+	</select>
+	
+	<select id="orderCountForPie" resultType="count">
+		SELECT COUNT(oi.orderID) ordercount,oi.payStatus
+		FROM xhOrderInfo oi
+		GROUP BY payStatus		
 	</select>
     
 </mapper>

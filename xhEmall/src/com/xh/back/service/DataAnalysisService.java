@@ -8,6 +8,7 @@ import com.xh.back.bean.Xhgrade;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.dataAnalysis.DataGrade;
 import com.xh.back.bean.dataAnalysis.DataOrder;
+import com.xh.back.bean.dataAnalysis.DataProduct;
 import com.xh.front.bean.Xhusers;
 
 public interface DataAnalysisService {
@@ -21,4 +22,6 @@ public interface DataAnalysisService {
 	public List<DataOrder> queryProvinceOrder();
 	
 	public List<DataOrder> queryExpressDataStat();
+	
+	public List<DataProduct> queryPsaleDataStat();
 }

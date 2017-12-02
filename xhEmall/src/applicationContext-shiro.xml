@@ -45,7 +45,7 @@
             	/jsp/back/loginbackstage.jsp=anon
             	/resource/**=anon
               	/admin/login.action=anon
-              	/logout.action=logout          	
+              	/logout.action=logout 	
                 /**=anon
             </value>
    		 </property>

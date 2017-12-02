@@ -487,4 +487,6 @@ var _hmt = _hmt || [];
 <script type="text/javascript" src="front/js/logout.js"></script>
 	 
   </body>
+  <a id="ibangkf" href="http://www.ibangkf.com">网站客服</a>
+  <script type="text/javascript" src="http://c.ibangkf.com/i/c-zhouxing.js"></script>
 </html>

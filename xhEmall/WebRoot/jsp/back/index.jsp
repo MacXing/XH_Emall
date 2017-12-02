@@ -217,29 +217,21 @@
 							<a class="J_menuItem" href="jsp/back/report/tongji.jsp">流量分析</a>
 						</li>
 						<li>
-							<a class="J_menuItem" href="graph_flot.html">客户统计</a>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/datashow/dataGradeShow.jsp">会员等级统计</a>
 						</li>
 						<li>
-							<a class="J_menuItem" href="graph_morris.html">订单统计</a>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/datashow/dataUserMap.jsp">会员分布统计</a>
 						</li>
 						<li>
-							<a class="J_menuItem" href="graph_rickshaw.html">销售概括</a>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/datashow/dataOrderMap.jsp">订单分布统计</a>
 						</li>
 						<li>
-							<a class="J_menuItem" href="graph_peity.html">会员排行</a>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/datashow/dataSaleShow.jsp">商品销量排行</a>
 						</li>
 						<li>
-							<a class="J_menuItem" href="graph_sparkline.html">销售明细</a>
+							<a class="J_menuItem" href="${pageContext.request.contextPath }/jsp/back/datashow/dataUserExperience.jsp">用户体验结构</a>
 						</li>
-						<li>
-							<a class="J_menuItem" href="graph_metrics.html">搜索引擎</a>
-						</li>
-						<li>
-							<a class="J_menuItem" href="graph_metrics.html">访问购买率</a>
-						</li>
-						<li>
-							<a class="J_menuItem" href="graph_metrics.html">站外投放JS</a>
-						</li>
+						
 					</ul>
 				</li>
 			

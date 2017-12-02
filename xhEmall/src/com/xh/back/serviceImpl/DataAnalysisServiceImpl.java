@@ -11,6 +11,7 @@ import com.xh.back.bean.Xhgrade;
 import com.xh.back.bean.Xhorderinfo;
 import com.xh.back.bean.dataAnalysis.DataGrade;
 import com.xh.back.bean.dataAnalysis.DataOrder;
+import com.xh.back.bean.dataAnalysis.DataProduct;
 import com.xh.back.mapper.DataAnalysisMapper;
 import com.xh.back.mapper.UserGradeMapper;
 import com.xh.back.service.DataAnalysisService;
@@ -56,6 +57,13 @@ public class DataAnalysisServiceImpl implements DataAnalysisService {
 		// TODO Auto-generated method stub
 		List<DataGrade> userCount=dataAnalysisMapper.queryUserGradeCount();
 		return userCount;
+	}
+
+	@Override
+	public List<DataProduct> queryPsaleDataStat() {
+		// TODO Auto-generated method stub
+		List<DataProduct> saleCount=dataAnalysisMapper.queryPsaleDataStat();
+		return saleCount;
 	}
 
 }

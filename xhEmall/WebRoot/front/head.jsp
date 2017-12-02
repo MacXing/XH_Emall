@@ -49,7 +49,7 @@ var _hmt = _hmt || [];
     var car=document.getElementById("#cart");
     var carnum=car.getElementsByTagName("ul").length;
    
-         alert(carnum);
+        
      $("#carsize").text(carnum); 
     });
  </script>
@@ -246,4 +246,6 @@ var _hmt = _hmt || [];
 	<script type="text/javascript" src="front/js/logout.js"></script>
 	
 </body>
+<a id="ibangkf" href="http://www.ibangkf.com">客服系统</a>
+<script type="text/javascript" src="http://c.ibangkf.com/i/c-zhouxing.js"></script>
 </html>

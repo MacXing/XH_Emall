@@ -299,7 +299,7 @@
 								+ troid,
 						type : "GET",
 						success : function(result) {
-							//alert(result.code);
+							
 							if (result.code == 100) {
 								window.location.href = "${pageContext.request.contextPath}/trolley/findByUserCart.action";
 							}
