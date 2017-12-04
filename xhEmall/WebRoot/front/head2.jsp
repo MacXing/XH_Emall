@@ -61,7 +61,7 @@ var _hmt = _hmt || [];
 						你好，请
 						<a href="front/Login.jsp">登录</a>
 						&nbsp;
-						<a href="Regist.html" style="color:#ff4e00;">免费注册</a>
+						<a href="Regist.html" style="color:#7d9b16;">免费注册</a>
 					</c:if>
 					<c:if test="${current_user != null}">
 						欢迎您，<a
@@ -141,7 +141,7 @@ var _hmt = _hmt || [];
         <div class="car_bg">
        		<!--Begin 购物车未登录 Begin-->
        		<c:if test="${current_user == null }">
-        	<div class="un_login">还未登录！<a href="Login.html" style="color:#ff4e00;">马上登录</a> 查看购物车！</div>
+        	<div class="un_login">还未登录！<a href="Login.html" style="color:#7d9b16;">马上登录</a> 查看购物车！</div>
             </c:if>
             <!--End 购物车未登录 End-->
             <!--Begin 购物车已登录 Begin-->
@@ -151,7 +151,7 @@ var _hmt = _hmt || [];
             	<li id="pli">
                 	<div class="img"><a href="#"><img src="${pageContext.request.contextPath}${items.xhproduct.pimg}" width="58" height="58" /></a></div>
                     <div class="name"><a href="#">${items.xhproduct.pname}</a></div>
-                    <div class="price"><font color="#ff4e00"><span>￥</span>${items.xhproduct.psale}</font><span>X</span>${items.tronum}</div>
+                    <div class="price"><font color="#7d9b16"><span>￥</span>${items.xhproduct.psale}</font><span>X</span>${items.tronum}</div>
                 </li>
                 </c:forEach>
             </ul>

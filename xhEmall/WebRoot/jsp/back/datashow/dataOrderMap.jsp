@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    },
 		    visualMap: {
 		        min: 0,
-		        max: 10,
+		        max: 200,
 		        left: 'left',
 		        top: 'bottom',
 		        text: ['高', '低'], // 文本，默认为数值文本

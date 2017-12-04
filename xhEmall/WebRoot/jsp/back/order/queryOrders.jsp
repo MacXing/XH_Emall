@@ -216,22 +216,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                <div class="form-group">
                                 	<label class="col-sm-3 control-label">会员编号：</label>                            	    
                                     <div class="col-sm-9">
-
-                                       
-
                                         <input name="userid" id="userid11" type="text" class="form-control checkuserbyid" placeholder="请输入会员编号">
                                     	<div class="checkuser" style="color:red;margin-top:auto"></div>
-
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">邮寄编号：</label>
                                     <div class="col-sm-9">
-
-                                      
                                         <input type="text" id="shoppingid11" name="shoppingid" class="form-control checkexpbyid" placeholder="请输入邮寄编号">
                                     	<div class="checkexpress" style="color:red;margin-top:auto"></div>
-
                                     </div>
                                 </div>                                                               
                                 <div class="form-group">
@@ -677,8 +670,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		url:"${pageContext.request.contextPath}/order/getProvincelist.action",
      		success:function(result){    			
      			$.each(result.extend.provincelist,function(index,item){
-     				 //var option=$("<option value='"+item.provinceid+"'></option>").append(item.province);
-     				 var option = $("<option></option>").attr("value",item.provinceid).append(item.province);
+     				 var option=$("<option value='"+item.provinceid+"'></option>").append(item.province);
      				 option.appendTo("#provinceId1");     				 
      			});
      			//获取城市 
@@ -686,11 +678,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      				$.ajax({
          	     		type:"GET",
          	     		url:"${pageContext.request.contextPath}/order/getCityByProvinceId.action?id="+$("#provinceId1").val(),    		
-         	     		success:function(result){    			
+         	     		success:function(result){
+         	     			$("#cityId1 > option[value != 0]").remove();
          	     			$.each(result.extend.citylist,function(index,item){
-         	     				 //var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
-         	     				 $("#cityId1 > option[value != 0]").remove();
-         	     				 var option = $("<option></option>").attr("value",item.cityid).append(item.city);
+         	     				 var option=$("<option value='"+item.cityid+"'></option>").append(item.city);
          	     				 option.appendTo("#cityId1");    	     				
          	     			});
          	     			 //获取地区
@@ -698,7 +689,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	     				$.ajax({
              	     	     		type:"GET",
              	     	     		url:"${pageContext.request.contextPath}/order/getAreaByCityId.action?id="+$("#cityId1").val(),    		
-             	     	     		success:function(result){    			
+             	     	     		success:function(result){ 
              	     	     			$("#areaId1 > option[value != 0]").remove();
              	     	     			$.each(result.extend.arealist,function(index,item){
              	     	     				 var option=$("<option value='"+item.areaid+"'></option>").append(item.area);
@@ -818,7 +809,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		    $("#userid1").attr("value",result.users.userid);
 	    		    $("#shoppingid1").attr("value",result.shopping.shoppingid);
 		 		 	$("#ordertime1").html(fmtDate(result.ordertime));
-		 		 	$("#addphone1").html("value",result.addphone);		 		 	
+		 		 	$("#addphone1").attr("value",result.addphone);	 		 	
 		 		 	$("#addusername1").attr("value",result.addusername);
 		 		 	$("#addcountry1").attr("value",result.addcountry);
 		 		 	$("#addprovince1").text(result.addprovince).text(); 		 		 	
