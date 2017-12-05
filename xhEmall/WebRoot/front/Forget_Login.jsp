@@ -216,7 +216,7 @@ var _hmt = _hmt || [];
 			var ii = layer.load();
 			var userphone = $("#userphone").val();
 			$.ajax({
-				url : "user/forgetGetQuestion.action?userphone=" + userphone,
+				url : "${pageContext.request.contextPath}/user/forgetGetQuestion.action?userphone=" + userphone,
 				success : function(result) {
 					if (result.status == 0) {
 						layer.close(ii);

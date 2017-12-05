@@ -219,6 +219,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                       value:result[i].usercount
 		                   });
 		           	}
+		           	if(result[i].province==null){
+		           		result[i].province="";
+		           	}
 		       		count.push({
 		                   name:result[i].province.replace('省',''),
 		                   value:result[i].usercount

@@ -301,7 +301,7 @@
 
 		/*点击添加*/
 		function addmsg() {
-			window.location.href = "front/Member_Msgadd.jsp";
+			window.location.href = "${pageContext.request.contextPath}/front/Member_Msgadd.jsp";
 		}
 
 		/* 点击清空 */

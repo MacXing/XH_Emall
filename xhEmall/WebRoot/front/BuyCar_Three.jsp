@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'BuyCar_Three.jsp' starting page</title>
+<title>BuyCar_Three</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -77,7 +77,7 @@
 							您选定的配送方式为: <font color="#ff4e00">${orderinfo.shoppingname }</font>; &nbsp; &nbsp;
 							您选定的支付方式为: <font color="#ff4e00">
 							 <c:if test="${orderinfo.payPrice ==0}">
-							 	<h4>支付宝</h4>
+							 	支付宝
 							 </c:if>
 							</font>;
 							&nbsp; &nbsp;您的应付款金额为: <font color="#ff4e00">￥${orderinfo.payfee }</font>
@@ -91,9 +91,9 @@
 							<div class="btn_u" style="margin:0 auto; padding:0 20px; width:120px;">
 								<a href="${pageContext.request.contextPath}/Pay/viewOrder.action?orderid=${orderinfo.orderid }">立即使用支付宝支付</a>
 							</div>
-							<a href="/front/index.jsp">首页</a>
+							<a href="${pageContext.request.contextPath}/front/index.jsp">首页</a>
 							&nbsp; &nbsp;
-							<a href="#">用户中心</a>
+							<a href="${pageContext.request.contextPath }/userCenter/queryUserByIdForDetail.action?id=${current_user.userid }">用户中心</a>
 						</td>
 					</tr>
 				</table>

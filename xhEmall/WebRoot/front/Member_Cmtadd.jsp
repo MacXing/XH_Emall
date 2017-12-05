@@ -296,11 +296,11 @@
 											success : function(result) {
 												if (result.code == 100) {
 													alert("添加成功！");
-													window.location.href = "userComment/queryCommentById.action?id="
+													window.location.href = "${pageContext.request.contextPath}/userComment/queryCommentById.action?id="
 															+ userid;
 												} else {
 													alert("添加失败！");
-													window.location.href = "userComment/queryCommentById.action?id="
+													window.location.href = "${pageContext.request.contextPath}/userComment/queryCommentById.action?id="
 															+ userid;
 												}
 											}
@@ -319,7 +319,7 @@
 			$.ajax({
 				cache : true,
 				type : "GET",
-				url : "userComment/checkProduct.action?id=" + pid,
+				url : "${pageContext.request.contextPath}/userComment/checkProduct.action?id=" + pid,
 				success : function(result) {
 					if (result.code != 100) {
 						$(".checkproduct").html(result.msg);

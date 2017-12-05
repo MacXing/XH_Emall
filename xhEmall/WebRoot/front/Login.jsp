@@ -123,8 +123,8 @@ var _hmt = _hmt || [];
 					if (result.status == 0) {
 						layer.close(ii);
 						layer.msg(result.msg);
-						 window.location.href = "home/home.action";
-						/* window.location.reload(); */
+						 window.location.href = "${pageContext.request.contextPath}/home/home.action";
+						
 					} else {
 						layer.close(ii);
 						layer.msg(result.msg);

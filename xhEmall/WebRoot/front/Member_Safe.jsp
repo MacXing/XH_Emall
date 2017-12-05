@@ -189,7 +189,7 @@
 			var pwdnew = $("#pwdnew").val();
 			var ii = layer.load();
 			$.ajax({
-				url : "user/restPassword.action",
+				url : "${pageContext.request.contextPath}/user/restPassword.action",
 				data : {
 					"passwordNew" : pwdnew,
 					"passwordOld" : pwdold
@@ -207,7 +207,7 @@
 			var phonenew = $("#phonenew").val();
 			var ii = layer.load();
 			$.ajax({
-				url : "user/restPhone.action",
+				url : "${pageContext.request.contextPath}/user/restPhone.action",
 				data : {
 					"userphoneNew" : phonenew,
 					"userphoneOld" : phoneold

@@ -258,12 +258,12 @@
 		$("#receiptbtn").click(function (){
 			var ii = layer.load();
 			$.ajax({
-				url: "frontOrder/receiptOrder.action?orderid=" + ${orderid},
+				url: "${pageContext.request.contextPath}/frontOrder/receiptOrder.action?orderid=" + ${orderid},
 				success: function (result){
 					if(result.status == 0){
 						layer.close(ii);
 						layer.msg(result.msg);
-						window.location.href = "frontOrder/queryOrderInfo.action?userid=" + ${current_user.userid};
+						window.location.href = "${pageContext.request.contextPath}/frontOrder/queryOrderInfo.action?userid=" + ${current_user.userid};
 					} else {
 						layer.close(ii);
 						layer.msg(result.msg);

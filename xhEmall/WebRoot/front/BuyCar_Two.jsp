@@ -300,7 +300,7 @@
 					"id": "${id}"
 				},
 				success: function(result){
-					window.location.href = "front/BuyCar_Three.jsp";					
+					window.location.href = "${pageContext.request.contextPath}/front/BuyCar_Three.jsp";					
 				}
 			});
 		});

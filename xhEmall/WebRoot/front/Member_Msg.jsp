@@ -227,11 +227,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										success : function(result) {
 											if (result.code == 100) {
 												alert("修改成功！");
-												window.location.href = "userCenter/queryUsermessageById.action?id="
+												window.location.href = "${pageContext.request.contextPath}/userCenter/queryUsermessageById.action?id="
 														+ userid;
 											} else {
 												alert("修改失败！");
-												window.location.href = "userCenter/queryUsermessageById.action?id="
+												window.location.href = "${pageContext.request.contextPath}/userCenter/queryUsermessageById.action?id="
 														+ userid;
 											}
 										}

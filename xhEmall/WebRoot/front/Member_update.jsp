@@ -367,11 +367,11 @@
 										success : function(result) {
 											if (result.code == 100) {
 												alert("修改成功！");
-												window.location.href = "userCenter/queryUserByIdForDetail.action?id="
+												window.location.href = "${pageContext.request.contextPath}/userCenter/queryUserByIdForDetail.action?id="
 														+ userid;
 											} else {
 												alert("修改失败！");
-												window.location.href = "userCenter/queryUserByIdForDetail.action?id="
+												window.location.href = "${pageContext.request.contextPath}/userCenter/queryUserByIdForDetail.action?id="
 														+ userid;
 											}
 										}

@@ -228,11 +228,11 @@
 										success : function(result) {
 											if (result.code == 100) {
 												alert("添加成功！");
-												window.location.href = "userCenter/queryUsermessageById.action?id="
+												window.location.href = "${pageContext.request.contextPath}/userCenter/queryUsermessageById.action?id="
 														+ userid;
 											} else {
 												alert("添加失败！");
-												window.location.href = "userCenter/queryUsermessageById.action?id="
+												window.location.href = "${pageContext.request.contextPath}/userCenter/queryUsermessageById.action?id="
 														+ userid;
 											}
 										}
